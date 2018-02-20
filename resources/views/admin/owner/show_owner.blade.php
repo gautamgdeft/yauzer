@@ -58,8 +58,8 @@
                      </tr>
 
                      <tr>
-                        <th scope="row">Customer Status</th>
-                        <td>@if($user->login_status == '1')Active Customer @else Inactive Customer @endif</td>
+                        <th scope="row">Owner Status</th>
+                        <td>@if($user->login_status == '1')Active Owner @else Inactive Owner @endif</td>
                      </tr>
 
                      <tr>

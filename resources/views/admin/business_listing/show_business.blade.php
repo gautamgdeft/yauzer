@@ -3,10 +3,10 @@
 <aside class="right-side">
    <!-- Content Header (Page header) -->
    <section class="content-header">
-      <h1> View User Details </h1>
+      <h1> View Business Details </h1>
       <ol class="breadcrumb">
          <li><a href="{{ route('admin.dashboard') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-         <li class="active">View User Details</li>
+         <li class="active">View Business Details</li>
       </ol>
    </section>
 
@@ -19,52 +19,67 @@
                   <table class="vertical-table table table-bordered">
                      <tr>
                         <th scope="row">ID</th>
-                        <td>{{ $user->id }}</td>
+                        <td>{{ $businessListing->id }}</td>
                      </tr>
 
                      <tr>
                         <th scope="row">Name</th>
-                        <td>{{ $user->name }}</td>
+                        <td>{{ $businessListing->name }}</td>
                      </tr>
 
                      <tr>
                         <th scope="row">Email</th>
-                        <td>{{ $user->email }}</td>
+                        <td>{{ $businessListing->email }}</td>
                      </tr>
 
                      <tr>
+                        <th scope="row">Business Owner</th>
+                        <td>{{ $businessListing->user->name }}</td>
+                     </tr>                     
+
+                     <tr>
                         <th scope="row">Address</th>
-                        <td>{{ $user->address }}</td>
+                        <td>{{ $businessListing->address }}</td>
                      </tr>
 
                      <tr>
                         <th scope="row">City</th>
-                        <td>{{ $user->city }}</td>
+                        <td>{{ $businessListing->city }}</td>
                      </tr>
 
                      <tr>
                         <th scope="row">State</th>
-                        <td>{{ $user->state }}</td>
+                        <td>{{ $businessListing->state }}</td>
                      </tr>                     
 
                      <tr>
                         <th scope="row">Country</th>
-                        <td>{{ $user->country }}</td>
+                        <td>{{ $businessListing->country }}</td>
                      </tr>
 
                      <tr>
                         <th scope="row">Zipcode</th>
-                        <td>{{ $user->zipcode }}</td>
+                        <td>{{ $businessListing->zipcode }}</td>
+                     </tr>                     
+
+                     <tr>
+                        <th scope="row">Website</th>
+                        <td>{{ $businessListing->website }}</td>
                      </tr>
 
                      <tr>
-                        <th scope="row">Customer Status</th>
-                        <td>@if($user->login_status == '1')Active Customer @else Inactive Customer @endif</td>
+                        <th scope="row">Description</th>
+                        <td>{{ $businessListing->description }}</td>
+                     </tr>                     
+
+                     <tr>
+                        <th scope="row">Business Status</th>
+                        <td>@if($businessListing->status == '1')Active Business @else Inactive Business @endif</td>
                      </tr>
 
                      <tr>
-                        <th scope="row">Profile Image</th>
-                        <td><img id="image_src" class="img-circle" src="/uploads/avatars/{{ $user->avatar }}" style="height: 45px; width: 45px;"></td>
+                        <th scope="row">Business Image</th>
+                        <td><img id="image_src" class="img-circle" src="/uploads/businessAvatars/{{ $businessListing->avatar }}" style="height: 45px; width: 45px;"></td>
                      </tr>
 
                   </table>

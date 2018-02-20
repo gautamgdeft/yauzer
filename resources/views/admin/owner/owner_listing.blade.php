@@ -7,10 +7,10 @@
 <aside class="right-side">
    <!-- Content Header (Page header) -->
    <section class="content-header">
-      <h1> Customer Management </h1>
+      <h1> Owner Management </h1>
       <ol class="breadcrumb">
          <li><a href="{{ route('admin.dashboard') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-         <li class="active">Customer Management</li>
+         <li class="active">Owner Management</li>
       </ol>
    </section>
 
@@ -27,7 +27,7 @@
       <div class="col-xs-12">
          <div class="box">
             <div class="box-header">
-               <a href="{{ route('admin.show_user_form') }}" class="btn bg-olive btn-flat">Add New Customer</a>
+               <a href="{{ route('admin.show_owner_form') }}" class="btn bg-olive btn-flat">Add New Owner</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
@@ -45,6 +45,7 @@
                   <tbody>
                   	 @if(!is_null($allusers))
                   	 @foreach($allusers as $loopingUsers)
+
                      <tr class="tr_{{ $loopingUsers->id }}">
                         <td>{{ $loopingUsers->name }}</td>
                         <td>{{ $loopingUsers->email }}</td>
@@ -63,8 +64,8 @@
                         </td>
 
                         <td><button class="btn btn-danger btn-flat delete_user" data-id="{{ $loopingUsers->id }}">Delete</button>
-                        <a href="{{ route('admin.show_edit_form',['slug' => $loopingUsers->slug]) }}" class="btn btn-warning btn-flat">Edit</a>
-             			      <a href="{{ route('admin.show_customer',['slug' => $loopingUsers->slug]) }}" class="btn btn-info btn-flat">View Customer</a>
+                        <a href="{{ route('admin.edit_owner_form',['slug' => $loopingUsers->slug]) }}" class="btn btn-warning btn-flat">Edit</a>
+             			<a href="{{ route('admin.show_customer',['slug' => $loopingUsers->slug]) }}" class="btn btn-info btn-flat">View Customer</a>
                        </td>
 
                      </tr>
@@ -119,7 +120,7 @@ $('.delete_user').click(function()
 	var user_id = $(this).data('id');
 	$.ajax({
 			headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},    	
-            url: "{{ route('admin.destoy_user') }}",
+            url: "{{ route('admin.destoy_owner') }}",
             type: "post",
             dataType: "JSON",
             data: { 'id': $(this).data('id') },
@@ -152,7 +153,7 @@ $('.accept_reg').click(function()
     var user_id = $(this).data('id');
 	$.ajax({
 			headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},    	
-            url: "{{ route('admin.update_registeration_status') }}",
+            url: "{{ route('admin.update_owner_registeration_status') }}",
             type: "post",
             dataType: "JSON",
             data: { 'id': $(this).data('id') },
@@ -184,24 +185,24 @@ $('.activate_user').click(function()
     var user_id = $(this).data('id');
 	$.ajax({
 			headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},    	
-            url: "{{ route('admin.update_customer_status') }}",
+            url: "{{ route('admin.update_owner_status') }}",
             type: "post",
             dataType: "JSON",
             data: { 'id': $(this).data('id') },
             success: function(response)
             {
             	if ( response.status === 'success' ) 
-      				{
-      				   $('#activate_user_'+user_id).html('Activate Customer');	
-      				   $('#activate_user_'+user_id).addClass('hide');
-      				   $('#inactivate_user_'+user_id).removeClass('hide');
-      				   $('#msgs').html("<div class='alert alert-success'>"+response.msg+"</div>");
-      				}else{
-      				   $('#inactivate_user_'+user_id).html('Inacttivate Customer');	
-      				   $('#inactivate_user_'+user_id).addClass('hide');					
-      				   $('#activate_user_'+user_id).removeClass('hide');
-      				   $('#msgs').html("<div class='alert alert-success'>"+response.msg+"</div>");
-      				}
+				{
+				   $('#activate_user_'+user_id).html('Activate Customer');	
+				   $('#activate_user_'+user_id).addClass('hide');
+				   $('#inactivate_user_'+user_id).removeClass('hide');
+				   $('#msgs').html("<div class='alert alert-success'>"+response.msg+"</div>");
+				}else{
+				   $('#inactivate_user_'+user_id).html('Inacttivate Customer');	
+				   $('#inactivate_user_'+user_id).addClass('hide');					
+				   $('#activate_user_'+user_id).removeClass('hide');
+				   $('#msgs').html("<div class='alert alert-success'>"+response.msg+"</div>");
+				}
             }
 
            });    

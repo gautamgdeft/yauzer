@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'city', 'state', 'zipcode', 'country', 'address', 'phone_number', 'age',
+        'name', 'email', 'password', 'city', 'state', 'zipcode', 'country', 'address', 'phone_number', 'age', 'login_status', 'registeration_status',
     ];
 
     /**
@@ -42,12 +42,6 @@ class User extends Authenticatable
         ];
     }    
 
-    public static function findBySlugOrFail($slug)
-    {
-         return $user = User::findBySlug($slug);
-    }
-
-
     /**
       * Get the roles a user has
       */
@@ -55,6 +49,32 @@ class User extends Authenticatable
      {
          return $this->belongsToMany(Role::class, 'user_roles');
      }
+
+     public function businesses()
+     {
+        return $this->hasMany('App\BusinessListing');
+     } 
+
+     
+     public static function findBySlugOrFail($slug)
+     {
+         return $user = User::findBySlug($slug);
+     }
+
+
+
+     public function isUser() 
+     {
+
+        return $this->hasRole('user'); // ?? something like this! should return true or false
+     }
+
+     public function isOwner() 
+     {
+
+        return $this->hasRole('owner'); // ?? something like this! should return true or false
+     }
+
 
     /**
       * Check User Role
@@ -64,6 +84,7 @@ class User extends Authenticatable
          return in_array($check, array_fetch($this->roles->toArray(), 'name'));
 
      }
+
 
     /**
       * Get key in array with corresponding value

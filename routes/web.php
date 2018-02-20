@@ -49,4 +49,33 @@ Route::prefix('admin')->group(function()
     Route::post('/update-registeration-status', 'Admin\CustomerController@update_reg_status')->name('admin.update_registeration_status');    
     Route::post('/update-customer-status', 'Admin\CustomerController@update_customer_status')->name('admin.update_customer_status');
     Route::get('/view-customer/{slug}', 'Admin\CustomerController@show_customer')->name('admin.show_customer');
+
+    //Owner-Management-Routes
+    Route::get('/owners', 'Admin\OwnerController@owners')->name('admin.owners');
+	Route::get('/new-owner', 'Admin\OwnerController@new_owner')->name('admin.show_owner_form');		
+    Route::post('/new-owner', 'Admin\OwnerController@store_owner')->name('admin.store_owner');
+    Route::post('/delete-owner', 'Admin\OwnerController@destroy_owner')->name('admin.destoy_owner');
+    Route::get('/edit-owner/{slug}', 'Admin\OwnerController@edit_owner')->name('admin.edit_owner_form');
+	Route::post('/update-owner/{slug}', 'Admin\OwnerController@update_owner')->name('admin.update_owner');    
+    Route::post('/update-owner-registeration-status', 'Admin\OwnerController@update_reg_status')->name('admin.update_owner_registeration_status');    
+    Route::post('/update-owner-status', 'Admin\OwnerController@update_owner_status')->name('admin.update_owner_status');	
+    Route::get('/view-owner/{slug}', 'Admin\OwnerController@show_owner')->name('admin.show_owner');
+
+    //Business-Category-Routes
+    Route::get('/business-categories', 'Admin\BusinessCategoryController@business_category_listing')->name('admin.business_category_listing');
+    Route::get('/new-category', 'Admin\BusinessCategoryController@new_category')->name('admin.show_category_form');
+    Route::post('/new-category', 'Admin\BusinessCategoryController@store_category')->name('admin.store_category');
+    Route::get('/edit-category/{slug}', 'Admin\BusinessCategoryController@edit_category')->name('admin.edit_category_form');
+    Route::post('/update-category/{slug}', 'Admin\BusinessCategoryController@update_category')->name('admin.update_category');
+    Route::post('/delete-category', 'Admin\BusinessCategoryController@destroy_category')->name('admin.destroy_category');
+    Route::post('/update-category-status', 'Admin\BusinessCategoryController@update_category_status')->name('admin.update_category_status');
+    Route::get('/view-category/{slug}', 'Admin\BusinessCategoryController@show_category')->name('admin.show_category');
+
+
+    //Business-Listings-Routes
+	Route::get('/business-listings', 'Admin\BusinessListingController@business_listing')->name('admin.business_listing');
+    Route::post('/delete-business', 'Admin\BusinessListingController@destroy_business')->name('admin.destroy_business');	
+	Route::post('/update-business-status', 'Admin\BusinessListingController@update_business_status')->name('admin.update_business_status');
+   Route::get('/view-business/{slug}', 'Admin\BusinessListingController@show_business')->name('admin.show_business');	      
+
 });

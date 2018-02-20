@@ -220,7 +220,7 @@
                <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header bg-light-blue">
-                     <img src="/uploads/avatars/{{ $user->avatar }}" class="img-circle" alt="User Image" />
+                     <img src="/uploads/avatars/{{ Auth::user()->avatar }}" class="img-circle" alt="User Image" />
                      <p>
                         {{ Auth::user()->name }}
                         <small>Site Admin</small>

@@ -4,7 +4,7 @@
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
                         <div class="pull-left image">
-                            <img src="/uploads/avatars/{{ $user->avatar }}" class="img-circle" alt="User Image"/>
+                            <img src="/uploads/avatars/{{ Auth::user()->avatar }}" class="img-circle" alt="User Image"/>
                         </div>
                         <div class="pull-left info">
                             <p>Hello, {{ Auth::user()->name }}</p>
@@ -23,6 +23,21 @@
                         <li>
                             <a href="{{ route('admin.users') }}">
                                 <i class="fa fa-user"></i> <span>Customer Management</span>
+                            </a>
+                        </li>                        
+                        <li>
+                            <a href="{{ route('admin.owners') }}">
+                                <i class="fa fa-user"></i> <span>Owner Management</span>
+                            </a>
+                        </li>                        
+                        <li>
+                            <a href="{{ route('admin.business_category_listing') }}">
+                                <i class="fa fa-user"></i> <span>Business Categories</span>
+                            </a>
+                        </li>                        
+                        <li>
+                            <a href="{{ route('admin.business_listing') }}">
+                                <i class="fa fa-building-o"></i> <span>Business Listings</span>
                             </a>
                         </li>
                         <li class="treeview">
