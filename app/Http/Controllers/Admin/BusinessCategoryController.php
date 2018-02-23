@@ -40,7 +40,7 @@ class BusinessCategoryController extends Controller
     {
     	 //Validating-Category-Data
            $validatedData = $request->validate([
-        	'name'         => 'required|string|max:255',
+        	  'name'         => 'required|string|max:255',
             'avatar'       => 'unique:business_categories'
            ]);
 
@@ -94,7 +94,7 @@ class BusinessCategoryController extends Controller
                uploadBusinessAvatar($avatar, $category);
             } 
 
-			Session::flash('success', 'Business Category was updated.');
+			      Session::flash('success', 'Business Category was updated.');
             
             return redirect()->route('admin.business_category_listing');                      
 

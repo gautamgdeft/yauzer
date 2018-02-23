@@ -197,7 +197,7 @@ $('.activate_user').click(function()
       				   $('#inactivate_user_'+user_id).removeClass('hide');
       				   $('#msgs').html("<div class='alert alert-success'>"+response.msg+"</div>");
       				}else{
-      				   $('#inactivate_user_'+user_id).html('Inacttivate Customer');	
+      				   $('#inactivate_user_'+user_id).html('Inactivate Customer');	
       				   $('#inactivate_user_'+user_id).addClass('hide');					
       				   $('#activate_user_'+user_id).removeClass('hide');
       				   $('#msgs').html("<div class='alert alert-success'>"+response.msg+"</div>");

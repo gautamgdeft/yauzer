@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Role;
+use App\Country;
 use Image;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Validator;
@@ -22,17 +23,19 @@ class OwnerController extends Controller
     public function __construct()
     {
         $this->middleware('auth:admin');
+
     }
 
     public function owners()
     {
-    	$users = User::whereHas( 'roles', function($q){ $q->where('name', 'owner'); } )->get();
-    	return view('admin.owner.owner_listing', ['allusers' => $users]);
+      $users = User::whereHas( 'roles', function($q){ $q->where('name', 'owner'); } )->get();
+      return view('admin.owner.owner_listing', ['allusers' => $users]);
     }
 
     public function new_owner()
     {
-    	return view('admin.owner.new_owner');
+      $country = Country::selectCountries();
+    	return view('admin.owner.new_owner', compact('country'));
     }
 
     public function store_owner(Request $request)
@@ -52,7 +55,7 @@ class OwnerController extends Controller
         ]);
 
 
-        //Storing User
+      //Storing User
     	$user = User::create(
 	              array(
 	                   'name'          => $request->input('name'),
@@ -93,8 +96,9 @@ class OwnerController extends Controller
 
     public function edit_owner(Request $request, $slug)
     {
+      $country = Country::selectCountries();
     	$user = User::findBySlugOrFail($slug);
-    	return view('admin.owner.edit_owner_form', ['user' => $user]);    	
+    	return view('admin.owner.edit_owner_form', ['user' => $user, 'country' => $country]);    	
     }
 
 

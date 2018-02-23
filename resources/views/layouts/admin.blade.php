@@ -49,6 +49,7 @@
     <script src="{{ asset('js/admin/datatables/dataTables.bootstrap.js') }}"></script>
     <script src="{{ asset('js/admin/admin_app.js') }}"></script>
     <script src="{{ asset('js/admin/admin_dashobard.js') }}"></script>
+    <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
 
     @yield('custom_scripts')
 

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Role;
+use App\Country;
 use Image;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Validator;
@@ -32,14 +33,15 @@ class CustomerController extends Controller
 
     public function new_user()
     {
-    	return view('admin.customer.new_user');
+      $country = Country::selectCountries();
+      return view('admin.customer.new_user', compact('country'));
     }
 
     public function store_user(Request $request)
     {
 
         $validatedData = $request->validate([
-        	'name'         => 'required|string|max:255',
+        	  'name'         => 'required|string|max:255',
             'email'        => 'required|string|email|max:255|unique:users',
             'password'     => 'required|string|min:6',
             'country'      => 'required|string',
@@ -94,8 +96,9 @@ class CustomerController extends Controller
 
     public function edit_customer(Request $request, $slug)
     {
+      $country = Country::selectCountries();
     	$user = User::findBySlugOrFail($slug);
-    	return view('admin.customer.edit_customer_form', ['user' => $user]);    	
+    	return view('admin.customer.edit_customer_form', ['user' => $user, 'country' => $country]);    	
     }
 
 

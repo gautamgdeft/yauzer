@@ -27,7 +27,7 @@
             <div class="box-body">
                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                   <label for="name">Name</label>
-                  <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}">
+                  <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}" required="required">
 
                   @if ($errors->has('name'))
                     <span class="help-block">
@@ -51,7 +51,14 @@
 
                <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
                   <label for="country">Country</label>
-                  <input type="text" class="form-control" id="country" name="country" value="{{ $user->country }}">
+                  <select class="form-control" id="country" name="country" value="{{ old('country') }}" required="required">
+                  <option value="">Choose Country</option>  
+                  @if(!is_null($country))
+                    @foreach($country as $loopingCountries)  
+                    <option value="{{ $loopingCountries }}" @if($loopingCountries == $user->country) selected="selected" @endif >{{ $loopingCountries }}</option>
+                    @endforeach
+                  @endif
+                  </select>  
 
                   @if ($errors->has('country'))
                     <span class="help-block">
@@ -59,11 +66,11 @@
                     </span>
                   @endif
 
-               </div>
+               </div> 
 
                <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
                   <label for="address">Address</label>
-                  <input type="text" class="form-control" id="address" name="address" value="{{ $user->address }}">
+                  <input type="text" class="form-control" id="address" name="address" value="{{ $user->address }}" required="required">
 
                   @if ($errors->has('address'))
                     <span class="help-block">
@@ -76,7 +83,7 @@
 
                <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
                   <label for="address">City</label>
-                  <input type="text" class="form-control" id="city" name="city" value="{{ $user->city }}">
+                  <input type="text" class="form-control" id="city" name="city" value="{{ $user->city }}" required="required">
 
                   @if ($errors->has('city'))
                     <span class="help-block">
@@ -89,7 +96,7 @@
 
                <div class="form-group{{ $errors->has('state') ? ' has-error' : '' }}">
                   <label for="address">State</label>
-                  <input type="text" class="form-control" id="state" name="state" value="{{ $user->state }}">
+                  <input type="text" class="form-control" id="state" name="state" value="{{ $user->state }}" required="required">
 
                   @if ($errors->has('state'))
                     <span class="help-block">
@@ -101,7 +108,7 @@
 
                <div class="form-group{{ $errors->has('zipcode') ? ' has-error' : '' }}">
                   <label for="zipcode">Zipcode</label>
-                  <input type="text" class="form-control" id="zipcode" name="zipcode" value="{{ $user->zipcode }}">
+                  <input type="text" class="form-control" id="zipcode" name="zipcode" value="{{ $user->zipcode }}" required="required">
 
                   @if ($errors->has('zipcode'))
                     <span class="help-block">
@@ -113,7 +120,7 @@
 
                <div class="form-group{{ $errors->has('phone_number') ? ' has-error' : '' }}">
                   <label for="phone_number">Phone Number</label>
-                  <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ $user->phone_number }}">
+                  <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ $user->phone_number }}" required="required">
 
                   @if ($errors->has('phone_number'))
                     <span class="help-block">
@@ -125,7 +132,7 @@
 
                <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
                   <label for="avatar">Profile Image</label>
-                  <input type="file" id="avatar" name="avatar" class="form-control" onchange="ValidateSingleInput(this);" >
+                  <input type="file" id="avatar" name="avatar" class="form-control" onchange="ValidateSingleInput(this);">
 
                   @if ($errors->has('avatar'))
       			        <span class="help-block">

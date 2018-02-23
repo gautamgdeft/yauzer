@@ -90,7 +90,7 @@
          </div>
       </div>
    </section>
-   </section>
-   <!-- /.content -->            
+</section>
+<!-- /.content -->            
 </aside>
 @endsection

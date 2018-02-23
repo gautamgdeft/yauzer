@@ -53,7 +53,12 @@ class User extends Authenticatable
      public function businesses()
      {
         return $this->hasMany('App\BusinessListing');
-     } 
+     }
+
+     public function country()
+     {
+        return $this->belongsTo('App\Country');
+     }        
 
      
      public static function findBySlugOrFail($slug)

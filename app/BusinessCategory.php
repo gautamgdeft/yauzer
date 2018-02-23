@@ -11,6 +11,12 @@ class BusinessCategory extends Model
     use Sluggable;
     use SluggableScopeHelpers;
 
+
+    public function business_subcategory()
+    {
+        return $this->hasMany('App\BusinessSubcategory');
+    }     
+
     /**
      * The attributes that are mass assignable.
      *
