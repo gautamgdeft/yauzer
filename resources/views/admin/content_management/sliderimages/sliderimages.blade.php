@@ -35,6 +35,7 @@
                   <thead>
                      <tr>
                         <th>Image</th>
+                        <th>Description</th>
                         <th>Status</th>
                         <th>Action</th>
                      </tr>
@@ -44,14 +45,15 @@
                   	 @foreach($sliderImages as $loopingSliderImages)
                      <tr class="tr_{{ $loopingSliderImages->id }}">
                         <td><img id="image_src" class="" src="/uploads/sliderAvatars/{{ $loopingSliderImages->avatar }}" style="height: 45px; width: 150px;"></td>
+                        <td>{{ $loopingSliderImages->description }}</td>
                         <td>
-                          <button id="active_{{ $loopingSliderImages->id }}" class="btn btn-success btn-flat active_slide_image @if($loopingSliderImages->status == '0') hide @endif" data-id="{{ $loopingSliderImages->id }}">Active</button>
+                          <button id="active_{{ $loopingSliderImages->id }}" class="btn btn-success btn-flat active_slide_image @if($loopingSliderImages->status == '0') hide @endif" data-id="{{ $loopingSliderImages->id }}" data-toggle="tooltip" title="Click to Inactive">Active</button>
 
-                          <button id="inactive_{{ $loopingSliderImages->id }}" class="btn btn-danger btn-flat active_slide_image @if($loopingSliderImages->status == '1') hide @endif" data-id="{{ $loopingSliderImages->id }}">Inactive</button>                              
+                          <button id="inactive_{{ $loopingSliderImages->id }}" class="btn btn-danger btn-flat active_slide_image @if($loopingSliderImages->status == '1') hide @endif" data-id="{{ $loopingSliderImages->id }}" data-toggle="tooltip" title="Click to Active">Inactive</button>                              
                         </td>
                         <td>
-                          <button class="btn btn-danger btn-flat delete_slider_image" data-id="{{ $loopingSliderImages->id }}">Delete</button>
-                          <a href="{{ route('admin.edit_slider_image',['slug' => $loopingSliderImages->slug]) }}" class="btn btn-warning btn-flat">Edit</a>               		      	
+                          <button class="btn btn-danger btn-flat delete_slider_image" data-id="{{ $loopingSliderImages->id }}" data-toggle="tooltip" title="Delete Slider-image"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                          <a href="{{ route('admin.edit_slider_image',['slug' => $loopingSliderImages->slug]) }}" class="btn btn-warning btn-flat" data-toggle="tooltip" title="Edit Slider-image"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>               		      	
                        </td>
 
                      </tr>
@@ -62,6 +64,7 @@
                   <tfoot>
                      <tr>
                         <th>Image</th>
+                        <th>Description</th>
                         <th>Status</th>
                         <th>Action</th>
                      </tr>

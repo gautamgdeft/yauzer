@@ -80,7 +80,7 @@ class BusinessCategoryController extends Controller
             //Validating-Category-Data
     		$validatedData = $request->validate([
 		        	'name'         => 'required|string|max:255',
-		            'avatar'       => 'unique:business_categories'
+		          'avatar'       => 'unique:business_categories'
             ]);
 
             //Updating Category

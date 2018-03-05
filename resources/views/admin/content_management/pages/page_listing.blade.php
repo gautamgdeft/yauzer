@@ -53,13 +53,13 @@
                         <td>{{ $loopingpages->metakeywords }}</td>
                         <td>{{ $loopingpages->metadescription }}</td>
                         <td>
-                          <button id="active_{{ $loopingpages->id }}" class="btn btn-success btn-flat active_page @if($loopingpages->status == '0') hide @endif" data-id="{{ $loopingpages->id }}">Active</button>
+                          <button id="active_{{ $loopingpages->id }}" class="btn btn-success btn-flat active_page @if($loopingpages->status == '0') hide @endif" data-id="{{ $loopingpages->id }}" data-toggle="tooltip" title="Click to Inactive">Active</button>
 
-                          <button id="inactive_{{ $loopingpages->id }}" class="btn btn-danger btn-flat active_page @if($loopingpages->status == '1') hide @endif" data-id="{{ $loopingpages->id }}">Inactive</button>                              
+                          <button id="inactive_{{ $loopingpages->id }}" class="btn btn-danger btn-flat active_page @if($loopingpages->status == '1') hide @endif" data-id="{{ $loopingpages->id }}" data-toggle="tooltip" title="Click to Active">Inactive</button>                              
                         </td>
                         <td>
-                          <button class="btn btn-danger btn-flat delete_page" data-id="{{ $loopingpages->id }}">Delete</button>
-                          <a href="{{ route('admin.edit_page_form',['slug' => $loopingpages->slug]) }}" class="btn btn-warning btn-flat">Edit</a>               		      	
+                          <button class="btn btn-danger btn-flat delete_page" data-id="{{ $loopingpages->id }}" data-toggle="tooltip" title="Delete Page"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                          <a href="{{ route('admin.edit_page_form',['slug' => $loopingpages->slug]) }}" class="btn btn-warning btn-flat" data-toggle="tooltip" title="Edit Page"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>               		      	
                        </td>
 
                      </tr>

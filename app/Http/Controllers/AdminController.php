@@ -50,7 +50,7 @@ class AdminController extends Controller
             }else{
                 $user = Auth::user();
                 $user->name  = $request->input('name');
-                $user->email = $request->input('email');
+                //$user->email = $request->input('email');
 
 
                 if($request->hasFile('avatar'))
@@ -114,7 +114,7 @@ class AdminController extends Controller
     {
         $rules = [
                     'name'                 =>  'required',
-                    'email'                =>  'required|email',
+                    #'email'                =>  'required|email',
                     'avatar'               =>  'unique:admins'
                  ];
 

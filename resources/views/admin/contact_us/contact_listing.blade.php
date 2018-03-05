@@ -45,8 +45,8 @@
           <td>{{ $loopingcontacts->email }}</td>
           <td>{{ $loopingcontacts->message }}</td>
           <td>
-            <button class="btn btn-danger btn-flat delete_contact" data-id="{{ $loopingcontacts->id }}">Delete</button>
-            <a href="" class="btn btn-info btn-flat">View</a>            
+            <button class="btn btn-danger btn-flat delete_contact" data-id="{{ $loopingcontacts->id }}" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+            <a href="" class="btn btn-info btn-flat" data-toggle="tooltip" title="View"><i class="fa fa-eye" aria-hidden="true"></i></a>            
           </td>
 
         </tr>

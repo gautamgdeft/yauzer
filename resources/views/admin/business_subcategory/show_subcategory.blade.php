@@ -55,8 +55,8 @@
                       <button id="inactive_{{ $loopingSubcategories->id }}" class="btn btn-danger btn-flat active_subcategory @if($loopingSubcategories->status == '1') hide @endif" data-id="{{ $loopingSubcategories->id }}">Inactive</button>                                                    
                    </td>
                    <td>
-                      <button class="btn btn-danger btn-flat delete_subcategory" data-id="{{ $loopingSubcategories->id }}">Delete</button>
-                      <a href="{{ route('admin.edit_subcategory_form',['slug' => $loopingSubcategories->slug]) }}" class="btn btn-warning btn-flat">Edit</a>
+                      <button class="btn btn-danger btn-flat delete_subcategory" data-id="{{ $loopingSubcategories->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                      <a href="{{ route('admin.edit_subcategory_form',['slug' => $loopingSubcategories->slug]) }}" class="btn btn-warning btn-flat"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                    </td>
 
                 </tr>

@@ -144,7 +144,7 @@
 
                <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
                   <label for="avatar">Profile Image</label>
-                  <input type="file" id="avatar" name="avatar" class="form-control" onchange="ValidateSingleInput(this);" required="required" >
+                  <input type="file" id="avatar" name="avatar" class="form-control" onchange="ValidateSingleInput(this);" >
 
                   @if ($errors->has('avatar'))
       			        <span class="help-block">
@@ -154,8 +154,64 @@
 
                   <img id="image_src" class="img-circle" src="/uploads/avatars/default.png" style="height: 45px; width: 45px;">
                </div>
+
             </div>
             <!-- /.box-body -->
+
+            <div class="container-fluid">
+                    <div class="creditCardForm">
+                      <div class="heading">
+                        <h1>Credit Card Details</h1>
+                      </div>
+                        <div class="payment">
+                                <div class="form-group owner">
+                                    <label for="credit_card_owner_name">Customer Name</label>
+                                    <input type="text" class="form-control" name="credit_card_owner_name" id="owner">
+                                </div>
+                                <div class="form-group CVV">
+                                    <label for="cvv">CVV</label>
+                                    <input type="text" class="form-control" id="cvv" name="cvv">
+                                </div>
+                                <div class="form-group" id="card-number-field">
+                                    <label for="credit_card_number">Card Number</label>
+                                    <input type="text" class="form-control" id="cardNumber" name="credit_card_number">
+                                </div>
+                                <div class="form-group" id="expiration-date">
+                                    <label>Expiration Date</label>
+                                    <select name="credit_exp_month">
+                                        <option value="">Month</option>
+                                        <option value="01">January</option>
+                                        <option value="02">February </option>
+                                        <option value="03">March</option>
+                                        <option value="04">April</option>
+                                        <option value="05">May</option>
+                                        <option value="06">June</option>
+                                        <option value="07">July</option>
+                                        <option value="08">August</option>
+                                        <option value="09">September</option>
+                                        <option value="10">October</option>
+                                        <option value="11">November</option>
+                                        <option value="12">December</option>
+                                    </select>
+                                    <select name="credit_exp_year">
+                                        <option value="">Year</option>
+                                        <option value="16"> 2016</option>
+                                        <option value="17"> 2017</option>
+                                        <option value="18"> 2018</option>
+                                        <option value="19"> 2019</option>
+                                        <option value="20"> 2020</option>
+                                        <option value="21"> 2021</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" id="credit_cards">
+                                  <img src="{{URL::asset('img/credit-card/visa.jpg')}}" id="visa">
+                                  <img src="{{URL::asset('img/credit-card/mastercard.jpg')}}" id="mastercard">
+                                  <img src="{{URL::asset('img/credit-card/amex.jpg')}}" id="amex">
+                                </div>
+                        </div>
+                    </div>
+                 </div>
+
             <div class="box-footer">
                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
@@ -172,6 +228,9 @@
 
 
 @section('custom_scripts')
+<script src="{{ asset('js/admin/credit_card/jquery.payform.min.js') }}"></script>
+<script src="{{ asset('js/admin/credit_card/script.js') }}"></script>
+
 <script type="text/javascript">
 
 $(document).ready(function()

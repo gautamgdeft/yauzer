@@ -67,7 +67,7 @@
             <!-- /.box-body -->
             <div class="box-footer">
                <button type="submit" class="btn btn-primary">Update</button>
-               <a href="{{ URL::previous() }}" class="btn btn-primary">Go Back</a>
+               <a href="{{ URL::previous() }}" class="btn btn-warning">Go Back</a>
             </div>
          </form>
       </div>

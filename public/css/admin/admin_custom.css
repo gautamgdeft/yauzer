@@ -1,0 +1,297 @@
+/***sidebar***/
+.skin-black .sidebar > .sidebar-menu > li > a:hover, .skin-black .sidebar > .sidebar-menu > li.active > a{
+  background: #85c226;
+	color:#fff;
+}
+.text-success{
+ color: #85c226;
+}
+
+
+.navbar-nav > .user-menu > .dropdown-menu{
+	width: 285px;
+}
+.skin-black .navbar .nav a{
+	color: #787878;
+}
+.skin-black .navbar .nav > li > a:hover, .skin-black .navbar .nav .open > a:focus ,.skin-black .navbar .nav > li > a:active{
+	color: #85c226;
+}
+.bg-light-blue {
+    background-color: #333333 !important;
+}
+.pull-mid{
+    display: inline-block;
+    margin: 0px 3.5px;
+}
+.btn.btn-default,.bg-olive, .btn.btn-info,.btn.btn-success,.btn.btn-primary{
+	background: #85c226 !important;
+	color:#fff !important;
+	border-color:#85c226 !important;
+	padding: 6px 10px; 
+	border-radius: 0px;
+}
+.btn.btn-default:hover, .btn.btn-info:hover,.btn.btn-success:hover,.btn.btn-primary:hover{
+	background: #629119 !important;
+	color:#fff !important;
+	border-color:#629119 !important;
+}
+.btn.btn-warning{
+	background: #2a8290 !important;
+	color:#fff !important;
+	border-color:#2a8290 !important;
+    border-radius: 0px;
+}
+.btn.btn-warning:hover{
+  background: #297988 !important;
+}
+.btn.btn-danger{
+	background: #e86d5a!important;
+	color:#fff !important;
+	border-color:#e86d5a!important;
+}
+.btn.btn-danger:hover{
+	background: #e2503a !important;
+}
+.toggle-off.btn{
+	background: #2a8290 !important;
+	color:#fff !important;
+	border-color:#2a8290 !important;
+    border-radius: 0px;
+}
+.toggle-off.btn:hover{
+	background: #297988 !important;
+}
+ .toggle span.toggle-handle {
+    background: #fff !important;
+}
+.toggle.btn.btn-default.off{
+background: #2a8290 !important;
+	color:#fff !important;
+	border-color:#2a8290 !important;
+    border-radius: 0px;
+}
+.toggle.btn.btn-default.off .toggle-handle:hover{
+  background: #2a8290 !important;
+}
+.right-side > .content-header > .breadcrumb > li > a{
+	color: #85c226;
+}
+.right-side > .content-header > h1{
+	color: #85c226;
+}
+.box .box-header a {
+    float: right;
+    margin: 10px 10px 0px 0px;
+}
+.pagination>.disabled>span, .pagination>.disabled>span:hover, .pagination>.disabled>span:focus, .pagination>.disabled>a, .pagination>.disabled>a:hover, .pagination>.disabled>a:focus{
+	color: #fff;
+    background-color: #85c226;
+    border-color: #85c226;
+}
+.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus{
+	background: #2a8290 !important;
+	color:#fff !important;
+	border-color:#2a8290 !important;
+}
+.pagination>li {
+    display: inline-block;
+    margin-right: 5px;
+}
+.pagination>li:last-child {
+    margin: 0px;
+}
+div.dataTables_filter input {
+    height: 34px;
+}
+.box form{
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0px;
+}
+.box.box-primary .img-circle {
+	  margin-top: 20px;
+	  height: 55px !important;
+    width: 55px !important;
+}
+.img-circle {  
+    border: 2px solid #333;   
+}
+.alert{
+	width: 97.5%;
+}
+.creditCardForm {
+	font-family: 'Source Sans Pro', sans-serif;
+    max-width: 100%;
+    background-color: #fff;
+    margin: 0px auto;
+    overflow: hidden;
+    padding: 0px;
+    color: #333;
+    border-top: 1px solid #333;
+}
+.creditCardForm .heading h1{
+	font-family: 'Source Sans Pro', sans-serif;
+    color: #333;
+    text-align: left;
+    font-size: 24px;	
+}
+.creditCardForm .payment {
+    float: left;
+    font-size: 14px;
+    padding: 10px 0px;
+    margin-top:0px;
+}
+.creditCardForm label{
+	font-family: 'Source Sans Pro', sans-serif;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+.creditCardForm .payment .form-control{
+	line-height: 34px;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    color: #555;
+}
+.creditCardForm .payment select {
+    padding: 0px 10px;
+    height: 34px;
+    line-height: 34px;
+}
+#credit_cards img {
+    width: 60px;
+    height: 36px;
+}
+.hours {
+    width: 100%;
+}
+.hours ul.open-down{
+  display: inline-block;
+  width: 100%;
+  padding: 0px;
+}
+.hours ul.open-down .input-group {
+    display: inline-block;
+    width: 44%;
+    margin: 0px 5px;
+}
+.hours ul.open-down .input-group .input-small {
+    width: 75%;
+    display: inline-block;
+}
+.hours ul.open-down .input-group-addon{
+       width: auto;
+    height: 34px;
+    float: right;
+}
+.hours ul.open-down .input-group span i {
+    line-height: 18px;
+  }
+.custom-tabing{
+   	padding: 15px;
+}
+ .custom-tabing .nav-tabs>li{
+  	z-index: 2;
+  	position: relative;
+  	background: #F5F5F5;
+  	margin-right: 20px;
+    border-bottom: 1px solid #85c226;
+ }
+ .custom-tabing .nav-tabs>li>a{
+	font-size: 14px;
+	color: #333;
+	border-radius: 0px;
+	padding: 6px 15px;
+}
+ .custom-tabing .nav-tabs {
+    border-bottom: 1px solid #85c226;
+}
+ .custom-tabing .tab-content{
+  border:1px solid #85c226;
+  border-top:none;
+  padding: 15px;
+}
+.custom-tabing .nav-tabs>li:first-child::before{
+	display: none;
+}
+.custom-tabing .nav-tabs>li::before {
+    position: absolute;
+    content: "";
+    background: #F5F5F5;
+    left: -5px;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    z-index: -1;
+    transform: skew(-17deg);
+}
+.custom-tabing .nav-tabs>li::after {
+    position: absolute;
+    content: "";
+    background: #F5F5F5;
+    right: -5px;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    z-index: -1;
+    transform: skew(17deg);
+}
+.custom-tabing .nav-tabs>li.active::before {
+    position: absolute;
+    content: "";
+    background: #85c226;
+    left: -5px;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    z-index: -1;
+    transform: skew(-17deg);
+}
+.custom-tabing .nav-tabs>li.active::after {
+    position: absolute;
+    content: "";
+    background: #85c226;
+    right: -5px;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    z-index: -1;
+    transform: skew(17deg);
+}
+.custom-tabing .nav-tabs>li>a:hover{
+	background:transparent;
+	border-color: transparent;
+	color: #000;
+}
+.custom-tabing .nav-tabs>li.active>a, .custom-tabing .nav-tabs>li.active>a:hover, .custom-tabing .nav-tabs>li.active>a:focus{
+    background: #85c226;
+	color:#fff;
+	border-color:#85c226;
+}
+
+
+/***********************/
+@media screen and (max-width: 599px){
+  .hours ul.open-down .input-group .input-small{
+  	width:74%;
+  }
+}
+@media screen and (max-width: 479px){
+.hours {
+    width: 100%;
+    margin-top: 10px;
+    display: inline-block;
+}
+.hours ul.open-down .input-group {
+    width: 100%;
+    margin: 0px;
+}
+.hours ul.open-down{
+   text-align:left;
+	}
+.hours ul.open-down .input-group .input-small {
+    width: 83%;
+}	
+}

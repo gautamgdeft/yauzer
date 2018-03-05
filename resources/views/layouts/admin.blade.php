@@ -17,7 +17,10 @@
     <link href="{{ asset('css/admin/morris/morris.css') }}" rel="stylesheet">
     <link href="{{ asset('css/admin/jvectormap/jquery-jvectormap-1.2.2.css') }}" rel="stylesheet">
     <link href="{{ asset('css/admin/datatables/dataTables.bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/admin/timepicker/bootstrap-timepicker.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/admin/AdminLTE.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/admin/credit_card/styles_credit_card.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/admin/admin_custom.css') }}" rel="stylesheet">
 
 </head>
 <body class="skin-black">
@@ -47,9 +50,12 @@
     <script src="{{ asset('js/admin/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
     <script src="{{ asset('js/admin/datatables/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('js/admin/datatables/dataTables.bootstrap.js') }}"></script>
+    <script src="{{ asset('js/admin/timepicker/bootstrap-timepicker.min.js') }}"></script>
     <script src="{{ asset('js/admin/admin_app.js') }}"></script>
     <script src="{{ asset('js/admin/admin_dashobard.js') }}"></script>
     <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('js/admin/admin_custom.js') }}"></script>
+    <script src="{{ asset('js/admin/responsive-tabs.js') }}"></script>
 
     @yield('custom_scripts')
 

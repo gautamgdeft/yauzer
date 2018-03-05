@@ -41,6 +41,29 @@ class User extends Authenticatable
             ]
         ];
     }    
+     #Relation with Business
+     public function businesses()
+     {
+        return $this->hasMany('App\BusinessListing');
+     }
+     
+     #Relation with Yauzer
+     public function yauzers()
+     {
+        return $this->hasMany('App\Yauzer');
+     }     
+
+     #Relation with Country
+     public function country()
+     {
+        return $this->belongsTo('App\Country');
+     }      
+
+     #Relation with Credit-Card
+     public function creditcards()
+     {
+        return $this->hasOne('App\CreditCard');
+     } 
 
     /**
       * Get the roles a user has
@@ -50,15 +73,6 @@ class User extends Authenticatable
          return $this->belongsToMany(Role::class, 'user_roles');
      }
 
-     public function businesses()
-     {
-        return $this->hasMany('App\BusinessListing');
-     }
-
-     public function country()
-     {
-        return $this->belongsTo('App\Country');
-     }        
 
      
      public static function findBySlugOrFail($slug)

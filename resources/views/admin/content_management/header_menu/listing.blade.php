@@ -47,13 +47,13 @@
         <td>{{ $loopingMenus->name }}</td>
         <td>{{ $loopingMenus->url }}</td>
         <td>
-          <button id="active_{{ $loopingMenus->id }}" class="btn btn-success btn-flat active_menu @if($loopingMenus->status == '0') hide @endif" data-id="{{ $loopingMenus->id }}">Active</button>
+          <button id="active_{{ $loopingMenus->id }}" class="btn btn-success btn-flat active_menu @if($loopingMenus->status == '0') hide @endif" data-id="{{ $loopingMenus->id }}" data-toggle="tooltip" title="Click to Inactive">Active</button>
 
-          <button id="inactive_{{ $loopingMenus->id }}" class="btn btn-danger btn-flat active_menu @if($loopingMenus->status == '1') hide @endif" data-id="{{ $loopingMenus->id }}">Inactive</button>                                                    
+          <button id="inactive_{{ $loopingMenus->id }}" class="btn btn-danger btn-flat active_menu @if($loopingMenus->status == '1') hide @endif" data-id="{{ $loopingMenus->id }}" data-toggle="tooltip" title="Click to Active">Inactive</button>                                                    
         </td>
         <td>
-          <button class="btn btn-danger btn-flat delete_menu" data-id="{{ $loopingMenus->id }}">Delete</button>
-          <a href="{{ route('admin.edit_header_menu', ['slug' => $loopingMenus->slug]) }}" class="btn btn-warning btn-flat">Edit</a>
+          <button class="btn btn-danger btn-flat delete_menu" data-id="{{ $loopingMenus->id }}" data-toggle="tooltip" title="Delete Menu"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+          <a href="{{ route('admin.edit_header_menu', ['slug' => $loopingMenus->slug]) }}" class="btn btn-warning btn-flat" data-toggle="tooltip" title="Edit Menu"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
         </td>
 
       </tr>

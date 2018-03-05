@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Role;
 use App\Country;
+use App\CreditCard;
 use Image;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Validator;
@@ -42,7 +43,7 @@ class OwnerController extends Controller
     {
 
         $validatedData = $request->validate([
-        	'name'         => 'required|string|max:255',
+        	  'name'         => 'required|string|max:255',
             'email'        => 'required|string|email|max:255|unique:users',
             'password'     => 'required|string|min:6',
             'country'      => 'required|string',
@@ -89,7 +90,20 @@ class OwnerController extends Controller
             $user->save();
           }
 
-         return redirect()->route('admin.owners')
+          //Adding Credit Card Details
+
+          $creditCard   = new CreditCard;
+          $creditCard->user_id = $user->id;
+          $creditCard->credit_card_owner_name = $request->credit_card_owner_name;
+          $creditCard->cvv = $request->cvv;
+          $creditCard->credit_card_number  = $request->credit_card_number;
+          $creditCard->credit_exp_month = $request->credit_exp_month;
+          $creditCard->credit_exp_year = $request->credit_exp_year;
+
+          //Saving Credit Card
+          $creditCard->save();
+
+          return redirect()->route('admin.owners')
                         ->with("success","Owner has been added successfuly");
          
     }
@@ -106,16 +120,16 @@ class OwnerController extends Controller
     {
         $user = User::findBySlugOrFail($slug);
 
-		$validatedData = $request->validate([
-        	'name'         => 'required|string|max:255',
-            'country'      => 'required|string',
-            'address'      => 'required|string',
-            'city'         => 'required|string',
-            'state'        => 'required|string',
-            'zipcode'      => 'required|numeric',
-            'phone_number' => 'required',
-            'avatar'       => 'unique:users'
-        ]);
+    		$validatedData = $request->validate([
+            	  'name'         => 'required|string|max:255',
+                'country'      => 'required|string',
+                'address'      => 'required|string',
+                'city'         => 'required|string',
+                'state'        => 'required|string',
+                'zipcode'      => 'required|numeric',
+                'phone_number' => 'required',
+                'avatar'       => 'unique:users'
+            ]);
 
 
             if($request->hasFile('avatar'))
@@ -127,6 +141,11 @@ class OwnerController extends Controller
             } 
 
             $user->update($request->all());
+
+            //Updating Credit-Card Info
+            
+             $user->creditcards()->update(['credit_card_owner_name' => $request->credit_card_owner_name, 'cvv' => $request->cvv, 'credit_card_number' => $request->credit_card_number, 'credit_exp_month' => $request->credit_exp_month, 'credit_exp_year' => $request->credit_exp_year]);
+
 			      Session::flash('success', 'Owner was updated.');
             return redirect()->route('admin.owners');                      
 

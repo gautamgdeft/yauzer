@@ -85,8 +85,13 @@ Route::prefix('admin')->group(function()
 	Route::get('/business-listings', 'Admin\BusinessListingController@business_listing')->name('admin.business_listing');
     Route::post('/delete-business', 'Admin\BusinessListingController@destroy_business')->name('admin.destroy_business');	
 	Route::post('/update-business-status', 'Admin\BusinessListingController@update_business_status')->name('admin.update_business_status');
-   Route::get('/view-business/{slug}', 'Admin\BusinessListingController@show_business')->name('admin.show_business');
+    Route::get('/view-business/{slug}', 'Admin\BusinessListingController@show_business')->name('admin.show_business');
+    Route::get('/edit-business/{slug}', 'Admin\BusinessListingController@edit_business')->name('admin.show_edit_business_form');    
+    Route::post('/update-business/{slug}', 'Admin\BusinessListingController@update_business')->name('admin.update_business');
 
+
+    //Business-Hours-Routes    
+    Route::post('/update-hours/{slug}', 'Admin\BusinessHourController@update_business_hours')->name('admin.update_business_hours');
 
  //Content-Management-Routes Starts
 
@@ -126,9 +131,21 @@ Route::prefix('admin')->group(function()
     Route::get('/edit-footer-menu/{slug}', 'Admin\ContentManagementController@edit_footer_menu')->name('admin.edit_footer_menu');
     Route::post('update-footer-menu/{slug}', 'Admin\ContentManagementController@update_footer_menu')->name('admin.update_footer_menu');
 
+    //Manage FAQ Routes
+    Route::get('/faqs', 'Admin\ContentManagementController@faqs')->name('admin.faqs');
+    Route::get('/new-faq', 'Admin\ContentManagementController@show_faq_form')->name('admin.show_faq_form');
+    Route::post('/new-faq', 'Admin\ContentManagementController@store_faq')->name('admin.store_faq');
+    Route::post('/update-faq-status', 'Admin\ContentManagementController@update_faq_status')->name('admin.update_faq_status');    
+    Route::post('/destroy-faq', 'Admin\ContentManagementController@destroy_faq')->name('admin.destroy_faq');
+    Route::get('/edit-faq/{slug}', 'Admin\ContentManagementController@edit_faq')->name('admin.edit_faq_form');
+    Route::post('/update-faq/{slug}', 'Admin\ContentManagementController@update_faq')->name('admin.update_faq');       
+
     //Manage-Contact-US-Routes
     Route::get('/listing-contacts', 'Admin\ContactusController@listing')->name('admin.contactListing');
-    Route::post('/delete-contact', 'Admin\ContactusController@destroy_contact')->name('admin.destroy_contact');
-    Route::get('/view-contact-detail/{id}', 'Admin\ContactusController@contact_details')->name('admin.contactdetail');                   
+    Route::post('/delete-contact', 'Admin\ContactusController@destroy_contact')->name('admin.destroy_contact');   
+    Route::get('/view-contact-detail/{id}', 'Admin\ContactusController@contact_details')->name('admin.contactdetail');
 
+    //Report-Management-Routes                   
+    Route::get('/report-management', 'Admin\ReportManagementController@show_reports')->name('admin.report_management');
+    Route::get('/export', 'Admin\ReportManagementController@export')->name('admin.export');
 });

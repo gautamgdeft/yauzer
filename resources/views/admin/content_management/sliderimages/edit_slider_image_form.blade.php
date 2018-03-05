@@ -36,7 +36,20 @@
                   @endif
 
                   <img id="image_src" class="" src="/uploads/sliderAvatars/{{ $sliderImage->avatar }}" style="height: 45px; width: 150px;">
-               </div>             
+               </div>  
+
+
+               <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+                  <label for="description">Description</label>
+                  <input type="text" class="form-control" id="description" name="description" value="{{ $sliderImage->description }}" required="required">
+
+                  @if ($errors->has('description'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('description') }}</strong>
+                    </span>
+                  @endif
+
+               </div>                          
 
                <div class="form-group{{ $errors->has('image_alt_text') ? ' has-error' : '' }}">
                   <label for="image_alt_text">Image Alt Text</label>
@@ -54,6 +67,7 @@
             <!-- /.box-body -->
             <div class="box-footer">
                <button type="submit" class="btn btn-primary">Submit</button>
+               <a href="{{ URL::previous() }}" class="btn btn-warning">Go Back</a>
             </div>
          </form>
       </div>

@@ -48,15 +48,15 @@
         <td><img id="image_src" class="img-circle" src="/uploads/categoryAvatars/{{ $loopingCategories->avatar }}" style="height: 45px; width: 45px;"></td>
         <td>
 
-          <button id="active_{{ $loopingCategories->id }}" class="btn btn-success btn-flat active_category @if($loopingCategories->status == '0') hide @endif" data-id="{{ $loopingCategories->id }}">Active</button>
+          <button id="active_{{ $loopingCategories->id }}" class="btn btn-success btn-flat active_category @if($loopingCategories->status == '0') hide @endif" data-id="{{ $loopingCategories->id }}" data-toggle="tooltip" title="Click to Inactive">Active</button>
 
-          <button id="inactive_{{ $loopingCategories->id }}" class="btn btn-danger btn-flat active_category @if($loopingCategories->status == '1') hide @endif" data-id="{{ $loopingCategories->id }}">Inactive</button>                                                    
+          <button id="inactive_{{ $loopingCategories->id }}" class="btn btn-danger btn-flat active_category @if($loopingCategories->status == '1') hide @endif" data-id="{{ $loopingCategories->id }}" data-toggle="tooltip" title="Click to Active">Inactive</button>                                                    
         </td>
         <td>
-          <button class="btn btn-danger btn-flat delete_category" data-id="{{ $loopingCategories->id }}">Delete</button>
-          <a href="{{ route('admin.edit_category_form',['slug' => $loopingCategories->slug]) }}" class="btn btn-warning btn-flat">Edit</a>
-          <a href="{{ route('admin.show_category',['slug' => $loopingCategories->slug]) }}" class="btn btn-info btn-flat">View</a>
-          <a href="{{ route('admin.show_subcategory',['slug' => $loopingCategories->slug]) }}" class="btn btn-info btn-flat">View Subcategories</a>
+          <button class="btn btn-danger btn-flat delete_category" data-id="{{ $loopingCategories->id }}" data-toggle="tooltip" title="Delete Category"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+          <a href="{{ route('admin.edit_category_form',['slug' => $loopingCategories->slug]) }}" class="btn btn-warning btn-flat" data-toggle="tooltip" title="Edit Category"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+          <a href="{{ route('admin.show_category',['slug' => $loopingCategories->slug]) }}" class="btn btn-info btn-flat" data-toggle="tooltip" title="View Category"><i class="fa fa-eye" aria-hidden="true"></i></a>
+          <a href="{{ route('admin.show_subcategory',['slug' => $loopingCategories->slug]) }}" class="btn btn-info btn-flat" data-toggle="tooltip" title="Click to view Subcategories">View Subcategories</a>
         </td>
 
       </tr>

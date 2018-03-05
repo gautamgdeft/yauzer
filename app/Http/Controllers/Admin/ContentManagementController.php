@@ -12,6 +12,7 @@ use App\BusinessCategory;
 use App\BusinessListing;
 use App\HeaderMenu;
 use App\FooterMenu;
+use App\Faq;
 use Image;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Validator;
@@ -160,6 +161,7 @@ public function store_slider_image(Request $request)
 
   $validatedData = $request->validate([
     'image_alt_text' => 'required|string',
+    'description'    => 'required|string',
     'avatar'         => 'image:jpg,png,jpeg,gif|unique:sliderimages'
   ]);
 
@@ -167,6 +169,7 @@ public function store_slider_image(Request $request)
   $sliderImage = SliderImage::create(
    array(
     'image_alt_text' => $request->input('image_alt_text'),                  
+    'description'    => $request->input('description'),                  
   ));
 
          //Saving Slider-Image Avatar
@@ -237,11 +240,13 @@ public function update_slider_image(Request $request, $slug)
 
  $validatedData = $request->validate([
    'image_alt_text' => 'required|string',
+   'description'    => 'required|string',
    'avatar'         => 'image:jpg,png,jpeg,gif|unique:sliderimages'
  ]);
 
 
  $sliderImage->image_alt_text = $request->input('image_alt_text');
+ $sliderImage->description    = $request->input('description');
  $sliderImage->save();
 
  if($request->hasFile('avatar'))
@@ -382,12 +387,12 @@ public function update_footer_menu_status(Request $request)
    $footerMenu->save();
    return response(['msg' => 'Menu status has been activated successfully', 'status' => 'success']); 
 
- }else{
+  }else{
    $footerMenu->status  = false;
    $footerMenu->save();
    return response(['msg' => 'Menu status has been deactivated successfully', 'status' => 'declined']); 
- }  
-}
+  }  
+ }
 
 }
 
@@ -425,6 +430,90 @@ public function update_footer_menu(Request $request, $slug)
 
  Session::flash('success', 'Menu was updated.');
  return redirect()->route('admin.footermenus');                            
+}
+
+public function faqs()
+{
+  $faqs = Faq::all();
+  return view('admin.content_management.faqs.listing', compact('faqs'));
+}
+
+public function show_faq_form()
+{ 
+  return view('admin.content_management.faqs.show_faq_form'); 
+}
+
+public function store_faq(Request $request)
+{
+  $validatedData = $request->validate([
+    'question' => 'required|string',
+    'answer'   => 'required'
+  ]);
+
+   $faq = new Faq;
+   $faq->question = $request->question;
+   $faq->answer = $request->answer;
+   $faq->save();
+
+  return redirect()->route('admin.faqs')
+  ->with("success","Faq has been added successfuly");     
+
+}
+
+public function update_faq_status(Request $request)
+{
+ if ( $request->input('id') ) 
+ {
+  $faq = Faq::find($request->input('id'));
+
+  if($faq->status == false)
+  {
+   $faq->status  = true;
+   $faq->save();
+   return response(['msg' => 'Faq status has been activated successfully', 'status' => 'success']); 
+
+  }else{
+   $faq->status  = false;
+   $faq->save();
+   return response(['msg' => 'Faq status has been deactivated successfully', 'status' => 'declined']); 
+  }  
+ }
+}
+
+public function destroy_faq(Request $request)
+{
+ if ( $request->input('id') ) 
+ {
+  $faq = Faq::find($request->input('id'));         
+  $faq->delete();
+  return response(['msg' => 'Faq has been deleted successfully', 'status' => 'success']);
+ }
+
+  return response(['msg' => 'Faq deleting the menu', 'status' => 'failed']);  
+}
+
+public function edit_faq($slug)
+{
+    $faq = Faq::findBySlugOrFail($slug);
+    return view('admin.content_management.faqs.edit_faq_form', compact('faq'));
+}
+
+public function update_faq(Request $request, $slug)
+{
+ $faq = Faq::findBySlugOrFail($slug);
+
+ $validatedData = $request->validate([
+     'question'    => 'required|string',
+     'answer'      => 'required'
+ ]);
+
+
+ $faq->question = $request->input('question');
+ $faq->answer   = $request->input('answer');
+ $faq->save();
+
+ Session::flash('success', 'Faq was updated.');
+ return redirect()->route('admin.faqs');    
 }
 
 }

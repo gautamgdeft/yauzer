@@ -1,7 +1,7 @@
  <header class="header">
    <a href="{{ route('admin.dashboard') }}" class="logo">
       <!-- Add the class icon to your logo image or logo icon to add the margining -->
-      Yauzer Admin Panel
+      <img src="{{ asset('img/logo.png') }}" alt="user image"/>
    </a>
    <!-- Header Navbar: style can be found in header.less -->
    <nav class="navbar navbar-static-top" role="navigation">
@@ -15,7 +15,7 @@
       <div class="navbar-right">
          <ul class="nav navbar-nav">
             <!-- Messages: style can be found in dropdown.less-->
-            <li class="dropdown messages-menu">
+{{--             <li class="dropdown messages-menu">
                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                <i class="fa fa-envelope"></i>
                <span class="label label-success">4</span>
@@ -91,9 +91,9 @@
                   </li>
                   <li class="footer"><a href="#">See All Messages</a></li>
                </ul>
-            </li>
+            </li> --}}
             <!-- Notifications: style can be found in dropdown.less -->
-            <li class="dropdown notifications-menu">
+{{--             <li class="dropdown notifications-menu">
                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                <i class="fa fa-warning"></i>
                <span class="label label-warning">10</span>
@@ -132,9 +132,9 @@
                   </li>
                   <li class="footer"><a href="#">View all</a></li>
                </ul>
-            </li>
+            </li> --}}
             <!-- Tasks: style can be found in dropdown.less -->
-            <li class="dropdown tasks-menu">
+{{--             <li class="dropdown tasks-menu">
                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                <i class="fa fa-tasks"></i>
                <span class="label label-danger">9</span>
@@ -210,7 +210,7 @@
                      <a href="#">View all tasks</a>
                   </li>
                </ul>
-            </li>
+            </li> --}}
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -243,7 +243,7 @@
                      <div class="pull-left">
                         <a href="{{ route('admin.profile') }}" class="btn btn-default btn-flat">Profile</a>
                      </div>
-                     <div class="">
+                     <div class="pull-mid">
                         <a href="{{ route('admin.showChangePasswordForm') }}" class="btn btn-default btn-flat">Change Password</a>
                      </div>
                      <div class="pull-right">

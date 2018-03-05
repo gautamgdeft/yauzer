@@ -21,7 +21,7 @@ class SliderImage extends Model
      * @var array
      */
     protected $fillable = [
-        'avatar', 'slug', 'image_alt_text', 'status',
+        'avatar', 'slug', 'description', 'image_alt_text', 'status',
     ];
 
 

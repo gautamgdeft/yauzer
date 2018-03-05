@@ -38,6 +38,18 @@
                   <img id="image_src" class="" src="/uploads/sliderAvatars/default.png" style="height: 45px; width: 150px;">
                </div>             
 
+               <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+                  <label for="description">Description</label>
+                  <input type="text" class="form-control" id="description" name="description" value="{{ old('description') }}" required="required">
+
+                  @if ($errors->has('description'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('description') }}</strong>
+                    </span>
+                  @endif
+
+               </div>               
+
                <div class="form-group{{ $errors->has('image_alt_text') ? ' has-error' : '' }}">
                   <label for="image_alt_text">Image Alt Text</label>
                   <input type="text" class="form-control" id="image_alt_text" name="image_alt_text" value="{{ old('image_alt_text') }}" required="required">

@@ -15,7 +15,8 @@ class CreateSliderImagesTable extends Migration
     {
         Schema::create('slider_images', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('avatar')->default('default.png');;
+            $table->string('avatar')->default('default.png');
+            $table->string('description');
             $table->string('slug')->nullable();
             $table->string('image_alt_text');
             $table->boolean('status')->default(true);
