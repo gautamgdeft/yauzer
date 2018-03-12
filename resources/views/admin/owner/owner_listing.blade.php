@@ -116,33 +116,38 @@
 // Deleting-Simple-User
 $('.delete_user').click(function()
 {
-	$(this).html('Deleting...');
-	var user_id = $(this).data('id');
-	$.ajax({
-			headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},    	
-            url: "{{ route('admin.destoy_owner') }}",
-            type: "post",
-            dataType: "JSON",
-            data: { 'id': $(this).data('id') },
-            success: function(response)
-            {
-            	if ( response.status === 'success' ) 
-				{
-				   $('.tr_'+user_id).remove();
-				   $('#msgs').html("<div class='alert alert-success'>"+response.msg+"</div>");
-				}
-            },
-            error: function( response ) 
-            {
-               if ( response.status === 422 ) 
-               {
-               	   $(this).html('Delete');
-                   $('#msgs').html("<div class='alert alert-error'>"+response.msg+"</div>");
-            }
-        }
+    var confirmation = confirm("Are you sure you want to delete this owner?");
+    if (confirmation) 
+    {   
+  	$(this).html('Deleting...');
+  	var user_id = $(this).data('id');
+  	$.ajax({
+  			headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},    	
+              url: "{{ route('admin.destoy_owner') }}",
+              type: "post",
+              dataType: "JSON",
+              data: { 'id': $(this).data('id') },
+              success: function(response)
+              {
+              	if ( response.status === 'success' ) 
+  				{
+  				   $('.tr_'+user_id).remove();
+  				   $('#msgs').html("<div class='alert alert-success'>"+response.msg+"</div>");
+  				}
+              },
+              error: function( response ) 
+              {
+                 if ( response.status === 422 ) 
+                 {
+                 	   $(this).html('Delete');
+                     $('#msgs').html("<div class='alert alert-error'>"+response.msg+"</div>");
+              }
+          }
 
 
-    });
+      });
+
+  }
     
 });
 

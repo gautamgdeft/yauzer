@@ -270,7 +270,14 @@ div.dataTables_filter input {
 	color:#fff;
 	border-color:#85c226;
 }
-
+.header .logo img {
+    max-width: 130px;
+    margin: 10px 0px 0px;
+    width: 100%;
+}
+.user-panel {
+    margin-top: 5px;
+}
 
 /***********************/
 @media screen and (max-width: 599px){

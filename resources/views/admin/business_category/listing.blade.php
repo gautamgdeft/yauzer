@@ -105,33 +105,37 @@
 // Deleting-Category
 $('.delete_category').click(function()
 {
-	$(this).html('Deleting...');
-	var category_id = $(this).data('id');
-	$.ajax({
-   headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},    	
-   url: "{{ route('admin.destroy_category') }}",
-   type: "post",
-   dataType: "JSON",
-   data: { 'id': $(this).data('id') },
-   success: function(response)
+  var confirmation = confirm("Are you sure you want to delete this category?");
+  if (confirmation) 
+  {   
+  	$(this).html('Deleting...');
+  	var category_id = $(this).data('id');
+  	$.ajax({
+     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},    	
+     url: "{{ route('admin.destroy_category') }}",
+     type: "post",
+     dataType: "JSON",
+     data: { 'id': $(this).data('id') },
+     success: function(response)
+     {
+      if ( response.status === 'success' ) 
+      {
+       $('.tr_'+category_id).remove();
+       $('#msgs').html("<div class='alert alert-success'>"+response.msg+"</div>");
+     }
+   },
+   error: function( response ) 
    {
-    if ( response.status === 'success' ) 
-    {
-     $('.tr_'+category_id).remove();
-     $('#msgs').html("<div class='alert alert-success'>"+response.msg+"</div>");
+     if ( response.status === 422 ) 
+     {
+       $(this).html('Delete');
+       $('#msgs').html("<div class='alert alert-error'>"+response.msg+"</div>");
+     }
    }
- },
- error: function( response ) 
- {
-   if ( response.status === 422 ) 
-   {
-     $(this).html('Delete');
-     $('#msgs').html("<div class='alert alert-error'>"+response.msg+"</div>");
-   }
- }
 
 
-});
+  });
+  }
   
 });
 
