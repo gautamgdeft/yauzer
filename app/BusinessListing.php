@@ -27,7 +27,13 @@ class BusinessListing extends Model
     public function yauzers()
     {
      return $this->hasMany('App\Yauzer');
-    } 
+    }
+
+    #Relation with Business-Pictures
+    public function business_pictures()
+    {
+     return $this->hasMany('App\BusinessPicture');
+    }     
 
     #Creating-Slugs
     public function sluggable()

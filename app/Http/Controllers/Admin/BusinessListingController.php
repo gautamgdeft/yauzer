@@ -10,6 +10,7 @@ use App\BusinessCategory;
 use App\BusinessListing;
 use App\BusinessHour;
 use App\Country;
+use App\BusinessPicture;
 use Image;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Validator;
@@ -29,7 +30,7 @@ class BusinessListingController extends Controller
     public function business_listing()
     {
     	$business_listing = BusinessListing::all();
-    	return view('admin.business_listing.listing', ['business_listing' => $business_listing]);
+      return view('admin.business_listing.listing', ['business_listing' => $business_listing]);
     }
 
     #Business-Status-Upgrdation-Function
@@ -86,8 +87,9 @@ class BusinessListingController extends Controller
     {
        $country = Country::selectCountries();
        $businessListing = BusinessListing::findBySlugOrFail($slug);
-       $businessHours = BusinessHour::find($businessListing->id);  
-       return view('admin.business_listing.edit_business', ['businessListing' => $businessListing, 'country' => $country, 'businessHours' => $businessHours]);
+       $businessHours = BusinessHour::find($businessListing->id);
+       $businessPictures = BusinessPicture::all();
+       return view('admin.business_listing.edit_business', ['businessListing' => $businessListing, 'country' => $country, 'businessHours' => $businessHours, 'businessPictures' => $businessPictures]);
     }
 
     #Updating-Business-Function
@@ -107,7 +109,7 @@ class BusinessListingController extends Controller
             'phone_number'      => 'required',
             'avatar'            => 'image:jpg,png,jpeg,gif|unique:business_listings'
         ]);
-        #dd($request->all());
+
         $business->update($request->all());
 
         #Updating Avatar If Present

@@ -93,6 +93,11 @@ Route::prefix('admin')->group(function()
     //Business-Hours-Routes    
     Route::post('/update-hours/{slug}', 'Admin\BusinessHourController@update_business_hours')->name('admin.update_business_hours');
 
+    //Business-Pictures-Routes
+    Route::get('/new-picture/{slug}', 'Admin\BusinessPictureController@new_picture')->name('admin.new_picture_form');    
+    Route::post('/store-picture/{slug}', 'Admin\BusinessPictureController@store_picture')->name('admin.store_picture');
+    Route::post('/destroy-picture', 'Admin\BusinessPictureController@destroy_picture')->name('admin.destroy_business_picture');
+
  //Content-Management-Routes Starts
 
     //Manage-Pages-Routes   

@@ -43,7 +43,21 @@ function uploadBusinessMainAvatar($avatar, $business)
 {
   $filename = time() . '.' . $avatar->getClientOriginalExtension();
   $path = '/uploads/businessAvatars/' . $filename;
-  Image::make($avatar)->resize(300, 300)->save( public_path($path));
+  Image::make($avatar)->resize(246, 222)->save( public_path($path));
+  $business->update(
+    array(
+      'avatar' => $filename,
+    ));
+
+  return true;
+}
+
+#Upload-Business-Pictures-Avatar-Function
+function uploadBusinessPicturesAvatar($avatar, $business) 
+{
+  $filename = time() . '.' . $avatar->getClientOriginalExtension();
+  $path = '/uploads/businessAvatars/' . $filename;
+  Image::make($avatar)->resize(475, 283)->save( public_path($path));
   $business->update(
     array(
       'avatar' => $filename,
