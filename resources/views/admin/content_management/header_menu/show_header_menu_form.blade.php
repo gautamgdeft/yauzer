@@ -22,7 +22,7 @@
    <section class="content">
       <div class="box box-primary">
          <!-- form start -->
-         <form role="form" action="{{ route('admin.store_header_menu') }}" enctype="multipart/form-data" method="POST">
+         <form id="header-form" role="form" action="{{ route('admin.store_header_menu') }}" enctype="multipart/form-data" method="POST">
          	{{ csrf_field() }}
             <div class="box-body">
                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -51,7 +51,7 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
-               <button type="submit" class="btn btn-primary">Submit</button>
+               <button id="header-submit-btn" type="submit" class="btn btn-primary">Submit</button>
             </div>
          </form>
       </div>
@@ -60,4 +60,50 @@
    <!-- /.content -->
 </aside>
 <!-- /.right-side -->
+@endsection
+
+
+@section('custom_scripts')
+
+<script type="text/javascript">
+  
+ $(document).ready(function()
+ {
+       //Adding-Validations
+  $('#header-form').validate({
+  onfocusout: function (valueToBeTested) {
+      $(valueToBeTested).valid();
+  },
+
+    rules: {
+
+      "name": {
+          maxlength: 50,
+          alphanumeric: true, 
+      },      
+      valueToBeTested: {
+          required: true,
+      }
+
+    },
+
+  });
+
+  $('#header-submit-btn').click(function()
+  {
+    if($('#header-form').valid())
+    {
+      $('#header-submit-btn').prop('disabled', true);
+      $('#header-form').submit();
+    }else{
+      return false;
+    }
+  });
+
+    $.validator.addMethod("alphanumeric", function (value, element) {
+    return this.optional(element) || /^[a-z0-9s ]+$/i.test(value);
+    }, "Only letters, numbers are allowed.");   
+ });
+</script>
+
 @endsection

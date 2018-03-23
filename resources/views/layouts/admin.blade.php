@@ -13,8 +13,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/star-rating.css') }}" rel="stylesheet">
     <link href="{{ asset('css/admin/ionicons.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/admin/morris/morris.css') }}" rel="stylesheet">
     <link href="{{ asset('css/admin/jvectormap/jquery-jvectormap-1.2.2.css') }}" rel="stylesheet">
     <link href="{{ asset('css/admin/datatables/dataTables.bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('css/admin/timepicker/bootstrap-timepicker.min.css') }}" rel="stylesheet">
@@ -43,8 +43,9 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script src="{{ asset('js/admin/jquery-ui-1.10.3.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>    
+    <script src="{{ asset('js/validate.min.js') }}"></script>    
+    <script src="{{ asset('js/star-rating.js') }}"></script>    
     <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>    
-    <script src="{{ asset('js/admin/morris/morris.min.js') }}"></script>
     <script src="{{ asset('js/admin/sparkline/jquery.sparkline.min.js') }}"></script>
     <script src="{{ asset('js/admin/jvectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
     <script src="{{ asset('js/admin/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
@@ -52,7 +53,6 @@
     <script src="{{ asset('js/admin/datatables/dataTables.bootstrap.js') }}"></script>
     <script src="{{ asset('js/admin/timepicker/bootstrap-timepicker.min.js') }}"></script>
     <script src="{{ asset('js/admin/admin_app.js') }}"></script>
-    <script src="{{ asset('js/admin/admin_dashobard.js') }}"></script>
     <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
     <script src="{{ asset('js/admin/admin_custom.js') }}"></script>
     <script src="{{ asset('js/admin/responsive-tabs.js') }}"></script>

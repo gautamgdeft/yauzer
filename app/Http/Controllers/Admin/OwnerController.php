@@ -27,9 +27,26 @@ class OwnerController extends Controller
 
     }
 
+    public function search(Request $request)
+    {
+           $search_parameter = $request->search_parameter;
+           if($search_parameter != "")
+           {
+            $allusers = User::where ( 'name', 'LIKE', '%' . $search_parameter . '%' )->whereHas( 'roles', function($q){ $q->where('name', 'owner'); } )->orWhere ( 'email', 'LIKE', '%' . $search_parameter . '%' )->whereHas( 'roles', function($q){ $q->where('name', 'owner'); } )->paginate (10)->setPath ( '' );
+            $pagination = $allusers->appends ( array (
+                  'search_parameter' => $request->search_parameter 
+              ) );
+              
+            if (count ( $allusers ) > 0)
+            return view ( 'admin.owner.owner_listing' )->withDetails ( $allusers )->withQuery ( $search_parameter );
+           }
+
+            return view ( 'admin.owner.owner_listing' )->withMessage ( 'No Details found. Try to search again !' );
+    }    
+
     public function owners()
     {
-      $users = User::whereHas( 'roles', function($q){ $q->where('name', 'owner'); } )->get();
+      $users = User::whereHas( 'roles', function($q){ $q->where('name', 'owner'); } )->orderBy('id', 'desc')->paginate(10);
       return view('admin.owner.owner_listing', ['allusers' => $users]);
     }
 
@@ -90,19 +107,6 @@ class OwnerController extends Controller
             $user->save();
           }
 
-          //Adding Credit Card Details
-
-          $creditCard   = new CreditCard;
-          $creditCard->user_id = $user->id;
-          $creditCard->credit_card_owner_name = $request->credit_card_owner_name;
-          $creditCard->cvv = $request->cvv;
-          $creditCard->credit_card_number  = $request->credit_card_number;
-          $creditCard->credit_exp_month = $request->credit_exp_month;
-          $creditCard->credit_exp_year = $request->credit_exp_year;
-
-          //Saving Credit Card
-          $creditCard->save();
-
           return redirect()->route('admin.owners')
                         ->with("success","Owner has been added successfuly");
          
@@ -142,11 +146,7 @@ class OwnerController extends Controller
 
             $user->update($request->all());
 
-            //Updating Credit-Card Info
-            
-             $user->creditcards()->update(['credit_card_owner_name' => $request->credit_card_owner_name, 'cvv' => $request->cvv, 'credit_card_number' => $request->credit_card_number, 'credit_exp_month' => $request->credit_exp_month, 'credit_exp_year' => $request->credit_exp_year]);
-
-			      Session::flash('success', 'Owner was updated.');
+			      Session::flash('success', 'Owner has been updated.');
             return redirect()->route('admin.owners');                      
 
     }
@@ -202,9 +202,13 @@ class OwnerController extends Controller
            
             if($user->avatar != 'default.png'){
               $path = '/uploads/avatars/' . $user->avatar;
+              if(file_exists( '/uploads/avatars/' . $user->avatar)) { 
               unlink(public_path() . $path);
+              }
             }
-            $user->delete();
+
+            User::delete_user($user);
+
             return response(['msg' => 'Owner has been deleted successfully', 'status' => 'success']);
          }
 

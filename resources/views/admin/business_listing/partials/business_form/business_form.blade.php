@@ -1,5 +1,5 @@
              <!-- form start -->
-             <form role="form" action="{{ route('admin.update_business',['slug' => $businessListing->slug]) }}" enctype="multipart/form-data" method="POST">
+             <form id="edit-business-form" role="form" action="{{ route('admin.update_business',['slug' => $businessListing->slug]) }}" enctype="multipart/form-data" method="POST">
               {{ csrf_field() }}
                 <div class="box-body">
 
@@ -139,7 +139,7 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
-                   <button type="submit" class="btn btn-primary">Update</button>
+                   <button id="submit-business-form-btn" type="submit" class="btn btn-primary">Update</button>
                    <a href="{{ URL::previous() }}" class="btn btn-warning">Go Back</a>
                 </div>
-             </form> 
+             </form>            

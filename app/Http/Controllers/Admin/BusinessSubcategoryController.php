@@ -24,10 +24,31 @@ class BusinessSubcategoryController extends Controller
         $this->middleware('auth:admin');
     }
 
+    public function search($slug, Request $request)
+    {
+           $search_parameter = $request->search_parameter;
+           if($search_parameter != "")
+           {
+            
+            $category = BusinessCategory::findBySlugOrFail($slug);
+
+            $filterSubCategories = $category->business_subcategory()->where( 'name', 'LIKE', '%' . $search_parameter . '%' )->paginate (10)->setPath ( '' );
+
+            $pagination = $filterSubCategories->appends ( array (
+                  'search_parameter' => $request->search_parameter 
+              ) );
+              
+            if (count ( $filterSubCategories ) > 0)
+            return view ( 'admin.business_subcategory.show_subcategory',compact('slug') )->withDetails ( $filterSubCategories )->withQuery ( $search_parameter );
+           }
+
+            return view ( 'admin.business_subcategory.show_subcategory',compact('slug') )->withMessage ( 'No Details found. Try to search again !' );
+    }      
+
     public function show_subcategory($slug)
     {
        $category = BusinessCategory::findBySlugOrFail($slug);
-       $subcategory = $category->business_subcategory()->where('status', true)->get();
+       $subcategory = $category->business_subcategory()->orderBy('id', 'desc')->paginate(10);
        return view('admin.business_subcategory.show_subcategory',compact('slug','subcategory'));	
     }
 
@@ -65,7 +86,7 @@ class BusinessSubcategoryController extends Controller
 	          }
 
          return redirect()->route('admin.show_subcategory',['slug' => $slug])
-                        ->with("success","Business Sub-Category has been added successfuly");
+                        ->with("success","Business Sub-Category has been added successfully");
     }
 
     public function update_subcategory_status(Request $request)
@@ -108,13 +129,13 @@ class BusinessSubcategoryController extends Controller
             return response(['msg' => 'Failed deleting the business sub-category', 'status' => 'failed']);    	
     }
 
-    public function edit_subcategory($slug)
+    public function edit_subcategory($category, $slug)
     {
     	$subcategory = BusinessSubcategory::findBySlugOrFail($slug);
-    	return view('admin.business_subcategory.edit_subcategory_form', compact('subcategory'));    
+    	return view('admin.business_subcategory.edit_subcategory_form', compact('category' ,'subcategory'));    
     }
 
-    public function update_subcategory(Request $request, $slug)
+    public function update_subcategory(Request $request, $category, $slug)
     {
         $subcategory = BusinessSubcategory::findBySlugOrFail($slug);
 
@@ -135,7 +156,7 @@ class BusinessSubcategoryController extends Controller
                uploadBusinessSubCatAvatar($avatar, $subcategory);
             } 
 
-			Session::flash('success', 'Business Sub-Category was updated.');
-            return redirect()->route('admin.show_subcategory', compact('slug'));          	
+			Session::flash('success', 'Business Sub-Category has been updated.');
+            return redirect()->route('admin.show_subcategory', compact('category'));          	
     }
 }

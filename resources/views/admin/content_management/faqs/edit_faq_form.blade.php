@@ -5,10 +5,10 @@
 <aside class="right-side">
  <!-- Content Header (Page header) -->
  <section class="content-header">
-  <h1> Edit Faq </h1>
+  <h1> Edit FAQ </h1>
   <ol class="breadcrumb">
    <li><a href="{{ route('admin.dashboard') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-   <li class="active">Edit Faq</li>
+   <li class="active">Edit FAQ</li>
  </ol>
 </section>
 
@@ -22,7 +22,7 @@
 <section class="content">
   <div class="box box-primary">
    <!-- form start -->
-   <form role="form" action="{{ route('admin.update_faq',['slug' => $faq->slug]) }}" enctype="multipart/form-data" method="POST">
+   <form id="edit-faq-form" role="form" action="{{ route('admin.update_faq',['slug' => $faq->slug]) }}" enctype="multipart/form-data" method="POST">
     {{ csrf_field() }}
     <div class="box-body">
      <div class="form-group{{ $errors->has('question') ? ' has-error' : '' }}">
@@ -52,7 +52,7 @@
   </div>
   <!-- /.box-body -->
   <div class="box-footer">
-   <button type="submit" class="btn btn-primary">Update</button>
+   <button id="faq-submit-btn" type="submit" class="btn btn-primary">Update</button>
    <a href="{{ URL::previous() }}" class="btn btn-warning">Go Back</a>
  </div>
 </form>
@@ -72,66 +72,34 @@
 
   $(document).ready(function()
   {
-    $("#avatar").change(function () {
-      readURL(this);
-    });  
+       //Adding-Validations
+  $('#edit-faq-form').validate({
+  onfocusout: function (valueToBeTested) {
+      $(valueToBeTested).valid();
+  },
+
+    rules: {
+    
+      valueToBeTested: {
+          required: true,
+      }
+
+    },
+
   });
 
-  /*---- Start Function For Checking Image Extension For Valid Image Selection ---*/
-
-  var _validFileExtensions = [".jpg", ".jpeg", ".gif", ".png"];
-
-  function ValidateSingleInput(oInput) {
-    
-    if (oInput.type == "file") {
-      var sFileName = oInput.value;
-
-      if (sFileName.length > 0) {
-        var blnValid = false;
-        for (var j = 0; j < _validFileExtensions.length; j++) 
-        {
-          var sCurExtension = _validFileExtensions[j];
-          if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) 
-          {
-            blnValid = true;
-            break;
-          }
-        }
-
-        if (!blnValid) {
-
-          alert('Sorry ! Allowed image extensions are .JPG, .JPEG, .GIF, .PNG');
-
-          // swal("Sorry !", "Allowed image extensions are .JPG, .JPEG, .GIF, .PNG")
-          oInput.value = "";
-          return false;
-        }
-      }
+  $('#faq-submit-btn').click(function()
+  {
+    if($('#edit-faq-form').valid())
+    {
+      $('#faq-submit-btn').prop('disabled', true);
+      $('#edit-faq-form').submit();
+    }else{
+      return false;
     }
-    return true;
-  }
+  });
 
-  /*---- End Function For Checking Image Extension For Valid Image Selection ---*/ 
-
-// Start Image Preview
-
-function readURL(input) {
-
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
-    reader.onload = function (e) {
-      $('#image_src').css('display', 'block');
-      $('#image_src').attr('src', e.target.result);
-
-      $('#avatar').removeClass('validate_error');
-      $("#avatar").next('label').remove();
-    }
-    reader.readAsDataURL(input.files[0]);
-  }
-}
-
-//  End Image Preview 
-
+  });
 </script>     
 
 @endsection

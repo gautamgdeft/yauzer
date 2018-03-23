@@ -62,7 +62,7 @@ class User extends Authenticatable
      #Relation with Credit-Card
      public function creditcards()
      {
-        return $this->hasOne('App\CreditCard');
+        return $this->hasMany('App\CreditCard');
      } 
 
     /**
@@ -80,6 +80,14 @@ class User extends Authenticatable
          return $user = User::findBySlug($slug);
      }
 
+     public static function delete_user($user)
+     {
+         
+        $user->businesses()->delete();
+        $user->creditcards()->delete();
+        $user->delete();
+
+     }
 
 
      public function isUser() 

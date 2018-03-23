@@ -33,7 +33,19 @@ class BusinessListing extends Model
     public function business_pictures()
     {
      return $this->hasMany('App\BusinessPicture');
-    }     
+    }
+
+    #Relation with Credit-Card
+    public function creditcards()
+    {
+     return $this->hasOne('App\CreditCard');
+    }      
+
+    #Relation with Discount
+    public function discounts()
+    {
+     return $this->hasOne('App\Discount');
+    }          
 
     #Creating-Slugs
     public function sluggable()

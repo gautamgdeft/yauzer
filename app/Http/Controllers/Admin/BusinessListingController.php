@@ -11,6 +11,9 @@ use App\BusinessListing;
 use App\BusinessHour;
 use App\Country;
 use App\BusinessPicture;
+use App\CreditCard;
+use App\Discount;
+use App\Yauzer;
 use Image;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Validator;
@@ -26,10 +29,29 @@ class BusinessListingController extends Controller
         $this->middleware('auth:admin');
     }
 
+    #Business-Search-Function
+    public function search(Request $request)
+    {
+           $search_parameter = $request->search_parameter;
+           if($search_parameter != "")
+           {
+
+            $filterBusiness = BusinessListing::where ( 'name', 'LIKE', '%' . $search_parameter . '%' )->paginate (10)->setPath ( '' );
+            $pagination = $filterBusiness->appends ( array (
+                  'search_parameter' => $request->search_parameter 
+              ) );
+              
+            if (count ( $filterBusiness ) > 0)
+            return view ( 'admin.business_listing.listing' )->withDetails ( $filterBusiness )->withQuery ( $search_parameter );
+           }
+
+            return view ( 'admin.business_listing.listing' )->withMessage ( 'No Details found. Try to search again !' );
+    }      
+
     #Business-Listing-Function
     public function business_listing()
     {
-    	$business_listing = BusinessListing::all();
+    	$business_listing = BusinessListing::orderBy('id', 'desc')->paginate(10);
       return view('admin.business_listing.listing', ['business_listing' => $business_listing]);
     }
 
@@ -87,9 +109,13 @@ class BusinessListingController extends Controller
     {
        $country = Country::selectCountries();
        $businessListing = BusinessListing::findBySlugOrFail($slug);
-       $businessHours = BusinessHour::find($businessListing->id);
-       $businessPictures = BusinessPicture::all();
-       return view('admin.business_listing.edit_business', ['businessListing' => $businessListing, 'country' => $country, 'businessHours' => $businessHours, 'businessPictures' => $businessPictures]);
+       $businessHours = BusinessHour::where('business_id', $businessListing->id)->first();
+       $businessPictures = BusinessPicture::where('business_id', $businessListing->id)->get();
+       $businessPaymentInfo = CreditCard::where('business_id', $businessListing->id)->first();
+       $businessDiscountInfo = Discount::where('business_id', $businessListing->id)->first();
+       $businessYauzersInfo = Yauzer::where('business_id', $businessListing->id)->get();
+       
+       return view('admin.business_listing.edit_business', ['businessListing' => $businessListing, 'country' => $country, 'businessHours' => $businessHours, 'businessPictures' => $businessPictures, 'businessPaymentInfo' => $businessPaymentInfo, 'businessDiscountInfo' => $businessDiscountInfo, 'businessYauzersInfo' => $businessYauzersInfo]);
     }
 
     #Updating-Business-Function
@@ -120,7 +146,7 @@ class BusinessListingController extends Controller
            uploadBusinessMainAvatar($avatar, $business);
         } 
 
-        return redirect()->route('admin.business_listing')->with("success","Business was updated");       
+        return redirect()->route('admin.business_listing')->with("success","Business has been updated");       
     }
 
 

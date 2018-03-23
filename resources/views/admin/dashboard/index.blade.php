@@ -23,36 +23,58 @@
             <div class="small-box bg-aqua">
                <div class="inner">
                   <h3>
-                     150
+                     {{ $total_customers }}
                   </h3>
                   <p>
-                     New Orders
+                     Customers
                   </p>
                </div>
                <div class="icon">
                   <i class="fa fa-briefcase"></i>
                </div>
-               <a href="#" class="small-box-footer">
+               <a href="{{ route('admin.customer_export') }}" class="small-box-footer">
                More info <i class="fa fa-arrow-circle-right"></i>
                </a>
             </div>
          </div>
          <!-- ./col -->
+
+         <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-red">
+               <div class="inner">
+                  <h3>
+                     {{ $total_owners }}
+                  </h3>
+                  <p>
+                     Owners
+                  </p>
+               </div>
+               <div class="icon">
+                  <i class="fa fa-eye"></i>
+               </div>
+               <a href="{{ route('admin.owner_export') }}" class="small-box-footer">
+               More info <i class="fa fa-arrow-circle-right"></i>
+               </a>
+            </div>
+         </div>
+         <!-- ./col -->
+
          <div class="col-lg-3 col-xs-6">
             <!-- small box -->
             <div class="small-box bg-green">
                <div class="inner">
                   <h3>
-                     53<sup style="font-size: 20px">%</sup>
+                     {{ $total_business }}
                   </h3>
                   <p>
-                     Bounce Rate
+                     Business
                   </p>
                </div>
                <div class="icon">
                   <i class="fa fa-signal"></i>
                </div>
-               <a href="#" class="small-box-footer">
+               <a href="{{ route('admin.business_export') }}" class="small-box-footer">
                More info <i class="fa fa-arrow-circle-right"></i>
                </a>
             </div>
@@ -63,36 +85,16 @@
             <div class="small-box bg-yellow">
                <div class="inner">
                   <h3>
-                     44
+                     {{ $total_yauzers }}
                   </h3>
                   <p>
-                     User Registrations
+                     Yauzers
                   </p>
                </div>
                <div class="icon">
                   <i class="fa fa-user"></i>
                </div>
-               <a href="#" class="small-box-footer">
-               More info <i class="fa fa-arrow-circle-right"></i>
-               </a>
-            </div>
-         </div>
-         <!-- ./col -->
-         <div class="col-lg-3 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-red">
-               <div class="inner">
-                  <h3>
-                     65
-                  </h3>
-                  <p>
-                     Unique Visitors
-                  </p>
-               </div>
-               <div class="icon">
-                  <i class="fa fa-eye"></i>
-               </div>
-               <a href="#" class="small-box-footer">
+               <a href="{{ route('admin.yauzer_export') }}" class="small-box-footer">
                More info <i class="fa fa-arrow-circle-right"></i>
                </a>
             </div>

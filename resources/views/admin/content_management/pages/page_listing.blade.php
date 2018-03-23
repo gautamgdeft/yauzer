@@ -27,25 +27,46 @@
       <div class="col-xs-12">
          <div class="box">
             <div class="box-header">
-               <a href="{{ route('admin.show_page_form') }}" class="btn bg-olive btn-flat">Add New Page</a>
+                <a href="{{ route('admin.show_page_form') }}" class="btn bg-olive btn-flat">Add New Page</a>
+
+
+            <div class="box-tools">
+                <form action="{{ route('page.search') }}" method="POST" role="search">
+                  {{ csrf_field() }}
+                  <div class="input-group">
+                      <input type="text" name="search_parameter" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search" value="@if(isset($details)) {{ $query }} @endif"/>
+                      <div class="input-group-btn">
+                          <button type="submit" class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                      </div>
+                  </div>
+                </form>
+
+              @if(isset($details))
+                <a href="{{ route('admin.pages') }}" class="btn btn-danger btn-flat search-filter">Clear Filter</a>
+              @endif   
+
+            </div>                  
             </div>
             <!-- /.box-header -->
-            <div class="box-body table-responsive">
-               <table id="example1" class="table table-bordered table-striped">
-                  <thead>
+
+            {{-- All Pages Result Display --}}
+            @if(isset($pages))
+            <div class="box-body table-responsive no-padding">
+              <table class="table table-hover table-bordered">
+                  
                      <tr>
                         <th>Name</th>
                         <th>Url</th>
-                        <th>Metatitle</th>
-                        <th>Metakeywords</th>
-                        <th>Metadescription</th>
+                        <th>Meta Title</th>
+                        <th>Meta Keywords</th>
+                        <th>Meta Description</th>
                         <th>Status</th>
                         <th>Action</th>
                      </tr>
-                  </thead>
-                  <tbody>
-                  	 @if(!is_null($pages))
-                  	 @foreach($pages as $loopingpages)
+                  
+                  
+                     @if(!is_null($pages))
+                     @foreach($pages as $loopingpages)
                      <tr class="tr_{{ $loopingpages->id }}">
                         <td>{{ $loopingpages->name }}</td>
                         <td>{{ $loopingpages->pageurl }}</td>
@@ -59,27 +80,79 @@
                         </td>
                         <td>
                           <button class="btn btn-danger btn-flat delete_page" data-id="{{ $loopingpages->id }}" data-toggle="tooltip" title="Delete Page"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                          <a href="{{ route('admin.edit_page_form',['slug' => $loopingpages->slug]) }}" class="btn btn-warning btn-flat" data-toggle="tooltip" title="Edit Page"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>               		      	
+                          <a href="{{ route('admin.edit_page_form',['slug' => $loopingpages->slug]) }}" class="btn btn-warning btn-flat" data-toggle="tooltip" title="Edit Page"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                          <a href="{{ route('admin.view_page',['slug' => $loopingpages->slug]) }}" class="btn btn-info btn-flat" data-toggle="tooltip" title="View Page"><i class="fa fa-eye" aria-hidden="true"></i></a>                                                       
                        </td>
 
                      </tr>
                      @endforeach
                      @endif
                      
-                  </tbody>
-                  <tfoot>
+                                 
+               </table>
+            </div>
+            <div class="box-footer clearfix">
+                <ul class="pagination pagination-sm no-margin pull-right">
+                    <li>@if($pages){!! $pages->render() !!}@endif</li>
+                </ul>
+            </div>
+
+            @endif            
+
+
+
+            {{-- Searching Result Page Display --}}
+            @if(isset($details))
+            <div class="box-body table-responsive no-padding">
+              <p> The Search results for your query <b class="cstm-bold"> {{ $query }} </b> are :</p>
+              <table class="table table-hover table-bordered">
+                  
                      <tr>
                         <th>Name</th>
                         <th>Url</th>
-                        <th>Metatitle</th>
-                        <th>Metakeywords</th>
-                        <th>Metadescription</th>
+                        <th>Meta title</th>
+                        <th>Meta keywords</th>
+                        <th>Meta description</th>
                         <th>Status</th>
                         <th>Action</th>
                      </tr>
-                  </tfoot>
+                  
+                  
+                  	 @if(!is_null($details))
+                  	 @foreach($details as $loopingpages)
+                     <tr class="tr_{{ $loopingpages->id }}">
+                        <td>{{ $loopingpages->name }}</td>
+                        <td>{{ $loopingpages->pageurl }}</td>
+                        <td>{{ $loopingpages->metatitle }}</td>
+                        <td>{{ $loopingpages->metakeywords }}</td>
+                        <td>{{ $loopingpages->metadescription }}</td>
+                        <td>
+                          <button id="active_{{ $loopingpages->id }}" class="btn btn-success btn-flat active_page @if($loopingpages->status == '0') hide @endif" data-id="{{ $loopingpages->id }}" data-toggle="tooltip" title="Click to Inactive">Active</button>
+
+                          <button id="inactive_{{ $loopingpages->id }}" class="btn btn-danger btn-flat active_page @if($loopingpages->status == '1') hide @endif" data-id="{{ $loopingpages->id }}" data-toggle="tooltip" title="Click to Active">Inactive</button>                              
+                        </td>
+                        <td>
+                          <button class="btn btn-danger btn-flat delete_page" data-id="{{ $loopingpages->id }}" data-toggle="tooltip" title="Delete Page"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                          <a href="{{ route('admin.edit_page_form',['slug' => $loopingpages->slug]) }}" class="btn btn-warning btn-flat" data-toggle="tooltip" title="Edit Page"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                          <a href="{{ route('admin.view_page',['slug' => $loopingpages->slug]) }}" class="btn btn-info btn-flat" data-toggle="tooltip" title="View Page"><i class="fa fa-eye" aria-hidden="true"></i></a>                                                                   		      	
+                       </td>
+
+                     </tr>
+                     @endforeach
+                     @endif
+
+                  
                </table>
             </div>
+            <div class="box-footer clearfix">
+                <ul class="pagination pagination-sm no-margin pull-right">
+                    <li>@if($details){!! $details->render() !!}@endif</li>
+                </ul>
+            </div>
+
+            @elseif(isset($message))
+            <p>{{ $message }}</p>
+            @endif 
             <!-- /.box-body -->
          </div>
          <!-- /.box -->
@@ -97,7 +170,12 @@
 <!-- page script -->
 <script type="text/javascript">
     $(document).ready(function(){
-        $("#example1").dataTable();
+      $('#example1').dataTable( {
+         'aoColumnDefs': [{
+              'bSortable': false,
+              'aTargets': ['no-sort']
+          }]
+      });   
         // $('#example1').dataTable({
         //     "bPaginate": true,
         //     "bLengthChange": false,
@@ -109,8 +187,8 @@
 
 
 // Deleting-Category
-$('.delete_page').click(function()
-{
+$(".delete_page").on("click", function() 
+{    
   var confirmation = confirm("Are you sure you want to delete this page?");
   if (confirmation) 
   {    

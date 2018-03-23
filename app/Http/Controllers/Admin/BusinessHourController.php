@@ -27,7 +27,7 @@ class BusinessHourController extends Controller
     public function update_business_hours(Request $request, $slug)
     {   
     	   $business = BusinessListing::findBySlugOrFail($slug);
-         $businessHours =  BusinessHour::updateOrCreate(['business_id' => $business->id], $request->all());
-         return Redirect::back()->with('success', 'Business Hours updated successfully');
+           $businessHours =  BusinessHour::updateOrCreate(['business_id' => $business->id], $request->all());
+           return Redirect::back()->with('success', 'Business Hours updated successfully');
     } 
 }

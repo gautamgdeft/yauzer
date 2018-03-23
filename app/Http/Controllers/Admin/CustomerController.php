@@ -25,9 +25,27 @@ class CustomerController extends Controller
         $this->middleware('auth:admin');
     }
 
+    public function search(Request $request)
+    {
+           $search_parameter = $request->search_parameter;
+           if($search_parameter != "")
+           {
+
+            $allusers = User::whereHas( 'roles', function($q){ $q->where('name', 'user'); } )->whereHas( 'roles', function($q){ $q->where('name', 'user'); } )->where ( 'name', 'LIKE', '%' . $search_parameter . '%' )->orWhere ( 'email', 'LIKE', '%' . $search_parameter . '%' )->whereHas( 'roles', function($q){ $q->where('name', 'user'); } )->paginate (10)->setPath ( '' );
+            $pagination = $allusers->appends ( array (
+                  'search_parameter' => $request->search_parameter 
+              ) );
+              
+            if (count ( $allusers ) > 0)
+            return view ( 'admin.customer.user' )->withDetails ( $allusers )->withQuery ( $search_parameter );
+           }
+
+            return view ( 'admin.customer.user' )->withMessage ( 'No Details found. Try to search again !' );
+    }
+
     public function users()
     {
-    	$users = User::whereHas( 'roles', function($q){ $q->where('name', 'user'); } )->get();
+    	$users = User::whereHas( 'roles', function($q){ $q->where('name', 'user'); } )->orderBy('id', 'desc')->paginate(10);
     	return view('admin.customer.user', ['allusers' => $users]);
     }
 
@@ -89,7 +107,7 @@ class CustomerController extends Controller
           }
 
          return redirect()->route('admin.users')
-                        ->with("success","User has been added successfuly");
+                        ->with("success","User has been added successfully");
          
     }
 
@@ -127,7 +145,7 @@ class CustomerController extends Controller
             } 
 
             $user->update($request->all());
-			      Session::flash('success', 'Customer was updated.');
+			      Session::flash('success', 'Customer has been updated.');
             return redirect()->route('admin.users');                      
 
     }

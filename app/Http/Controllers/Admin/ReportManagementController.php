@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Role;
+use App\BusinessListing;
+use App\Yauzer;
 use Session;
 use Hash;
 use Illuminate\Support\Facades\DB;
@@ -30,22 +32,94 @@ class ReportManagementController extends Controller
     	return view('admin.report_management.show_reports', compact('total_customers', 'total_business', 'total_yauzers', 'total_owners'));
     }
 
-    public function export()
-	{
-    header("Content-type: text/csv");
-    header("Content-Disposition: attachment; filename=file.csv");
-    header("Pragma: no-cache");
-    header("Expires: 0");
+    public function customer_export()
+    {
+        header("Content-type: text/csv");
+        header("Content-Disposition: attachment; filename=customer.csv");
+        header("Pragma: no-cache");
+        header("Expires: 0");
 
-    $reviews = User::all();
-    $columns = array('UserID', 'Name');
+        $reviews = User::whereHas( 'roles', function($q){ $q->where('name', 'user'); } )->orderBy('id', 'desc')->get();
+        
+        $columns = array('UserID', 'Name', 'Email', 'City', 'State', 'Zipcode', 'Country', 'Address', 'Phone Number');
 
-    $file = fopen('php://output', 'w');
-    fputcsv($file, $columns);
+        $file = fopen('php://output', 'w');
+        fputcsv($file, $columns);
 
-    foreach($reviews as $review) {
-        fputcsv($file, array($review->id,$review->name));
-    }
-    exit();
-	}
+        foreach($reviews as $review){
+
+             fputcsv($file, array($review->id,$review->name,$review->email,$review->city,$review->state,$review->zipcode, $review->country, $review->address, $review->phone_number));
+
+        }
+        exit();
+    }       
+
+
+    public function owner_export()
+    {
+        header("Content-type: text/csv");
+        header("Content-Disposition: attachment; filename=owner.csv");
+        header("Pragma: no-cache");
+        header("Expires: 0");
+
+        $reviews = User::whereHas( 'roles', function($q){ $q->where('name', 'owner'); } )->orderBy('id', 'desc')->get();
+        
+        $columns = array('UserID', 'Name', 'Email', 'City', 'State', 'Zipcode', 'Country', 'Address', 'Phone Number');
+
+        $file = fopen('php://output', 'w');
+        fputcsv($file, $columns);
+
+        foreach($reviews as $review){
+
+             fputcsv($file, array($review->id,$review->name,$review->email,$review->city,$review->state,$review->zipcode, $review->country, $review->address, $review->phone_number));
+
+        }
+        exit();
+    }      
+
+    public function business_export()
+    {
+        header("Content-type: text/csv");
+        header("Content-Disposition: attachment; filename=business_listing.csv");
+        header("Pragma: no-cache");
+        header("Expires: 0");
+
+        $reviews = BusinessListing::orderBy('id', 'desc')->get();
+        
+        $columns = array('BusinessID', 'Name', 'BusinessOwner', 'Address', 'City', 'State', 'Zipcode', 'Country', 'Phone Number', 'Website', 'Description', 'Latitude', 'Longitude');
+
+        $file = fopen('php://output', 'w');
+        fputcsv($file, $columns);
+
+        foreach($reviews as $review){
+
+             fputcsv($file, array($review->id,$review->name,$review->user->name,$review->address,$review->city,$review->state,$review->zipcode,$review->country,$review->phone_number,$review->website,$review->description,$review->latitude,$review->longitude));
+
+        }
+        exit();
+    }       
+
+    public function yauzer_export()
+    {
+        header("Content-type: text/csv");
+        header("Content-Disposition: attachment; filename=yauzer.csv");
+        header("Pragma: no-cache");
+        header("Expires: 0");
+
+        $reviews = Yauzer::orderBy('id', 'desc')->get();
+        
+        $columns = array('YauzerID', 'Yauzer', 'BusinessName', 'BusinessOwner', 'User', 'Rating');
+
+        $file = fopen('php://output', 'w');
+        fputcsv($file, $columns);
+
+        foreach($reviews as $review){
+
+             fputcsv($file, array($review->id,$review->yauzer,$review->business->name,$review->business->user->name,$review->user->name,$review->rating));
+
+        }
+        exit();
+    }    
+
+
 }

@@ -30,14 +30,17 @@
                <a href="{{ route('admin.new_slider_image') }}" class="btn bg-olive btn-flat">Add Slider Image</a>
             </div>
             <!-- /.box-header -->
-            <div class="box-body table-responsive">
-               <table id="example1" class="table table-bordered table-striped">
+
+            {{-- All Pages Result Display --}}
+            @if(isset($sliderImages))
+            <div class="box-body table-responsive no-padding">
+              <table class="table table-hover table-bordered">
                   <thead>
                      <tr>
-                        <th>Image</th>
-                        <th>Description</th>
-                        <th>Status</th>
-                        <th>Action</th>
+                        <th class="no-sort">Image</th>
+                        <th class="no-sort">Description</th>
+                        <th class="no-sort">Status</th>
+                        <th class="no-sort">Action</th>
                      </tr>
                   </thead>
                   <tbody>
@@ -53,7 +56,8 @@
                         </td>
                         <td>
                           <button class="btn btn-danger btn-flat delete_slider_image" data-id="{{ $loopingSliderImages->id }}" data-toggle="tooltip" title="Delete Slider-image"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                          <a href="{{ route('admin.edit_slider_image',['slug' => $loopingSliderImages->slug]) }}" class="btn btn-warning btn-flat" data-toggle="tooltip" title="Edit Slider-image"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>               		      	
+                          <a href="{{ route('admin.edit_slider_image',['slug' => $loopingSliderImages->slug]) }}" class="btn btn-warning btn-flat" data-toggle="tooltip" title="Edit Slider-image"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                          <a href="{{ route('admin.view_slider_image',['slug' => $loopingSliderImages->slug]) }}" class="btn btn-info btn-flat" data-toggle="tooltip" title="View Slider Image"><i class="fa fa-eye" aria-hidden="true"></i></a>                                          		      	
                        </td>
 
                      </tr>
@@ -71,6 +75,13 @@
                   </tfoot>
                </table>
             </div>
+            <div class="box-footer clearfix">
+                <ul class="pagination pagination-sm no-margin pull-right">
+                    <li>@if($sliderImages){!! $sliderImages->render() !!}@endif</li>
+                </ul>
+            </div>
+            @endif
+            
             <!-- /.box-body -->
          </div>
          <!-- /.box -->
@@ -88,7 +99,12 @@
 <!-- page script -->
 <script type="text/javascript">
     $(document).ready(function(){
-        $("#example1").dataTable();
+        // $('#example1').dataTable( {
+        //    'aoColumnDefs': [{
+        //         'bSortable': false,
+        //         'aTargets': ['no-sort']
+        //     }]
+        // });   
         // $('#example1').dataTable({
         //     "bPaginate": true,
         //     "bLengthChange": false,
@@ -154,7 +170,7 @@ $('.active_slide_image').click(function()
               if ( response.status === 'success' ) 
               {
                  $('#inactive_'+image_id).addClass('hide');
-                 $('#inactive_'+image_id).html('Active'); 
+                 $('#inactive_'+image_id).html('Inactive'); 
                  $('#active_'+image_id).removeClass('hide');         
                  $('#msgs').html("<div class='alert alert-success'>"+response.msg+"</div>");
               }else{

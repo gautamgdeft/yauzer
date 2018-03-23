@@ -13,7 +13,6 @@
 	      </div>
 	      <div class="caption">
 	         <a href="javascript:void(0);" class="btn btn-danger delete_picture" data-id="{{ $loopingPictures->id }}"><i class="fa fa-trash-o"></i> </a>
-	         <a href="javascript:void(0);" class="btn btn-danger" data-toggle="confirmation"><i class="fa fa-trash-o"></i> </a>
 	      </div>
 	   </div>
 	</div>
@@ -21,4 +20,4 @@
 @endforeach
 @endif
 
-<p class="dum @if(@sizeof($businessPictures)) hide @endif">No Pictures Found.</p>
+<p class="dum @if(@sizeof($businessPictures)) hide @endif">No pictures found for this business.</p>

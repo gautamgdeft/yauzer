@@ -22,10 +22,28 @@ class BusinessCategoryController extends Controller
         $this->middleware('auth:admin');
     }
 
+    public function search(Request $request)
+    {
+           $search_parameter = $request->search_parameter;
+           if($search_parameter != "")
+           {
+
+            $filterCategories = BusinessCategory::where ( 'name', 'LIKE', '%' . $search_parameter . '%' )->paginate (10)->setPath ( '' );
+            $pagination = $filterCategories->appends ( array (
+                  'search_parameter' => $request->search_parameter 
+              ) );
+              
+            if (count ( $filterCategories ) > 0)
+            return view ( 'admin.business_category.listing' )->withDetails ( $filterCategories )->withQuery ( $search_parameter );
+           }
+
+            return view ( 'admin.business_category.listing' )->withMessage ( 'No Details found. Try to search again !' );
+    }  
+
 
     public function business_category_listing()
     {
-       $business_categories = BusinessCategory::all();	
+       $business_categories = BusinessCategory::orderBy('id', 'desc')->paginate(10);
        return view('admin.business_category.listing', ['business_categories' => $business_categories]);
     }
 
@@ -62,7 +80,7 @@ class BusinessCategoryController extends Controller
 	          }
 
          return redirect()->route('admin.business_category_listing')
-                        ->with("success","Business Category has been added successfuly");                                  
+                        ->with("success","Business Category has been added successfully");                                  
     }
 
 
@@ -94,7 +112,7 @@ class BusinessCategoryController extends Controller
                uploadBusinessAvatar($avatar, $category);
             } 
 
-			      Session::flash('success', 'Business Category was updated.');
+			      Session::flash('success', 'Business Category has been updated.');
             
             return redirect()->route('admin.business_category_listing');                      
 
@@ -135,7 +153,7 @@ class BusinessCategoryController extends Controller
               }else{
               	$category->status  = false;
               	$category->save();
-              	return response(['msg' => 'Business Category starus has been deactivated successfully', 'status' => 'declined']); 
+              	return response(['msg' => 'Business Category status has been deactivated successfully', 'status' => 'declined']); 
               }	
     	 }
 

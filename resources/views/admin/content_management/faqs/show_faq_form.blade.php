@@ -22,7 +22,7 @@
    <section class="content">
       <div class="box box-primary">
          <!-- form start -->
-         <form role="form" action="{{ route('admin.store_faq') }}" enctype="multipart/form-data" method="POST">
+         <form id="faq-form" role="form" action="{{ route('admin.store_faq') }}" enctype="multipart/form-data" method="POST">
          	{{ csrf_field() }}
             <div class="box-body">
                <div class="form-group{{ $errors->has('question') ? ' has-error' : '' }}">
@@ -51,7 +51,7 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
-               <button type="submit" class="btn btn-primary">Submit</button>
+               <button id="faq-submit-btn" type="submit" class="btn btn-primary">Submit</button>
             </div>
          </form>
       </div>
@@ -60,4 +60,43 @@
    <!-- /.content -->
 </aside>
 <!-- /.right-side -->
+@endsection
+
+
+
+@section('custom_scripts')
+<script type="text/javascript">
+
+  $(document).ready(function()
+  {
+       //Adding-Validations
+  $('#faq-form').validate({
+  onfocusout: function (valueToBeTested) {
+      $(valueToBeTested).valid();
+  },
+
+    rules: {
+    
+      valueToBeTested: {
+          required: true,
+      }
+
+    },
+
+  });
+
+  $('#faq-submit-btn').click(function()
+  {
+    if($('#faq-form').valid())
+    {
+      $('#faq-submit-btn').prop('disabled', true);
+      $('#faq-form').submit();
+    }else{
+      return false;
+    }
+  });
+
+  });
+</script>     
+
 @endsection

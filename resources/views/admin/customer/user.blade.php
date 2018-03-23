@@ -28,21 +28,37 @@
          <div class="box">
             <div class="box-header">
                <a href="{{ route('admin.show_user_form') }}" class="btn bg-olive btn-flat">Add New Customer</a>
+              <div class="box-tools">
+                  <form action="{{ route('customer.search') }}" method="POST" role="search">
+                    {{ csrf_field() }}
+                    <div class="input-group">
+                        <input type="text" name="search_parameter" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/ value="@if(isset($details)) {{ $query }} @endif">
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                  </form>
+
+                  @if(isset($details))
+                   <a href="{{ route('admin.users') }}" class="btn btn-danger btn-flat search-filter">Clear Filter</a>
+                  @endif
+              </div>               
             </div>
             <!-- /.box-header -->
-            <div class="box-body table-responsive">
-               <table id="example1" class="table table-bordered table-striped">
-                  <thead>
+
+            {{-- All Customer Result Display --}}
+            @if(isset($allusers))
+            <div class="box-body table-responsive no-padding">
+               <table class="table table-hover table-bordered">
                      <tr>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Image</th>
                         <th>Customer Status</th>
-                        <th>Registeration Status</th>
+                        <th>Registration Status</th>
                         <th>Action</th>
                      </tr>
-                  </thead>
-                  <tbody>
+                  
                   	 @if(!is_null($allusers))
                   	 @foreach($allusers as $loopingUsers)
                      <tr class="tr_{{ $loopingUsers->id }}">
@@ -57,9 +73,9 @@
                         </td>
 
                         <td>
-	                        <button id="accept_reg_{{ $loopingUsers->id }}" class="btn btn-success btn-flat accept_reg @if($loopingUsers->registeration_status == '1') hide @endif" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Click to Accept Registeration">Accept</button>
+	                        <button id="accept_reg_{{ $loopingUsers->id }}" class="btn btn-success btn-flat accept_reg @if($loopingUsers->registeration_status == '1') hide @endif" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Click to Accept Registration">Accept</button>
 
-	                        <button id="reject_reg_{{ $loopingUsers->id }}" class="btn btn-danger btn-flat accept_reg @if($loopingUsers->registeration_status == '0') hide @endif" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Click to Reject Registeration">Reject</button>  
+	                        <button id="reject_reg_{{ $loopingUsers->id }}" class="btn btn-danger btn-flat accept_reg @if($loopingUsers->registeration_status == '0') hide @endif" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Click to Reject Registration">Reject</button>  
                         </td>
 
                         <td><button class="btn btn-danger btn-flat delete_user" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Delete Customer"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
@@ -70,21 +86,73 @@
                      </tr>
                      @endforeach
                      @endif
-                     
-                  </tbody>
-                  <tfoot>
+                  
+               </table>             
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+                <ul class="pagination pagination-sm no-margin pull-right">
+                    <li>@if($allusers){!! $allusers->render() !!}@endif</li>
+                </ul>
+            </div>
+
+            @endif               
+
+            {{-- Searching Result Customer Display --}}
+            @if(isset($details))
+            <div class="box-body table-responsive no-padding">
+              <p> The Search results for your query <b class="cstm-bold"> {{ $query }} </b> are :</p>
+               <table class="table table-hover table-bordered">
                      <tr>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Image</th>
                         <th>Customer Status</th>
-                        <th>Registeration Status</th>
+                        <th>Registration Status</th>
                         <th>Action</th>
                      </tr>
-                  </tfoot>
-               </table>
+                  
+                     @if(!is_null($details))
+                     @foreach($details as $loopingUsers)
+                     <tr class="tr_{{ $loopingUsers->id }}">
+                        <td>{{ $loopingUsers->name }}</td>
+                        <td>{{ $loopingUsers->email }}</td>
+                        <td><img id="image_src" class="img-circle" src="/uploads/avatars/{{ $loopingUsers->avatar }}" style="height: 45px; width: 45px;"></td>
+
+                        <td>
+                          <button id="activate_user_{{ $loopingUsers->id }}" class="btn btn-success btn-flat activate_user @if($loopingUsers->login_status == '1') hide @endif" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Click to Activate Customer">Activate Customer</button>
+
+                          <button id="inactivate_user_{{ $loopingUsers->id }}" class="btn btn-danger btn-flat activate_user @if($loopingUsers->login_status == '0') hide @endif" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Click to Inactivate Customer">Inactivate Customer</button>                          
+                        </td>
+
+                        <td>
+                          <button id="accept_reg_{{ $loopingUsers->id }}" class="btn btn-success btn-flat accept_reg @if($loopingUsers->registeration_status == '1') hide @endif" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Click to Accept Registration">Accept</button>
+
+                          <button id="reject_reg_{{ $loopingUsers->id }}" class="btn btn-danger btn-flat accept_reg @if($loopingUsers->registeration_status == '0') hide @endif" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Click to Reject Registration">Reject</button>  
+                        </td>
+
+                        <td><button class="btn btn-danger btn-flat delete_user" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Delete Customer"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                        <a href="{{ route('admin.show_edit_form',['slug' => $loopingUsers->slug]) }}" class="btn btn-warning btn-flat" data-toggle="tooltip" title="Edit Customer"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                        <a href="{{ route('admin.show_customer',['slug' => $loopingUsers->slug]) }}" class="btn btn-info btn-flat" data-toggle="tooltip" title="View Customer"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                       </td>
+
+                     </tr>
+                     @endforeach
+                     @endif
+                                       
+               </table>             
             </div>
             <!-- /.box-body -->
+            <div class="box-footer clearfix">
+                <ul class="pagination pagination-sm no-margin pull-right">
+                    <li>@if($details){!! $details->render() !!}@endif</li>
+                </ul>
+            </div>
+
+            @elseif(isset($message))
+            <p>{{ $message }}</p>
+            @endif               
+
          </div>
          <!-- /.box -->
       </div>
@@ -101,7 +169,13 @@
 <!-- page script -->
 <script type="text/javascript">
     $(document).ready(function(){
-        $("#example1").dataTable();
+      
+        // $('#example1').dataTable( {
+        //    'aoColumnDefs': [{
+        //         'bSortable': false,
+        //         'aTargets': ['no-sort']
+        //     }]
+        // });    
         // $('#example1').dataTable({
         //     "bPaginate": true,
         //     "bLengthChange": false,
@@ -113,7 +187,7 @@
 
 
 // Deleting-Simple-User
-$('.delete_user').click(function()
+$(".delete_user").on("click", function() 
 {
   var confirmation = confirm("Are you sure you want to delete this customer?");
   if (confirmation) 
@@ -150,7 +224,7 @@ $('.delete_user').click(function()
 });
 
 // Accepting Registeration Status
-$('.accept_reg').click(function()
+$(".accept_reg").on("click", function() 
 {
     $(this).html('Please wait..');
     var user_id = $(this).data('id');
@@ -182,7 +256,7 @@ $('.accept_reg').click(function()
 
 
 // Changing Customer Status Activate User/Inacttivate User
-$('.activate_user').click(function()
+$(".activate_user").on("click", function() 
 {
     $(this).html('Please wait..');
     var user_id = $(this).data('id');

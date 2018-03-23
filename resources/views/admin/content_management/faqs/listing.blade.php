@@ -29,16 +29,19 @@
      <a href="{{ route('admin.show_faq_form') }}" class="btn bg-olive btn-flat">Add New FAQ</a>
    </div>
    <!-- /.box-header -->
-   <div class="box-body table-responsive">
-     <table id="example1" class="table table-bordered table-striped">
-      <thead>
+
+  {{-- All Pages Result Display --}}
+  @if(isset($faqs))
+  <div class="box-body table-responsive no-padding">
+    <table class="table table-hover table-bordered">
+      
        <tr>
         <th>Question</th>
         <th>Status</th>
         <th>Action</th>
       </tr>
-    </thead>
-    <tbody>
+    
+    
       @if(!is_null($faqs))
       @foreach($faqs as $loopingFaqs)
       <tr class="tr_{{ $loopingFaqs->id }}">
@@ -50,25 +53,34 @@
           <button id="inactive_{{ $loopingFaqs->id }}" class="btn btn-danger btn-flat active_faq @if($loopingFaqs->status == '1') hide @endif" data-id="{{ $loopingFaqs->id }}" data-toggle="tooltip" title="Click to Active">Inactive</button>                                                    
         </td>
         <td>
-          <button class="btn btn-danger btn-flat delete_faq" data-id="{{ $loopingFaqs->id }}" data-toggle="tooltip" title="Delete Faq"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-          <a href="{{ route('admin.edit_faq_form',['slug' => $loopingFaqs->slug ]) }}" class="btn btn-warning btn-flat" data-toggle="tooltip" title="Edit Faq"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+          <button class="btn btn-danger btn-flat delete_faq" data-id="{{ $loopingFaqs->id }}" data-toggle="tooltip" title="Delete FAQ"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+          <a href="{{ route('admin.edit_faq_form',['slug' => $loopingFaqs->slug ]) }}" class="btn btn-warning btn-flat" data-toggle="tooltip" title="Edit FAQ"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+          <a href="{{ route('admin.view_faq',['slug' => $loopingFaqs->slug]) }}" class="btn btn-info btn-flat" data-toggle="tooltip" title="View FAQ"><i class="fa fa-eye" aria-hidden="true"></i></a>          
         </td>
 
       </tr>
       @endforeach
       @endif
       
-    </tbody>
-    <tfoot>
+    
+    
      <tr>
       <th>Question</th>
       <th>Status</th>
       <th>Action</th>
     </tr>
-  </tfoot>
+  
 </table>
 </div>
+  <div class="box-footer clearfix">
+      <ul class="pagination pagination-sm no-margin pull-right">
+          <li>@if($faqs){!! $faqs->render() !!}@endif</li>
+      </ul>
+  </div>
 <!-- /.box-body -->
+
+@endif
+
 </div>
 <!-- /.box -->
 </div>
@@ -84,8 +96,13 @@
 
 <!-- page script -->
 <script type="text/javascript">
-  $(document).ready(function(){
-    $("#example1").dataTable();
+ $(document).ready(function(){
+        //     $('#example1').dataTable( {
+        //        'aoColumnDefs': [{
+        //             'bSortable': false,
+        //             'aTargets': ['no-sort']
+        //         }]
+        //     });   
         // $('#example1').dataTable({
         //     "bPaginate": true,
         //     "bLengthChange": false,

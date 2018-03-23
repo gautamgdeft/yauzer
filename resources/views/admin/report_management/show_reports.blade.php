@@ -32,7 +32,7 @@
                <div class="icon">
                   <i class="fa fa-briefcase"></i>
                </div>
-               <a href="{{ route('admin.export') }}" class="small-box-footer">
+               <a href="{{ route('admin.customer_export') }}" class="small-box-footer">
                More info <i class="fa fa-arrow-circle-right"></i>
                </a>
             </div>
@@ -53,7 +53,7 @@
                <div class="icon">
                   <i class="fa fa-eye"></i>
                </div>
-               <a href="#" class="small-box-footer">
+               <a href="{{ route('admin.owner_export') }}" class="small-box-footer">
                More info <i class="fa fa-arrow-circle-right"></i>
                </a>
             </div>
@@ -74,7 +74,7 @@
                <div class="icon">
                   <i class="fa fa-signal"></i>
                </div>
-               <a href="#" class="small-box-footer">
+               <a href="{{ route('admin.business_export') }}" class="small-box-footer">
                More info <i class="fa fa-arrow-circle-right"></i>
                </a>
             </div>
@@ -94,7 +94,7 @@
                <div class="icon">
                   <i class="fa fa-user"></i>
                </div>
-               <a href="#" class="small-box-footer">
+               <a href="{{ route('admin.yauzer_export') }}" class="small-box-footer">
                More info <i class="fa fa-arrow-circle-right"></i>
                </a>
             </div>

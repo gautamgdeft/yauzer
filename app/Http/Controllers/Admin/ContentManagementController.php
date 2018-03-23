@@ -28,11 +28,28 @@ class ContentManagementController extends Controller
     $this->middleware('auth:admin');
   }
 
+ public function search(Request $request)
+ {
+       $search_parameter = $request->search_parameter;
+       if($search_parameter != "")
+       {
 
-  public function pages()
-  {
-   $pages = Page::all();		
-   return view('admin.content_management.pages.page_listing',['pages' => $pages]);
+        $filterPages = Page::where ( 'name', 'LIKE', '%' . $search_parameter . '%' )->orWhere ( 'pageurl', 'LIKE', '%' . $search_parameter . '%' )->paginate (10)->setPath ( '' );
+        $pagination = $filterPages->appends ( array (
+              'search_parameter' => $request->search_parameter 
+          ) );
+          
+        if (count ( $filterPages ) > 0)
+        return view ( 'admin.content_management.pages.page_listing' )->withDetails ( $filterPages )->withQuery ( $search_parameter );
+       }
+
+        return view ( 'admin.content_management.pages.page_listing' )->withMessage ( 'No Details found. Try to search again !' );
+ } 
+
+ public function pages()
+ {
+  $pages = Page::orderBy('id', 'desc')->paginate(10);		
+  return view('admin.content_management.pages.page_listing',['pages' => $pages]);
  }
 
 
@@ -131,10 +148,15 @@ public function update_page(Request $request, $slug)
  ]);
 
  $page->update($request->all());
- Session::flash('success', 'Page was updated.');
+ Session::flash('success', 'Page has been updated.');
  return redirect()->route('admin.pages');                          	
 }
 
+public function view_page($slug)
+{
+       $page = Page::findBySlugOrFail($slug);
+       return view('admin.content_management.pages.view_page', ['page' => $page]);  
+}
 
 public function images()
 {
@@ -144,7 +166,7 @@ public function images()
 
 public function sliderimages()
 {
- $sliderImages = SliderImage::all();
+ $sliderImages = SliderImage::orderBy('id', 'desc')->paginate(10);
  return view('admin.content_management.sliderimages.sliderimages',['sliderImages' => $sliderImages]);
 }
 
@@ -258,13 +280,39 @@ public function update_slider_image(Request $request, $slug)
 
  } 
 
- Session::flash('success', 'Slider image was updated.');
+ Session::flash('success', 'Slider image has been updated.');
  return redirect()->route('admin.sliderimages');                          	
 }
 
+public function view_slider_image($slug)
+{
+       $sliderImage = SliderImage::findBySlugOrFail($slug);
+       return view('admin.content_management.sliderimages.view_slider_image', ['sliderImage' => $sliderImage]); 
+}
+
+
+public function search_header_menu(Request $request)
+{
+       $search_parameter = $request->search_parameter;
+       if($search_parameter != "")
+       {
+
+        $filterHeaderMenu = HeaderMenu::where ( 'name', 'LIKE', '%' . $search_parameter . '%' )->orWhere ( 'url', 'LIKE', '%' . $search_parameter . '%' )->paginate (10)->setPath ( '' );
+        $pagination = $filterHeaderMenu->appends ( array (
+              'search_parameter' => $request->search_parameter 
+          ) );
+          
+        if (count ( $filterHeaderMenu ) > 0)
+        return view ( 'admin.content_management.header_menu.listing' )->withDetails ( $filterHeaderMenu )->withQuery ( $search_parameter );
+       }
+
+        return view ( 'admin.content_management.header_menu.listing' )->withMessage ( 'No Details found. Try to search again !' );
+} 
+
+
 public function headermenus()
 {
-  $headerMenus = HeaderMenu::all();
+  $headerMenus = HeaderMenu::orderBy('id', 'desc')->paginate(10);
   return view('admin.content_management.header_menu.listing',compact('headerMenus'));  
 }
 
@@ -343,13 +391,37 @@ public function update_header_menu(Request $request, $slug)
  $headerMenu->url  = $request->input('url');
  $headerMenu->save();
 
- Session::flash('success', 'Menu was updated.');
+ Session::flash('success', 'Menu has been updated.');
  return redirect()->route('admin.headermenus');                            
 }
 
+public function view_header_menu($slug)
+{
+       $headerMenu = HeaderMenu::findBySlugOrFail($slug);
+       return view('admin.content_management.header_menu.view_header_menu', ['headerMenu' => $headerMenu]);  
+}
+
+public function search_footer_menu(Request $request)
+{
+       $search_parameter = $request->search_parameter;
+       if($search_parameter != "")
+       {
+
+        $filterFooterMenu = FooterMenu::where ( 'name', 'LIKE', '%' . $search_parameter . '%' )->orWhere ( 'url', 'LIKE', '%' . $search_parameter . '%' )->paginate (10)->setPath ( '' );
+        $pagination = $filterFooterMenu->appends ( array (
+              'search_parameter' => $request->search_parameter 
+          ) );
+          
+        if (count ( $filterFooterMenu ) > 0)
+        return view ( 'admin.content_management.footer_menu.listing' )->withDetails ( $filterFooterMenu )->withQuery ( $search_parameter );
+       }
+
+        return view ( 'admin.content_management.footer_menu.listing' )->withMessage ( 'No Details found. Try to search again !' );
+} 
+
 public function footermenus()
 {
-  $footerMenus = FooterMenu::all();
+  $footerMenus = FooterMenu::orderBy('id', 'desc')->paginate(10);
   return view('admin.content_management.footer_menu.listing',compact('footerMenus'));  
 }
 
@@ -428,13 +500,19 @@ public function update_footer_menu(Request $request, $slug)
  $footerMenu->url  = $request->input('url');
  $footerMenu->save();
 
- Session::flash('success', 'Menu was updated.');
+ Session::flash('success', 'Menu has been updated.');
  return redirect()->route('admin.footermenus');                            
+}
+
+public function view_footer_menu($slug)
+{
+       $footerMenu = FooterMenu::findBySlugOrFail($slug);
+       return view('admin.content_management.footer_menu.view_footer_menu', ['footerMenu' => $footerMenu]);  
 }
 
 public function faqs()
 {
-  $faqs = Faq::all();
+  $faqs = Faq::orderBy('id', 'desc')->paginate(10);
   return view('admin.content_management.faqs.listing', compact('faqs'));
 }
 
@@ -456,7 +534,7 @@ public function store_faq(Request $request)
    $faq->save();
 
   return redirect()->route('admin.faqs')
-  ->with("success","Faq has been added successfuly");     
+  ->with("success","FAQ has been added successfuly");     
 
 }
 
@@ -470,14 +548,20 @@ public function update_faq_status(Request $request)
   {
    $faq->status  = true;
    $faq->save();
-   return response(['msg' => 'Faq status has been activated successfully', 'status' => 'success']); 
+   return response(['msg' => 'FAQ status has been activated successfully', 'status' => 'success']); 
 
   }else{
    $faq->status  = false;
    $faq->save();
-   return response(['msg' => 'Faq status has been deactivated successfully', 'status' => 'declined']); 
+   return response(['msg' => 'FAQ status has been deactivated successfully', 'status' => 'declined']); 
   }  
  }
+}
+
+public function view_faq($slug)
+{
+       $faq = Faq::findBySlugOrFail($slug);
+       return view('admin.content_management.faqs.view_faq', ['faq' => $faq]);  
 }
 
 public function destroy_faq(Request $request)
@@ -486,10 +570,10 @@ public function destroy_faq(Request $request)
  {
   $faq = Faq::find($request->input('id'));         
   $faq->delete();
-  return response(['msg' => 'Faq has been deleted successfully', 'status' => 'success']);
+  return response(['msg' => 'FAQ has been deleted successfully', 'status' => 'success']);
  }
 
-  return response(['msg' => 'Faq deleting the menu', 'status' => 'failed']);  
+  return response(['msg' => 'FAQ deleting the menu', 'status' => 'failed']);  
 }
 
 public function edit_faq($slug)
@@ -512,7 +596,7 @@ public function update_faq(Request $request, $slug)
  $faq->answer   = $request->input('answer');
  $faq->save();
 
- Session::flash('success', 'Faq was updated.');
+ Session::flash('success', 'FAQ has been updated.');
  return redirect()->route('admin.faqs');    
 }
 

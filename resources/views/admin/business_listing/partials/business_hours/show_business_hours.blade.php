@@ -197,3 +197,5 @@
                    <button type="submit" class="btn btn-primary">Update</button>
                    <a href="{{ route('admin.business_listing') }}" class="btn btn-warning">Go Back</a>
                 </div>
+
+</form>                

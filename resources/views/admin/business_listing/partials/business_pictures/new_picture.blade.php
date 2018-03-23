@@ -24,7 +24,7 @@
    <section class="content">
       <div class="box box-primary">
          <!-- form start -->
-         <form role="form" action="{{ route('admin.store_picture', ['slug' => $slug]) }}" enctype="multipart/form-data" method="POST">
+         <form id="add-picture-form" role="form" action="{{ route('admin.store_picture', ['slug' => $slug]) }}" enctype="multipart/form-data" method="POST">
          	{{ csrf_field() }}
             <div class="box-body">
 
@@ -44,7 +44,7 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
-               <button type="submit" class="btn btn-primary">Submit</button>
+               <button id="picture-submit-btn" type="submit" class="btn btn-primary">Submit</button>
                <a href="{{ URL::previous() }}" class="btn btn-warning">Go Back</a>
             </div>
          </form>
@@ -66,7 +66,37 @@ $(document).ready(function()
 {
   $("#avatar").change(function () {
   readURL(this);
-});  
+});
+
+   //Adding-Validations
+  $('#add-picture-form').validate({
+  onfocusout: function (valueToBeTested) {
+      $(valueToBeTested).valid();
+  },
+
+  highlight: function(element) {
+    $('element').removeClass("error");
+  },
+
+  rules: {
+
+      valueToBeTested: {
+          required: true,
+      }
+
+    },
+  });     
+
+  $('#picture-submit-btn').click(function()
+  {
+    if($('#add-picture-form').valid())
+    {
+      $('#picture-submit-btn').prop('disabled', true);
+      $('#add-picture-form').submit();
+    }else{
+      return false;
+    }
+  });   
 });
 
 /*---- Start Function For Checking Image Extension For Valid Image Selection ---*/

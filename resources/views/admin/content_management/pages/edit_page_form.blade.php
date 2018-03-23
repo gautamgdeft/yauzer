@@ -22,7 +22,7 @@
    <section class="content">
       <div class="box box-primary">
          <!-- form start -->
-         <form role="form" action="{{ route('admin.update_page',['slug' => $page->slug]) }}" enctype="multipart/form-data" method="POST">
+         <form id="edit-page-form" role="form" action="{{ route('admin.update_page',['slug' => $page->slug]) }}" enctype="multipart/form-data" method="POST">
          	{{ csrf_field() }}
             <div class="box-body">
                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -89,7 +89,7 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
-               <button type="submit" class="btn btn-primary">Update</button>
+               <button id="page-submit-btn" type="submit" class="btn btn-primary">Update</button>
                <a href="{{ URL::previous() }}" class="btn btn-warning">Go Back</a>
             </div>
          </form>
@@ -108,6 +108,53 @@
 <script type="text/javascript">
 
 CKEDITOR.replace( 'description-ckeditor' );
+
+$(document).ready(function()
+{
+    //Adding-Validations
+  $('#edit-page-form').validate({
+  onfocusout: function (valueToBeTested) {
+      $(valueToBeTested).valid();
+  },
+
+    rules: {
+
+      "name": {
+          maxlength: 50,
+          alphanumeric: true, 
+      },      
+      "metatitle": {
+          alphanumeric: true, 
+      },      
+      "metakeywords": {
+          alphanumeric: true, 
+      },      
+      "metadescription": {
+          alphanumeric: true, 
+      },
+      valueToBeTested: {
+          required: true,
+      }
+
+    },
+
+  });
+
+  $('#page-submit-btn').click(function()
+  {
+    if($('#edit-page-form').valid())
+    {
+      $('#page-submit-btn').prop('disabled', true);
+      $('#edit-page-form').submit();
+    }else{
+      return false;
+    }
+  });
+
+    $.validator.addMethod("alphanumeric", function (value, element) {
+    return this.optional(element) || /^[a-z0-9s ]+$/i.test(value);
+    }, "Only letters, numbers are allowed.");     
+});
 
 </script>     
 
