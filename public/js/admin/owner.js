@@ -75,7 +75,32 @@ $(document).ready(function()
       }
 
     },
-  });          
+  });
+
+  //Adding-Validations-Changing-Owner-Password
+  $('#change-password-form').validate({
+  onfocusout: function (valueToBeTested) {
+      $(valueToBeTested).valid();
+  },
+
+  highlight: function(element) {
+    $('element').removeClass("error");
+  },
+
+  rules: {
+
+      "password": {
+         required: true, 
+      },
+      "confirm_password": {
+          equalTo: "#password",
+      },
+      valueToBeTested: {
+          required: true,
+      }
+
+    },
+  });           
 
   //Sumitting-New-Owner-Form
   $('#submit-owner-btn').click(function()
@@ -96,6 +121,18 @@ $(document).ready(function()
     {
       $('#submit-edit-owner-btn').prop('disabled', true);
       $('#edit-owner-form').submit();
+    }else{
+      return false;
+    }
+  });
+
+ //Submitting-Change-Password-Owner-Form
+  $('#submit-password-btn').click(function()
+  {
+    if($('#change-password-form').valid())
+    {
+      $('#submit-password-btn').prop('disabled', true);
+      $('#change-password-form').submit();
     }else{
       return false;
     }

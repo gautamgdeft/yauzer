@@ -35,6 +35,7 @@ class BusinessDescriptionController extends Controller
       $businessListing->description = $request->description;
       $businessListing->update();
       
-      return redirect()->route('admin.show_edit_business_form',['slug' => $slug])->with("success","Business Description has been updated successfully");
+      $route = 'admin/edit-business/'.$slug.'/#parentHorizontalTab4';
+      return redirect($route)->with("success","Business Description has been updated successfully");
     }
 }

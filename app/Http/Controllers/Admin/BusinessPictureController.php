@@ -46,8 +46,11 @@ class BusinessPictureController extends Controller
 	            $business_picture->save();
 	          }
 
-	     return redirect()->route('admin.show_edit_business_form', compact('slug'))
-                        ->with("success","Picture has been addedd successfully");     
+        $route = 'admin/edit-business/'.$slug.'/#parentHorizontalTab3';
+        return redirect($route)->with("success","Picture has been addedd successfully");
+	      
+        //return redirect()->route('admin.show_edit_business_form', compact('slug'))
+                        //->with("success","Picture has been addedd successfully");     
 
     }
 

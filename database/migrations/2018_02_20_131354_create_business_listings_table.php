@@ -19,6 +19,7 @@ class CreateBusinessListingsTable extends Migration
             $table->string('email')->unique();
             $table->string('name');
             $table->string('business_category')->nullable();
+            $table->string('business_subcategory')->nullable();
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();

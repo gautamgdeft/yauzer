@@ -1,3 +1,6 @@
+        <div class="box-header discounts-1">
+          <h3>Discounts</h3>
+        </div>                      
              <!-- form start -->
 
              <form id="edit-business-discount-form" role="form" action="{{ route('admin.update_business_discount',['slug' => $businessListing->slug]) }}" enctype="multipart/form-data" method="POST">
@@ -31,7 +34,7 @@
 
                     <div class="form-group{{ $errors->has('valid_thru') ? ' has-error' : '' }}">
                       <label for="valid_thru">Discount Valid Thru</label>
-                      <input type="text" class="form-control" id="valid_thru" name="valid_thru" value="@if(@sizeof($businessDiscountInfo->valid_thru)) {{ date('d/m/Y', strtotime($businessDiscountInfo->valid_thru)) }} @endif" required="required">
+                      <input type="text" class="form-control" id="valid_thru" name="valid_thru" value="@if(@sizeof($businessDiscountInfo->valid_thru)) {{ date('m/d/Y', strtotime($businessDiscountInfo->valid_thru)) }} @endif" required="required">
 
                       @if ($errors->has('valid_thru'))
                         <span class="help-block">

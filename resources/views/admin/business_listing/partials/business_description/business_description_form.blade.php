@@ -1,4 +1,5 @@
-<div class="box-header">
+<div class="box-header description-1">
+	<h3>Description</h3>
    <a href="{{ route('admin.show_business_description_form', ['slug' => $businessListing->slug]) }}" class="btn bg-olive btn-flat">Edit</a>
 </div>
 

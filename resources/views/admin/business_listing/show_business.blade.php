@@ -35,6 +35,24 @@
                      <tr>
                         <th scope="row">Business Owner</th>
                         <td>{{ $businessListing->user->name }}</td>
+                     </tr>                         
+                      
+                     <tr>
+                        <th scope="row">Business Category</th>
+                        <td>{{ $businessListing->category->name }}</td>
+                     </tr>                      
+                      
+                     <tr>
+                        <th scope="row">Business Subcategory</th>
+                        <td>
+                           @if(@sizeof($business_subcategories))
+                            @foreach($business_subcategories as $loopingSubcategories)
+                             {{ $loopingSubcategories }}@if (!$loop->last),@endif 
+                            @endforeach
+                           @else
+                             No subcategories found
+                           @endif 
+                        </td>
                      </tr>                     
 
                      <tr>

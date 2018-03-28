@@ -15,6 +15,15 @@ class Yauzer extends Model
         'business_id', 'user_id', 'yauzer', 'rating', 'status',
     ];
 
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'business_id', 'user_id',
+    ];    
+
     #Relation with User
     public function user()
     {

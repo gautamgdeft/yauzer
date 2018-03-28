@@ -21,6 +21,12 @@ class BusinessListing extends Model
     public function user()
     {
      return $this->belongsTo('App\User');
+    }    
+
+    #Relation with Business-Category
+    public function category()
+    {
+     return $this->belongsTo('App\BusinessCategory', 'business_category');
     }
 
     #Relation with Yauzer
@@ -45,7 +51,20 @@ class BusinessListing extends Model
     public function discounts()
     {
      return $this->hasOne('App\Discount');
-    }          
+    }
+
+    #Relation with Business-Specilaity
+    public function business_specialities()
+    {
+     return $this->hasMany('App\Speciality');
+    }    
+
+    #Relation with Intersted-Business
+    public function interested_business()
+    {
+     return $this->hasMany('App\InterestedBusiness');
+    }
+
 
     #Creating-Slugs
     public function sluggable()

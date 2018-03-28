@@ -28,6 +28,9 @@ class BusinessPaymentController extends Controller
    {
 	   $business = BusinessListing::findBySlugOrFail($slug);
 	   $businessPaymentInfo =  CreditCard::updateOrCreate(['business_id' => $business->id], $request->all());
-       return Redirect::back()->with('success', 'Business Payment Information has been updated successfully');
+
+     $route = 'admin/edit-business/'.$slug.'/#parentHorizontalTab5';
+     return redirect($route)->with("success","Business Payment Information has been updated successfully");
+     #return Redirect::back()->with('success', 'Business Payment Information has been updated successfully');
    }
 }

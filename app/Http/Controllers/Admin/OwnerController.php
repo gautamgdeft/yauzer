@@ -220,5 +220,26 @@ class OwnerController extends Controller
     {
        $user = User::findBySlugOrFail($slug);
        return view('admin.owner.show_owner', ['user' => $user]);
+    }
+
+    public function change_password($slug)
+    {  
+       return view('admin.owner.change_password',compact('slug'));
+    }
+
+    public function store_password(Request $request, $slug)
+    {
+            #Running Validations
+            $validatedData = $request->validate([
+                'password'              => 'required|same:password',
+                'confirm_password'      => 'required|same:password'
+            ]);
+
+            $user = User::findBySlugOrFail($slug);
+            $user->password = bcrypt($request['password']);
+            $user->save();
+
+            return redirect()->route('admin.show_owner', ['slug' => $slug])
+            ->with("success","Password has been changed successfuly");              
     }                
 }

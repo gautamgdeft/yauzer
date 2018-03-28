@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\BusinessCategory;
+use App\BusinessSubcategory;
 use App\BusinessListing;
 use App\BusinessHour;
 use App\Country;
@@ -14,6 +15,10 @@ use App\BusinessPicture;
 use App\CreditCard;
 use App\Discount;
 use App\Yauzer;
+use App\Speciality;
+use App\InterestedBusiness;
+use App\BusinessInfo;
+use App\BusinessMoreInfo;
 use Image;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Validator;
@@ -101,21 +106,41 @@ class BusinessListingController extends Controller
     public function show_business($slug)
     {
        $businessListing = BusinessListing::findBySlugOrFail($slug);
-       return view('admin.business_listing.show_business', ['businessListing' => $businessListing]);
+        if(@sizeof($businessListing->business_subcategory)){
+         $businessListing['business_subcategory'] = explode(',', $businessListing->business_subcategory);
+         $business_subcategories = BusinessSubcategory::whereIn('id', $businessListing->business_subcategory)->pluck('name'); 
+        }else{
+          $business_subcategories = NULL;
+        }       
+       
+       return view('admin.business_listing.show_business', ['businessListing' => $businessListing, 'business_subcategories' => $business_subcategories]);
     }
 
     #Show-Edit-Business-Form-Function
     public function edit_business($slug)
     {
        $country = Country::selectCountries();
+       $allBusinesses = BusinessListing::all();
        $businessListing = BusinessListing::findBySlugOrFail($slug);
        $businessHours = BusinessHour::where('business_id', $businessListing->id)->first();
        $businessPictures = BusinessPicture::where('business_id', $businessListing->id)->get();
        $businessPaymentInfo = CreditCard::where('business_id', $businessListing->id)->first();
        $businessDiscountInfo = Discount::where('business_id', $businessListing->id)->first();
-       $businessYauzersInfo = Yauzer::where('business_id', $businessListing->id)->get();
+       $businessYauzersInfo = Yauzer::orderBy('id', 'desc')->where('business_id', $businessListing->id)->get();
+       $businessSpecialitiesInfo = Speciality::orderBy('id', 'desc')->where('business_id', $businessListing->id)->get();
+
+
+       $intersetedBusinesses = InterestedBusiness::orderBy('id', 'desc')->where('business_id', $businessListing->id)->first();
+        if(@sizeof($intersetedBusinesses->interested_businesses)){
+         $intersetedBusinesses['interested_businesses'] = explode(',', $intersetedBusinesses->interested_businesses);
+        }
        
-       return view('admin.business_listing.edit_business', ['businessListing' => $businessListing, 'country' => $country, 'businessHours' => $businessHours, 'businessPictures' => $businessPictures, 'businessPaymentInfo' => $businessPaymentInfo, 'businessDiscountInfo' => $businessDiscountInfo, 'businessYauzersInfo' => $businessYauzersInfo]);
+       //Pedefined Business-Info-Admin
+       $businessInfo = BusinessInfo::where('status', true)->where('user_id', 0)->orWhere('user_id', $businessListing->user_id)->get();
+       $existing_db_business_info = BusinessMoreInfo::where('business_id', $businessListing->id)->pluck('business_info_id')->toArray();
+       
+
+       return view('admin.business_listing.edit_business', ['businessListing' => $businessListing, 'country' => $country, 'businessHours' => $businessHours, 'businessPictures' => $businessPictures, 'businessPaymentInfo' => $businessPaymentInfo, 'businessDiscountInfo' => $businessDiscountInfo, 'businessYauzersInfo' => $businessYauzersInfo, 'businessSpecialitiesInfo' => $businessSpecialitiesInfo, 'allBusinesses' => $allBusinesses, 'intersetedBusinesses' => $intersetedBusinesses, 'businessInfo' => $businessInfo, 'existing_db_business_info' => $existing_db_business_info]);
     }
 
     #Updating-Business-Function

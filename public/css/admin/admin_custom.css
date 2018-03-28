@@ -114,6 +114,7 @@ div.dataTables_filter input {
     margin: 0 auto;
     width: 100%;
     padding: 0px;
+    margin-top: 20px;
 }
 .box.box-primary .img-circle {
 	  margin-top: 20px;
@@ -202,16 +203,19 @@ div.dataTables_filter input {
   	position: relative;
   	background: #F5F5F5;
   	margin-right: 20px;
-    border-bottom: 1px solid #85c226;
+    list-style-type: none;
+    margin-bottom: 0px;
  }
  .custom-tabing .nav-tabs>li>a{
 	font-size: 14px;
 	color: #333;
 	border-radius: 0px;
-	padding: 6px 15px;
+	padding: 6px 10px;
 }
  .custom-tabing .nav-tabs {
-    border-bottom: 1px solid #85c226;
+ border-bottom: 1px solid #85c226;
+ float: left;
+ width:100%;
 }
  .custom-tabing .tab-content{
   border:1px solid #85c226;
@@ -245,7 +249,7 @@ div.dataTables_filter input {
     z-index: -1;
     transform: skew(17deg);
 }
-.custom-tabing .nav-tabs>li.active::before {
+.custom-tabing .nav-tabs>li.resp-tab-active::before {
     position: absolute;
     content: "";
     background: #85c226;
@@ -256,7 +260,7 @@ div.dataTables_filter input {
     z-index: -1;
     transform: skew(-17deg);
 }
-.custom-tabing .nav-tabs>li.active::after {
+.custom-tabing .nav-tabs>li.resp-tab-active::after {
     position: absolute;
     content: "";
     background: #85c226;
@@ -271,6 +275,25 @@ div.dataTables_filter input {
 	background:transparent;
 	border-color: transparent;
 	color: #000;
+}
+.custom-tabing button.tbbtn {
+    background: transparent;
+    border: none;
+    padding: 6px 10px;
+    font-size: 14px;
+}
+.custom-tabing button.tbbtn:focus{
+    outline: none !important;
+}
+.custom-tabing .resp-tab-content{
+     border: 1px solid #85c226;
+    border-top: none;
+}
+.custom-tabing .nav-tabs>li.resp-tab-active>button.tbbtn, .custom-tabing .nav-tabs>li.resp-tab-active>button.tbbtn:hover, .custom-tabing .nav-tabs>li.resp-tab-active>button.tbbtn:focus{
+    background: #85c226;
+    color:#fff;
+    border-color:#85c226;
+    outline: inherit;
 }
 .custom-tabing .nav-tabs>li.active>a, .custom-tabing .nav-tabs>li.active>a:hover, .custom-tabing .nav-tabs>li.active>a:focus{
     background: #85c226;
@@ -394,8 +417,156 @@ table.table >tbody>tr>td{
     word-break: break-all;
     max-width: 252px;
 }
-
-
+/** 180327 **/
+table.table.table-hover.table-bordered tr td:first-child {
+    max-width: 120px;
+}
+.box p {
+    padding: 0;
+    display: block;
+    width: 100%;
+}
+.tooltip.fade.top.in {
+    line-height: 22px;
+}
+ .box-header h3 {
+    display: inline-block;
+    font-size: 18px;
+    text-transform: capitalize;
+    color: #85c226;
+}
+div#business_description .box-header {
+    border-bottom: 2px solid #E6E9ED;
+}
+.box-header.description-1,
+.box-header.discounts-1,
+.box-header.speciality-1,
+.box-header.yauzer-1  {
+    margin-bottom: 10px;
+}
+.box-header.payment-1,
+.box-header.discounts-1,
+.box-header.hours-1,
+.box-header.info-1,
+.box-header.adds-1,
+.box-header.speciality-1,
+.box-header.detail-1,
+.box-header.yauzer-1  {
+    border-bottom: 2px solid #E6E9ED;
+}
+.form-group .bootstrap-tagsinput {
+    border-radius: 0;
+    display: block;
+    border:1px solid #aaa;
+    padding: 2px;
+}
+.form-group .label-info {
+    padding: 0px 5px;
+    font-size: 14px;
+    font-weight: normal;
+    background-color: #eee;
+    background-image: -webkit-gradient(linear,50% 0,50% 100%,color-stop(20%,#f4f4f4),color-stop(50%,#f0f0f0),color-stop(52%,#e8e8e8),color-stop(100%,#eee));
+    background-image: -webkit-linear-gradient(#f4f4f4 20%,#f0f0f0 50%,#e8e8e8 52%,#eee 100%);
+    background-image: -moz-linear-gradient(#f4f4f4 20%,#f0f0f0 50%,#e8e8e8 52%,#eee 100%);
+    background-image: -o-linear-gradient(#f4f4f4 20%,#f0f0f0 50%,#e8e8e8 52%,#eee 100%);
+    background-image: linear-gradient(#f4f4f4 20%,#f0f0f0 50%,#e8e8e8 52%,#eee 100%);
+    background-size: 100% 19px;
+    background-repeat: repeat-x;
+    background-clip: padding-box;
+    box-shadow: 0 0 2px #fff inset, 0 1px 0 rgba(0,0,0,.05);
+    color: #333 !important;
+    line-height: 13px;
+    border: 1px solid #aaa;
+}
+span.tag.label.label-info span {
+    font-weight: bold;
+    font-size: 17px;
+    position: relative;
+    left: -5px;
+    color: #797979;
+}
+/*****28032018*****/
+.chosen-container-multi .chosen-choices li.search-field input[type=text]{
+  min-width:253px !important;
+}
+ul.commentboxlist{
+    padding: 0px;
+    margin: 0px;
+}
+ul.commentboxlist li {
+    list-style-type: none;
+    margin:20px 0px 0px;
+    padding-bottom: 20px;
+    border-bottom: 1px dotted #ccc;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+ul.commentboxlist li h5.authorname {
+    font-size: 16px;
+    font-weight: 700;
+}
+ul.commentboxlist li:last-child{
+    border-bottom: none;
+}
+ul.commentboxlist li figure {
+    width: 10%;
+    float: left;
+    text-align: center;
+}
+ul.commentboxlist li  .commentbox-content {
+    float: left;
+    width: 90%;
+}
+ul.commentboxlist li .button-box {
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    width: 80px;
+    top: 0;
+}
+ul.commentboxlist li .rating-xs {
+    font-size: 20px;
+}
+ul.commentboxlist li .rating-container .caption .label {
+    padding: 6px 12px;
+    vertical-align: middle;
+    font-size: 12px;
+}
+ul.commentboxlist li .rating-container .clear-rating{
+    display: none;
+}
+ul.speciality_checks {
+    padding: 0;
+}
+ul.speciality_checks .commentbox-content p{
+   font-weight: 700;
+   line-height: 13px;
+   margin-bottom: 10px;
+}
+ul.speciality_checks li {
+    list-style-type: none;
+    display: inline-block;
+    width: 12.4%;
+    text-align: center;
+    border: 1px dotted #ccc;
+    padding: 15px;
+    margin:10px 20px 20px 0px;
+}
+ul.speciality_checks li:nth-child(7) {
+    margin-right: 0px;
+}
+#edit-speciality-form .box-body .form-group label {
+    width: 100%;
+}
+#edit-speciality-form .box-body .form-group br {
+   display: none;
+ }
+#edit-speciality-form .box-body input[type="radio"]{
+    opacity: 1 !important;
+   height: inherit;
+   margin: 0px;
+}
 /********Media Query***************/
 @media screen and (max-width: 599px){
   .hours ul.open-down .input-group .input-small{
@@ -419,3 +590,4 @@ table.table >tbody>tr>td{
     width: 83%;
 }	
 }
+

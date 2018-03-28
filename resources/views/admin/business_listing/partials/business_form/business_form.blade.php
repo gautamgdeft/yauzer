@@ -1,3 +1,7 @@
+  <div class="box-header detail-1">
+    <h3>Details</h3>
+  </div>   
+
              <!-- form start -->
              <form id="edit-business-form" role="form" action="{{ route('admin.update_business',['slug' => $businessListing->slug]) }}" enctype="multipart/form-data" method="POST">
               {{ csrf_field() }}

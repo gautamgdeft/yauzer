@@ -27,18 +27,21 @@ class BusinessDiscountController extends Controller
 
    public function update_business_discount(Request $request, $slug)
    {
-        //Validation-Working
+        //Validation-Working-Starts
         $validatedData = $request->validate([
         	'discount_title'  => 'required|string',
             'description'     => 'required|string',
-            'valid_thru'      => 'required|date',
+            'valid_thru'      => 'required',
         ]);
 
        //Processing the Code
        $formatdate = Carbon::parse($request->valid_thru)->format('Y-m-d');
        $request['valid_thru'] = $formatdate;
    	   $business = BusinessListing::findBySlugOrFail($slug);
-	   $businessDiscountInfo =  Discount::updateOrCreate(['business_id' => $business->id], $request->all());
-       return Redirect::back()->with('success', 'Business update_business_discount has been updated successfully');
+	     $businessDiscountInfo =  Discount::updateOrCreate(['business_id' => $business->id], $request->all());
+       
+        $route = 'admin/edit-business/'.$slug.'/#parentHorizontalTab6';
+        return redirect($route)->with("success","Business update_business_discount has been updated successfully");
+        #return Redirect::back()->with('success', 'Business update_business_discount has been updated successfully');
    }
 }

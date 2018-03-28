@@ -40,8 +40,14 @@
             </li>
 
             <li class="{{ (\Request::route()->getName() == 'admin.business_listing' || \Request::route()->getName() == 'admin.show_business' || \Request::route()->getName() == 'admin.show_edit_business_form' || \Request::route()->getName() == 'admin.new_picture_form' || \Request::route()->getName() == 'business.search') ? 'active' : '' }}">
-                <a href="{{ route('admin.business_listing') }}">
+                <a  href="{{ route('admin.business_listing') }}">
                     <i class="fa fa-suitcase"></i> <span>Business Listings</span>
+                </a>
+            </li>            
+
+            <li class="{{ (\Request::route()->getName() == 'business.more_info_listing' || \Request::route()->getName() == 'businessinfo.search' || \Request::route()->getName() == 'admin.edit_form' || \Request::route()->getName() == 'business.add_more_info') ? 'active' : '' }}">
+                <a href="{{ route('business.more_info_listing') }}">
+                    <i class="fa fa-suitcase"></i> <span>Business More Info</span>
                 </a>
             </li>
 

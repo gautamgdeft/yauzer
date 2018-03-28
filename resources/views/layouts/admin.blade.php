@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/admin/easy-responsive-tabs.css') }}" rel="stylesheet">
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/star-rating.css') }}" rel="stylesheet">
     <link href="{{ asset('css/admin/ionicons.min.css') }}" rel="stylesheet">
@@ -42,7 +43,8 @@
     {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <script src="{{ asset('js/admin/jquery-ui-1.10.3.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>    
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script> 
+    <script src="{{ asset('js/admin/easyResponsiveTabs.js') }}"></script>   
     <script src="{{ asset('js/validate.min.js') }}"></script>    
     <script src="{{ asset('js/star-rating.js') }}"></script>    
     <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>    

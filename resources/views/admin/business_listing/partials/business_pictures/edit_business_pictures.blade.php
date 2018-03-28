@@ -1,4 +1,5 @@
 <div class="box-header">
+	<h3>Pictures & Videos</h3>
    <a href="{{ route('admin.new_picture_form', ['slug' => $businessListing->slug]) }}" class="btn bg-olive btn-flat">Add New Picture</a>
 </div>
 

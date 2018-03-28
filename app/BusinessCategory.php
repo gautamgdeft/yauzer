@@ -15,6 +15,11 @@ class BusinessCategory extends Model
     public function business_subcategory()
     {
         return $this->hasMany('App\BusinessSubcategory');
+    }    
+
+    public function business_listings()
+    {
+        return $this->hasOne('App\BusinessListing');
     }     
 
     /**

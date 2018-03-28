@@ -17,7 +17,7 @@ class CreateYauzersTable extends Migration
             $table->increments('id');
             $table->integer('business_id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->string('yauzer');
+            $table->text('yauzer');
             $table->integer('rating')->default(0);
             $table->boolean('status')->default(true);
             $table->timestamps();

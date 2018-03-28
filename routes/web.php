@@ -25,12 +25,12 @@ Route::prefix('admin')->group(function()
 {	
 	Route::get('/login'     , 'Auth\AdminLoginController@showLoginform')->name('admin.login');
 	Route::post('/login'    , 'Auth\AdminLoginController@login')->name('admin.login.submit');
-	Route::get('/dashboard' , 'AdminController@index')->name('admin.dashboard');
+	Route::get('/dashboard' , 'Admin\AdminController@index')->name('admin.dashboard');
 	Route::get('/logout'    , 'Auth\AdminLoginController@logout')->name('admin.logout');
-	Route::get('/profile'   , 'AdminController@profile')->name('admin.profile');
-	Route::post('/update-profile', 'AdminController@update')->name('admin.update_profile');
-	Route::get('/changepassword','AdminController@showChangePasswordForm')->name('admin.showChangePasswordForm');
-	Route::post('/changepassword','AdminController@changepassword')->name('admin.changepassword');	
+	Route::get('/profile'   , 'Admin\AdminController@profile')->name('admin.profile');
+	Route::post('/update-profile', 'Admin\AdminController@update')->name('admin.update_profile');
+	Route::get('/changepassword','Admin\AdminController@showChangePasswordForm')->name('admin.showChangePasswordForm');
+	Route::post('/changepassword','Admin\AdminController@changepassword')->name('admin.changepassword');	
 
 
 	//Admin-Password-Forgot-Routes
@@ -62,6 +62,9 @@ Route::prefix('admin')->group(function()
     Route::post('/update-owner-registeration-status', 'Admin\OwnerController@update_reg_status')->name('admin.update_owner_registeration_status');    
     Route::post('/update-owner-status', 'Admin\OwnerController@update_owner_status')->name('admin.update_owner_status');	
     Route::get('/view-owner/{slug}', 'Admin\OwnerController@show_owner')->name('admin.show_owner');
+    Route::get('/change-password/{slug}', 'Admin\OwnerController@change_password')->name('admin.change_password');   
+
+    Route::post('/store-password/{slug}', 'Admin\OwnerController@store_password')->name('admin.store_password');
 
     //Business-Category-Routes
     Route::any( '/search-category', 'Admin\BusinessCategoryController@search')->name('category.search');
@@ -111,7 +114,41 @@ Route::prefix('admin')->group(function()
     Route::post('/update-business-description/{slug}', 'Admin\BusinessDescriptionController@update_business_description')->name('admin.update_business_description');
 
     //Business-Discounts-Routes
-    Route::post('/update-business-discount-information/{slug}', 'Admin\BusinessDiscountController@update_business_discount')->name('admin.update_business_discount');    
+    Route::post('/update-business-discount-information/{slug}', 'Admin\BusinessDiscountController@update_business_discount')->name('admin.update_business_discount');
+
+    //Business-Yauzers-Routes
+    Route::get('/add-business-yauzer/{slug}', 'Admin\BusinessYauzerController@new_yauzer')->name('admin.new_yauzer_form');
+    Route::post('/store-business-yauzer/{slug}', 'Admin\BusinessYauzerController@store_yauzer')->name('admin.store_yauzer');    
+    Route::get('/edit-business-yauzer/{yauzer_id}/{slug}', 'Admin\BusinessYauzerController@edit_yauzer')->name('admin.edit_yauzer');     
+    Route::post('/update-business-yauzer/{yauzer_id}/{slug}', 'Admin\BusinessYauzerController@update_yauzer')->name('admin.update_yauzer');    
+    Route::post('/destroy-business-yauzer', 'Admin\BusinessYauzerController@destory_yauzer')->name('admin.destory_yauzer');
+
+    //Business-Speciality-Routes
+   Route::get('/add-business-speciality/{slug}', 'Admin\BusinessSpecialityController@new_speciality')->name('admin.new_speciality_form');
+   Route::post('/store-business-speciality/{slug}', 'Admin\BusinessSpecialityController@store_speciality')->name('admin.store_speciality');
+   Route::get('/edit-business-speciality/{speciality_slug}/{slug}', 'Admin\BusinessSpecialityController@edit_speciality')->name('admin.edit_speciality'); 
+   Route::post('/update-business-speciality/{speciality_slug}/{slug}', 'Admin\BusinessSpecialityController@update_speciality')->name('admin.update_speciality');   
+   Route::post('/destroy-business-speciality', 'Admin\BusinessSpecialityController@destory_speciality')->name('admin.destory_speciality');
+
+   //Business-Interested-Routes
+    Route::post('/update-business-interested-information/{slug}', 'Admin\BusinessInterestedController@update_interested_business')->name('admin.update_interested_business');
+
+
+ //Business-More-Info-Routes
+    Route::get( '/more-info-listing', 'Admin\BusinessInfoController@show_listing')->name('business.more_info_listing');
+    Route::get( '/add-more-info', 'Admin\BusinessInfoController@add_more_info')->name('business.add_more_info');   
+    Route::post( '/add-more-info', 'Admin\BusinessInfoController@store_business_info')->name('business.store_business_info');
+    Route::post('/update-info-status', 'Admin\BusinessInfoController@update_info_status')->name('admin.update_info_status');
+    Route::post('/destroy-business-info', 'Admin\BusinessInfoController@destroy_business_info')->name('admin.destroy_business_info');
+
+    Route::post('/search-business-info', 'Admin\BusinessInfoController@search')->name('businessinfo.search');
+    Route::get('/edit-business-info/{slug}', 'Admin\BusinessInfoController@edit_business_info')->name('admin.edit_form');    
+    Route::post('/update-business-info/{slug}', 'Admin\BusinessInfoController@update_business_info')->name('admin.update_business_info');
+
+    //Seperate For Business-Listing-Edit-Info-Tab-Routes
+    Route::post('/update-business-main-info/{slug}', 'Admin\BusinessInfoController@update_main_info')->name('admin.update_main_info');                   
+
+
 
 
  //Content-Management-Routes Starts

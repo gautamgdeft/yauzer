@@ -1,3 +1,7 @@
+  <div class="box-header hours-1">
+    <h3>Hours</h3>
+  </div>    
+
 <form role="form" action="{{ route('admin.update_business_hours',['slug' => $businessListing->slug]) }}" enctype="multipart/form-data" method="POST">
               {{ csrf_field() }}
                 <div class="box-body">
