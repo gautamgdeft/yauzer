@@ -38,18 +38,30 @@
                   <img id="image_src" class="" src="/uploads/sliderAvatars/{{ $sliderImage->avatar }}" style="height: 45px; width: 150px;">
                </div>  
 
+               <div class="form-group{{ $errors->has('h2_description') ? ' has-error' : '' }}">
+                  <label for="h2_description">H2 Description</label>
+                  <input type="text" class="form-control" id="h2_description" name="h2_description" value="{{ $sliderImage->h2_description }}" required="required">
 
-               <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-                  <label for="description">Description</label>
-                  <input type="text" class="form-control" id="description" name="description" value="{{ $sliderImage->description }}" required="required">
-
-                  @if ($errors->has('description'))
+                  @if ($errors->has('h2_description'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('description') }}</strong>
+                        <strong>{{ $errors->first('h2_description') }}</strong>
                     </span>
                   @endif
 
                </div>                          
+
+               <div class="form-group{{ $errors->has('h3_description') ? ' has-error' : '' }}">
+                  <label for="h3_description">H3 Description</label>
+                  <input type="text" class="form-control" id="h3_description" name="h3_description" value="{{ $sliderImage->h3_description }}" required="required">
+
+                  @if ($errors->has('h3_description'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('h3_description') }}</strong>
+                    </span>
+                  @endif
+
+               </div>                 
+
 
                <div class="form-group{{ $errors->has('image_alt_text') ? ' has-error' : '' }}">
                   <label for="image_alt_text">Image Alt Text</label>

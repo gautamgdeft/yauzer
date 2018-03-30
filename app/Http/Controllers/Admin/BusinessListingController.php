@@ -155,7 +155,7 @@ class BusinessListingController extends Controller
             'address'           => 'required|string',
             'city'              => 'required|string',
             'state'             => 'required|string',
-            'zipcode'           => 'required|numeric',
+            'zipcode'           => 'required',
             'country'           => 'required|string',
             'phone_number'      => 'required',
             'avatar'            => 'image:jpg,png,jpeg,gif|unique:business_listings'

@@ -1,69 +1,103 @@
-@extends('layouts.app')
+@extends('layouts.user')
 
 @section('content')
-<div class="container">
+
+
+<!-- Login Form Starts -->
+<div class="form-background">
+  <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
+      <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8 col-xs-offset-1 col-xs-10 padding0">
+        <div class="form-outer-wrapper">
+          <div class="form-heading">
+            <h2>Login</h2>
 
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('login') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
-                                </a>
-                            </div>
-                        </div>
-                    </form>
+              <div id="msgs">
+                @if(session('success'))
+                <div class="alert alert-success">
+                {{ session('success') }}
                 </div>
+                @endif               
+
+                @if(session('danger'))
+                <div class="alert alert-danger">
+                {{ session('danger') }}
+                </div>
+                @endif
+              </div> 
+
+          </div>
+          <div class="form-container">
+            <form id="login-form" method="POST" action="{{ route('login') }}">
+                {{ csrf_field() }}
+
+              <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                <label for="email">Email</label>
+                <input type="text" name="email" class="form-control form-input" placeholder="Enter Your Email" value="{{ old('email') }}" required>
+
+                    @if ($errors->has('email'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('email') }}</strong>
+                        </span>
+                    @endif
+
+              </div>
+
+
+              <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                <label for="password">Password</label>
+                <input type="password" name="password" class="form-control form-input" placeholder="Enter Your Password" required>
+
+                    @if ($errors->has('password'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('password') }}</strong>
+                        </span>
+                    @endif
+
+              </div>
+
+
+              <button id="login_submit_btn" type="submit" class="btn-form">Login<i class="fa fa-arrow-circle-right"></i></button>
+              <a href="{{ route('password.request') }}" class="fgt-pswd">Forgot password?</a>
+            </form>
+
+          </div>
+
+          <div class="other-accounts">
+            <div class="accounts-heading">
+              <h5>Login with other accounts</h5>
             </div>
-        </div>
+
+            <div class="col-sm-6 accounts-btn padding0">
+              <button type="button" class="fb-btn"><i class="fa fa-facebook"></i><span>Facebook</span></button>
+            </div>
+
+            <div class="col-sm-6 accounts-btn padding0">
+              <button type="button" class="twitter-btn"><i class="fa fa-twitter"></i><span>Twitter</span></button>
+            </div>
+
+            <div class="col-sm-12 form-separator padding0">
+              <div class="hr-left">
+                <hr />
+              </div>
+              <div class="or">
+                <h5>OR</h5>
+              </div>
+              <div class="hr-left">
+                <hr />
+              </div>
+              <button onclick="location.href='{{ route('register') }}'" type="button" class="btn-signup">SignUp</button>
+            </div>
+
+          </div>
+
+        </div>  
+      </div>
     </div>
+  </div>
 </div>
+
+<!--form ends here -->
+
+
 @endsection

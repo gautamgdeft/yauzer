@@ -19,6 +19,7 @@ class CreateYauzersTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->text('yauzer');
             $table->integer('rating')->default(0);
+            $table->string('ip_address')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

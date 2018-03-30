@@ -1,0 +1,1107 @@
+
+@media only screen and (max-width:1350px){
+.grid .owl-prev{ left:0;}
+.grid .owl-next{ right:0;}
+}
+
+
+
+@media only screen and (max-width:1199px){
+
+.form-outer-wrapper {
+    padding: 35px 60px;
+}
+.other-accounts .fb-btn, .other-accounts .twitter-btn {
+    width:175px;
+}
+.form-background-2 .form-outer-wrapper {
+    padding: 35px 60px;
+}
+
+
+.main-text.slider-content{ width: 970px;}
+
+.business-sec .nav.nav-tabs li a{ font-size: 16px; padding: 4px 15px;}
+
+
+
+/*180216*/
+.alphabet-meaning {
+    width: 82%;
+}
+
+/*180217*/
+
+.location-search ul li {
+    margin-right: 5px;
+    max-width: 190px;
+}
+.location-search ul li .form-control {
+    font-size: 14px;
+    padding-left: 35px;
+}
+.lawyer-listing ul li span {
+    font-size: 14px;
+	margin-right:5px;
+    padding-right: 10px;
+}
+.lawyer-listing ul li {
+    font-size: 14px;
+}
+/********180228***********/
+.addresscontainer .addresscontent ul li{
+      margin: 0 3px;	
+}
+#profile-detail.owl-theme .owl-controls .owl-page{width:82px; height:82px;}
+}
+
+
+@media (max-width:1024px) {
+    .lawyer-listing ul li {
+    width: 100%;
+    margin-top: 5px;
+}
+.form-outer-wrapper .form-container, .form-outer-wrapper .form-container.form-signup {
+    padding: 30px 35px;
+}
+.form-outer-wrapper {
+    padding: 30px 60px;
+}
+.form-background-2 .form-outer-wrapper {
+    padding: 30px 60px;
+}
+.other-accounts .fb-btn, .other-accounts .twitter-btn {
+    font-size: 16px;
+}
+.other-accounts .fb-btn i, .other-accounts .twitter-btn i {
+    width: 40px;
+}
+#profile-detail.owl-theme .owl-controls .owl-page{width:82px; height:82px;}
+.addresscontainer .addresscontent ul li img{max-width:40px;}
+.commentbox .yauzeredtime-status li img{max-width:30px;}
+}
+
+
+@media only screen and (max-width:991px){
+
+.form-outer-wrapper .form-container, .form-outer-wrapper .form-container.form-signup {
+    max-width: 450px;
+}
+.other-accounts {
+    max-width: 450px;
+}
+.other-accounts .fb-btn i, .other-accounts .twitter-btn i {
+    width: 40px;
+}
+
+
+
+
+.login-sec{ padding-left: 0;}
+.top-nav-link li{ padding-left: 14px;}
+.top-nav-link li a{font-size: 17px;}
+.main-text.slider-content{ width: 750px;}
+.footer-links{ margin-bottom:30px;}
+.paddingleft0{ padding-left: 15px;}
+.footer-logo-outr{ text-align: center; width: 100%; display: inline-block; margin-bottom: 30px;}
+.slider-content h2{ font-size: 36px;}
+.banner_sec .carousel-control{ width: 45px; height: 45px; line-height: 45px; z-index: 99;}
+.banner-form .form-group{ width: 100%; margin-bottom: 15px;}
+button.search-btn{ width: 100%;}
+.banner-form .form-group:last-child{ width: 100%; margin-bottom: 0;}
+.banner-form .form-group{ padding-right: 0;}
+.banner-form{ border-radius: 15px;}
+
+.services-sec{ width: 100%; text-align: center;}
+.service-right-sec{ width: 100%;}
+ .sec-title{ font-size: 28px;}
+ .find-inner-sec .sub-heading{ font-size: 16px;}
+.yauzer-blog-sec .sec-title{ padding-bottom: 15px;}
+.service-right-sec p.heading-sec{ font-size: 22px;}
+.business-sec .nav.nav-tabs li a{ font-size: 14px; padding: 4px 12px;}
+.grid .owl-prev{ left:-30px;}
+.grid .owl-next{ right:-30px;}
+
+/*180215*/
+.blog-form-container {
+    padding: 40px;
+}
+.padding-right {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+.padding-left {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+.blog-form-wrapper.create-listing .wrap {
+    margin-bottom: 60px;
+}
+
+
+
+
+
+
+/*180216*/
+.border-separator {
+    max-width: 100%;
+	margin-top:15px;
+}
+.border-separator img {
+	display:block;
+}
+.youzer-alphabet-y::after, .youzer-alphabet-a::after, .youzer-alphabet-u::after, .youzer-alphabet-z::after, .youzer-alphabet-e::after, .youzer-alphabet-r::after {
+    left: 70px;
+}
+.alphabet-meaning {
+    width: 83%;
+}
+.defination-separator {
+    margin-top: 30px;
+}
+.youzer-details-container h2 {
+    font-size: 20px;
+}
+.blog-post-text {
+    padding: 30px 0 0 0;
+}
+.blog-post-text p {
+    margin-bottom: 20px;
+}
+
+
+/*180217*/
+.location-search ul li {
+    margin-right: 5px;
+    max-width: 32%;
+}
+.location-search ul li:first-child {
+    margin-left: 10px;
+}
+.location-search ul li:last-child {
+    max-width: 65%;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.location-search h2 {
+    font-size: 23px;
+	margin-bottom:15px;
+}
+.location-search a {
+    font-size: 16px;
+}
+.location-search form {
+    margin-top: 0;
+}
+.lawyer-listing figure span.lawyer-tag {
+    font-size: 14px;
+    font-weight: 400;
+}
+.lawyer-listing h3 {
+    font-size: 16px;
+}
+
+.lawyer-listing ul li span:after {
+    display:none;
+}
+.lawyer-listing .btn-more {
+    bottom: 25px;
+}
+.lawyer-listing figure .content {
+    padding: 15px;
+}
+
+.lawyer-listing ul.pagination li {
+    width: 12%;
+    margin-top: 5px;
+}
+.location-search ul li {
+    margin-right: 0;
+    max-width: 85%;
+    margin-bottom: 10px;
+}
+.location-search ul li:first-child {
+    margin-left: 0px;
+}
+.location-search ul li:last-child {
+    max-width: 85%;
+    margin-top: 0;
+    margin-left: 0;
+}
+.location-search .col-sm-4:after {
+    height: 280%;
+}
+/******180222********/
+	.main-text.slider-content{top: 14%;}
+	.service-carousel{
+	max-width:80%;	
+	}
+
+.share-content-inner{ margin-top: -105px;}
+
+
+.location-search .col-sm-4:after{ height: 100%; bottom: inherit; top: 0;}
+#profile-detail.owl-theme .owl-controls .owl-page{width:65px; height:65px;}
+.addresscontainer .addresscontent ul li img{max-width:28px;}
+
+}
+@media (max-width:991px){
+	.lawyer-listing.business-listing .aside_sec {
+    width: 100%;
+    max-width: 274px;
+    margin: 30px auto 50px;
+}
+/********180228***********/
+.listing-pageview {
+    padding: 0px;
+}
+    .addresscontainer iframe {
+    min-height: 280px;
+}
+.get-in-touch-list {
+    max-width: 250px;
+    display: block;
+    margin: 0 auto;
+	margin-bottom:30px;
+	padding:0;
+}
+
+
+
+}
+@media only screen and (max-width:850px){
+.grid .owl-prev{ left:0px;}
+.grid .owl-next{ right:0px;}
+section.business-sec.gallery-sec .tab-content{ width: 98%; margin: auto; padding: 0 30px;}
+}
+
+@media only screen and (max-width:767px){
+
+.lawyer-listing ul li {
+    width: auto;
+    margin-top: 5px;
+}
+    .other-accounts .fb-btn, .other-accounts .twitter-btn {
+    width: 100%;
+    margin-bottom: 15px;
+}
+.other-accounts .fb-btn i, .other-accounts .twitter-btn i {
+    width: 80px;
+}
+.form-outer-wrapper .form-container .btn-form {
+    width:100%; 
+}
+.other-accounts .form-separator {
+    padding: 10px 0;
+}
+.form-outer-wrapper .form-container .btn-form {
+    margin-top:20px;
+}
+.other-accounts .form-separator {
+    margin-top: 0px;
+}
+.other-accounts .hr-left {
+    width: 45%;
+}
+
+
+.logo-outr{ width: 100%}
+.navbar-toggle{ background: #fff;}
+.navbar-toggle .icon-bar{background-color: #85c226;}
+.dr-header nav.navbar .collapse, .dr-header nav.navbar .collapsing {
+    padding: 0 15px !important;    position: absolute;    top: 50px;    margin: 0;    padding: 0;    left: 0;    right: 0;
+ background: #85c226; border: none; }
+ .dr-header nav.navbar li a{ color: #fff;}
+  .dr-header nav.navbar  ul{ margin: 0;}
+.dr-header nav.navbar {
+    position: static;
+    bottom: auto;
+    background: transparent;
+    border: none;
+}
+.footer-links.blogs li .left-img{ width: 50px;}   
+.dr-header nav.navbar .collapse.in, .dr-header nav.navbar .collapsing{ position: absolute !important;}
+
+.main-text.slider-content{ width: 100%;}
+.main-text.slider-content{ top: 18%;}
+.banner_sec .carousel-inner .item{ height: 600px;}
+.share-content{ width: 96%; margin: auto; display: inherit;}
+.sec-title{ font-size: 30px;}
+
+/*15-02-18*/
+.business-sec .tab_menu .nav-tabs>li{float:left;}
+.business-sec .nav.nav-tabs{margin-top:10px; }
+section.business-sec.gallery-sec .left-sm-side{
+    padding-right: 5px;
+}
+section.business-sec.gallery-sec .right-sm-side {
+    padding-left: 5px;
+}
+.business-sec .tab-content .col-md-12{margin-bottom:0px;}
+
+
+
+/*180215*/
+
+.blog-form-wrapper {
+    padding: 31px 0 40px;
+}
+.wrap button {
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+}
+.wrap button i{
+    font-size: 14px !important;
+}
+.blog-form-wrapper.create-listing .blog-form-heading {
+    margin-top: 30px;
+}
+
+
+
+
+
+
+/*180216*/
+.border-separator {
+    max-width: 100%;
+}
+.border-separator img {
+	display:initial;
+}
+.youzer-alphabet-y, .youzer-alphabet-a, .youzer-alphabet-u, .youzer-alphabet-z, .youzer-alphabet-e, .youzer-alphabet-r {
+    width: 6%;
+}
+.youzer-alphabet-y::after, .youzer-alphabet-a::after, .youzer-alphabet-u::after, .youzer-alphabet-z::after, .youzer-alphabet-e::after, .youzer-alphabet-r::after {
+    height:75px;
+	left:50px;
+}
+.alphabet-meaning {
+    width: 85%;
+}
+.youzer-defination-cotainer {
+    padding: 40px 20px 0 20px;
+}
+.youzer-details-container h2 {
+    font-size: 20px;
+    color: #222222;
+}
+.defination-separator {
+    margin-top: 10px;
+}
+.youzer-details-container {
+    padding: 45px 40px;
+    margin-top: 30px;
+}
+.blog-post-container {
+    padding: 40px 0px;
+}
+.user-comment-heading {
+    margin-bottom: 0px;
+}
+.border-separator {
+    margin-top: 5px;
+}
+.blog-post-wrapper {
+    padding: 50px 0 60px 0;
+}
+/*180217*/
+.location-search ul li:first-child {
+    margin-left: 15px;
+}
+
+.location-search ul li:last-child {
+    max-width: 94%;
+    margin-top: 15px;
+    margin-left: 15px;
+}
+
+.lawyer-listing figure span.lawyer-tag {
+    font-size: 16px;
+    padding: 5px 15px;
+}
+/******180222********/
+.service-carousel .carousel-inner {
+    max-width: 500px;
+}	
+.main-text.slider-content.banner-form-section {
+    top: 32%;
+}
+
+
+ul.top-social-sec{ text-align: center;}
+.login-sec{ padding-left: 15px; text-align: center;}
+.wanna-text{ display: inline-block; width: auto;}
+.wanna-text a{ display: inline-block; text-align: center;}
+.top-nav-link.text-right{ text-align: center; display: inline-block; width: auto;}
+.log-business{ display: inline-block; width: auto; text-align: center; padding-left: 15px;}
+.location-search .col-sm-4:after{ display: none;}
+
+.inner-pages .dr-header nav.navbar{ background: #85c226;}
+
+}
+
+@media (max-width:767px){
+    
+    .lawyer-listing.business-listing figure img{
+        width: 100%;
+    }.lawyer-listing.business-listing figure img{
+        width: auto;
+    }
+    .col-sm-12.text-center.pagination-ceontent {
+    float: left;
+    width: 100%;
+}
+    
+.inner-pages .dr-header nav.navbar{ background: #85c226;}
+/*.business-banner-inner{padding:50px 15px; min-height:285px;}*/
+    .cstm_banner.business-banner-inner {
+    min-height: 200px;
+    padding: 90px 15px;
+}
+
+/******180228*********/
+.blog-sidebar{
+	margin-top:30px;
+}
+.sideblog-list li {
+    width: 46%;
+    margin: 15px 10px 0px;
+}
+.search-bar{margin-top:15px; width:100%;}
+.location-search ul li{margin-top:15px;}
+.search-bar li .form-group{margin-bottom:15px;}
+.get-in-touch-list {
+	margin-left:0;
+}
+    ul.top-social-sec{
+        display: none;
+}
+    .navbar{
+        min-height: auto;
+    }
+    .navbar-toggle {
+    position: absolute;
+    left: 15px;
+    top: 20px;
+    margin-top: 8px;
+    margin-right: 15px;
+    margin-bottom: 8px;
+    background-color: transparent;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.dr-header nav.navbar .collapse.in, .dr-header nav.navbar .collapsing {
+    position: absolute !important;
+    z-index: 9;
+    top: 136px;
+}
+    .navbar-toggle, .navbar-toggle:focus ,  .navbar-toggle:hover {
+/*    border: 1px solid #8abf1c;*/
+    background: #fff;
+}
+    .dr-header nav.navbar li a {
+    padding: 7px 0;
+    }
+    .dr-header nav.navbar ul {
+    margin: 8px 0;
+}
+    .visible-xs {
+    display: block!important;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+}
+   header.dr-header.sticky {
+    position: fixed;
+    z-index: 999;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+     header.dr-header .login-sec{
+      z-index:0;
+         margin-top: 0px;
+         -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    }
+     header.dr-header.sticky .login-sec{
+      z-index: -1;
+         opacity: 0;
+         margin-top: -50px;
+         -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    }
+     header.dr-header.sticky nav.navbar .collapse.in,  header.dr-header.sticky nav.navbar .collapsing {
+    top: 108px;
+}
+    .form-background{
+        background: none;
+    }
+    .dr-header nav.navbar li a:hover {
+    background: none;
+    color: #285257;
+}
+    .inner-pages .dr-header nav.navbar{
+        position: static;
+    }
+    .addresswrapper p span {
+    width: 75px;
+    display: inline-block;
+}
+    .sideblog-list li figure {
+    float: left;
+    width: 20%;
+}
+    .sideblog-list li figcaption {
+    width: 80%;
+}
+    .lawyer-listing.business-listing ul li, .lawyer-listing.business-listing ul li span {
+    font-size: 13px;
+}
+    .location-search{
+        display: none;
+    }
+    .lawyer-listing.business-listing figure img {
+    width: auto;
+    max-height: 170px;
+    margin: auto;
+    display: block;
+}
+    .lawyer-listing.business-listing .aside_sec a.learn-more {
+    font-size: 14px;
+    padding: 6px 0px;
+    max-width: 126px;
+}
+    .mobile{
+     position: relative;
+    float: left;
+    margin:0 auto 0;
+    display: block;
+    right: 0;
+    width: 100%;
+    }
+    .lawyer-listing.business-listing  .mobile .aside_sec{
+        margin: 20px auto 10px !important;
+    }
+    a.left.carousel-control, a.right.carousel-control{
+        display: none;
+    }
+    #return-to-top i, #return-to-top i:hover, #return-to-top i:focus {
+    font-size: 20px;
+}
+    .service-carousel .owl-next,.service-carousel .owl-prev{
+        width: 25px;
+        height: 25px;
+    }
+    section.yauzer-blog-sec .owl-carousel .owl-nav i {
+    width: 25px;
+    height: 26px;
+    line-height: 25px !important;
+    font-size: 20px !important;
+    text-align: center;
+    padding: 0 4px !important;
+}
+    .service-left figure {
+    width: 56px;
+    height: 56px;
+    }
+    .service-carousel.owl-carousel .owl-item img {
+    width: 30px!important;
+    top: 13px;
+}
+    .services-sec.service2:hover figure img {
+    top: -30px;
+}
+    .services-sec.service1:hover figure img {
+    top: -25px;
+}
+    .services-sec.service3:hover figure img {
+    top: -49px;
+}
+    .service-right-sec p.heading-sec {
+    font-size: 10px;
+}
+    .text-center.heading-text{
+        text-align: left;
+    }
+   .yauzer-blog-sec .sec-title{
+        padding-bottom: 0;
+    }
+    .sec-title , .sec-title span{
+        font-size: 18px;
+        text-align: left;
+    }
+    .sec-title {
+    font-size: 18px !important;
+}
+   
+section.yauzer-blog-sec.dr-find-sec h3 span{
+   display: inline-block !important;font-size: 20px;
+} 
+    .business-sec{
+        padding: 65px 0;
+    }
+    .business-sec .sec-title , .business-sec .sec-title span{
+        font-size:18px;
+        text-align: left;
+    }
+    span.block{
+        font-size: 14px; display: block;
+    }
+    .heading-text hr{
+        display: none;
+    }
+    .business-sec .heading-text h2 {
+        
+    margin-bottom: 10px;
+}
+    .owl-carousel.owl-theme.grid.owl-loaded.owl-drag .col-md-12.col-sm-12.col-xs-6.left-sm-side, .owl-carousel.owl-theme.grid.owl-loaded.owl-drag .col-md-12.col-sm-12.col-xs-6.right-sm-side{
+        width: 50%;
+        float: left
+    }
+    .commentboxlist li{
+        text-align: left;
+    }
+    a.visibile-xs {
+    display: block !important;
+    border: 1px solid;
+    width: 100px;
+    padding: 4px;
+    text-align: center;
+}
+    .table-responsive>.table>tbody>tr>td, .table-responsive>.table>tbody>tr>th, .table-responsive>.table>tfoot>tr>td, .table-responsive>.table>tfoot>tr>th, .table-responsive>.table>thead>tr>td, .table-responsive>.table>thead>tr>th {
+    white-space: nowrap;
+    padding: 0 3px;
+}
+section.business-sec.gallery-sec .tab-content, #blog-carousel{display:none;}
+.business-slider-mobile{display:block; width:100%; overflow-y:hidden; overflow:auto;padding:0 15px 15px;}
+.business-slider-list{display: -webkit-inline-flex; display: inline-flex; list-style:none;}
+.business-slider-list li{-webkit-box-flex: 0 1 auto; -moz-box-flex: 0 1 auto; -webkit-flex: 0 1 auto;-ms-flex: 0 1 auto; flex: 0 1 auto; width: 270px; margin-right: 15px;/*box-shadow: 0 0 3px 0 rgba(0,0,0,.12), 0 1px 3px 0 rgba(0,0,0,.12); */overflow:hidden;}
+.business-slider-list li figcaption{background:#fff; padding:15px;}
+.business-slider-list li figcaption h2{font-size:16px; font-weight:bold; text-align:center; color:#000;}
+.business-slider-list.blog-slider-list li a{box-shadow:none; padding-left:0; margin-top:5px;}
+.business-slider-list.blog-slider-list li .blog-desc{padding:15px;}
+.business-slider-list.blog-slider-list li .blog-desc p{padding-right:0;}
+
+
+}
+@media only screen and (max-width:599px){
+.other-accounts .hr-left {
+    width: 44%;
+}
+.form-outer-wrapper {
+    padding: 20px 40px;
+}
+.form-background-2 .form-outer-wrapper {
+    padding: 20px 40px;
+}
+.form-outer-wrapper .form-container, .form-outer-wrapper .form-container.form-signup {
+    margin-top: 20px;
+}
+.form-background-2 .form-outer-wrapper .form-container.form-signup {
+    padding: 20px;
+}
+
+
+ul.top-social-sec, .top-nav-link.text-right{ text-align: center;}
+.top-header .col-xs-6{width:100%; text-align: center; float: none; display: inline-block;}
+
+.slider-content h3{ font-size: 20px;}
+.slider-content h2{ font-size: 32px;}
+.banner_sec .carousel-control {    width: 34px;    height: 34px;    line-height: 39px}
+a.left.carousel-control i {    left: -2px;    position: relative;}
+a.right.carousel-control i {    right: -2px;    position: relative;}
+.share-content-inner{ margin-top: -60px;}
+.banner_sec .carousel-inner .item{ height: 510px;}
+.share-content-inner p{ font-size: 20px;}
+
+.business-sec .tab-content figure{width:98%;}
+/*15-02-18*/
+.grid .owl-prev, .grid .owl-next{height:60px; line-height:60px; width:32px;}
+.business-sec .owl-theme .owl-dots {display:block; position:relative; top:10px;}
+.business-sec .owl-theme .owl-nav{display:none;}
+section.business-sec.gallery-sec .read-btn{margin-top:20px;}
+.sec-title{font-size:24px;}
+#return-to-top{height:24px; width:24px;}
+#return-to-top i, #return-to-top i:hover, #return-to-top i:focus {font-size:22px; top:0px; left:5px;}
+.gallery-hover-content .inner-content h2{font-size:16px; max-width:80%; margin:auto; margin-bottom:10px; word-wrap:break-word;}
+
+/*180215*/
+.blog-form-submit {
+    width: 100%;
+    margin-bottom: 20px;
+}
+.blog-form-cancel {
+    width: 100%;
+    margin-left: 0px;
+}
+.wrap select {
+    margin-bottom: 5px;
+}
+.blog-form-wrapper.create-listing .wrap {
+    margin-bottom: 30px;
+}
+
+
+
+
+/*180216*/
+.blog-post-container {
+    padding: 40px 0px;
+}
+.blog-post-text {
+    padding: 20px 0 0px 0;
+}
+.youzer-alphabet-y::after, .youzer-alphabet-a::after, .youzer-alphabet-u::after, .youzer-alphabet-z::after, .youzer-alphabet-e::after, .youzer-alphabet-r::after {
+    height: 70px;
+    left: 40px;
+}
+.alphabet-meaning {
+    width: 84%;
+}
+.youzer-details-container {
+    padding: 30px 20px;
+    margin-top: 0px;
+}
+
+.comment-separator {
+    margin: 30px 0 20px 0;
+}
+.blog-post-wrapper {
+    padding: 50px 0 50px 0;
+}
+.youzer-defination-cotainer {
+    padding: 40px 20px 0 0px;
+}
+/*180217*/
+.location-search ul li {
+    width: 100%;
+    margin: 0;
+	max-width:100%;
+}
+.location-search ul li:first-child {
+    margin-left: 0;
+}
+.location-search ul li:last-child {
+    max-width: 100%;
+    margin-top: 0;
+    margin-left: 0;
+}
+/******180222********/
+.service-carousel .carousel-inner {
+    max-width: 400px;
+}
+ .service-carousel .owl-prev {
+    left: -30px;		
+}
+.service-carousel .owl-next{
+	right: -30px !important;
+}
+/******180228*********/
+.sideblog-list li {
+    margin: 15px 8px 0px;
+}   
+}
+
+
+
+@media (max-width:480px) {
+     .banner_sec .carousel-inner .item {
+    height: 463px;
+}
+    .other-accounts .hr-left {
+    width: 43%;
+}
+.form-background .col-md-offset-3.col-md-6.col-sm-offset-2.col-sm-8.col-xs-offset-1.col-xs-10, .form-background-2 .col-md-offset-3.col-md-6.col-sm-offset-2.col-sm-8.col-xs-offset-1.col-xs-10 {
+    width:100%;
+    margin:0;
+}
+    .form-outer-wrapper {
+    padding: 15px 15px;
+}
+.form-outer-wrapper .form-container, .form-outer-wrapper .form-container.form-signup {
+    padding: 15px 15px;
+}
+.form-background-2 .form-outer-wrapper {
+    padding: 15px 15px;
+}
+.form-background-2 .form-outer-wrapper .form-container.form-signup {
+    padding: 15px;
+}
+.padding0 {
+    padding: 0 15px;
+}
+
+a.left.carousel-control, a.right.carousel-control{ top: inherit; bottom: 90px;}
+.banner-form{ width: 85%;}
+.slider-content h2{ font-size: 28px;}
+.slider-content h3{ font-size: 17px;}
+a.left.carousel-control{ left: 35%;}
+a.right.carousel-control{ right: 35%;}
+.read-btn{ font-size: 20px;padding:6px 35px;}
+.share-content-inner{ padding: 30px 11px 40px;}
+.find-inner-sec .sub-heading{ padding: 0;}
+
+.grid .owl-prev, .grid .owl-next{top:34%;}
+
+.gallery-hover-content .inner-content h2{font-size:13px;}
+
+
+/*180215*/
+.blog-form-heading h2 {
+    font-size: 20px;
+    color: #222222;
+}
+.blog-form-container label {
+    font-size: 16px;
+}
+.blog-form-container .file-upload {
+    margin-top: 0px;
+}
+.blog-form-container {
+    padding: 15px;
+}
+.blog-form-container .form-input {
+    padding: 0 15px;
+}
+.blog-form-container .upload-absolute {
+    left: 15px;
+}
+.blog-form-container .file-upload {
+    width: 100px;
+	font-size:12px;
+}
+.blog-form-container #fileuploadurl {
+    font-size: 12px;
+    margin-left: 10px;
+}
+.blog-form-container .upload-absolute {
+    top: 9px;
+}
+.blog-form-container .btn.dropdown-toggle.btn-default, .blog-form-container .btn.dropdown-toggle.btn-default:focus {
+    padding: 0 15px;
+}
+#color {
+	width:120px;
+}
+#fonts {
+    width: 120px;
+}
+.blog-form-container .upload-absolute-2 {
+    top: 41px;
+	left:15px;
+}
+/*180216*/
+.comment-detail {
+    width: calc(100% - 55px);
+}
+.user-image {
+    margin-right: 10px;
+}
+.blog-post-heading h3 {
+    font-size: 20px;
+}
+.user-image {
+    width: 45px;
+    height: 45px;
+}
+.user-comment-heading h3, span 
+    {
+    font-size: 14px;
+}
+.user-comment-heading {
+    position: relative;
+    margin-bottom: 10px;
+}
+.user-comment-container .padding0 {
+	padding:0;
+}
+.blog-post-container .padding0 {
+	padding:0;
+}
+.youzer-alphabet-y::after, .youzer-alphabet-a::after, .youzer-alphabet-u::after, .youzer-alphabet-z::after, .youzer-alphabet-e::after, .youzer-alphabet-r::after {
+    height: 60px;
+    left: 30px;
+}
+.blog-post-image {
+    min-height: 250px;
+}
+.blog-post-wrapper {
+    padding: 30px 0 30px 0;
+}
+.blog-post-container {
+    padding: 30px 0px;
+}
+.blog-post-image {
+	margin-top:20px;
+}
+.youzer-alphabet-y, .youzer-alphabet-a, .youzer-alphabet-u, .youzer-alphabet-z, .youzer-alphabet-e, .youzer-alphabet-r {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.youzer-alphabet-y::after, .youzer-alphabet-a::after, .youzer-alphabet-u::after, .youzer-alphabet-z::after, .youzer-alphabet-e::after, .youzer-alphabet-r::after {
+    left: 0;
+    height: 1px;
+    width: 100%;
+    top: 100px;
+}
+.alphabet-meaning {
+    width: 100%;
+	margin:0
+}
+.defination-separator {
+    margin-top: 10px;
+    display: none;
+}
+.youzer-defination-cotainer {
+	padding-right:0px;
+}
+/*180217*/
+.location-search ul li input[type=submit] {
+    background-position: 58% 56%;
+}	
+	/********180222*******/
+
+	.service-carousel .carousel-control{
+		top:100% !important;
+	}
+	.service-carousel a.left.carousel-control {
+		left: 25%;
+	}
+	.service-carousel a.right.carousel-control {
+    right: 25%;
+}
+	.create-basicmodal .modal-social-icons ul li a {
+	   width: 45px;
+    height: 45px;
+    line-height: 45px;
+	}
+	.padding0 {
+    padding: 0;
+}
+    
+  
+    .col-xs-6{
+        width: 100%;
+    }
+    .lawyer-listing .btn-more {
+    bottom: 15px;
+}
+.commentbox{text-align:center;}
+.yauzeredtime{    
+    width: 260px;
+    margin: 10px auto;
+    text-align: center;
+    display: inline-block;
+}
+.commentbox .yauzeredtime-status{float:none;}
+/*.commentboxlist figure{float:none; margin:0 auto 10px;}*/
+/******180228*********/
+.sideblog-list li {
+    width: 100%;
+    margin: 15px 0px 0px;
+}
+      .bottom-footer {
+    font-size: 10px;
+}
+    .log-business {
+    font-size: 17px;
+    }
+   
+}
+@media (max-width:400px) {
+.main-text.slider-content{ top: 13%;}
+.banner-form{ width: 95%}
+.slider-content h2{ font-size: 20px;}
+.share-content-inner p{ font-size: 16px;}
+.share-content-inner {    padding: 18px 11px 25px;}
+.read-btn{ font-size: 18px;}
+
+.grid .owl-prev, .grid .owl-next{top:32%;}
+
+/*180216*/
+.blog-post-heading h3 {
+    font-size: 16px;
+}
+.blog-post-heading ul li {
+    font-size: 12px;
+}
+.user-image {
+    width: 30px;
+    height: 30px;
+}
+.comment-detail {
+    width: calc(100% - 40px);
+}
+.comment-separator {
+    margin: 25px 0;
+}
+.alphabet-meaning {
+    width: 76%;
+}
+.blog-post-image {
+    min-height: 200px;
+}
+.youzer-alphabet-y::after, .youzer-alphabet-a::after, .youzer-alphabet-u::after, .youzer-alphabet-z::after, .youzer-alphabet-e::after, .youzer-alphabet-r::after {
+    height: 1px;
+    left: 0;
+}
+.alphabet-meaning {
+    width: 100%;
+}
+/*180217*/
+.location-search ul li input[type=submit] {
+    background-position: 62% 56%;
+}
+.main-text.slider-content.banner-form-section {
+    top: 25%;
+}
+
+
+.log-business{ width:100%; text-align: center; padding-top: 10px;}
+.log-business{ width:100%; text-align: center; padding-top: 10px;}
+
+/*******180228*********/
+#profile-detail.owl-theme .owl-controls .owl-page {
+    width: 60px;
+    height: 60px;
+}
+}
+@media (max-width:375px){
+   
+   a.logo {
+    max-width: 160px;
+    display: block;
+    margin: auto;
+}
+    header.dr-header.sticky nav.navbar .collapse.in, header.dr-header.sticky nav.navbar .collapsing {
+    top: 98px;
+}
+}
+@media (max-width:370px){
+  
+}

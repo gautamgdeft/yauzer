@@ -12,7 +12,7 @@ class Yauzer extends Model
      * @var array
      */
     protected $fillable = [
-        'business_id', 'user_id', 'yauzer', 'rating', 'status',
+        'business_id', 'user_id', 'yauzer', 'rating', 'ip_address', 'status',
     ];
 
     /**

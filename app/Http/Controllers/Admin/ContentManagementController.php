@@ -182,16 +182,18 @@ public function store_slider_image(Request $request)
 {
 
   $validatedData = $request->validate([
-    'image_alt_text' => 'required|string',
-    'description'    => 'required|string',
-    'avatar'         => 'image:jpg,png,jpeg,gif|unique:sliderimages'
+    'image_alt_text'    => 'required|string',
+    'h2_description'    => 'required|string',
+    'h3_description'    => 'required|string',
+    'avatar'            => 'image:jpg,png,jpeg,gif|unique:sliderimages'
   ]);
 
         //Storing SliderImages
   $sliderImage = SliderImage::create(
    array(
     'image_alt_text' => $request->input('image_alt_text'),                  
-    'description'    => $request->input('description'),                  
+    'h2_description'    => $request->input('h2_description'),
+    'h3_description'    => $request->input('h3_description'),                  
   ));
 
          //Saving Slider-Image Avatar
@@ -262,13 +264,15 @@ public function update_slider_image(Request $request, $slug)
 
  $validatedData = $request->validate([
    'image_alt_text' => 'required|string',
-   'description'    => 'required|string',
+   'h2_description'    => 'required|string',
+   'h3_description'    => 'required|string',
    'avatar'         => 'image:jpg,png,jpeg,gif|unique:sliderimages'
  ]);
 
 
  $sliderImage->image_alt_text = $request->input('image_alt_text');
- $sliderImage->description    = $request->input('description');
+ $sliderImage->h2_description    = $request->input('h2_description');
+ $sliderImage->h3_description    = $request->input('h3_description');
  $sliderImage->save();
 
  if($request->hasFile('avatar'))

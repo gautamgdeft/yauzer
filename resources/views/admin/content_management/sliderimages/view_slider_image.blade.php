@@ -28,9 +28,15 @@
                      </tr>
 
                      <tr>
-                        <th scope="row">Description</th>
-                        <td>{{ $sliderImage->description }}</td>
+                        <th scope="row">H2 Description</th>
+                        <td>{{ $sliderImage->h2_description }}</td>
+                     </tr> 
+
+                     <tr>
+                        <th scope="row">H3 Description</th>
+                        <td>{{ $sliderImage->h3_description }}</td>
                      </tr>
+
 
                   </table>
 

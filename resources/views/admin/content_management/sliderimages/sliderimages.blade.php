@@ -37,10 +37,11 @@
               <table class="table table-hover table-bordered">
                   <thead>
                      <tr>
-                        <th class="no-sort">Image</th>
-                        <th class="no-sort">Description</th>
-                        <th class="no-sort">Status</th>
-                        <th class="no-sort">Action</th>
+                        <th>Image</th>
+                        <th>H2 Description</th>
+                        <th>H3 Description</th>
+                        <th>Status</th>
+                        <th>Action</th>
                      </tr>
                   </thead>
                   <tbody>
@@ -48,7 +49,8 @@
                   	 @foreach($sliderImages as $loopingSliderImages)
                      <tr class="tr_{{ $loopingSliderImages->id }}">
                         <td><img id="image_src" class="" src="/uploads/sliderAvatars/{{ $loopingSliderImages->avatar }}" style="height: 45px; width: 150px;"></td>
-                        <td>{{ $loopingSliderImages->description }}</td>
+                        <td>{{ $loopingSliderImages->h2_description }}</td>
+                        <td>{{ $loopingSliderImages->h3_description }}</td>
                         <td>
                           <button id="active_{{ $loopingSliderImages->id }}" class="btn btn-success btn-flat active_slide_image @if($loopingSliderImages->status == '0') hide @endif" data-id="{{ $loopingSliderImages->id }}" data-toggle="tooltip" title="Click to Inactive">Active</button>
 
@@ -65,14 +67,6 @@
                      @endif
                      
                   </tbody>
-                  <tfoot>
-                     <tr>
-                        <th>Image</th>
-                        <th>Description</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                     </tr>
-                  </tfoot>
                </table>
             </div>
             <div class="box-footer clearfix">

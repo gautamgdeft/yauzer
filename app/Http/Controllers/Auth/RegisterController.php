@@ -6,6 +6,14 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
+use Mail;
+use App\Mail\WelcomeMail;
+use App\Mail\NewRegisterationMail;
+use App\Mail\VerifyMail;
+
 
 class RegisterController extends Controller
 {
@@ -62,10 +70,59 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'token' => str_random(40),
+
         ]);
+
+       //Assigning Role to Users
+        $user->assignRole($data['role']);
+        return $user;
     }
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        //Sending-User-Welcome-Email-With-Verification-Link 
+         \Mail::to($request->input('email'))->send(new VerifyMail($user));
+        
+        //Sending-Admin-New-User-Email-Registered
+         \Mail::to('teamphp00@gmail.com')->send(new NewRegisterationMail($user));
+
+        return redirect('login')->with("success","We sent you an activation code. Check your email and click on the link to verify");   
+
+        #$this->guard()->login($user);
+        #return $this->registered($request, $user)
+                        #?: redirect($this->redirectPath());
+    }
+
+
+    public function verifyUser($token)
+    {
+        $user = User::where('token', $token)->first();
+        if(isset($user) ){
+         
+            if($user->registeration_status != 1) {
+             $user->registeration_status = 1;
+             $user->login_status = 1;
+             $user->save();
+             $status = "Your e-mail is verified. You can now login.";
+            
+            }else{
+            $status = "Your e-mail is already verified. You can now login.";
+            }
+
+        }else{
+        return redirect('login')->with('danger', "Sorry your email cannot be identified.");
+        }
+
+        return redirect('login')->with('success', $status);
+    }
+
 }

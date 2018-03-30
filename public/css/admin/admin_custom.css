@@ -567,6 +567,15 @@ ul.speciality_checks li:nth-child(7) {
    height: inherit;
    margin: 0px;
 }
+
+.rating-container .caption .label.label-info {
+    background-color: #5bc0de;
+    border: none;
+    background-image: none;
+    box-shadow: none; color:#fff !important;
+}
+
+
 /********Media Query***************/
 @media screen and (max-width: 599px){
   .hours ul.open-down .input-group .input-small{

@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'city', 'state', 'zipcode', 'country', 'address', 'phone_number', 'age', 'login_status', 'registeration_status',
+        'name', 'email', 'password', 'city', 'state', 'zipcode', 'country', 'address', 'phone_number', 'age', 'login_status', 'registeration_status','token',
     ];
 
     /**
@@ -92,14 +92,28 @@ class User extends Authenticatable
 
      public function isUser() 
      {
+        foreach ($this->roles()->get() as $role)
+        {
+            if ($role->name == 'user')
+            {
+                return true;
+            }
+        }
 
-        return $this->hasRole('user'); // ?? something like this! should return true or false
+        return false;
      }
 
      public function isOwner() 
      {
+        foreach ($this->roles()->get() as $role)
+        {
+            if ($role->name == 'owner')
+            {
+                return true;
+            }
+        }
 
-        return $this->hasRole('owner'); // ?? something like this! should return true or false
+        return false;
      }
 
 
@@ -108,7 +122,7 @@ class User extends Authenticatable
       */
      public function hasRole($check)
      {
-         return in_array($check, array_fetch($this->roles->toArray(), 'name'));
+         return in_array($check, array_fetch($this->roles->first()->toArray(), 'name'));
 
      }
 

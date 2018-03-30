@@ -11,15 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+//Backend-Admin-Routes
 
 Route::prefix('admin')->group(function()
 {	
@@ -148,9 +143,6 @@ Route::prefix('admin')->group(function()
     //Seperate For Business-Listing-Edit-Info-Tab-Routes
     Route::post('/update-business-main-info/{slug}', 'Admin\BusinessInfoController@update_main_info')->name('admin.update_main_info');                   
 
-
-
-
  //Content-Management-Routes Starts
 
     //Manage-Pages-Routes
@@ -219,3 +211,35 @@ Route::prefix('admin')->group(function()
     Route::get('/business-listing-export', 'Admin\ReportManagementController@business_export')->name('admin.business_export');
     Route::get('/yauzer-export', 'Admin\ReportManagementController@yauzer_export')->name('admin.yauzer_export');
 });
+
+
+
+//Frontend-User-Routes
+Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
+Route::get('/', 'User\WelcomeController@index')->name('home.welcome');
+
+//Only-Auth-With-All-Role-Routes
+Route::group(['middleware' => ['auth']], function () {
+
+ Route::get('/home', 'User\HomeController@index')->name('user.home');
+
+});
+
+//Only-Auth-With-User-Role-Routes
+Route::group(['middleware' => ['auth', 'user']], function () {
+
+ Route::get('/yauzer-a-business', 'User\BusinessController@yauzer_business')->name('user.yauzer_business');
+ Route::post('/yauzer-a-business', 'User\BusinessController@save_yauzer')->name('user.save_yauzer');
+ Route::post('/check-business', 'User\BusinessController@check_business')->name('user.check_business');
+ Route::post('/get-business-subcategory', 'User\BusinessController@get_subcategory')->name('user.get_subcategory'); 
+ Route::post('/checkemail', 'User\BusinessController@check_email')->name('user.checkEmail');
+ Route::get('/user-dashboard', 'User\BusinessController@user_dashboard')->name('user.dashboard');
+
+}); 
+
+//Only-Auth-With-Owner-Role-Routes
+Route::group(['middleware' => ['auth', 'owner']], function () {
+
+
+});    
+
