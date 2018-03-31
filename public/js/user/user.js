@@ -15,11 +15,11 @@ $(document).ready(function()
 	
 setTimeout(function() {
 $('.alert-success').fadeOut('fast');
-}, 5000); 
+}, 8000); 
 
 setTimeout(function() {
 $('.alert-danger').fadeOut('fast');
-}, 5000); 
+}, 8000); 
 
 
 $('[data-toggle="tooltip"]').tooltip(); 
@@ -182,6 +182,7 @@ rules: {
       },
 
       "website": {
+          noSpace: true,
           url: true,
       },
 
@@ -257,17 +258,16 @@ rules: {
   {
         $('#business_name').removeClass('hide');
         $('#category').removeClass('hide');
-        $('#subcategory').removeClass('hide');
-        $('#name').val(' ');
-        $('#address').prop('disabled', false).val(' ');
-        $('#city').prop('disabled', false).val(' ');
-        $('#state').prop('disabled', false).val(' ');
-        $('#zipcode').prop('disabled', false).val(' ');
-        $('#phone_number').prop('disabled', false).val(' ');
-        $('#website').prop('disabled', false).val(' ');
-        $('#email').prop('disabled', false).val(' ');
-        $('#yauzer').prop('disabled', false).val(' ');
-        $('#store_yauzer_btn').prop('disabled', false).val(' ');     
+        $('#name').val('');
+        $('#address').prop('disabled', false).val('');
+        $('#city').prop('disabled', false).val('');
+        $('#state').prop('disabled', false).val('');
+        $('#zipcode').prop('disabled', false).val('');
+        $('#phone_number').prop('disabled', false).val('');
+        $('#website').prop('disabled', false).val('');
+        $('#email').prop('disabled', false).val('');
+        $('#yauzer').prop('disabled', false).val('');
+        $('#store_yauzer_btn').prop('disabled', false).val('');     
 
   }else{ 
   
@@ -356,6 +356,7 @@ $('#business_category').on('change', function()
             if(response.status == 'success') 
             {
               $(response.businessSubcategories).each(function(){
+               $('#subcategory').removeClass('hide'); 
                $('#business_subcategory').append("<option value='"+ this.id +"'>"+ this.name +"</option>");
               });
             }else{

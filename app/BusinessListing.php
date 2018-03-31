@@ -11,7 +11,7 @@ class BusinessListing extends Model
     use Sluggable;
     use SluggableScopeHelpers;
 
-    protected $fillable = ['name', 'address', 'city', 'state', 'zipcode', 'country', 'phone_number', 'avatar', 'website', 'latitude', 'longitude', 'user_id', 'email', 'business_category', 'business_subcategory'];
+    protected $fillable = ['name', 'address', 'city', 'state', 'zipcode', 'country', 'phone_number', 'avatar', 'website', 'latitude', 'longitude', 'user_id', 'added_by', 'email', 'business_category', 'business_subcategory'];
 
     protected $hidden = [
         'latitude', 'longitude',
@@ -21,6 +21,12 @@ class BusinessListing extends Model
     public function user()
     {
      return $this->belongsTo('App\User');
+    }     
+
+    #Relation with User
+    public function business_added_by()
+    {
+     return $this->belongsTo('App\User', 'added_by');
     }    
 
     #Relation with Business-Category

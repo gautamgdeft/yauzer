@@ -57,6 +57,7 @@
                      <tr>
                         <th>Name</th>
                         <th>Business Owner</th>
+                        <th>Business Added By</th>
                         <th>Email</th>
                         <th class="no-sort">Image</th>
                         <th class="no-sort">Status</th>
@@ -68,7 +69,8 @@
                      @foreach($business_listing as $loopinglistings)
                      <tr class="tr_{{ $loopinglistings->id }}">
                         <td>{{ $loopinglistings->name }}</td>
-                        <td>@if(@sizeof($loopinglistings->user)) <a data-toggle="tooltip" title="View Owner" href="{{ route('admin.show_owner',['slug' => $loopinglistings->user->slug]) }}">{{ $loopinglistings->user->name }}</a> @else Deleted User @endif</td>
+                        <td>@if(@sizeof($loopinglistings->user)) <a data-toggle="tooltip" title="View Owner" href="{{ route('admin.show_owner',['slug' => $loopinglistings->user->slug]) }}">{{ $loopinglistings->user->name }}</a> @else No Owner Yet @endif</td>
+                        <td>@if(@sizeof($loopinglistings->business_added_by)) <a data-toggle="tooltip" title="View User" href="{{ route('admin.show_owner',['slug' => $loopinglistings->business_added_by->slug]) }}">{{ $loopinglistings->business_added_by->name }}</a> @else No User @endif</td>
                         <td>{{ $loopinglistings->email }}</td>
                         <td><img id="image_src" class="img-circle" src="/uploads/businessAvatars/{{ $loopinglistings->avatar }}" style="height: 45px; width: 45px;"></td>
                         <td>

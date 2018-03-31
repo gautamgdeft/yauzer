@@ -34,7 +34,12 @@
 
                      <tr>
                         <th scope="row">Business Owner</th>
-                        <td>{{ $businessListing->user->name }}</td>
+                        <td>@if(@sizeof($businessListing->user)){{ $businessListing->user->name }}@else No Owner Yet @endif</td>
+                     </tr>                      
+
+                     <tr>
+                        <th scope="row">Business Added By</th>
+                        <td>@if(@sizeof($businessListing->business_added_by)){{ $businessListing->business_added_by->name }}@else No User Yet @endif</td>
                      </tr>                         
                       
                      <tr>

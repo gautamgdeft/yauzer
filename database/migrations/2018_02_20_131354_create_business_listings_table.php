@@ -15,7 +15,8 @@ class CreateBusinessListingsTable extends Migration
     {
         Schema::create('business_listings', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_id')->unsigned()->default(0);
+            $table->integer('added_by')->unsigned();
             $table->string('email')->unique();
             $table->string('name');
             $table->string('business_category')->nullable();

@@ -16,17 +16,18 @@ public $user;
 */
 public function __construct($user)
 {
-$this->user = $user;
+ $this->user = $user;
 }
 /**
 * Build the message.
 *
 * @return $this
 */
-    public function build()
-    {
-    return $this->view('user.emails.verifyUser');
-    }
+	
+public function build()
+{
+  return $this->view('user.emails.verifyUser');
+}
 
 
 }
