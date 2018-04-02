@@ -26,6 +26,7 @@ use Session;
 use Hash;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
+use App\Mail\BusinessStatusMail;
 
 class BusinessListingController extends Controller
 {
@@ -71,11 +72,16 @@ class BusinessListingController extends Controller
               {
               	$businessListing->status  = true;
               	$businessListing->save();
+
+                #Business-Approval-Email
+                \Mail::to($businessListing->business_added_by->email)->send(new BusinessStatusMail($businessListing));
               	return response(['msg' => 'Business status has been approved successfully', 'status' => 'success']); 
               	
               }else{
               	$businessListing->status  = false;
               	$businessListing->save();
+                #Business-Rejected-Email
+                \Mail::to($businessListing->business_added_by->email)->send(new BusinessStatusMail($businessListing));
               	return response(['msg' => 'Business status has been rejected successfully', 'status' => 'declined']); 
               }	
     	 }

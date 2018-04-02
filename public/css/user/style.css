@@ -929,7 +929,7 @@ overflow: hidden;}
 .blog-form-wrapper {
     float: left;
     width: 100%;
-    padding: 51px 0 60px;
+    padding: 51px 0 0px;
     background: #f3f3f3;
 }
 .blog-form-heading {
@@ -958,6 +958,7 @@ overflow: hidden;}
 	box-shadow: none;
 	border: 1px solid #d6d6d6;
 	padding:0 30px;
+    font-weight: 400 !important;
 }
 .blog-form-container label {
     width: 100%;
@@ -981,7 +982,7 @@ overflow: hidden;}
 	background:#ffffff;
 }
 .blog-form-submit {
-	    width: 130px;
+	width: 130px;
     height: 40px;
     background: #a6ce39;
     border-radius: 50px;
@@ -1015,6 +1016,8 @@ overflow: hidden;}
 }
 .blog-form-button-container {
 	margin-top:30px;
+    float: left;
+    width: 100%;
 }
 .add-more {
 	margin-bottom:30px;
@@ -2178,4 +2181,215 @@ ul.yauzeredtime-status li {
 .rating-stars .empty-stars span{ color: #aaa !important; }
 .rating-stars .filled-stars span{ color: #fde16d !important; }
 .rating-container .caption .label{color: #fff;}
+/****180402******/
+.error {
+    color: #a94442 !important;
+    font-size: 13px !important;
+    position: absolute;
+    left: 25px;
+    bottom: 0;
+}
+.blog-form-container .form-group .chosen-container-multi {border-radius: 50px;border: 1px solid #d6d6d6;overflow: visible;
+background: transparent;padding: 0px 20px; }
+.blog-form-container .chosen-container-active .chosen-choices{
+    border: 1px solid #d6d6d6; 
+    border-radius: 50px;
+}
+.blog-form-container .form-group .chosen-container-multi .chosen-choices {line-height: 50px;font-size: 14px;
+color: #555;background: #fff;box-shadow: none;border: none;padding: 0px 10px;  overflow: visible; }
+.blog-form-container .form-group .chosen-container-multi .chosen-choices  li span{color: inherit;}
+#yauzer_business .chosen-container-multi .chosen-choices li.search-choice{margin: 13px 5px 3px 0;}
+#yauzer_business .chosen-container-multi .chosen-choices li.search-field input[type=text]{font-family: 'Lato', sans-serif;}
+ul.user-login #image_src {
+    width: 25px !important;
+    height: 25px !important;
+}
+ul.user-login li a.dropdown-toggle{
+    display: inline-block;
+    vertical-align: middle;
+}
+ul.user-login li ul.dropdown-menu{
+    min-width: 270px;
+    text-align: center;
+    padding: 0px 0px 10px;
+    border-radius: 0px;
+    left: -25px;
+}
+ul.user-login li ul.dropdown-menu li{
+    display: inline-block;
+    width: auto;
+   padding: 0px 1px;
+}
+ul.user-login li ul.dropdown-menu li.user-header{
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    background-color: #333333 !important;
+    text-align: center;
+    margin-bottom: 10px;
+}
+ ul.user-login li ul.dropdown-menu li.user-header img{
+    z-index: 5;
+    height: 90px;
+    width: 90px;
+    border: 8px solid;
+    border-color: transparent;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+ul.user-login li ul.dropdown-menu li.user-header > p {
+    z-index: 5;
+    color: #f9f9f9;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 15px;
+    text-shadow: 2px 2px 3px #333333;
+    margin-top: 10px;
+}
+ul.user-login li ul.dropdown-menu li a{
+    font-size: 12px;
+    background: #85c226;
+    color: #fff;
+    border-color: #85c226;
+    padding: 6px 10px;
+    border-radius: 0px;
+}
+ul.user-login li ul.dropdown-menu li a:hover{
+    background: #629119;
+    color: #fff;
+    border-color: #629119;
+}
+ul.user-login li ul.dropdown-menu li:first-child {
+    padding-left: 0px;
+}
+ul.user-login li ul.dropdown-menu li:last-child{
+    padding-right: 0px;
+}
+/*******user-dashboard-css*******/
+/* Profile container */
+.profile {
+  margin: 20px 0;
+}
 
+/* Profile sidebar */
+.profile-sidebar {padding: 20px 0 10px 0;background: #fff;}
+.profile-userpic img {float: none;margin: 0 auto;width: 50%;height: 50%;-webkit-border-radius: 50% !important;
+-moz-border-radius: 50% !important;border-radius: 50% !important;}
+.profile-usertitle {text-align: center;margin-top: 20px;}
+.profile-usertitle-name {color: #5a7391;font-size: 16px;font-weight: 600;margin-bottom: 7px;}
+.profile-usertitle-job {text-transform: uppercase;color: #5b9bd1;font-size: 12px;font-weight: 600;
+margin-bottom: 15px;}
+.profile-userbuttons {text-align: center;margin-top: 10px;}
+.profile-userbuttons .btn {text-transform: uppercase;font-size: 11px;font-weight: 600;padding: 6px 15px;
+margin-right: 5px;}
+.profile-userbuttons .btn:last-child {margin-right: 0px;}    
+.profile-usermenu {margin-top: 30px;}
+.profile-usermenu ul li {border-bottom: 1px solid #f0f4f7;}
+.profile-usermenu ul li:last-child {border-bottom: none;}
+.profile-usermenu ul li a {color: #93a3b5;font-size: 14px;font-weight: 400;}
+.profile-usermenu ul li a i {margin-right: 8px;font-size: 14px;}
+.profile-usermenu ul li a:hover {background-color: #fafcfd;color: #5b9bd1;}
+.profile-usermenu ul li.active {border-bottom: none;}
+.profile-usermenu ul li.active a {color: #5b9bd1;background-color: #f6f9fb;border-left: 2px solid #5b9bd1;margin-left: -2px;}
+/* Profile Content */
+.profile-content {padding: 20px 20px 50px;background: #fff;min-height: 460px;}
+.profile{display: inline-flex;width: 100%;}
+.profile-sidebar{height: 100%;}
+.profile-userpic img{border: 1px solid #ccc;}
+.profile-usertitle .profile-usertitle-name{color: #84c225;}
+.profile-sidebar .profile-usermenu ul li.active a {color: #84c225;background-color: #f6f9fb;border-left: 2px solid #84c225;}
+.profile-sidebar .profile-usermenu ul li a:hover {color: #84c225;}
+.profile-content h4.title {font-size: 24px;color: #222222;width: 100%;padding-bottom: 15px;margin-bottom: 15px; border-bottom: 1px solid #ccc;}
+.profile-content form .form-group label{width: 100%;margin-bottom: 5px;color: #222222;font-size: 15px;}
+.profile-content form .form-group .form-control{font-family: 'Lato', sans-serif;height: 40px;
+border-radius: 40px;box-shadow: none;border: 1px solid #d6d6d6;padding: 0 30px;font-weight: 400 !important;}
+.profile-content form  input#avatar {padding-top: 8px;}
+.profile-content form img#image_src {margin-top: 20px;border: 1px solid #ccc;}
+.profile-content form button.btn,.modal-footer .btn {float: left;min-width: 130px;color: #fff;background-color: #84c225;border-color: #84c225;display: inline-block;height: 40px;line-height: 40px;font-size: 18px;padding: 0px;text-align: center;border-radius: 50px;}
+.profile-content form button.btn:hover,.modal-footer .btn:hover{background: #ffffff;border: 1px solid #a6ce39;color: #a6ce39;}
+.page-header{font-size: 24px;color: #222222;width: 100%;padding-bottom: 15px;margin-bottom: 15px; border-bottom: 1px solid #ccc;margin: 0px;width:100%;}
+.page-header small {
+    font-size: 13px;
+    line-height: 24px;
+}
+.profile-content .media {
+    width: 100%;
+    display: inline-block;
+    margin-top: 20px;
+}
+.profile-content .media  a.media-left {
+    width: 20%;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+}
+.profile-content .media  a.media-left .img-circle{
+    width: 110px;
+    height: 110px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+
+}
+.profile-content .media  .media-body{
+    position: relative;
+    width: 79%;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    padding: 30px 20px;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    font-size: 14px;
+    line-height: 20px;
+    margin: 5px 0px;
+}
+.profile-content .media  .media-body small.edit-text {
+    position: absolute;
+    right: 20px;
+    top: 5px;
+    font-size: 20px;   
+}
+.profile-content .media  .media-body small.edit-text i{
+    color: #222222;
+}
+.profile-content .media  .media-body small.edit-text i:hover{
+    color: #84c225;
+}
+.profile-content .media  .media-body .media-heading{
+    font-size: 18px;
+    color: #222222;
+    font-weight: 600;
+}
+.profile-content .media .media-body .pull-right i {
+    margin-right: 5px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.modal-header{
+    background-color: #333333;
+    color: #84c225;
+    font-size: 20px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+.modal-header .close {
+    color: #84c225;
+    opacity: 1;
+    text-shadow: none;
+    font-size: 30px !important;
+}
+.modal-header .close:hover{
+    border: none;
+}
+#yauzer_div textarea.form-control{
+  border-radius: 0px;
+  padding: 10px;
+  min-height: 120px;
+  resize: none;
+}
+.modal-open { overflow: hidden; position: relative; left: -8px; }
+#yauzer_div .rating-stars .form-control{border: none;}
+.modal-footer{margin-top: 0px;}

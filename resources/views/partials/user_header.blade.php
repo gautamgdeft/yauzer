@@ -30,19 +30,23 @@
             <div class="col-sm-4 col-xs-12 pull-right login-sec">
                <div class="wanna-text"><a href="javascript:;"> Wanna Yauz?  </a></div>
                <div class="top-nav-link text-right">
-                  <ul>
+                  <ul class="user-login">
 
                      @guest
                      <li><a href="{{ route('login') }}"> Login  </a></li>
                      <li><a href="{{ route('register') }}">  Signup </a></li>
                      @else
                       <li class="dropdown">
-                          <img id="image_src" class="img-circle" src="/uploads/avatars/{{ Auth::user()->avatar }}" style="height: 45px; width: 45px;">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                              <i class="glyphicon glyphicon-user"></i>
                               {{ Auth::user()->name }} <span class="caret"></span>
                           </a>
 
                           <ul class="dropdown-menu">
+                              <li class="user-header bg-light-blue">
+                              <img src="/uploads/avatars/{{ Auth::user()->avatar }}" class="img-circle" alt="User Image">
+                              <p>{{ Auth::user()->name }}</p>
+                              </li>
                               <li><a href="{{ route('user.dashboard') }}">Dashboard</a></li>
                               <li><a href="{{ route('user.yauzer_business') }}">Yauzer a Business </a></li>
                               <li>
@@ -84,7 +88,7 @@
                   <li class="active"><a href="javascript:void(0)">Find a Business</a></li>
                   <li><a href="javascript:void(0)">What is Yauzer </a></li>
                   <li><a href="javascript:void(0)">Yauzer for Business</a></li>
-                  <li><a href="javascript:void(0)">Yauzer a Business</a></li>
+                  <li><a href="{{ route('user.yauzer_business') }}">Yauzer a Business</a></li>
                </ul>
             </div>
          </div>

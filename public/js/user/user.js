@@ -390,4 +390,87 @@ $(".businessSubcategory").chosen({
   placeholder_text_multiple: "Click to choose subcategories ..."
   });
 
+
+//Image Preview Code
+$("#avatar").change(function () 
+{
+  readURL(this);
+});
+
 }); //End-Ready-Function
+
+
+
+/*---- Start Function For Checking Image Extension For Valid Image Selection ---*/
+
+var _validFileExtensions = [".jpg", ".jpeg", ".gif", ".png"];
+
+function ValidateSingleInput(oInput) {
+    
+    if (oInput.type == "file") {
+      var sFileName = oInput.value;
+
+      if (sFileName.length > 0) {
+        var blnValid = false;
+        for (var j = 0; j < _validFileExtensions.length; j++) 
+        {
+          var sCurExtension = _validFileExtensions[j];
+          if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) 
+          {
+            blnValid = true;
+            break;
+          }
+        }
+
+        if (!blnValid) {
+
+          alert('Sorry ! Allowed image extensions are .JPG, .JPEG, .GIF, .PNG');
+
+          // swal("Sorry !", "Allowed image extensions are .JPG, .JPEG, .GIF, .PNG")
+          oInput.value = "";
+          return false;
+        }
+      }
+    }
+return true;
+}
+
+/*---- End Function For Checking Image Extension For Valid Image Selection ---*/ 
+
+// Start Image Preview
+
+function readURL(input) {
+
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $('#image_src').css('display', 'block');
+        $('#image_src').attr('src', e.target.result);
+
+        $('#avatar').removeClass('validate_error');
+        $("#avatar").next('label').remove();
+    }
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+//  End Image Preview 
+
+
+    function applyValidate(formid){
+      
+      $('#'+formid).validate({
+
+        rules: {
+          
+          'yauzer': {
+            required: true,
+          },
+
+          valueToBeTested: {
+              required: true,
+          }
+
+        },
+      });
+   } 

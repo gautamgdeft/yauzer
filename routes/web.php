@@ -235,8 +235,10 @@ Route::group(['middleware' => ['auth', 'user']], function () {
  Route::post('/get-business-subcategory', 'User\BusinessController@get_subcategory')->name('user.get_subcategory'); 
  Route::post('/checkemail', 'User\BusinessController@check_email')->name('user.checkEmail');
 
- Route::get('/user-dashboard', 'User\UserController@dashboard')->name('user.dashboard');
+ Route::get('/dashboard', 'User\UserController@dashboard')->name('user.dashboard');
+ Route::get('/yauzers', 'User\UserController@yauzers')->name('user.yauzers');
  Route::post('/update-profile', 'User\UserController@update_profile')->name('user.update_profile');
+ Route::post('/update-yauzer', 'User\UserController@update_yauzer')->name('user.update_yauzer');
 
 }); 
 
