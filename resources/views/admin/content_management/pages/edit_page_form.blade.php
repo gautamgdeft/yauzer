@@ -108,6 +108,7 @@
 <script type="text/javascript">
 
 CKEDITOR.replace( 'description-ckeditor' );
+CKEDITOR.config.allowedContent = true;
 
 $(document).ready(function()
 {

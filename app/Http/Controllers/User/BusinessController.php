@@ -37,12 +37,16 @@ class BusinessController extends Controller
 
     public function save_yauzer(Request $request)
     { 
+      if($request->rating == NULL)
+      {
+        $request['rating'] = 0;
+      }
       #Checking User yauzer Adding limitations
 
       #Per-Day-Limit-On-All-Business
       if($this->yauzer_adding_avaliablity($request->business_id) === 'total_yauzer_per_day_limit_exceeded') 
       {
-		    return redirect()->back()->withSuccess('You can only yauzer 5 businesses per day'); 
+		    return redirect()->back()->withSuccess('You can only add five business yauzers per day'); 
       }
       elseif(($this->yauzer_adding_avaliablity($request->business_id) == 0))
       {
@@ -67,8 +71,9 @@ class BusinessController extends Controller
       		  if(@sizeof($request->business_subcategory)){
       		   $request['business_subcategory'] = implode(',', $request->business_subcategory);
       		  }
-
-    	      $business = new BusinessListing($request->all());
+            
+            $request['status'] = true; //Approved-Business-Status
+            $business = new BusinessListing($request->all());
     	      $business->save();
             
             #Business-Notification-Email-Admin
@@ -81,7 +86,7 @@ class BusinessController extends Controller
     			    
               $yauzer = new Yauzer($request->all()); 
     	         $yauzer->save();
-    	         return redirect()->back()->withSuccess('Congratulations you have successfully added a business and yauzered it. It will be published once approved by Admin');
+    	         return redirect()->back()->withSuccess('Congratulations you have successfully added a business and yauzered it.');
   		     }
   
 

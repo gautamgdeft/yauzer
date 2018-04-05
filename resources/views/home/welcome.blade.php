@@ -90,16 +90,20 @@
       <div class="row">
          <div class="col-sm-12">
             <div id="service-carousel" class="owl-carousel owl-theme pos-rel service-carousel ">
+               @if(sizeof($businessCategory))
+               @foreach($businessCategory as $loopingCategory)
                <div class="item">
                   <div class="services-sec service1">
                      <div class="service-left">
-                        <figure> <img src="{{ asset('images/service-icon1.png') }}" alt=""/> </figure>
+                        <figure> <img src="/uploads/categoryAvatars/{{ $loopingCategory->avatar }}" alt=""/> </figure>
                      </div>
                      <div class="service-right-sec">
-                        <p class="heading-sec"> HOTELS</p>
+                        <p class="heading-sec"> {{ $loopingCategory->name }}</p>
                      </div>
                   </div>
                </div>
+               @endforeach
+               @else
                <div class="item">
                   <div class="services-sec service5">
                      <div class="service-left">
@@ -150,6 +154,7 @@
                      </div>
                   </div>
                </div>
+               @endif
             </div>
          </div>
       </div>

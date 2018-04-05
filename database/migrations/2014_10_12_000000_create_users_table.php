@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
             $table->date('age')->nullable();
             $table->boolean('login_status')->default(false);
             $table->boolean('registeration_status')->default(false);
-            $table->string('token');
+            $table->string('token')->nullable();
             $table->string('slug');
             $table->rememberToken();
             $table->timestamps();

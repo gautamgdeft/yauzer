@@ -11,7 +11,7 @@ class BusinessListing extends Model
     use Sluggable;
     use SluggableScopeHelpers;
 
-    protected $fillable = ['name', 'address', 'city', 'state', 'zipcode', 'country', 'phone_number', 'avatar', 'website', 'latitude', 'longitude', 'user_id', 'added_by', 'email', 'business_category', 'business_subcategory'];
+    protected $fillable = ['name', 'address', 'city', 'state', 'zipcode', 'country', 'phone_number', 'avatar', 'website', 'latitude', 'longitude', 'user_id', 'added_by', 'email', 'business_category', 'business_subcategory', 'status'];
 
     protected $hidden = [
         'latitude', 'longitude',
@@ -38,7 +38,7 @@ class BusinessListing extends Model
     #Relation with Yauzer
     public function yauzers()
     {
-     return $this->hasMany('App\Yauzer');
+     return $this->hasMany('App\Yauzer', 'business_id');
     }
 
     #Relation with Business-Pictures
@@ -85,5 +85,13 @@ class BusinessListing extends Model
     public static function findBySlugOrFail($slug)
     {
          return $businessListing = BusinessListing::findBySlug($slug);
-    }     
+    } 
+
+     public static function delete_business($business)
+     {
+         
+        $business->yauzers()->delete();
+        $business->delete();
+
+     }        
 }

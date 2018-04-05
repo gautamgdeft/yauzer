@@ -53,14 +53,20 @@ $(document).ready(function()
 
       "phone_number": {
           number: true,
-          minlength: 3,
+          minlength: 8,
           maxlength: 16,
-      },
+      },  
       valueToBeTested: {
           required: true,
       }
 
     },
+    messages: {
+        phone_number: {
+            minlength: jQuery.format("Enter at least {0} digits"),
+            maxlength: jQuery.format("Please enter no more than {0} digits."),
+        }
+    }    
   });     
 
   $('#submit-business-form-btn').click(function()
@@ -371,6 +377,11 @@ $(".businessInfo").chosen({
   placeholder_text_multiple: "Click to choose Predefined Business Info..."
   });
 
+$("#zipcode").keypress(function(event) {
+  if ( event.which == 45 ) {
+      event.preventDefault();
+   }
+});
 
 }); //End-ready-function
 

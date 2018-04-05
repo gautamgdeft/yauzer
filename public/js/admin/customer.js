@@ -32,7 +32,7 @@ $(document).ready(function()
       },      
       "phone_number": {
           number: true,
-          minlength: 3,
+          minlength: 8,
           maxlength: 16,          
       },
       valueToBeTested: {
@@ -40,6 +40,12 @@ $(document).ready(function()
       }
 
     },
+    messages: {
+        phone_number: {
+            minlength: jQuery.format("Enter at least {0} digits"),
+            maxlength: jQuery.format("Please enter no more than {0} digits."),
+        }
+    }    
   });
 
   //Adding-Validations-Edit-Customer-Form
@@ -68,7 +74,7 @@ $(document).ready(function()
       },
       "phone_number": {
           number: true,
-          minlength: 3,
+          minlength: 8,
           maxlength: 16,
       },
       valueToBeTested: {
@@ -76,6 +82,12 @@ $(document).ready(function()
       }
 
     },
+    messages: {
+        phone_number: {
+            minlength: jQuery.format("Enter at least {0} digits"),
+            maxlength: jQuery.format("Please enter no more than {0} digits."),
+        }
+    }    
   });       
    
   //Submitting New Customer Form 
@@ -108,6 +120,11 @@ $(document).ready(function()
     }, "Only letters are allowed.");   
 
 
+$("#zipcode").keypress(function(event) {
+  if ( event.which == 45 ) {
+      event.preventDefault();
+   }
+});
 
 }); //End-Ready-Functions
 

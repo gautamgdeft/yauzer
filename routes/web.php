@@ -217,12 +217,14 @@ Route::prefix('admin')->group(function()
 //Frontend-User-Routes
 Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
 Route::get('/', 'User\WelcomeController@index')->name('home.welcome');
+Route::get('/business-login', 'Auth\LoginController@showLoginForm')->name('owner.login');
+Route::get('/what-is-yauzer', 'Cms\CmsController@what_is_yauzer')->name('user.what_is_yauzer');
+
 
 //Only-Auth-With-All-Role-Routes
 Route::group(['middleware' => ['auth']], function () {
  
 Route::get('/home', 'User\WelcomeController@checkuser')->name('user.home');
-
 
 });
 
@@ -243,8 +245,16 @@ Route::group(['middleware' => ['auth', 'user']], function () {
 }); 
 
 //Only-Auth-With-Owner-Role-Routes
-Route::group(['middleware' => ['auth', 'owner']], function () {
+Route::group(['prefix' => 'owner','middleware' => ['auth', 'owner']], function () {
 
+ Route::get('/yauzer-for-business', 'Owner\BusinessController@yauzer_business')->name('user.yauzer_business');
+ Route::get('/dashboard', 'Owner\DashboardController@index')->name('owner.dashboard');
+ Route::get('/profile', 'Owner\ProfileController@profile')->name('owner.profile');
+ Route::post('/profile', 'Owner\ProfileController@update_profile')->name('owner.update_profile');
+ Route::get('/changepassword', 'Owner\ProfileController@changepasswordform')->name('owner.changepasswordform');
+ Route::post('/changepassword','Owner\ProfileController@changepassword')->name('owner.changepassword');
+ Route::get('/logout', 'Owner\ProfileController@logout')->name('owner.logout');
+ 
 
 });    
 

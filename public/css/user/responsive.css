@@ -281,6 +281,16 @@ section.business-sec.gallery-sec .tab-content{ width: 98%; margin: auto; padding
 
 @media only screen and (max-width:767px){
 
+#yauzer_business .error {
+    position: absolute !important;
+    left: 14px;
+    bottom: -21px;
+    margin: 0;
+    display: inline-block;
+}
+
+
+
 .lawyer-listing ul li {
     width: auto;
     margin-top: 5px;
@@ -1049,7 +1059,8 @@ a.right.carousel-control{ right: 35%;}
     .log-business {
     font-size: 17px;
     }       
-   
+ /*****180403*****/
+#yauzer_div .rating-xs {font-size: inherit;}  
 }
 @media (max-width:479px) {
 /*****180402*****/
@@ -1057,6 +1068,7 @@ a.right.carousel-control{ right: 35%;}
 .profile-content .media .media-body{ width: 100%;}
 .profile .col-md-3,.profile .col-md-9{padding: 0px;}
 ul.user-login li ul.dropdown-menu{left: -80%;}
+
 }
 @media (max-width:400px) {
 .main-text.slider-content{ top: 13%;}
@@ -1128,5 +1140,5 @@ ul.user-login li ul.dropdown-menu{left: -80%;}
 }
 }
 @media (max-width:370px){
- ul.user-login li ul.dropdown-menu{left: -85%;} 
+ ul.user-login li ul.dropdown-menu{left: -103%;} 
 }

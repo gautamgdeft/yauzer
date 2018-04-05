@@ -93,7 +93,7 @@ class ReportManagementController extends Controller
 
         foreach($reviews as $review){
 
-             fputcsv($file, array($review->id,$review->name,$review->user->name,$review->address,$review->city,$review->state,$review->zipcode,$review->country,$review->phone_number,$review->website,$review->description,$review->latitude,$review->longitude));
+             fputcsv($file, array($review->id,$review->name,$review->business_added_by->name,$review->address,$review->city,$review->state,$review->zipcode,$review->country,$review->phone_number,$review->website,$review->description,$review->latitude,$review->longitude));
 
         }
         exit();
@@ -101,23 +101,24 @@ class ReportManagementController extends Controller
 
     public function yauzer_export()
     {
+
         header("Content-type: text/csv");
         header("Content-Disposition: attachment; filename=yauzer.csv");
         header("Pragma: no-cache");
         header("Expires: 0");
 
         $reviews = Yauzer::orderBy('id', 'desc')->get();
-        
-        $columns = array('YauzerID', 'Yauzer', 'BusinessName', 'BusinessOwner', 'User', 'Rating');
+       
+         $columns = array('YauzerID', 'Yauzer', 'BusinessName', 'BusinessOwner', 'User', 'Rating');
 
-        $file = fopen('php://output', 'w');
-        fputcsv($file, $columns);
+         $file = fopen('php://output', 'w');
+         fputcsv($file, $columns);
 
-        foreach($reviews as $review){
+         foreach($reviews as $review){
 
-             fputcsv($file, array($review->id,$review->yauzer,$review->business->name,$review->business->user->name,$review->user->name,$review->rating));
+              fputcsv($file, array($review->id,$review->yauzer,$review->business->name,$review->business->business_added_by->name,$review->user->name,$review->rating));
 
-        }
+         }
         exit();
     }    
 

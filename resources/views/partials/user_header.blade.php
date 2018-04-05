@@ -39,7 +39,7 @@
                       <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                               <i class="glyphicon glyphicon-user"></i>
-                              {{ Auth::user()->name }} <span class="caret"></span>
+                              {{ str_limit(Auth::user()->name, 8) }} <span class="caret"></span>
                           </a>
 
                           <ul class="dropdown-menu">
@@ -47,8 +47,13 @@
                               <img src="/uploads/avatars/{{ Auth::user()->avatar }}" class="img-circle" alt="User Image">
                               <p>{{ Auth::user()->name }}</p>
                               </li>
+                              @if (Auth::user()->roles->first()->name == 'owner')
+                              <li><a href="{{ route('owner.dashboard') }}">Dashboard</a></li>
+                              <li><a href="{{ route('owner.login') }}">Yauzer for Business </a></li>
+                              @else
                               <li><a href="{{ route('user.dashboard') }}">Dashboard</a></li>
                               <li><a href="{{ route('user.yauzer_business') }}">Yauzer a Business </a></li>
+                              @endif
                               <li>
                                   <a href="{{ route('logout') }}"
                                       onclick="event.preventDefault();
@@ -67,7 +72,7 @@
                   </ul>
                </div>
                @guest
-                <div class="log-business"><a href="{{ route('login') }}">Log in for Business</a> </div>
+                <div class="log-business"><a href="{{ route('owner.login') }}">Log in for Business</a> </div>
                @endguest
             </div>
          </div>
@@ -77,7 +82,7 @@
       <div class="menu">
          <div class="container">
             <div class="navbar-header">
-               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+               <button id="submenu" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                <span class="icon-bar"></span>
                <span class="icon-bar"></span>
                <span class="icon-bar"></span>                        
@@ -86,14 +91,34 @@
             <div class="collapse navbar-collapse" id="myNavbar">
                <ul class="nav navbar-nav">
                   <li class="active"><a href="javascript:void(0)">Find a Business</a></li>
-                  <li><a href="javascript:void(0)">What is Yauzer </a></li>
-                  <li><a href="javascript:void(0)">Yauzer for Business</a></li>
+                  <li><a href="{{ route('user.what_is_yauzer') }}">What is Yauzer </a></li>
+                  @if ((Auth::user() && Auth::user()->roles->first()->name == 'owner'))
+                  <li><a href="{{ route('owner.login') }}">Yauzer for Business</a></li>
+                  @elseif((Auth::user() && Auth::user()->roles->first()->name == 'user'))
                   <li><a href="{{ route('user.yauzer_business') }}">Yauzer a Business</a></li>
+                  @else
+                  <li><a href="{{ route('owner.login') }}">Yauzer for Business</a></li>
+                  <li><a href="{{ route('user.yauzer_business') }}">Yauzer a Business</a></li>
+                  @endif
                </ul>
             </div>
          </div>
       </div>
    </nav>
 </header>
+
+@section('custom_scripts')
+<script type="text/javascript">
+$(function(){  
+$('.mb_toggle_hide').click(function(){
+
+   $('#submenu').addClass('collapsed');
+   $('#myNavbar').removeClass('in');
+
+    
+});
+});
+</script>
+@endsection
 
 <!-- header-section-ends -->

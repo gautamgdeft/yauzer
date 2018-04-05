@@ -14,8 +14,9 @@ class UserController extends Controller
 {
     public function dashboard()
     {    
-    	 $countries = Country::selectCountries();
-    	 return view('user.dashboard.dashboard', compact('countries'));														
+         $splitName = explode(' ', Auth::user()->name, 2);
+         $countries = Country::selectCountries();
+    	 return view('user.dashboard.dashboard', compact('countries','splitName'));														
     }
 
     public function update_profile(Request $request)
@@ -59,7 +60,9 @@ class UserController extends Controller
     }
 
     public function update_yauzer(Request $request)
-    {
+    {      
+            if($request->rating == NULL){
+             $request['rating'] = 0;}
            $business = Yauzer::find($request->id);
            if(@sizeof($business)){
 

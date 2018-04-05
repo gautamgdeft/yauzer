@@ -26,7 +26,7 @@
             <h4 class="title">Edit Profile</h4>
          </div>
          <div class="content">
-            <form name="user_profile_form" method="POST" action="{{ route('user.update_profile') }}" enctype="multipart/form-data">
+            <form id="user_profile_form" name="user_profile_form" method="POST" action="{{ route('user.update_profile') }}" enctype="multipart/form-data">
                {{ csrf_field() }}
                <div class="row">
                   <div class="col-md-6">
@@ -38,7 +38,7 @@
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Last Name</label>
-                        <input type="text" class="form-control border-input" placeholder="Last Name" name="lastname" value="{{ strstr(Auth::user()->name, ' ') }}" required>
+                        <input type="text" class="form-control border-input" placeholder="Last Name" name="lastname" value="@if(!empty($splitName[1])){{ $splitName['1'] }}@endif" required>
                      </div>
                   </div>
                </div>
@@ -87,7 +87,7 @@
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Zip Code</label>
-                        <input type="number" class="form-control border-input" placeholder="ZIP Code" name="zipcode" value="{{ Auth::user()->zipcode }}" required>
+                        <input type="text" class="form-control border-input" id="zipcode" placeholder="ZIP Code" name="zipcode" value="{{ Auth::user()->zipcode }}" required>
                      </div>
                   </div>
                </div>
@@ -109,7 +109,7 @@
                   </div>
                </div>
                <div class="text-center">
-                  <button type="submit" class="btn btn-info btn-fill btn-wd">Update</button>
+                  <button id="user_profile_btn" type="submit" class="btn btn-info btn-fill btn-wd">Update</button>
                </div>
                <div class="clearfix"></div>
             </form>

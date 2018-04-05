@@ -101,7 +101,8 @@ class BusinessListingController extends Controller
               $path = '/uploads/businessAvatars/' . $category->avatar;
               unlink(public_path() . $path);
             }
-            $businessListing->delete();
+            BusinessListing::delete_business($businessListing);
+            #$businessListing->delete();
             return response(['msg' => 'Business has been deleted successfully', 'status' => 'success']);
         }
 

@@ -22,7 +22,7 @@
                @endif              
             </div>
             <div class="page-header">
-               <h1><small class="pull-right">{{ $yauzers->count() }} yauzers</small> Yauzers </h1>
+               <h1><small class="pull-right">{{ $yauzers->count() }} Yauzer</small> Yauzers </h1>
             </div>
             <div class="comments-list">
                @if(@sizeof($yauzers))
@@ -31,11 +31,11 @@
                   <a class="media-left" href="#">
                   <img class="img-circle" src="/uploads/businessAvatars/{{ $loopingYauzer->business->avatar }}">
                   </a>
-                  <div class="media-body">
+                  <div class="media-body cstm-txt">
                      <p class="pull-right"><i class="fa fa-clock-o" aria-hidden="true"></i><small>{{ $loopingYauzer->updated_at->diffForHumans() }}</small></p>
                      <h4 class="media-heading user_name">{{ $loopingYauzer->business->name }}</h4>
                      {{ $loopingYauzer->yauzer }}
-                     <small class="edit-text"><a href="javascript:void(0)" data-toggle="modal" data-target="#editYauzer{{ $loopingYauzer->id }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></small>
+                     <small class="edit-text"><a href="javascript:void(0)" data-toggle="modal" data-target="#editYauzer{{ $loopingYauzer->id }}"><i data-toggle="tooltip" title="Edit Yauzer" data-placement="bottom" class="fa fa-pencil-square-o" aria-hidden="true"></i></a></small>
                   </div>
                </div>
                
@@ -56,7 +56,7 @@
                                  <textarea name="yauzer" id="yauzer" class="form-control" rows="8" required>{{ $loopingYauzer->yauzer }}</textarea>
                               </div>
                               <div id="yauzer_div" class="form-group">
-                                 <label>Rating<span> *</span></label>
+                                 <label>Rating</label>
                                  <input id="input-21e" value="{{ $loopingYauzer->rating }}" type="text" class="form-control rating" data-min=0 data-max=5 data-step=1 data-size="xs" name="rating" title="">
                               </div>
                         </div>

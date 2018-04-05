@@ -146,11 +146,11 @@ rules: {
 
 
   //Submitting Login Form 
-  $('#login_password_btn').click(function()
+  $('#login_submit_btn').click(function()
   {
     if($('#login-form').valid())
     {
-      $('#login_password_btn').prop('disabled', true);
+      $('#login_submit_btn').prop('disabled', true);
       $('#login-form').submit();
     }else{
       return false;
@@ -223,7 +223,75 @@ rules: {
     }else{
       return false;
     }
-  });            
+  }); 
+
+
+//Adding-Validations-On-User-Profile-Form
+$('#user_profile_form').validate({
+onfocusout: function (valueToBeTested) {
+  $(valueToBeTested).valid();
+},
+
+highlight: function(element) {
+  $('element').removeClass("error");
+},
+
+rules: {
+  
+  "firstname": {
+      alphanumeric: true,
+      character_with_space: true,
+      maxlength: 25, 
+  },  
+  "lastname": {
+      alphanumeric: true,
+      character_with_space: true,
+      maxlength: 25, 
+  },
+  "phone_number": {
+      number: true,
+      minlength: 8,
+      maxlength: 16,
+  },  
+  "city": {
+      required: true,
+  },   
+  "state": {
+      required: true,
+  },   
+  "zipcode": {
+      alphanumeric: true,
+      required: true,
+  },   
+  "address": {
+      required: true,
+  },  
+
+  valueToBeTested: {
+      required: true,
+  }
+
+},
+    messages: {
+        phone_number: {
+            minlength: jQuery.format("Enter at least {0} digits"),
+            maxlength: jQuery.format("Please enter no more than {0} digits."),
+        }
+    }
+});   
+
+
+  //Submitting User-Profile-Form-Business Form 
+  $('#user_profile_btn').click(function()
+  {
+    if($('#user_profile_form').valid())
+    {
+      $('#user_profile_btn').prop('disabled', true);
+      $('#user_profile_form').submit();
+    }else{
+      return false;
+    }
+  });           
 
 
 
@@ -240,12 +308,9 @@ rules: {
   //Alphanumeric-Add-Method
   $.validator.addMethod("alphanumeric", function (value, element) {
     return this.optional(element) || /^[a-z\d\-_\s]+$/i.test(value);
-  }, "Please enter alpha-numeric characters only.");
+  }, "Please enter alpha-numeric characters only.");  
 
-  //No-Space-Add-Method
-  $.validator.addMethod("noSpace", function (value, element) {
-      return value == '' || value.trim().length != 0;
-  }, "No space please and don't leave it empty");
+
 
 
 
@@ -396,6 +461,17 @@ $("#avatar").change(function ()
 {
   readURL(this);
 });
+
+$("#zipcode").keypress(function(event) {
+  if ( event.which == 45 ) {
+      event.preventDefault();
+   }
+});
+
+//Reset-Add-Yauzer-Form
+  $('.blog-form-cancel').click(function(){
+        $('#yauzer_business')[0].reset();
+  });
 
 }); //End-Ready-Function
 

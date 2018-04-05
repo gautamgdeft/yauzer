@@ -11,7 +11,7 @@
 
                   <li> <i class="fa fa-envelope"> </i><a href="javascript:;"> Contact Us </a>
                   </li>
-                  <li> <i class="fa fa-map-marker"> </i> <!--Visit Us--><a href="create-basic-listing.html">Yauzer a Business</a></li>
+                  <li> <i class="fa fa-map-marker"> </i> <!--Visit Us--><a href="{{ route('user.yauzer_business') }}">Yauzer a Business</a></li>
                   
                 </ul>
               </div>

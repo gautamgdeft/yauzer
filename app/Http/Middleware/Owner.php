@@ -21,6 +21,6 @@ class Owner
             return $next($request);
         }
 
-        return redirect()->route('user.welcome');
+        return redirect()->route('owner.login');
     }
 }

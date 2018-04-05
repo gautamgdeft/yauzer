@@ -24,13 +24,13 @@
     <link href="{{ asset('css/user/responsive.css') }}" rel="stylesheet">
 
 </head>
-<body>
-    
+<body> 
  {{-- Admin Header Starts --}}
       @include('partials/user_header')
  {{-- Admin Header Ends --}}
 
-
+ <div class="mb_toggle_hide">  
+    
      @yield('content')
 
  {{-- Admin Footer Starts --}}
@@ -51,6 +51,6 @@
     <script src="{{ asset('js/user/user.js') }}"></script>
 
     @yield('custom_scripts')
-
+</div>
 </body>
 </html>

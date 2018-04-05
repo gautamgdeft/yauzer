@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\SliderImage;
+use App\BusinessCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Validation\ValidationException;
@@ -20,13 +21,14 @@ class WelcomeController extends Controller
             return redirect()->route('user.yauzer_business');
         }else{
             
-            return view('owner.dashboard.home');
+            return redirect()->route('owner.dashboard');
         }
     }
 
     public function index()
     {
     	$sliderImages = SliderImage::orderBy('id', 'desc')->get();
-    	return view('home.welcome', compact('sliderImages'));
+        $businessCategory = BusinessCategory::where('status', '1')->get();
+        return view('home.welcome', compact('sliderImages','businessCategory'));
     }
 }

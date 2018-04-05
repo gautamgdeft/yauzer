@@ -10,7 +10,7 @@
       <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8 col-xs-offset-1 col-xs-10 padding0">
         <div class="form-outer-wrapper">
           <div class="form-heading">
-            <h2>Login</h2>
+            <h2>{{ (\Request::route()->getName() == 'owner.login') ? 'Log in for Business' : 'Login' }}</h2>
 
               <div id="msgs">
                 @if(session('success'))
