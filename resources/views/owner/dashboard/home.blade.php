@@ -2,6 +2,8 @@
 
 @section('content')
 
+
+
 <aside class="right-side">
    <!-- Content Header (Page header) -->
    <section class="content-header">
@@ -14,6 +16,15 @@
          <li class="active">Dashboard</li>
       </ol>
    </section>
+
+    <div id="msgs">
+     @if(session('success'))
+     <div class="alert alert-success">
+      {{ session('success') }}
+    </div>
+    @endif
+    </div>
+             
    <!-- Main content -->
    <section class="content">
       <!-- Small boxes (Stat box) -->

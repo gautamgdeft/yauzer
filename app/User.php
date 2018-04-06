@@ -42,9 +42,9 @@ class User extends Authenticatable
         ];
     }    
      #Relation with Business
-     public function businesses()
+     public function business()
      {
-        return $this->hasMany('App\BusinessListing');
+        return $this->hasOne('App\BusinessListing');
      }
      
      #Relation with Yauzer
@@ -83,7 +83,7 @@ class User extends Authenticatable
      public static function delete_user($user)
      {
          
-        $user->businesses()->delete();
+        $user->business->delete();
         $user->creditcards()->delete();
         $user->delete();
 

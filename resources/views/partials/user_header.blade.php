@@ -93,7 +93,7 @@
                   <li class="active"><a href="javascript:void(0)">Find a Business</a></li>
                   <li><a href="{{ route('user.what_is_yauzer') }}">What is Yauzer </a></li>
                   @if ((Auth::user() && Auth::user()->roles->first()->name == 'owner'))
-                  <li><a href="{{ route('owner.login') }}">Yauzer for Business</a></li>
+                  <li><a href="{{ route('user.home') }}">Yauzer for Business</a></li>
                   @elseif((Auth::user() && Auth::user()->roles->first()->name == 'user'))
                   <li><a href="{{ route('user.yauzer_business') }}">Yauzer a Business</a></li>
                   @else

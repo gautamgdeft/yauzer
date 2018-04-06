@@ -18,7 +18,7 @@ class CreateBusinessListingsTable extends Migration
             $table->integer('user_id')->unsigned()->default(0);
             $table->integer('added_by')->unsigned();
             $table->string('email')->unique();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->string('business_category')->nullable();
             $table->string('business_subcategory')->nullable();
             $table->string('address')->nullable();
@@ -27,6 +27,7 @@ class CreateBusinessListingsTable extends Migration
             $table->string('zipcode')->nullable();
             $table->string('country')->nullable();
             $table->string('phone_number')->nullable();
+            $table->string('fax_number')->nullable();
             $table->string('website')->nullable();
             $table->text('description')->nullable();
             $table->string('avatar')->default('default.png');

@@ -225,6 +225,9 @@ Route::get('/what-is-yauzer', 'Cms\CmsController@what_is_yauzer')->name('user.wh
 Route::group(['middleware' => ['auth']], function () {
  
 Route::get('/home', 'User\WelcomeController@checkuser')->name('user.home');
+Route::post('/check-business', 'User\BusinessController@check_business')->name('user.check_business');
+Route::post('/get-business-subcategory', 'User\BusinessController@get_subcategory')->name('user.get_subcategory');
+Route::post('/checkemail', 'User\BusinessController@check_email')->name('user.checkEmail'); 
 
 });
 
@@ -233,9 +236,6 @@ Route::group(['middleware' => ['auth', 'user']], function () {
 
  Route::get('/yauzer-a-business', 'User\BusinessController@yauzer_business')->name('user.yauzer_business');
  Route::post('/yauzer-a-business', 'User\BusinessController@save_yauzer')->name('user.save_yauzer');
- Route::post('/check-business', 'User\BusinessController@check_business')->name('user.check_business');
- Route::post('/get-business-subcategory', 'User\BusinessController@get_subcategory')->name('user.get_subcategory'); 
- Route::post('/checkemail', 'User\BusinessController@check_email')->name('user.checkEmail');
 
  Route::get('/dashboard', 'User\UserController@dashboard')->name('user.dashboard');
  Route::get('/yauzers', 'User\UserController@yauzers')->name('user.yauzers');
@@ -247,12 +247,56 @@ Route::group(['middleware' => ['auth', 'user']], function () {
 //Only-Auth-With-Owner-Role-Routes
 Route::group(['prefix' => 'owner','middleware' => ['auth', 'owner']], function () {
 
- Route::get('/yauzer-for-business', 'Owner\BusinessController@yauzer_business')->name('user.yauzer_business');
+ #Owner-Dashboard-Route
  Route::get('/dashboard', 'Owner\DashboardController@index')->name('owner.dashboard');
+
+ #Owner-Profile-Management-Routes
  Route::get('/profile', 'Owner\ProfileController@profile')->name('owner.profile');
  Route::post('/profile', 'Owner\ProfileController@update_profile')->name('owner.update_profile');
  Route::get('/changepassword', 'Owner\ProfileController@changepasswordform')->name('owner.changepasswordform');
  Route::post('/changepassword','Owner\ProfileController@changepassword')->name('owner.changepassword');
+
+ #Owner-Business-Claim Or Adding Business-Routes
+ Route::get('/yauzer-for-business', 'Owner\BusinessController@yauzer_business')->name('owner.yauzer_business');
+ Route::post('/yauzer-for-business', 'Owner\BusinessController@claim_business')->name('owner.claim_business');
+ Route::get('/yauzer-for-business', 'Owner\BusinessController@yauzer_business')->name('owner.yauzer_business');
+
+ #Owner-Business-Managing Business Basic Information
+ Route::get('/biz-basic-information', 'Owner\BusinessController@edit_biz_basic_info')->name('owner.edit_biz_basic_info');
+ Route::post('/biz-basic-information/{slug}', 'Owner\BusinessController@update_biz_basic_info')->name('owner.update_biz_basic_info');
+
+ #Owner-Payment-Information
+ Route::get('/payment-information', 'Owner\PaymentController@index')->name('owner.payment_information');
+
+ #Owner-Additional-Business-Information
+ Route::get('/additional-biz-information', 'Owner\BusinessController@edit_biz_additional_info')->name('owner.edit_biz_additional_info');
+ Route::post('/additional-biz-information/{slug}', 'Owner\BusinessController@update_biz_additional_info')->name('owner.update_biz_additional_info');
+ Route::post('/verify-email', 'Owner\BusinessController@check_email')->name('owner.checkEmail');
+
+ #Owner-Pictures&Videos-Routes
+  Route::get('/pictures-videos', 'Owner\BusinessPictureController@index')->name('owner.pictures_videos');
+  Route::get('/new-picture/{slug}', 'Owner\BusinessPictureController@new_picture')->name('owner.new_picture_form');    
+  Route::post('/store-picture/{slug}', 'Owner\BusinessPictureController@store_picture')->name('owner.store_picture');
+  Route::post('/destroy-picture', 'Owner\BusinessPictureController@destroy_picture')->name('owner.destroy_business_picture'); 
+
+ #Owner-Business-Description
+  Route::get('/biz-description', 'Owner\BusinessDescriptionController@index')->name('owner.biz_description');
+  Route::get('/edit-business-description/{slug}', 'Owner\BusinessDescriptionController@edit_description_form')->name('owner.show_business_description_form');
+  Route::post('/update-business-description/{slug}', 'Owner\BusinessDescriptionController@update_business_description')->name('owner.update_business_description');
+
+  #Owner-Business-Hours-Routes
+  Route::get('/biz-hours', 'Owner\BusinessHourController@index')->name('owner.biz_hours');
+  Route::post('/update-hours/{slug}', 'Owner\BusinessHourController@update_business_hours')->name('owner.update_business_hours');
+
+  #Owner-Business-Specilality-Routes  
+   Route::get('/biz-specialties', 'Owner\BusinessSpecialityController@index')->name('owner.biz_specialties');
+   Route::get('/add-business-speciality/{slug}', 'Owner\BusinessSpecialityController@new_speciality')->name('owner.new_speciality_form');
+   Route::post('/store-business-speciality/{slug}', 'Owner\BusinessSpecialityController@store_speciality')->name('owner.store_speciality');
+   Route::get('/edit-business-speciality/{speciality_slug}/{slug}', 'Owner\BusinessSpecialityController@edit_speciality')->name('owner.edit_speciality'); 
+   Route::post('/update-business-speciality/{speciality_slug}/{slug}', 'Owner\BusinessSpecialityController@update_speciality')->name('owner.update_speciality');   
+   Route::post('/destroy-business-speciality', 'Owner\BusinessSpecialityController@destory_speciality')->name('owner.destory_speciality');  
+
+
  Route::get('/logout', 'Owner\ProfileController@logout')->name('owner.logout');
  
 

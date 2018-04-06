@@ -7,7 +7,7 @@
     <div class="row">
       <div class="col-md-12">
         <div class="blog-form-heading">
-          <h2>Congratulations, you’re the first to Yauzer the business</h2>
+          <h2>Congratulations, Claim or Add your business</h2>
         </div>
         <div class="blog-form-container padding-less" id="padding-less">
 
@@ -19,7 +19,7 @@
           @endif
           </div>
 
-          <form name="yauzer_business" id="yauzer_business" method="Post" action="{{ route('user.save_yauzer') }}">
+          <form name="yauzer_for_business" id="yauzer_for_business" method="Post" action="{{ route('owner.claim_business') }}"> 
 
             {{ csrf_field() }}
             
@@ -31,7 +31,7 @@
               <label for="headline">Businesses<span> *</span></label>
               <select name="business_id" class="form-control form-input" id="business_select" required>
                 @if(sizeof($businesses))
-                 <option value="" disabled selected>Choose Business you want to yauzer</option>
+                 <option value="" disabled selected>Choose Business for yauzer</option>
                 @foreach($businesses as $loopingBusiness)
                  <option value="{{ $loopingBusiness->id }}">{{ $loopingBusiness->name }}</option>
                 @endforeach
@@ -120,32 +120,10 @@
               </div>
             </div>
 
-            <div class="col-md-12 col-sm-12">
-              <div id="yauzer_div" class="form-group{{ $errors->has('yauzer') ? ' has-error' : '' }}">
-              <label>What makes this business your favorite, give it a Yauz!<span> *</span></label>
-              <textarea name="yauzer" id="yauzer" class="form-control" rows="8" disabled required></textarea>
-                
-                @if ($errors->has('yauzer'))
-                <span class="help-block">
-                  <strong>{{ $errors->first('yauzer') }}</strong>
-                </span>
-                @endif
-
-              </div>
-
-
-            </div>            
-
-            <div class="col-md-12 col-sm-12">
-							<div id="yauzer_div" class="form-group">
-              <label>Rating</label>
-              <input id="input-21e" value="0" type="text" class="form-control rating" data-min=0 data-max=5 data-step=1 data-size="xs" name="rating" title="">
-							</div>
-            </div>
-
             <div class="blog-form-button-container">
-              <button id="store_yauzer_btn" class="blog-form-submit" type="submit" disabled> Submit</button>
-              <button type="button" class="blog-form-cancel reset_yauzer_form">Cancel</button>
+              <button id="claim_business_btn" name="clain_business" value="claimed" class="blog-form-submit" type="submit" disabled> Claim Business</button>              
+              <button id="submit_business" class="blog-form-submit hide" type="submit"> Submit</button>
+              <button type="button" class="blog-form-cancel reset_form">Cancel</button>
             </div>
 
           </form>
@@ -155,4 +133,9 @@
   </div>
 </div>
 
+@endsection
+
+
+@section('custom_scripts')
+  <script src="{{ asset('js/owner/owner.js') }}"></script>
 @endsection

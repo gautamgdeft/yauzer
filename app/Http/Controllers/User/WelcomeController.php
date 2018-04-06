@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\SliderImage;
 use App\BusinessCategory;
+use App\BusinessListing;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Validation\ValidationException;
@@ -20,8 +21,14 @@ class WelcomeController extends Controller
         {
             return redirect()->route('user.yauzer_business');
         }else{
-            
-            return redirect()->route('owner.dashboard');
+
+            $checkClaimedBusiness = BusinessListing::checkClaimedBusiness(Auth::user()->id);
+
+            if(sizeof($checkClaimedBusiness)){
+             return redirect()->route('owner.dashboard');
+            }else{
+             return redirect()->route('owner.yauzer_business');    
+            }
         }
     }
 
@@ -31,4 +38,6 @@ class WelcomeController extends Controller
         $businessCategory = BusinessCategory::where('status', '1')->get();
         return view('home.welcome', compact('sliderImages','businessCategory'));
     }
+
+
 }

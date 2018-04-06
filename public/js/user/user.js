@@ -159,7 +159,7 @@ rules: {
 
 
   //Adding-Validations-On-Yauzer-A-Business-Form
-  $('#yauzer_business').validate({
+  var validator = $('#yauzer_business').validate({
   onfocusout: function (valueToBeTested) {
     $(valueToBeTested).valid();
   },
@@ -469,8 +469,8 @@ $("#zipcode").keypress(function(event) {
 });
 
 //Reset-Add-Yauzer-Form
-  $('.blog-form-cancel').click(function(){
-        $('#yauzer_business')[0].reset();
+  $('.reset_yauzer_form').click(function(){
+        validator.resetForm();
   });
 
 }); //End-Ready-Function

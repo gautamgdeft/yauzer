@@ -2,7 +2,6 @@
     <h3>Adds</h3>
   </div>   
 
-
      <!-- form start -->
 
      <form id="edit-interested_businesses-form" role="form" action="{{ route('admin.update_interested_business',['slug' => $businessListing->slug]) }}" enctype="multipart/form-data" method="POST">

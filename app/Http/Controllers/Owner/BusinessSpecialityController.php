@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Owner;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -18,15 +18,18 @@ use App\Http\Requests;
 
 class BusinessSpecialityController extends Controller
 {
-   public function __construct()
-   {
-	 $this->middleware('auth:admin');
-   }
+    public function index()
+    {
+    	$user = Auth::user();
+        $business = $user->business; 
+    	$businessSpecialitiesInfo = Speciality::orderBy('id', 'desc')->where('business_id', $business->id)->get();
+    	return view('owner.biz_speciality.index', compact('business','businessSpecialitiesInfo'));
+    }
 
    public function new_speciality($slug)
    {
    	$business = BusinessListing::findBySlugOrFail($slug);
-   	return view ( 'admin.business_listing.partials.business_specialties.new_speciality_form', compact('slug','business') );
+   	return view ( 'owner.biz_speciality.new_speciality_form', compact('slug','business') );
    }
 
    public function store_speciality(Request $request, $slug)
@@ -41,10 +44,8 @@ class BusinessSpecialityController extends Controller
        $speciality = new Speciality($request->all());
        $speciality->save();
 
-       $route = 'admin/edit-business/'.$slug.'/#parentHorizontalTab8';
-       return redirect($route)->with("success","Speciality has been added successfuly");       
+       return redirect()->route('owner.biz_specialties')->with("success","Speciality has been added successfuly");       
        
-       #return redirect()->route('admin.show_edit_business_form', ['slug' => $slug])->with("success","Speciality has been added successfuly");    
    }
 
    public function destory_speciality(Request $request)
@@ -63,7 +64,7 @@ class BusinessSpecialityController extends Controller
    {
        $business = BusinessListing::findBySlugOrFail($slug);
        $speciality = Speciality::findBySlugOrFail($speciality_slug);
-       return view ( 'admin.business_listing.partials.business_specialties.edit_speciality', compact('slug','business', 'speciality') );
+       return view ( 'owner.biz_speciality.edit_speciality', compact('slug','business', 'speciality') );
    }
 
    public function update_speciality($speciality_slug, $slug, Request $request)
@@ -78,10 +79,6 @@ class BusinessSpecialityController extends Controller
 
             $speciality->update($request->all());
 
-       $route = 'admin/edit-business/'.$slug.'/#parentHorizontalTab8';
-       return redirect($route)->with("success","Speciality has been updated successfuly"); 
-  
-   }    
-
-
+         return redirect()->route('owner.biz_specialties')->with("success","Speciality has been updated successfuly");   
+   }        
 }

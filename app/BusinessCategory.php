@@ -12,7 +12,7 @@ class BusinessCategory extends Model
     use SluggableScopeHelpers;
 
 
-    public function business_subcategory()
+    public function business_subcategories()
     {
         return $this->hasMany('App\BusinessSubcategory');
     }    

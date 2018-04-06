@@ -87,11 +87,21 @@ class BusinessListing extends Model
          return $businessListing = BusinessListing::findBySlug($slug);
     } 
 
-     public static function delete_business($business)
-     {
+    public static function delete_business($business)
+    {
          
         $business->yauzers()->delete();
         $business->delete();
 
-     }        
+    }
+
+    public static function checkClaimedBusiness($userId)
+    {
+        return BusinessListing::where('user_id', $userId)->get();
+    }
+
+     public static function get_business($business_id)
+    {
+        return $businesses = BusinessListing::find($business_id);
+    }        
 }

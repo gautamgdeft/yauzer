@@ -28,7 +28,7 @@ class BusinessController extends Controller
 
     public function check_business(Request $request)
     {
-      $businesses = $this->get_business($request->id);
+      $businesses = BusinessListing::get_business($request->id);
       if(sizeof($businesses)){
        return response()->json(['status' => 'success', 'business' => $businesses]);
       }
@@ -85,7 +85,7 @@ class BusinessController extends Controller
     	        $request['ip_address'] = request()->ip(); 
     			    
               $yauzer = new Yauzer($request->all()); 
-    	         $yauzer->save();
+    	        $yauzer->save();
     	         return redirect()->back()->withSuccess('Congratulations you have successfully added a business and yauzered it.');
   		     }
   
@@ -118,13 +118,6 @@ class BusinessController extends Controller
        	 return "true";
        }
        }
-    }
-
-
-
-    protected function get_business($business_id)
-    {
-    	return $businesses = BusinessListing::find($business_id);
     }
 
     protected function yauzer_adding_avaliablity($business_id)
