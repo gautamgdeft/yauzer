@@ -16,6 +16,7 @@ use Session;
 use App\Http\Requests;
 use Carbon\Carbon;
 use App\Mail\BusinessNotificationAdminMail;
+use App\Mail\PremiumBusinessAdminEmail;
 
 class BusinessController extends Controller
 {
@@ -61,7 +62,12 @@ class BusinessController extends Controller
   	         $request['ip_address'] = request()->ip(); 
   	         $yauzer = new Yauzer($request->all()); 
   	         $yauzer->save();
-  	         return redirect()->back()->withSuccess('Congratulations you have successfully yauzered a business');
+
+             if($yauzer->count() == '15'){
+              #Premium-Business-Notification-Email-Admin
+              \Mail::to('teamphp00@gmail.com')->send(new PremiumBusinessAdminEmail($yauzer->business));
+             }
+             return redirect()->back()->withSuccess('Congratulations you have successfully yauzered a business');
   		
   		    }else{
             #If Business is not present in our db plus saving business and yauzer:-
@@ -86,6 +92,12 @@ class BusinessController extends Controller
     			    
               $yauzer = new Yauzer($request->all()); 
     	        $yauzer->save();
+
+               if($yauzer->count() == '15'){
+                #Premium-Business-Notification-Email-Admin
+                \Mail::to('teamphp00@gmail.com')->send(new PremiumBusinessAdminEmail($yauzer->business));
+               }
+
     	         return redirect()->back()->withSuccess('Congratulations you have successfully added a business and yauzered it.');
   		     }
   

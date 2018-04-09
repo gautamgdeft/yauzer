@@ -43,6 +43,11 @@ class BusinessYauzerController extends Controller
        $user = new Yauzer($request->all());
        $user->save();
 
+       if($yauzer->count() == '15'){
+        #Premium-Business-Notification-Email-Admin
+        \Mail::to('teamphp00@gmail.com')->send(new PremiumBusinessAdminEmail($yauzer->business));
+       }       
+
       $route = 'admin/edit-business/'.$slug.'/#parentHorizontalTab7';
       return redirect($route)->with("success","Yauzer has been added successfuly");
 
@@ -55,7 +60,7 @@ class BusinessYauzerController extends Controller
     	 if ( $request->input('id') ) 
     	 {
             $yauzer = Yauzer::find($request->input('id'));
-            $yauzer->delete();
+            Yauzer::delete_yauzer($yauzer);
             return response(['msg' => 'Yauzer has been deleted successfully', 'status' => 'success']);
          }
 

@@ -30,9 +30,25 @@ class Yauzer extends Model
      return $this->belongsTo('App\User');
     }
 
-	#Relation with Business
+    #Relation with Business
     public function business()
     {
      return $this->belongsTo('App\BusinessListing');
-    }    
+    } 	
+
+    #Relation with Yauzer-Comment
+    public function yauzer_comment()
+    {
+     return $this->hasOne('App\YauzerComment');
+    }  
+
+
+
+     public static function delete_yauzer($business)
+     {
+         
+        $business->yauzer_comment->delete();
+        $business->delete();
+
+     }      
 }

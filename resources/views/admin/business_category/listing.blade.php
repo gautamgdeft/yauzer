@@ -196,16 +196,16 @@ $(".delete_category").on("click", function()
       {
        $('.tr_'+category_id).remove();
        $('#msgs').html("<div class='alert alert-success'>"+response.msg+"</div>");
-     }
-   },
-   error: function( response ) 
-   {
-     if ( response.status === 422 ) 
+      }
+     },
+     error: function( response ) 
      {
-       $(this).html('Delete');
-       $('#msgs').html("<div class='alert alert-error'>"+response.msg+"</div>");
+       if ( response.status === 422 ) 
+       {
+         $(this).html('Delete');
+         $('#msgs').html("<div class='alert alert-error'>"+response.msg+"</div>");
+       }
      }
-   }
 
 
   });

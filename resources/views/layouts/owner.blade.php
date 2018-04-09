@@ -22,6 +22,7 @@
     <link href="{{ asset('css/admin/AdminLTE.css') }}" rel="stylesheet">
     <link href="{{ asset('css/admin/credit_card/styles_credit_card.css') }}" rel="stylesheet">
     <link href="//cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" rel="stylesheet">
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/admin/admin_custom.css') }}" rel="stylesheet">
@@ -62,6 +63,7 @@
     <script src="{{ asset('js/admin/responsive-tabs.js') }}"></script>
     <script src="http://maps.googleapis.com/maps/api/js?libraries=places" type="text/javascript"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>    
     <script src="{{ asset('js/owner/owner.js') }}"></script>

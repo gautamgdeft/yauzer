@@ -70,6 +70,19 @@ function readURL(input) {
 $(document).ready(function()
 {
 
+  $.validator.setDefaults({ ignore: ":hidden:not(select)" });
+
+  // validation of chosen on change
+  if ($("select.chosen-select").length > 0) {
+      $("select.chosen-select").each(function() {
+          if ($(this).attr('required') !== undefined) {
+              $(this).on("change", function() {
+                  $(this).valid();
+              });
+          }
+      });
+  }  
+
    setTimeout(function() {
    $('.alert-success').fadeOut('fast');
    }, 8000); 
@@ -357,12 +370,11 @@ $(".businessSubcategory").chosen({
             customemail: true,
             remote: {
                  headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                 url: "/checkemail",
+                 url: "/owner/verify-email",
                  type: "post",
                  dataType: 'text',
                  data: {
                    success: function(resp) {
-                    console.log(resp);
                          if(resp == "true" ) {
                          resp.parent().removeClass('error');
                          resp.remove();
@@ -383,10 +395,10 @@ $(".businessSubcategory").chosen({
   //Submitting Yauzer-For-Business Form 
   $('#submit_business').click(function()
   {
-    if($('#yauzer_for_business').valid())
+    if(validator.valid())
     {
       $('#submit_business').prop('disabled', true);
-      $('#yauzer_for_business').submit();
+      document.getElementById("yauzer_for_business").submit();
     }else{
       return false;
     }
@@ -410,22 +422,11 @@ $(".businessSubcategory").chosen({
           alphanumeric: true, 
       },    
 
-      "phone_number": {
-          number: true,
-          minlength: 8,
-          maxlength: 16,
-      },  
       valueToBeTested: {
           required: true,
       }
 
-    },
-    messages: {
-        phone_number: {
-            minlength: jQuery.format("Enter at least {0} digits"),
-            maxlength: jQuery.format("Please enter no more than {0} digits."),
-        }
-    }    
+    },   
   });     
 
   $('#submit-business-form-btn').click(function()
@@ -461,7 +462,6 @@ $(".businessSubcategory").chosen({
                  dataType: 'text',
                  data: {
                    success: function(resp) {
-                    console.log(resp);
                          if(resp == "true" ) {
                          resp.parent().removeClass('error');
                          resp.remove();
@@ -675,6 +675,89 @@ $('.delete_speciality').click(function()
     }
 });  
 
+//Business-Info-By-admin
+$(".businessInfo").chosen({
+  width: "100%",
+  placeholder_text_multiple: "Click to choose Predefined Business Info..."
+  });
+
+
+$('#edit-business-info').validate({
+
+    errorPlacement: function (error, element) {
+        
+        if (element.is("select.chosen-select")) {
+            // placement for chosen
+            element.next("div.chosen-container").append(error);
+        } else {
+            // standard placement
+            error.insertAfter(element);
+        }
+    },
+
+onfocusout: function (valueToBeTested) {
+    $(valueToBeTested).valid();
+},
+
+highlight: function(element) {
+  $('element').removeClass("error");
+},
+
+rules: {
+
+    valueToBeTested: {
+        required: true,
+    }
+
+  },
+}); 
+
+//Submission-of-Business-Info-Form
+$('#update-businessInfp-form-btn').click(function()
+{
+  if($('#edit-business-info').valid())
+  {
+    $('#update-businessInfp-form-btn').prop('disabled', true);
+    $('#edit-business-info').submit();
+  }else{
+    return false;
+  }
+}); 
+
+
+//Validations-on-Discount-Form
+$('#edit-business-discount-form').validate({
+onfocusout: function (valueToBeTested) {
+    $(valueToBeTested).valid();
+},
+
+highlight: function(element) {
+  $('element').removeClass("error");
+},
+
+rules: {
+
+    valueToBeTested: {
+        required: true,
+    }
+
+  },
+});  
+
+
+//Submission-of-Discount-Form
+$('#update-discount-form-btn').click(function()
+{
+  if($('#edit-business-discount-form').valid())
+  {
+    $('#update-discount-form-btn').prop('disabled', true);
+    $('#edit-business-discount-form').submit();
+  }else{
+    return false;
+  }
+});
+
+
 }); //End-ready-function	
 
 
@@ -705,3 +788,23 @@ $(function() {
   });  
 
 });
+
+
+//Validation on Respond Yauzer Form
+  function applyValidate(formid){
+    
+      $('#'+formid).validate({
+
+      rules: {
+        
+        'comment': {
+          required: true,
+        },
+
+        valueToBeTested: {
+            required: true,
+        }
+
+      },
+    });
+ } 

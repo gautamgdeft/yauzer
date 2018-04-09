@@ -30,13 +30,13 @@
               <div class="form-group">
               <label for="headline">Businesses<span> *</span></label>
               <select name="business_id" class="form-control form-input" id="business_select" required>
-                @if(sizeof($businesses))
                  <option value="" disabled selected>Choose Business for yauzer</option>
+                @if(sizeof($businesses))
                 @foreach($businesses as $loopingBusiness)
                  <option value="{{ $loopingBusiness->id }}">{{ $loopingBusiness->name }}</option>
                 @endforeach
-                 <option value="other">Other Business</option>
                 @endif
+                 <option value="other">Other Business</option>
               </select>  
               </div>
             </div>            

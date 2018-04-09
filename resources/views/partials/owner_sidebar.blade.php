@@ -57,9 +57,27 @@
                 </a>
             </li>             
 
-            <li class="{{ (\Request::route()->getName() == 'owner.biz_specialties') ? 'active' : '' }}">
+            <li class="{{ (\Request::route()->getName() == 'owner.biz_specialties' || \Request::route()->getName() == 'owner.new_speciality_form' || \Request::route()->getName() == 'owner.edit_speciality') ? 'active' : '' }}">
                 <a href="{{ route('owner.biz_specialties') }}">
                     <i class="fa fa-building-o"></i> <span>Biz Specialties</span>
+                </a>
+            </li>              
+
+            <li class="{{ (\Request::route()->getName() == 'owner.biz_more_info') ? 'active' : '' }}">
+                <a href="{{ route('owner.biz_more_info') }}">
+                    <i class="fa fa-info"></i> <span>More Info</span>
+                </a>
+            </li>                
+
+            <li class="{{ (\Request::route()->getName() == 'owner.discounts') ? 'active' : '' }}">
+                <a href="{{ route('owner.discounts') }}">
+                    <i class="fa fa-money"></i> <span>Discounts</span>
+                </a>
+            </li>              
+
+            <li class="{{ (\Request::route()->getName() == 'owner.yauzers') ? 'active' : '' }}">
+                <a href="{{ route('owner.yauzers') }}">
+                    <i class="fa fa-comment"></i> <span>Yauzers</span>
                 </a>
             </li>            
         </ul>

@@ -65,6 +65,12 @@ class User extends Authenticatable
         return $this->hasMany('App\CreditCard');
      } 
 
+    #Relation with Yauzer-Comment
+    public function yauzer_comments()
+    {
+     return $this->hasMany('App\YauzerComment');
+    }         
+
     /**
       * Get the roles a user has
       */

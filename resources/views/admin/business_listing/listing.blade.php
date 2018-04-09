@@ -59,9 +59,9 @@
                         <th>Business Owner</th>
                         <th>Business Added By</th>
                         <th>Email</th>
-                        <th class="no-sort">Image</th>
-                        <th class="no-sort">Status</th>
-                        <th class="no-sort">Action</th>
+                        <th>Yauzers</th>
+                        <th>Status</th>
+                        <th>Action</th>
                      </tr>
                   
                   
@@ -72,7 +72,7 @@
                         <td>@if(@sizeof($loopinglistings->user)) <a data-toggle="tooltip" title="View Owner" href="{{ route('admin.show_owner',['slug' => $loopinglistings->user->slug]) }}">{{ $loopinglistings->user->name }}</a> @else No Owner Yet @endif</td>
                         <td>@if(@sizeof($loopinglistings->business_added_by)) <a data-toggle="tooltip" title="View User" href="{{ route('admin.show_owner',['slug' => $loopinglistings->business_added_by->slug]) }}">{{ $loopinglistings->business_added_by->name }}</a> @else No User @endif</td>
                         <td>{{ $loopinglistings->email }}</td>
-                        <td><img id="image_src" class="img-circle" src="/uploads/businessAvatars/{{ $loopinglistings->avatar }}" style="height: 45px; width: 45px;"></td>
+                        <td>{{ $loopinglistings->yauzers->count() }}</td>
                         <td>
                           <button id="approve_business_{{ $loopinglistings->id }}" class="btn btn-success btn-flat approve_business @if($loopinglistings->status == '1') hide @endif" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Click to Approve Business">Approve Business</button>
 
@@ -111,9 +111,9 @@
                         <th>Name</th>
                         <th>Business Owner</th>
                         <th>Email</th>
-                        <th class="no-sort">Image</th>
-                        <th class="no-sort">Status</th>
-                        <th class="no-sort">Action</th>
+                        <th>Yauzers</th>
+                        <th>Status</th>
+                        <th>Action</th>
                      </tr>
                   
                   
@@ -123,7 +123,7 @@
                         <td>{{ $loopinglistings->name }}</td>
                         <td>@if(@sizeof($loopinglistings->user)) {{ $loopinglistings->user->name }} @else Deleted User @endif</td>
                         <td>{{ $loopinglistings->email }}</td>
-                        <td><img id="image_src" class="img-circle" src="/uploads/businessAvatars/{{ $loopinglistings->avatar }}" style="height: 45px; width: 45px;"></td>
+                        <td>{{ $loopinglistings->yauzers->count() }}</td>
                         <td>
                           <button id="approve_business_{{ $loopinglistings->id }}" class="btn btn-success btn-flat approve_business @if($loopinglistings->status == '1') hide @endif" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Click to Approve Business">Approve Business</button>
 

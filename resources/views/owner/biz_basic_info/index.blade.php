@@ -64,7 +64,7 @@
 
                    <div id="subcategory" class="form-group{{ $errors->has('name') ? ' has-error' : '' }} @if(@sizeof($business->category->business_subcategories) == 0) hide @endif">
                       <label for="name">Business Subcategory</label>
-                      <select id="business_subcategory" class="businessSubcategory chosen-select form-control" name="business_subcategory[]" multiple="true" required="required">
+                      <select id="business_subcategory" class="businessSubcategory chosen-select form-control" name="business_subcategory[]" multiple="true">
                         
                          @if(@sizeof($business->category->business_subcategories))
                          @foreach($business->category->business_subcategories as $loopingsubcategories)

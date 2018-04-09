@@ -15,7 +15,6 @@ Auth::routes();
 
 
 //Backend-Admin-Routes
-
 Route::prefix('admin')->group(function()
 {	
 	Route::get('/login'     , 'Auth\AdminLoginController@showLoginform')->name('admin.login');
@@ -25,7 +24,8 @@ Route::prefix('admin')->group(function()
 	Route::get('/profile'   , 'Admin\AdminController@profile')->name('admin.profile');
 	Route::post('/update-profile', 'Admin\AdminController@update')->name('admin.update_profile');
 	Route::get('/changepassword','Admin\AdminController@showChangePasswordForm')->name('admin.showChangePasswordForm');
-	Route::post('/changepassword','Admin\AdminController@changepassword')->name('admin.changepassword');	
+    Route::post('/changepassword','Admin\AdminController@changepassword')->name('admin.changepassword');    
+
 
 
 	//Admin-Password-Forgot-Routes
@@ -91,6 +91,11 @@ Route::prefix('admin')->group(function()
     Route::get('/view-business/{slug}', 'Admin\BusinessListingController@show_business')->name('admin.show_business');
     Route::get('/edit-business/{slug}', 'Admin\BusinessListingController@edit_business')->name('admin.show_edit_business_form');    
     Route::post('/update-business/{slug}', 'Admin\BusinessListingController@update_business')->name('admin.update_business');
+
+    #Business-Listings-Premium-Routes
+    Route::any( '/search-premium-business', 'Admin\BusinessListingController@search_premium')->name('premium_business.search');
+    Route::get('/business-listings-premium', 'Admin\BusinessListingController@business_listing_premium')->name('admin.business_listing_premium');
+    Route::post('/send-business-premium-email', 'Admin\BusinessListingController@business_premium_email_owner')->name('admin.business_premium_email_owner');
 
 
     //Business-Hours-Routes    
@@ -297,7 +302,20 @@ Route::group(['prefix' => 'owner','middleware' => ['auth', 'owner']], function (
    Route::post('/destroy-business-speciality', 'Owner\BusinessSpecialityController@destory_speciality')->name('owner.destory_speciality');  
 
 
- Route::get('/logout', 'Owner\ProfileController@logout')->name('owner.logout');
+  #Owner-Business-More-Info
+   Route::get('/biz-moreinfo', 'Owner\BusinessMoreinfoController@index')->name('owner.biz_more_info');   
+   Route::post('/update-business-main-info/{slug}', 'Owner\BusinessMoreinfoController@update_main_info')->name('owner.update_main_info');
+
+  #Owner-Business-Discount-Info
+   Route::get('/biz-discounts', 'Owner\BusinessDiscountController@index')->name('owner.discounts'); 
+   Route::post('/update-business-discount-information/{slug}', 'Owner\BusinessDiscountController@update_business_discount')->name('owner.update_business_discount');
+
+  #Owner-Yauzers-Routes
+   Route::get('/biz-yauzers', 'Owner\BusinessYauzerController@index')->name('owner.yauzers');    
+   Route::post('/store-yauzer', 'Owner\BusinessYauzerController@respondYauzer')->name('owner.respond_yauzer');    
+
+  #Owner-Logout-Route
+   Route::get('/logout', 'Owner\ProfileController@logout')->name('owner.logout');
  
 
 });    

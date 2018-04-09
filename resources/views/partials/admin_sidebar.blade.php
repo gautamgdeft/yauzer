@@ -43,6 +43,12 @@
                 <a  href="{{ route('admin.business_listing') }}">
                     <i class="fa fa-suitcase"></i> <span>Business Listings</span>
                 </a>
+            </li>             
+
+            <li class="{{ (\Request::route()->getName() == 'admin.business_listing_premium' || \Request::route()->getName() == 'admin.show_business') ? 'active' : '' }}">
+                <a  href="{{ route('admin.business_listing_premium') }}">
+                    <i class="fa fa-money"></i> <span>Business Listings – Premium</span>
+                </a>
             </li>            
 
             <li class="{{ (\Request::route()->getName() == 'business.more_info_listing' || \Request::route()->getName() == 'businessinfo.search' || \Request::route()->getName() == 'admin.edit_form' || \Request::route()->getName() == 'business.add_more_info') ? 'active' : '' }}">

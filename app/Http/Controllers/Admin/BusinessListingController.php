@@ -27,6 +27,7 @@ use Hash;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Mail\BusinessStatusMail;
+use App\Mail\PremiumBusinessOwnerEmail;
 
 class BusinessListingController extends Controller
 {
@@ -102,7 +103,6 @@ class BusinessListingController extends Controller
               unlink(public_path() . $path);
             }
             BusinessListing::delete_business($businessListing);
-            #$businessListing->delete();
             return response(['msg' => 'Business has been deleted successfully', 'status' => 'success']);
         }
 
@@ -179,6 +179,51 @@ class BusinessListingController extends Controller
         } 
 
         return redirect()->route('admin.business_listing')->with("success","Business has been updated");       
+    }
+
+    public function search_premium(Request $request)
+    {
+           $search_parameter = $request->search_parameter;
+           if($search_parameter != "")
+           {
+
+            $filterBusiness = BusinessListing::where ( 'name', 'LIKE', '%' . $search_parameter . '%' )->has('yauzers', '>=' , 15)->with('yauzers')->paginate (10)->setPath ( '' );
+            $pagination = $filterBusiness->appends ( array (
+                  'search_parameter' => $request->search_parameter 
+              ) );
+              
+            if (count ( $filterBusiness ) > 0)
+            return view ( 'admin.business_listing_premium.listing' )->withDetails ( $filterBusiness )->withQuery ( $search_parameter );
+           }
+             
+            $filterBusiness = NULL; 
+            return view ( 'admin.business_listing_premium.listing' )->withDetails ( $filterBusiness )->withMessage ( 'No Details found. Try to search again !' );      
+    }
+
+    public function business_listing_premium()
+    {
+      $business = BusinessListing::has('yauzers', '>=' , 15)->with('yauzers')->paginate(10);
+      $details = NULL;
+       return view('admin.business_listing_premium.listing', compact('business', 'details'));
+    }
+
+    public function business_premium_email_owner(Request $request)
+    {
+      if($request->ajax()){
+
+        $business = BusinessListing::find($request->businessId);
+
+         #Business-Qualifies-Premium-Listing-Email-to-Owner
+          if(@sizeof($business->user)){
+          \Mail::to($business->user->email)->send(new PremiumBusinessOwnerEmail($business));
+          }
+
+        return response(['msg' => 'Premium Business notification has been sent to the owner successfully', 'status' => 'success']);
+
+        }else{
+         return response(['msg' => 'Failed sending the email.Try again', 'status' => 'failed']);
+        }  
+
     }
 
 

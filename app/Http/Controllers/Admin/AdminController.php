@@ -105,6 +105,11 @@ class AdminController extends Controller
             $user->save();
             return redirect()->back()->with("success","Password changed successfully !");
     }
+
+    public function sammy()
+    {
+      dd('Yes here');
+    }
     
 
 

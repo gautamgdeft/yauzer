@@ -12,7 +12,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 $(document).ready(function()
 {
-	
+	$.validator.setDefaults({ ignore: ":hidden:not(select)" });
+
 setTimeout(function() {
 $('.alert-success').fadeOut('fast');
 }, 8000); 
@@ -182,7 +183,6 @@ rules: {
       },
 
       "website": {
-          noSpace: true,
           url: true,
       },
 
@@ -216,10 +216,10 @@ rules: {
   //Submitting Yauzer-For-Business Form 
   $('#store_yauzer_btn').click(function()
   {
-    if($('#yauzer_business').valid())
+    if(validator.valid())
     {
       $('#store_yauzer_btn').prop('disabled', true);
-      $('#yauzer_business').submit();
+      document.getElementById("yauzer_business").submit();
     }else{
       return false;
     }

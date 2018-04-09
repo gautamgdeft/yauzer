@@ -30,13 +30,13 @@
               <div class="form-group">
               <label for="headline">Businesses<span> *</span></label>
               <select name="business_id" class="form-control form-input" id="business_select" required>
-                @if(sizeof($businesses))
                  <option value="" disabled selected>Choose Business you want to yauzer</option>
+                @if(sizeof($businesses))
                 @foreach($businesses as $loopingBusiness)
                  <option value="{{ $loopingBusiness->id }}">{{ $loopingBusiness->name }}</option>
                 @endforeach
-                 <option value="other">Other Business</option>
                 @endif
+                 <option value="other">Other Business</option>
               </select>  
               </div>
             </div>            
@@ -116,7 +116,7 @@
             <div class="col-md-6 col-sm-6">
               <div class="form-group">
               <label for="headline">Email Address<span> *</span></label>
-              <input name="email" id="email" type="text" class="form-control form-input" placeholder="Enter Email Address" disabled required>
+              <input name="email" id="email" type="text" class="form-control form-input" placeholder="Enter Email Address" disabled>
               </div>
             </div>
 

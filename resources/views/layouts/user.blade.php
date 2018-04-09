@@ -20,6 +20,8 @@
     <link href="{{ asset('css/user/jquery.scrolling-tabs.css') }}" rel="stylesheet">
     <link href="{{ asset('css/user/owl.carousel.min.css') }}" rel="stylesheet">
     <link href="//cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.min.css" rel="stylesheet">
+    <link href="{{ asset('css/admin/timepicker/bootstrap-timepicker.min.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/user/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/user/responsive.css') }}" rel="stylesheet">
 
@@ -44,6 +46,8 @@
     <script src="{{ asset('js/validate.min.js') }}"></script>    
     <script src="{{ asset('js/star-rating.js') }}"></script> 
     <script src="//cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"></script>
+    <script src="{{ asset('js/admin/timepicker/bootstrap-timepicker.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>     
     <script src="{{ asset('js/user/owl.carousel.js') }}"></script>
     <script src="{{ asset('js/user/jquery.scrolling-tabs.js') }}"></script>
     <script src="{{ asset('js/user/designer_custom.js') }}"></script>
