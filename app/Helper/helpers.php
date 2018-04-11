@@ -43,7 +43,7 @@ function uploadBusinessMainAvatar($avatar, $business)
 {
   $filename = time() . '.' . $avatar->getClientOriginalExtension();
   $path = '/uploads/businessAvatars/' . $filename;
-  Image::make($avatar)->resize(246, 222)->save( public_path($path));
+  Image::make($avatar)->resize(270, 329)->save( public_path($path));
   $business->update(
     array(
       'avatar' => $filename,

@@ -44,7 +44,7 @@ class BusinessListing extends Model
     #Relation with Business-Pictures
     public function business_pictures()
     {
-     return $this->hasMany('App\BusinessPicture');
+     return $this->hasMany('App\BusinessPicture', 'business_id');
     }
 
     #Relation with Credit-Card
@@ -62,14 +62,26 @@ class BusinessListing extends Model
     #Relation with Business-Specilaity
     public function business_specialities()
     {
-     return $this->hasMany('App\Speciality');
+     return $this->hasMany('App\Speciality', 'business_id');
     }    
 
     #Relation with Intersted-Business
     public function interested_business()
     {
-     return $this->hasMany('App\InterestedBusiness');
+     return $this->hasOne('App\InterestedBusiness', 'business_id');
+    }    
+
+    #Relation with Intersted-Business
+    public function business_more_info()
+    {
+     return $this->hasMany('App\BusinessMoreInfo', 'business_id');
     }
+
+    #Relation with Business Hours
+    public function business_hour()
+    {
+     return $this->hasOne('App\BusinessHour', 'business_id');
+    }    
 
 
     #Creating-Slugs

@@ -25,6 +25,7 @@
             
             <input type="hidden" name="latitude" id="latitude">
             <input type="hidden" name="longitude" id="longitude">
+            <input type="hidden" name="checkPost" id="checkPost">
             
             <div class="col-md-6 col-sm-6">
               <div class="form-group">

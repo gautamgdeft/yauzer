@@ -164,6 +164,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Unisharp\Ckeditor\ServiceProvider::class,
+        \Torann\GeoIP\GeoIPServiceProvider::class,
 
 
         /*
@@ -229,6 +230,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'GeoIP' => \Torann\GeoIP\Facades\GeoIP::class,
 
     ],
 

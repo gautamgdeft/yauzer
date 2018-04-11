@@ -2155,7 +2155,7 @@ ul.yauzeredtime-status li {
 }
 .business-slider-mobile{display:none;}
 /*****180328******/
-.business-sec .business-detail{width:97%;background:#fff;display:inline-block;border:1px solid #ddd;position:relative;padding-bottom:30px;}
+.business-sec .business-detail{width:100%;background:#fff;display:inline-block;border:1px solid #ddd;position:relative;padding-bottom:30px;margin: 10px 0px; }
 .business-sec .business-detail figure {height: 200px;overflow: hidden;box-shadow:none;}
 .business-sec .business-detail figure img{width:100%; height:100%;}
 .business-detail-text{padding:10px;}

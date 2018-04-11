@@ -9,6 +9,7 @@ use App\BusinessCategory;
 use App\BusinessSubcategory;
 use App\Yauzer;
 use App\User;
+use App\BusinessInfo;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +18,8 @@ use App\Http\Requests;
 use Carbon\Carbon;
 use App\Mail\BusinessNotificationAdminMail;
 use App\Mail\PremiumBusinessAdminEmail;
+use Illuminate\Support\Facades\DB;
+use GeoIP;
 
 class BusinessController extends Controller
 {
@@ -132,6 +135,44 @@ class BusinessController extends Controller
        }
     }
 
+    public function business_detail($slug)
+    {
+        $businessDetail = BusinessListing::findBySlugOrFail($slug);
+        
+        //Interested-Business-Working
+        if(@sizeof($businessDetail->interested_business->interested_businesses)){
+          $explodedArray = explode(',', $businessDetail->interested_business->interested_businesses);
+          $interestedBusiness = [];
+          foreach ($explodedArray as $businessId) {
+          $interestedBusiness[] = BusinessListing::find($businessId);
+          }
+        }else{
+          $interestedBusiness = NULL;
+        }  
+
+        return view('home.business_detail', compact('businessDetail','interestedBusiness'));
+    }
+
+    public function search_by_category($slug)
+    {
+       $businessCategory = BusinessCategory::findBySlugOrFail($slug);
+       $location = GeoIP::getLocation();
+       $circle_radius = 3959;
+       $max_distance = 50;
+       $lat = $location->lat;
+       $lng = $location->lon;
+
+       $businesses = DB::select('SELECT * FROM (SELECT *, (' . $circle_radius . ' * acos(cos(radians(' . $lat . ')) * cos(radians(latitude)) * cos(radians(longitude) - radians(' . $lng . ')) + sin(radians(' . $lat . ')) * sin(radians(latitude)))) AS distance FROM business_listings) AS distances WHERE distance < ' . $max_distance . ' AND business_category = '.$businessCategory->id.' ORDER BY distance');
+
+       dd($businesses);
+       
+       return view('home.category_search', compact('businesses'));     
+                
+    }
+
+
+
+    #Protected Functions
     protected function yauzer_adding_avaliablity($business_id)
     {
       $carbon_today = Carbon::today();

@@ -11,7 +11,7 @@
 				@foreach($businessYauzersInfo as $loopingYauzer)
 				<li id="yauzer_li_{{ $loopingYauzer->id }}">
 
-					<figure><img class="img-circle" src="/uploads/avatars/{{ $loopingYauzer->user->avatar }}" style="height: 45px; width: 45px;" alt="{{ $loopingYauzer->user->name }}"></figure>
+					<figure><img class="img-circle" src="/uploads/avatars/{{ $loopingYauzer->user->avatar }}" style="height: 75px; width: 75px;" alt="{{ $loopingYauzer->user->name }}"></figure>
 					<div class="commentbox-content">
 						<h5 class="authorname">{{ $loopingYauzer->user->name }}</h5>
 						<div class="star-rating">

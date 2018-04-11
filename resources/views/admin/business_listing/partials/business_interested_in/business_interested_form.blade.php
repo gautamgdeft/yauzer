@@ -20,7 +20,9 @@
                   @if(@sizeof($intersetedBusinesses->interested_businesses))
                   <option value="{{ $looping_businesses->id }}" @if(in_array($looping_businesses->id, $intersetedBusinesses->interested_businesses)) selected="selected" @endif>{{ $looping_businesses->name }}</option>
                   @else
-                  <option value="{{ $looping_businesses->id }}">{{ $looping_businesses->name }}</option>
+                   @if($businessListing->id != $looping_businesses->id)
+                   <option value="{{ $looping_businesses->id }}">{{ $looping_businesses->name }}</option>
+                   @endif
                   @endif
                  
                 @endforeach

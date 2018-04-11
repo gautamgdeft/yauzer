@@ -211,9 +211,13 @@ $(document).ready(function()
         $('#website').prop('disabled', false).val('');
         $('#email').prop('disabled', false).val('');
         $('#claim_business_btn').addClass('hide');     
-        $('#submit_business').removeClass('hide');     
+        $('#submit_business').removeClass('hide');
+        $('#checkPost').val('');
 
   }else{ 
+  
+  
+  $('#checkPost').val('clain_business');     
   
   //If Business Exist In Our Db
   if(!$('#business_name').hasClass('hide')){
@@ -394,6 +398,18 @@ $(".businessSubcategory").chosen({
 
   //Submitting Yauzer-For-Business Form 
   $('#submit_business').click(function()
+  {
+    if(validator.valid())
+    {
+      $('#submit_business').prop('disabled', true);
+      document.getElementById("yauzer_for_business").submit();
+    }else{
+      return false;
+    }
+  });   
+
+  //Submitting Yauzer-For-Business Form 
+  $('#claim_business_btn').click(function()
   {
     if(validator.valid())
     {

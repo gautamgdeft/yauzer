@@ -34,7 +34,8 @@ class BusinessController extends Controller
 
     public function claim_business(Request $request)
     {
-       if(isset($request->clain_business)){
+       
+       if(isset($request->checkPost)){
         #Claiming Business
        	$businesses = BusinessListing::get_business($request->business_id);
        	$businesses->user_id = \Auth::user()->id;

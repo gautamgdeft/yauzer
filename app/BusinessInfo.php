@@ -26,5 +26,11 @@ class BusinessInfo extends Model
     public static function findBySlugOrFail($slug)
     {
          return $businessInfo = BusinessInfo::findBySlug($slug);
-    }         
+    }
+
+    #Relation with Intersted-Business
+    public function business_more_info()
+    {
+     return $this->hasMany('App\BusinessMoreInfo', 'business_info_id');
+    }
 }

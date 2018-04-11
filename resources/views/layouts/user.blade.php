@@ -19,6 +19,7 @@
     <link href="{{ asset('css/user/bootstrap-select.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/user/jquery.scrolling-tabs.css') }}" rel="stylesheet">
     <link href="{{ asset('css/user/owl.carousel.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/user/owl.carousel.min1.css') }}" rel="stylesheet">
     <link href="//cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.min.css" rel="stylesheet">
     <link href="{{ asset('css/admin/timepicker/bootstrap-timepicker.min.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
@@ -49,6 +50,7 @@
     <script src="{{ asset('js/admin/timepicker/bootstrap-timepicker.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>     
     <script src="{{ asset('js/user/owl.carousel.js') }}"></script>
+    <script src="{{ asset('js/user/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('js/user/jquery.scrolling-tabs.js') }}"></script>
     <script src="{{ asset('js/user/designer_custom.js') }}"></script>
      <script src="http://maps.googleapis.com/maps/api/js?libraries=places" type="text/javascript"></script>

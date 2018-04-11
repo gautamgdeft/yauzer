@@ -224,6 +224,8 @@ Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
 Route::get('/', 'User\WelcomeController@index')->name('home.welcome');
 Route::get('/business-login', 'Auth\LoginController@showLoginForm')->name('owner.login');
 Route::get('/what-is-yauzer', 'Cms\CmsController@what_is_yauzer')->name('user.what_is_yauzer');
+Route::get('business-detail/{slug}', 'User\BusinessController@business_detail')->name('user.business_detail');
+Route::get('category/{slug}', 'User\BusinessController@search_by_category')->name('user.business_by_category');
 
 
 //Only-Auth-With-All-Role-Routes

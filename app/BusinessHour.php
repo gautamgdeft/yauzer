@@ -11,4 +11,12 @@ class BusinessHour extends Model
     protected $hidden = [
         'sun_status', 'mon_status', 'tue_status', 'wed_status', 'thur_status', 'fri_status', 'sat_status',
     ]; 
+
+
+    #Relation with Business
+    public function business()
+    {
+     return $this->belongsTo('App\BusinessListing');
+    }    
+
 }

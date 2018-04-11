@@ -6,7 +6,7 @@
 
 @if(@sizeof($businessListing->description))
 
- <p>{{ $businessListing->description }}</p>
+ {!!html_entity_decode($businessListing->description)!!}
 
 @endif
 

@@ -43,7 +43,7 @@ class BusinessYauzerController extends Controller
        $user = new Yauzer($request->all());
        $user->save();
 
-       if($yauzer->count() == '15'){
+       if($user->count() == '15'){
         #Premium-Business-Notification-Email-Admin
         \Mail::to('teamphp00@gmail.com')->send(new PremiumBusinessAdminEmail($yauzer->business));
        }       

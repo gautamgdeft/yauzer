@@ -528,8 +528,8 @@ ul.commentboxlist li  .commentbox-content {
 ul.commentboxlist li .button-box {
     display: inline-block;
     position: absolute;
-    right: 20px;
-    width: 80px;
+    right: 0;
+    width: 62px;
     top: 20px;
 }
 ul.commentboxlist li .rating-xs {
@@ -580,6 +580,16 @@ ul.speciality_checks li:nth-child(7) {
     border: none;
     background-image: none;
     box-shadow: none; color:#fff !important;
+}
+.option-store.x_panel {
+    padding: 15px;
+}
+.box{border-top: 2px solid #c1c1c1 !important;}
+.owner-reply {
+    float: right;
+    padding:20px 0px 0px 0px;
+    display: inline-block;
+    width: 90%;
 }
 
 

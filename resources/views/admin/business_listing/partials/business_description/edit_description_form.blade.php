@@ -54,6 +54,10 @@
 @section('custom_scripts')
 <script type="text/javascript">
 
+
+CKEDITOR.replace( 'description' );
+CKEDITOR.config.allowedContent = true;
+
 $(document).ready(function()
 {
   $("#avatar").change(function () {

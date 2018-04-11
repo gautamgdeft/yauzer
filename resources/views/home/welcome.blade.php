@@ -95,10 +95,11 @@
                <div class="item">
                   <div class="services-sec service1">
                      <div class="service-left">
-                        <figure> <img src="/uploads/categoryAvatars/{{ $loopingCategory->avatar }}" alt=""/> </figure>
+                        <a href="{{ route('user.business_by_category',['slug' => $loopingCategory->slug]) }}">
+                        <figure> <img src="/uploads/categoryAvatars/{{ $loopingCategory->avatar }}" alt=""/> </figure></a>
                      </div>
                      <div class="service-right-sec">
-                        <p class="heading-sec"> {{ $loopingCategory->name }}</p>
+                        <a href="{{ route('user.business_by_category',['slug' => $loopingCategory->slug]) }}"><p class="heading-sec"> {{ $loopingCategory->name }}</p></a>
                      </div>
                   </div>
                </div>
@@ -174,193 +175,36 @@
                <div class="container">
                   <div class="slider_sec">
                      <div class="row">
-                        <div class="owl-carousel owl-theme grid">
-                           <div class="item">
-                              <div class="col-md-12 col-sm-12 col-xs-6 left-sm-side">
-                                 <div class="business-detail">
+                        @if(sizeof($businesses))
+                        @foreach($businesses as $loopingBusiness)
+                        <div class="col-md-3 col-sm-4 col-xs-6">
+                            <div class="business-detail">
                                     <figure>
-                                       <img src="images/business-tab-1.png" alt="img">
+                                       <img src="/uploads/businessAvatars/{{ $loopingBusiness->avatar }}" alt="img">
                                     </figure>
-                                    <div class="business-detail-text">
-                                       <h2>Specialized Handiman Services</h2>
-                                       <p>1234 Main Street SW <br>
-                                          Miami Lakes, FL 33015
+                                 <div class="business-detail-text">
+                                       @php
+                                         $addressArray = explode(',', $loopingBusiness->address);
+                                       @endphp
+                                       <h2>{{ $loopingBusiness->name }}</h2>
+                                       <p>{{ $addressArray[0] }} <br>
+                                          {{ $addressArray[1] }}, {{ $addressArray[2] }} {{ $loopingBusiness->zipcode }}
                                        </p>
-                                       <a href="javascript:void" class="phoneno">Phone: 305-259-8549</a>
-                                       <span>E-mail:<a href="javascript:void">info@handiman.com</a></span>
-                                       <span>Web:<a href="javascript:void">www.handiman.com</a></span>
+                                       <a href="javascript:void" class="phoneno">Phone: {{ $loopingBusiness->phone_number }}</a>
+                                       <span>E-mail:<a href="javascript:void">{{ $loopingBusiness->email }}</a></span>
+                                       <span>Web:<a href="javascript:void" class="web">{{ $loopingBusiness->website }}</a></span>
                                     </div>
-                                    <a href="javascript:;" class="btn-more">More About This Biz</a> 
+                                    <a href="{{ route('user.business_detail',['slug' => $loopingBusiness->slug]) }}" class="btn-more">More About This Biz</a> 
                                  </div>
-                              </div>
-                              <div class="col-md-12 col-sm-12 col-xs-6  right-sm-side">
-                                 <div class="business-detail">
-                                    <figure>
-                                       <img src="images/business-tab-2.png" alt="img">
-                                    </figure>
-                                    <div class="business-detail-text">
-                                       <h2>Specialized Handiman Services</h2>
-                                       <p>1234 Main Street SW <br>
-                                          Miami Lakes, FL 33015
-                                       </p>
-                                       <a href="javascript:void" class="phoneno">Phone: 305-259-8549</a>
-                                       <span>E-mail:<a href="javascript:void">info@handiman.com</a></span>
-                                       <span>Web:<a href="javascript:void">www.handiman.com</a></span>
-                                    </div>
-                                    <a href="javascript:;" class="btn-more">More About This Biz</a> 
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="item">
-                              <div class="col-md-12 col-sm-12 col-xs-6 left-sm-side">
-                                 <div class="business-detail">
-                                    <figure>
-                                       <img src="images/business-tab-3.png" alt="img">
-                                    </figure>
-                                    <div class="business-detail-text">
-                                       <h2>Specialized Handiman Services</h2>
-                                       <p>1234 Main Street SW <br>
-                                          Miami Lakes, FL 33015
-                                       </p>
-                                       <a href="javascript:void" class="phoneno">Phone: 305-259-8549</a>
-                                       <span>E-mail:<a href="javascript:void">info@handiman.com</a></span>
-                                       <span>Web:<a href="javascript:void">www.handiman.com</a></span>
-                                    </div>
-                                    <a href="javascript:;" class="btn-more">More About This Biz</a> 
-                                 </div>
-                              </div>
-                              <div class="col-md-12 col-sm-12 col-xs-6 right-sm-side">
-                                 <div class="business-detail">
-                                    <figure>
-                                       <img src="images/business-tab-4.png" alt="img">
-                                    </figure>
-                                    <div class="business-detail-text">
-                                       <h2>Specialized Handiman Services</h2>
-                                       <p>1234 Main Street SW <br>
-                                          Miami Lakes, FL 33015
-                                       </p>
-                                       <a href="javascript:void" class="phoneno">Phone: 305-259-8549</a>
-                                       <span>E-mail:<a href="javascript:void">info@handiman.com</a></span>
-                                       <span>Web:<a href="javascript:void">www.handiman.com</a></span>
-                                    </div>
-                                    <a href="javascript:;" class="btn-more">More About This Biz</a> 
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="item">
-                              <div class="col-md-12 col-sm-12 col-xs-6 left-sm-side">
-                                 <div class="business-detail">
-                                    <figure>
-                                       <img src="images/business-tab-5.png" alt="img">
-                                    </figure>
-                                    <div class="business-detail-text">
-                                       <h2>Specialized Handiman Services</h2>
-                                       <p>1234 Main Street SW <br>
-                                          Miami Lakes, FL 33015
-                                       </p>
-                                       <a href="javascript:void" class="phoneno">Phone: 305-259-8549</a>
-                                       <span>E-mail:<a href="javascript:void">info@handiman.com</a></span>
-                                       <span>Web:<a href="javascript:void">www.handiman.com</a></span>
-                                    </div>
-                                    <a href="javascript:;" class="btn-more">More About This Biz</a> 
-                                 </div>
-                              </div>
-                              <div class="col-md-12 col-sm-12 col-xs-6 right-sm-side">
-                                 <div class="business-detail">
-                                    <figure>
-                                       <img src="images/business-tab-6.png" alt="img">
-                                    </figure>
-                                    <div class="business-detail-text">
-                                       <h2>Specialized Handiman Services</h2>
-                                       <p>1234 Main Street SW <br>
-                                          Miami Lakes, FL 33015
-                                       </p>
-                                       <a href="javascript:void" class="phoneno">Phone: 305-259-8549</a>
-                                       <span>E-mail:<a href="javascript:void">info@handiman.com</a></span>
-                                       <span>Web:<a href="javascript:void">www.handiman.com</a></span>
-                                    </div>
-                                    <a href="javascript:;" class="btn-more">More About This Biz</a> 
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="item">
-                              <div class="col-md-12 col-sm-12 col-xs-6 left-sm-side">
-                                 <div class="business-detail">
-                                    <figure>
-                                       <img src="images/business-tab-7.png" alt="img">
-                                    </figure>
-                                    <div class="business-detail-text">
-                                       <h2>Specialized Handiman Services</h2>
-                                       <p>1234 Main Street SW <br>
-                                          Miami Lakes, FL 33015
-                                       </p>
-                                       <a href="javascript:void" class="phoneno">Phone: 305-259-8549</a>
-                                       <span>E-mail:<a href="javascript:void">info@handiman.com</a></span>
-                                       <span>Web:<a href="javascript:void">www.handiman.com</a></span>
-                                    </div>
-                                    <a href="javascript:;" class="btn-more">More About This Biz</a> 
-                                 </div>
-                              </div>
-                              <div class="col-md-12 col-sm-12 col-xs-6 right-sm-side">
-                                 <div class="business-detail">
-                                    <figure>
-                                       <img src="images/business-tab-8.png" alt="img">
-                                    </figure>
-                                    <div class="business-detail-text">
-                                       <h2>Specialized Handiman Services</h2>
-                                       <p>1234 Main Street SW <br>
-                                          Miami Lakes, FL 33015
-                                       </p>
-                                       <a href="javascript:void" class="phoneno">Phone: 305-259-8549</a>
-                                       <span>E-mail:<a href="javascript:void">info@handiman.com</a></span>
-                                       <span>Web:<a href="javascript:void">www.handiman.com</a></span>
-                                    </div>
-                                    <a href="javascript:;" class="btn-more">More About This Biz</a> 
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="item">
-                              <div class="col-md-12 col-sm-12 col-xs-6 left-sm-side">
-                                 <div class="business-detail">
-                                    <figure>
-                                       <img src="images/business-tab-3.png" alt="img">
-                                    </figure>
-                                    <div class="business-detail-text">
-                                       <h2>Specialized Handiman Services</h2>
-                                       <p>1234 Main Street SW <br>
-                                          Miami Lakes, FL 33015
-                                       </p>
-                                       <a href="javascript:void" class="phoneno">Phone: 305-259-8549</a>
-                                       <span>E-mail:<a href="javascript:void">info@handiman.com</a></span>
-                                       <span>Web:<a href="javascript:void">www.handiman.com</a></span>
-                                    </div>
-                                    <a href="javascript:;" class="btn-more">More About This Biz</a> 
-                                 </div>
-                              </div>
-                              <div class="col-md-12 col-sm-12 col-xs-6 right-sm-side">
-                                 <div class="business-detail">
-                                    <figure>
-                                       <img src="images/business-tab-4.png" alt="img">
-                                    </figure>
-                                    <div class="business-detail-text">
-                                       <h2>Specialized Handiman Services</h2>
-                                       <p>1234 Main Street SW <br>
-                                          Miami Lakes, FL 33015
-                                       </p>
-                                       <a href="javascript:void" class="phoneno">Phone: 305-259-8549</a>
-                                       <span>E-mail:<a href="javascript:void">info@handiman.com</a></span>
-                                       <span>Web:<a href="javascript:void">www.handiman.com</a></span>
-                                    </div>
-                                    <a href="javascript:;" class="btn-more">More About This Biz</a> 
-                                 </div>
-                              </div>
-                           </div>
                         </div>
+                        @endforeach
+                        @endif                                                                                                                                                                    
                      </div>
                   </div>
                </div>
             </div>
          </div>
+
          <div class="col-sm-12 text-center">
             <!--<a href="javascript:;" class="read-btn"> View more </a>-->
          </div>
@@ -380,7 +224,7 @@
                   </p>
                   <a href="javascript:void" class="phoneno">Phone: 305-259-8549</a>
                   <span>E-mail:<a href="javascript:void">info@handiman.com</a></span>
-                  <span>Web:<a href="javascript:void">www.handiman.com</a></span>
+                  <span>Web:<a class="web" href="javascript:void">www.handiman.com</a></span>
                </div>
                <a href="javascript:;" class="btn-more">More About This Biz</a> 
             </div>
@@ -627,5 +471,14 @@
    </div>
 </section>
 <!-- Blog Ends -->
+
+@endsection
+
+@section('custom_scripts')
+
+<script type="text/javascript">
+ 
+
+</script>
 
 @endsection

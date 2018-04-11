@@ -39,21 +39,18 @@ highlight: function(element) {
 rules: {
   
   "name": {
-  	  noSpace: true,
-      character_with_space: true,
+  	  character_with_space: true,
       maxlength: 50, 
   },
   'email': {
       customemail: true,
   },
   'password': {
-      noSpace: true,
       minlength: 6,
       maxlength: 12,
   },
   'password_confirmation': {
   	  equalTo: "#password",
-      noSpace: true,
       minlength: 6,
       maxlength: 12,
   },
@@ -472,6 +469,21 @@ $("#zipcode").keypress(function(event) {
   $('.reset_yauzer_form').click(function(){
         validator.resetForm();
   });
+
+
+
+
+  //Removing-Https-From-Url-While-Showing-Lising-Main
+  $( ".business-detail" ).each(function( index ) {
+     var originalUrl = $(this).find('.web').text();
+     var urlNoProtocol = originalUrl.replace(/^https?\:\/\//i, "");
+     $(this).find('.web').text(urlNoProtocol);
+  });
+
+  //For-Business-Detail
+  var detail = $('.web-detail').text();
+  var urlNoProtocola = detail.replace(/^https?\:\/\//i, "");
+  $('.web-detail').text(urlNoProtocola);
 
 }); //End-Ready-Function
 

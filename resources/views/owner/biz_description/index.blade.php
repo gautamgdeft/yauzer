@@ -31,7 +31,7 @@
 
 @if(@sizeof($business->description))
 
- <p>{{ $business->description }}</p>
+ {!!html_entity_decode($business->description)!!}
 
 @endif
 
