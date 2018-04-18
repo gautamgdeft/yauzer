@@ -202,7 +202,7 @@ class BusinessListingController extends Controller
 
     public function business_listing_premium()
     {
-      $business = BusinessListing::has('yauzers', '>=' , 15)->with('yauzers')->paginate(10);
+      $business = BusinessListing::has('yauzers', '>=' , 1)->with('yauzers')->paginate(10);
       $details = NULL;
        return view('admin.business_listing_premium.listing', compact('business', 'details'));
     }

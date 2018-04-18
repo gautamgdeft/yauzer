@@ -1,5 +1,5 @@
  <header class="header">
-   <a href="{{ route('admin.dashboard') }}" class="logo">
+   <a href="{{ route('owner.dashboard') }}" class="logo">
       <!-- Add the class icon to your logo image or logo icon to add the margining -->
       <img src="{{ asset('img/logo.png') }}" alt="user image"/>
    </a>

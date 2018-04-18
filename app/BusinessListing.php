@@ -56,7 +56,7 @@ class BusinessListing extends Model
     #Relation with Discount
     public function discounts()
     {
-     return $this->hasOne('App\Discount');
+     return $this->hasOne('App\Discount', 'business_id');
     }
 
     #Relation with Business-Specilaity

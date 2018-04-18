@@ -4,7 +4,7 @@
 
 
 <div class="container">
-   <div class="row">
+{{--    <div class="row">
       <div class="col-sm-12">
          <div class="location-search ">
             <div class="col-sm-4">
@@ -35,239 +35,113 @@
             </div>
          </div>
       </div>
+   </div> --}}
+   <div id="msgs">
+    @if(session('success'))
+     <div class="alert alert-success">
+     {{ session('success') }}
+     </div>
+    @endif
    </div>
+
    <div class="row">
       <div class="lawyer-listing business-listing">
-         <div class="col-md-9 col-sm-12">
+         <div class="col-md-9 col-sm-12">              
             <div class="row">
                @if(@sizeof($businesses))
-               @foreach($businesses as $loopingBusiness)	
-               <div class="col-sm-4 col-xs-6">
+               @foreach($businesses as $loopingBusiness)
+               @if($loopingBusiness->premium_status == true)	
+               <div class="col-sm-4 col-xs-6 premium_cstm_biz">
                   <figure>
                      <a href="javascript:void(0)"  class="red-eyes">
                      <span><img src="{{ asset('images/red-eyes.png') }}"></span>
-                     <img src="/uploads/businessAvatars/{{ $loopingBusiness->avatar }}" alt=""/>
+                     <img style="width:236px; height:213px;" src="/uploads/businessAvatars/{{ $loopingBusiness->avatar }}" alt=""/>
                      </a>
                      <figcaption>
                         <div class="content">
-                           <h3> {{ $loopingBusiness->name }} of {{ $loopingBusiness->user->name }} 
-                           </h3>
-                           <p class="address-text">Law Offices of David A. Helfand Attorney at Law<br/>12345 Main Avenue Miami, FL 33137</p>
-                           <p class="address-text"><a href="tel:3051234567" class="hidden-xs"><i class="fa fa-phone"></i>305-123-4567</a><a href="tel:3051234567" class="visibile-xs">Call Now</a><br/>
-                              <a href="mailto:david@helfand.com"><i class="fa fa-envelope"></i>david@helfand.com</a><br/>
-                              <a href="http://www.helfand.com" target="_blank"><i class="fa fa-globe"></i>helfand.com</a>
-                           </p>
-                           <p>Injuries Resulting in Death, Auto     accident, Drunk Driving (DUI), Wrongful Death, Nursing Home Neglect, Medical Malpractice, Dog Bites, Slip & Fall    Accidents </p>
-                           <span class="lawyer-tag"> <i class="fa fa-tags"> </i> Personal Injury Lawyer </span>
-                           <ul>
-                              <li> <span> Direction </span> </li>
-                              <li>  Coupons</li>
-                           </ul>
-                           <a href="login.html" class="btn-more"> More About This Biz </a>
-                        </div>
-                     </figcaption>
-                  </figure>
-               </div>
-               @endforeach
-               @endif
+                           <h3> {{ $loopingBusiness->name }} </h3>
+                           @php
+                             $addressArray = explode(',', $loopingBusiness->address);
+                           @endphp
+                           <p class="address-text">{{ $addressArray[0] }}<br/>{{ $addressArray[1] }}, {{ $addressArray[2] }} {{ $loopingBusiness->zipcode }}</p>
+                           <p class="address-text"><a href="tel:{{ $loopingBusiness->phone_number }}" class="hidden-xs"><i class="fa fa-phone"></i>{{ $loopingBusiness->phone_number }}</a><a href="tel:{{ $loopingBusiness->phone_number }}" class="visibile-xs">Call Now</a><br/>
 
-               <div class="col-sm-4 col-xs-6">
-                  <figure>
-                     <a href="javascript:void(0)"  class="red-eyes">
-                     <span><img src="{{ asset('images/red-eyes.png') }}"></span>
-                     <img src="{{ asset('images/business-listing-img2.jpg') }}" alt=""/>
-                     </a>
-                     <figcaption>
-                        <div class="content">
-                           <h3> Law Offices of David A.
-                              Helfand Attorney at Law 
-                           </h3>
-                           <p class="address-text">Law Offices of David A. Helfand Attorney at Law<br/>12345 Main Avenue Miami, FL 33137</p>
-                           <p class="address-text"><a href="tel:3051234567" class="hidden-xs"><i class="fa fa-phone"></i>305-123-4567</a><a href="tel:3051234567" class="visibile-xs">Call Now</a><br/>
-                              <a href="mailto:david@helfand.com"><i class="fa fa-envelope"></i>david@helfand.com</a><br/>
-                              <a href="http://www.helfand.com" target="_blank"><i class="fa fa-globe"></i>helfand.com</a>
+                              <a href="mailto:{{ $loopingBusiness->email }}"><i class="fa fa-envelope"></i>{{ $loopingBusiness->email }}</a><br/>
+                              <a href="{{ $loopingBusiness->website }}" target="_blank"><i class="fa fa-globe"></i>{{ $loopingBusiness->website }}</a>
                            </p>
-                           <p>Injuries Resulting in Death, Auto     accident, Drunk Driving (DUI), Wrongful Death, Nursing Home Neglect, Medical Malpractice, Dog Bites, Slip & Fall    Accidents </p>
-                           <span class="lawyer-tag"> <i class="fa fa-tags"> </i> Personal Injury Lawyer </span>
-                           <ul>
-                              <li> <span> Direction </span> </li>
-                              <li>  Coupons</li>
+                           <p>{!! str_limit(html_entity_decode($loopingBusiness->description), 100) !!}</p>
+                           <div class="wrap_cstm_directions">
+                           <ul class="cstm-cat-search">
+                              <p class="address-text"> <a data-toggle="modal" data-target="#sendDirections{{ $loopingBusiness->id }}" href="javascript:void();"> Directions </a></p>
                            </ul>
-                           <a href="login.html" class="btn-more"> More About This Biz </a>
-                        </div>
-                     </figcaption>
-                  </figure>
-               </div>
-               <div class="col-sm-4 col-xs-6">
-                  <figure>
-                     <a href="javascript:void(0)"  class="red-eyes">
-                     <span><img src="{{ asset('images/red-eyes.png') }}"></span>
-                     <img src="{{ asset('images/business-listing-img3.jpg') }}" alt=""/>
-                     </a>
-                     <figcaption>
-                        <div class="content">
-                           <h3> Law Offices of David A.
-                              Helfand Attorney at Law 
-                           </h3>
-                           <p class="address-text">Law Offices of David A. Helfand Attorney at Law<br/>12345 Main Avenue Miami, FL 33137</p>
-                           <p class="address-text"><a href="tel:3051234567" class="hidden-xs"><i class="fa fa-phone"></i>305-123-4567</a><a href="tel:3051234567" class="visibile-xs">Call Now</a><br/>
-                              <a href="mailto:david@helfand.com"><i class="fa fa-envelope"></i>david@helfand.com</a><br/>
-                              <a href="http://www.helfand.com" target="_blank"><i class="fa fa-globe"></i>helfand.com</a>
-                           </p>
-                           <p>Injuries Resulting in Death, Auto     accident, Drunk Driving (DUI), Wrongful Death, Nursing Home Neglect, Medical Malpractice, Dog Bites, Slip & Fall    Accidents </p>
-                           <span class="lawyer-tag"> <i class="fa fa-tags"> </i> Personal Injury Lawyer </span>
-                           <ul>
-                              <li> <span> Direction </span> </li>
-                              <li>  Coupons</li>
-                           </ul>
-                           <a href="login.html" class="btn-more"> More About This Biz </a>
-                        </div>
-                     </figcaption>
-                  </figure>
-               </div>
-               <div class="col-sm-4 col-xs-6">
-                  <figure>
-                     <a href="javascript:void(0)"  class="red-eyes">
-                     <span><img src="{{ asset('images/red-eyes.png') }}"></span>
-                     <img src="{{ asset('images/business-listing-img4.jpg') }}" alt=""/>
-                     </a>
-                     <figcaption>
-                        <div class="content">
-                           <h3> Law Offices of David A.
-                              Helfand Attorney at Law 
-                           </h3>
-                           <p class="address-text">Law Offices of David A. Helfand Attorney at Law<br/>12345 Main Avenue Miami, FL 33137</p>
-                           <p class="address-text"><a href="tel:3051234567" class="hidden-xs"><i class="fa fa-phone"></i>305-123-4567</a><a href="tel:3051234567" class="visibile-xs">Call Now</a><br/>
-                              <a href="mailto:david@helfand.com"><i class="fa fa-envelope"></i>david@helfand.com</a><br/>
-                              <a href="http://www.helfand.com" target="_blank"><i class="fa fa-globe"></i>helfand.com</a>
-                           </p>
-                           <p>Injuries Resulting in Death, Auto     accident, Drunk Driving (DUI), Wrongful Death, Nursing Home Neglect, Medical Malpractice, Dog Bites, Slip & Fall    Accidents </p>
-                           <span class="lawyer-tag"> <i class="fa fa-tags"> </i> Personal Injury Lawyer </span>
-                           <ul>
-                              <li> <span> Direction </span> </li>
-                              <li>  Coupons</li>
-                           </ul>
-                           <a href="login.html" class="btn-more"> More About This Biz </a>
-                        </div>
-                     </figcaption>
-                  </figure>
-               </div>
-               <div class="col-sm-4 col-xs-6">
-                  <figure>
-                     <a href="javascript:void(0)"  class="red-eyes">
-                     <span><img src="{{ asset('images/red-eyes.png') }}"></span>
-                     <img src="{{ asset('images/business-listing-img5.jpg') }}" alt=""/>
-                     </a>
-                     <figcaption>
-                        <div class="content">
-                           <h3> Law Offices of David A.
-                              Helfand Attorney at Law 
-                           </h3>
-                           <p class="address-text">Law Offices of David A. Helfand Attorney at Law<br/>12345 Main Avenue Miami, FL 33137</p>
-                           <p class="address-text"><a href="tel:3051234567" class="hidden-xs"><i class="fa fa-phone"></i>305-123-4567</a><a href="tel:3051234567" class="visibile-xs">Call Now</a><br/>
-                              <a href="mailto:david@helfand.com"><i class="fa fa-envelope"></i>david@helfand.com</a><br/>
-                              <a href="http://www.helfand.com" target="_blank"><i class="fa fa-globe"></i>helfand.com</a>
-                           </p>
-                           <p>Injuries Resulting in Death, Auto     accident, Drunk Driving (DUI), Wrongful Death, Nursing Home Neglect, Medical Malpractice, Dog Bites, Slip & Fall    Accidents </p>
-                           <span class="lawyer-tag"> <i class="fa fa-tags"> </i> Personal Injury Lawyer </span>
-                           <ul>
-                              <li> <span> Direction </span> </li>
-                              <li>  Coupons</li>
-                           </ul>
-                           <a href="login.html" class="btn-more"> More About This Biz </a>
-                        </div>
-                     </figcaption>
-                  </figure>
-               </div>
-               <div class="col-sm-4 col-xs-6">
-                  <figure>
-                     <a href="javascript:void(0)"  class="red-eyes">
-                     <span><img src="{{ asset('images/red-eyes.png') }}"></span>
-                     <img src="{{ asset('images/business-listing-img6.jpg') }}" alt=""/>
-                     </a>
-                     <figcaption>
-                        <div class="content">
-                           <h3> Law Offices of David A.
-                              Helfand Attorney at Law 
-                           </h3>
-                           <p class="address-text">Law Offices of David A. Helfand Attorney at Law<br/>12345 Main Avenue Miami, FL 33137</p>
-                           <p class="address-text"><a href="tel:3051234567" class="hidden-xs"><i class="fa fa-phone"></i>305-123-4567</a><a href="tel:3051234567" class="visibile-xs">Call Now</a><br/>
-                              <a href="mailto:david@helfand.com"><i class="fa fa-envelope"></i>david@helfand.com</a><br/>
-                              <a href="http://www.helfand.com" target="_blank"><i class="fa fa-globe"></i>helfand.com</a>
-                           </p>
-                           <p>Injuries Resulting in Death, Auto     accident, Drunk Driving (DUI), Wrongful Death, Nursing Home Neglect, Medical Malpractice, Dog Bites, Slip & Fall    Accidents </p>
-                           <span class="lawyer-tag"> <i class="fa fa-tags"> </i> Personal Injury Lawyer </span>
-                           <ul>
-                              <li> <span> Direction </span> </li>
-                              <li>  Coupons</li>
-                           </ul>
-                           <a href="login.html" class="btn-more"> More About This Biz </a>
+                           <a href="{{ route('user.business_detail',['slug' => $loopingBusiness->slug]) }}" class="btn-more"> More About This Biz </a>
+                           </div>
                         </div>
                      </figcaption>
                   </figure>
                </div>
 
-               <div class="col-xs-12 visible-xs" style="display: block; position: relative; float: left; right: 0;">
-                  <div class="aside_sec">
-                     <img src="{{ asset('images/side-business-listing.jpg') }}" alt=""/>
-                     <div class="img_content">
-                        <h5>Did you ever had a business that you couldn't wait to tell it your friends?</h5>
-                        <p>Here you can share it with the world!</p>
-                        <a href="javascript:void(0)" class="learn-more">Learn More  <img src="{{ asset('images/search-btn-icon.png') }}"></a>  
+
+               {{-- Send Directions Popup --}}
+               <div class="modal fade in" id="sendDirections{{ $loopingBusiness->id }}" role="dialog">
+                  <div class="modal-dialog">
+                     <div class="modal-content">
+                        <div class="modal-header">
+                           <button type="button" class="close" data-dismiss="modal">×</button>
+                           <h4 class="modal-title">Get Directions</h4>
+                        </div>
+                        <div class="modal-body">
+                           <form id="{{ $loopingBusiness->id }}" name="get_directions" method="POST" action="{{ route('user.sendBusinessDirections') }}">
+                              {{ csrf_field() }}
+                              <input type="hidden" name="id" value="{{ $loopingBusiness->id }}">
+                              <input type="hidden" name="latitude" value="{{ $loopingBusiness->latitude }}">
+                              <input type="hidden" name="longitude" value="{{ $loopingBusiness->longitude }}">
+                              <div id="yauzer_div" class="form-group">
+                                 <label>Email<span> *</span></label>
+                                 <input name="email" id="email" class="form-control" required="required">
+                              </div>
+                        </div>
+                        <div class="modal-footer">
+                           <button type="submit" id="get_direction_btn" onclick="applyEmailValidate({{ $loopingBusiness->id }});" class="btn btn-default">Submit</button>
+                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                         </form>
                      </div>
                   </div>
                </div>
+
+               @endif
+               @endforeach
+               @else
+                 <p>No Premium Business Found</p>
+               @endif
+
                <div class="col-sm-12" style="float: left;">
                   <div class="row paddingTop">
+                     @if(@sizeof($businesses))
+                      @foreach($businesses as $loopingBusiness)                     
+                      @if($loopingBusiness->premium_status == false)
                      <div class="col-sm-4">
                         <figure>
                            <figcaption>
                               <div class="content">
-                                 <h3> Law Offices of David A.
-                                    Helfand Attorney at Law 
-                                 </h3>
-                                 <p class="address-text">Law Offices of David A. Helfand Attorney at Law<br/>12345 Main Avenue Miami, FL 33137</p>
-                                 <p class="address-text">
-                                 </p>
-                                 <a href="login.html" class="btn-more"> Yauzer This Biz </a>
+                                 <h3> {{ $loopingBusiness->name }}</h3>
+                                 @php
+                                   $addressArray = explode(',', $loopingBusiness->address);
+                                 @endphp
+                                 <p class="address-text">{{ $addressArray[0] }}<br/>{{ $addressArray[1] }}, {{ $addressArray[2] }} {{ $loopingBusiness->zipcode }}</p>
+                                 <a href="{{ route('user.yauzer_named_business',['slug' => $loopingBusiness->slug]) }}" class="btn-more"> Yauzer This Biz </a>
                               </div>
                            </figcaption>
                         </figure>
                      </div>
-                     <div class="col-sm-4">
-                        <figure>
-                           <figcaption>
-                              <div class="content">
-                                 <h3> Law Offices of David A.
-                                    Helfand Attorney at Law 
-                                 </h3>
-                                 <p class="address-text">Law Offices of David A. Helfand Attorney at Law<br/>12345 Main Avenue Miami, FL 33137</p>
-                                 <p class="address-text">
-                                 </p>
-                                 <a href="login.html" class="btn-more"> Yauzer This Biz </a>
-                              </div>
-                           </figcaption>
-                        </figure>
-                     </div>
-                     <div class="col-sm-4">
-                        <figure>
-                           <figcaption>
-                              <div class="content">
-                                 <h3> Law Offices of David A.
-                                    Helfand Attorney at Law 
-                                 </h3>
-                                 <p class="address-text">Law Offices of David A. Helfand Attorney at Law<br/>12345 Main Avenue Miami, FL 33137</p>
-                                 <p class="address-text">
-                                 </p>
-                                 <a href="login.html" class="btn-more">Yauzer This Biz</a>
-                              </div>
-                           </figcaption>
-                        </figure>
-                     </div>
+                     @endif
+                      @endforeach
+                      @endif
                   </div>
                </div>
                <div class="col-sm-12 text-center pagination-ceontent margin-bottom" >
-                  <ul class="pagination">
+{{--                   <ul class="pagination">
                      <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-left"></i></a></li>
                      <li class="page-item active"><a class="page-link" href="#">1</a></li>
                      <li class="page-item"><a class="page-link" href="#">2</a></li>
@@ -275,7 +149,7 @@
                      <li class="page-item "><a class="page-link" href="#">4</a></li>
                      <li class="page-item"><a class="page-link" href="#">5</a></li>
                      <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a></li>
-                  </ul>
+                  </ul> --}}
                </div>
             </div>
          </div>
@@ -289,11 +163,88 @@
                </div>
             </div>
             <div class="aside_sec">                    
-               <img src="{{ asset('images/google_map.jpg') }}" alt=""/>
+            @if(@sizeof($businesses))
+               <div id="mapCanvas" style="width: 100%; height:262px;"></div>
+            @endif
             </div>
          </div>
       </div>
    </div>
 </div>
+
+@endsection
+
+@section('custom_scripts')
+
+<script>
+function initMap() {
+    var map;
+    var bounds = new google.maps.LatLngBounds();
+    var mapOptions = {
+        mapTypeId: 'roadmap'
+    };
+                    
+    // Display a map on the web page
+    map = new google.maps.Map(document.getElementById("mapCanvas"), mapOptions);
+    map.setTilt(50);
+        
+    // Multiple markers location, latitude, and longitude
+    var markers = [
+      @if(@sizeof($businesses))
+        @foreach($businesses as $loopingBusiness)
+         @php
+           $addressArray = explode(',', $loopingBusiness->address);
+         @endphp
+        ['{{ $loopingBusiness->name }}, {{ $addressArray[2] }}', {{ $loopingBusiness->latitude }}, {{ $loopingBusiness->longitude }}],
+        @endforeach
+      @endif
+    ];
+                        
+    // Info window content
+    var infoWindowContent = [
+      @if(@sizeof($businesses))
+        @foreach($businesses as $loopingBusiness)    
+        ['<div class="info_content">' +
+        '<h3>{{ $loopingBusiness->name }}</h3>' +
+        '<p>{{ $loopingBusiness->address }}</p>' + '</div>'],
+        @endforeach
+      @endif
+    ];
+        
+    // Add multiple markers to map
+    var infoWindow = new google.maps.InfoWindow(), marker, i;
+    
+    // Place each marker on the map  
+    for( i = 0; i < markers.length; i++ ) {
+        var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+        bounds.extend(position);
+        marker = new google.maps.Marker({
+            position: position,
+            map: map,
+            title: markers[i][0]
+        });
+        
+        // Add info window to marker    
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+                infoWindow.setContent(infoWindowContent[i][0]);
+                infoWindow.open(map, marker);
+            }
+        })(marker, i));
+
+        // Center the map to fit all markers on the screen
+        map.fitBounds(bounds);
+    }
+
+    // Set zoom level
+    var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
+        this.setZoom(14);
+        google.maps.event.removeListener(boundsListener);
+    });
+    
+}
+// Load initialize function
+google.maps.event.addDomListener(window, 'load', initMap);
+</script>
 
 @endsection

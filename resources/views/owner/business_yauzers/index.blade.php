@@ -45,6 +45,7 @@
                            <div class="owner-reply">
                            <figure><img class="img-circle" src="/uploads/avatars/{{ $loopingYauzer->yauzer_comment->user->avatar }}" style="height: 75px; width: 75px;" alt="{{ $loopingYauzer->yauzer_comment->user->name }}"></figure>
                            <div class="commentbox-content">
+                              <a href="javascript:void;" data-toggle="modal" data-target="#myModal{{ $loopingYauzer->id }}" class="btn btn-warning btn-flat"><i data-toggle="tooltip" title="" data-original-title="Edit Comment" class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                               <h5 class="authorname">{{ $loopingYauzer->yauzer_comment->user->name }}</h5>
                               <p>{{ $loopingYauzer->yauzer_comment->comment }}</p>
                            </div>
@@ -52,7 +53,7 @@
                            @endif
 
                            <div class="button-box">
-                              <a href="javascript:void;" data-toggle="modal" data-target="#myModal{{ $loopingYauzer->id }}" class="btn btn-warning btn-flat" title="" data-original-title="Respond Yauzer"><i data-toggle="tooltip" title="Respond Yauzer" class="fa fa-reply" aria-hidden="true"></i></a>
+                              <a href="javascript:void;" data-toggle="modal" data-target="#myModal{{ $loopingYauzer->id }}" class="btn btn-warning btn-flat" title="" data-original-title="Respond Yauzer"><span data-toggle="tooltip" title="Respond Yauzer" aria-hidden="true">Reply</span></a>
                            </div>
                         </li>
 
@@ -63,7 +64,7 @@
                               <div class="modal-content">
                                  <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Respond Yauzer</h4>
+                                    <h4 class="modal-title">{{ @sizeof($loopingYauzer->yauzer_comment) ? 'Edit Comment' : 'Respond Yauzer' }}</h4>
                                  </div>
                                  <div class="modal-body">
                                     <form id="{{ $loopingYauzer->id }}" name="respond_yauzer" method="POST" action="{{ route('owner.respond_yauzer') }}">

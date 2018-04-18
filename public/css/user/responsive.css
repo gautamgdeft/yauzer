@@ -81,6 +81,45 @@
 .commentbox .yauzeredtime-status li img{max-width:30px;}
 /***180402******/
 ul.user-login li ul.dropdown-menu{left: -85px;} 
+
+/** 180412 **/
+
+ul.yauzeredtime-status {
+    margin: 0;
+}
+ul.yauzeredtime-status li {
+    max-width:20px;
+}
+ul.yauzeredtime-status li img {
+    max-width:20px!important; 
+}
+.commentbox .totalyauzered {
+    width: 20px;
+    height: 20px;
+    margin: 2px 0 0 5px;
+    font-size: 12px;
+    line-height: 12px;
+}
+.lawyer-listing.business-listing .aside_sec .img_content h5 {
+    font-size:16px;
+    margin-bottom: 10px;
+}
+.lawyer-listing.business-listing .aside_sec .img_content p {
+    margin-bottom: 10px;
+}
+/** 180417 **/
+p.business-timing {
+    font-size: 14px;
+}
+.bluebox h2 {
+    font-size:18px;
+}
+.business-times p {
+    font-size: 14px;
+}
+.business-times span.times-times {
+    font-size: 14px;
+}
 }
 
 
@@ -272,6 +311,28 @@ button.search-btn{ width: 100%;}
 .profile-content .media a.media-left{width: 29%;}
 .profile-content .media .media-body{ width: 70%;}
 ul.user-login li ul.dropdown-menu{left: -115px;} 
+/** 180417 **/
+.addresscontainer .addresscontent ul li img {
+    max-width:20px;
+}
+.business-times ul li {
+    width:20px;
+    height:20px;
+    line-height: 20px;
+    margin: 0!important;
+}
+.addresscontainer .business-times ul,
+.business-times span.times-number,
+.business-times span.times-times {
+    margin-left: 5px;
+}
+p.business-timing {
+    font-size: 13px;
+}
+p.business-timing span {
+    font-size: 14px;
+    margin-right:10px;
+}
 }
 @media only screen and (max-width:850px){
 .grid .owl-prev{ left:0px;}
@@ -729,6 +790,20 @@ section.business-sec.gallery-sec .tab-content, #blog-carousel{display:none;}
 .profile-content .media .media-body {
     width: 76%;
 }
+/** 180412**/
+.lawyer-listing.business-listing.listing-adds figure .adds-text a:nth-child(2) {
+    margin: 0 auto 10px auto;
+}
+.lawyer-listing.business-listing.listing-adds {
+    width: 48%;
+    display: inline-block;
+}
+.lawyer-listing.business-listing.listing-adds:nth-child(odd) {
+    margin-right:20px;
+}
+.bluebox p {
+    padding:5px 60px;
+}
 }
 @media only screen and (max-width:599px){
 .other-accounts .hr-left {
@@ -851,7 +926,14 @@ section.business-sec.gallery-sec .read-btn{margin-top:20px;}
     display: inherit;
 }  
 .profile-content{margin-top: 30px;}
-
+/** 180412 **/
+.lawyer-listing.business-listing.listing-adds {
+    width: 47%;
+    display: inline-block;
+}
+.lawyer-listing.business-listing.listing-adds:nth-child(odd) {
+    margin-right:20px;
+}
 }
 
 
@@ -1041,7 +1123,7 @@ a.right.carousel-control{ right: 35%;}
 }
 .commentbox{text-align:center;}
 .yauzeredtime{    
-    width: 260px;
+    width: 160px;
     margin: 10px auto;
     text-align: center;
     display: inline-block;
@@ -1061,6 +1143,41 @@ a.right.carousel-control{ right: 35%;}
     }       
  /*****180403*****/
 #yauzer_div .rating-xs {font-size: inherit;}  
+/** 180412 **/
+.lawyer-listing.business-listing.listing-adds {
+    width: 100%!important;
+}
+.lawyer-listing.business-listing.listing-adds figure {
+    width: 100%;
+}
+/** 180417 **/
+.lawyer-listing.business-listing .premium_cstm_biz figure {
+    min-height: 520px;
+}
+.addresscontainer .business-times ul {
+    width:60%;
+}
+.business-times {
+    text-align: center;
+}
+.business-times p {
+    margin-bottom: 10px;
+}
+p.business-timing span {
+    display: block;
+}
+p.business-timing {
+    text-align: center;
+}
+p.business-timing span {
+    margin-bottom:5px;
+}
+.addresscontainer .table td {
+    font-size: 14px;
+}
+.bluebox p {
+    padding:5px 10px;
+} 
 }
 @media (max-width:479px) {
 /*****180402*****/

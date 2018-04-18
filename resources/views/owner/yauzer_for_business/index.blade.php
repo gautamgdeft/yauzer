@@ -29,9 +29,9 @@
             
             <div class="col-md-6 col-sm-6">
               <div class="form-group">
-              <label for="headline">Businesses<span> *</span></label>
+              <label for="headline">Business Name<span> *</span></label>
               <select name="business_id" class="form-control form-input" id="business_select" required>
-                 <option value="" disabled selected>Choose Business for yauzer</option>
+                 <option value="" disabled selected>Claim or Add Your Business</option>
                 @if(sizeof($businesses))
                 @foreach($businesses as $loopingBusiness)
                  <option value="{{ $loopingBusiness->id }}">{{ $loopingBusiness->name }}</option>

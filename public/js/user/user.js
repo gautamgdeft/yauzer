@@ -12,7 +12,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 $(document).ready(function()
 {
-	$.validator.setDefaults({ ignore: ":hidden:not(select)" });
+	//$.validator.setDefaults({ ignore: ":hidden:not(select)" });
 
 setTimeout(function() {
 $('.alert-success').fadeOut('fast');
@@ -157,7 +157,7 @@ rules: {
 
 
   //Adding-Validations-On-Yauzer-A-Business-Form
-  var validator = $('#yauzer_business').validate({
+  $('#yauzer_business').validate({
   onfocusout: function (valueToBeTested) {
     $(valueToBeTested).valid();
   },
@@ -213,11 +213,13 @@ rules: {
   //Submitting Yauzer-For-Business Form 
   $('#store_yauzer_btn').click(function()
   {
-    if(validator.valid())
-    {
+
+   if($('#yauzer_business').valid())
+    {  alert(1);
       $('#store_yauzer_btn').prop('disabled', true);
       document.getElementById("yauzer_business").submit();
     }else{
+      alert(2);
       return false;
     }
   }); 
@@ -291,6 +293,43 @@ rules: {
   });           
 
 
+//Adding-Validations-On-User-Send-Directions-Form
+$('#get_directions').validate({
+onfocusout: function (valueToBeTested) {
+  $(valueToBeTested).valid();
+},
+
+highlight: function(element) {
+  $('element').removeClass("error");
+},
+
+rules: {
+  
+  "email": {
+      customemail: true,
+  },  
+
+  valueToBeTested: {
+      required: true,
+  }
+
+},
+
+});   
+
+
+  //Submitting Get-Directions-Form
+  $('#get_direction_btn').click(function()
+  {
+    if($('#get_directions').valid())
+    {
+      $('#get_direction_btn').prop('disabled', true);
+      $('#get_directions').submit();
+    }else{
+      return false;
+    }
+  });  
+
 
   //Only-Character-Add-Method
   $.validator.addMethod("character_with_space", function (value, element) {
@@ -315,6 +354,7 @@ rules: {
  
  $('#business_select').on('change', function() 
  {
+  $('#yauzer_business').validate().resetForm();
   //If Business Is Not In Our Db
   if($(this).val() == 'other')
   {
@@ -467,7 +507,9 @@ $("#zipcode").keypress(function(event) {
 
 //Reset-Add-Yauzer-Form
   $('.reset_yauzer_form').click(function(){
-        validator.resetForm();
+       var v = $("#yauzer_business").validate();
+       $(this).closest('form').find("input[type=text], textarea, select").val("");
+       v.resetForm();
   });
 
 
@@ -544,15 +586,38 @@ function readURL(input) {
 
 //  End Image Preview 
 
-
     function applyValidate(formid){
-      
       $('#'+formid).validate({
 
         rules: {
           
           'yauzer': {
             required: true,
+          },
+
+          valueToBeTested: {
+              required: true,
+          }
+
+        },
+      });
+   }     
+
+   function applyEmailValidate(formid){
+      
+      $('#'+formid).validate({
+        onfocusout: function (valueToBeTested) {
+          $(valueToBeTested).valid();
+        },
+
+        highlight: function(element) {
+          $('element').removeClass("error");
+        },        
+        rules: {
+          
+          'email': {
+            required: true,
+            customemail: true,
           },
 
           valueToBeTested: {

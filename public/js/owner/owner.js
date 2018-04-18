@@ -442,7 +442,12 @@ $(".businessSubcategory").chosen({
           required: true,
       }
 
-    },   
+    },
+    messages: {
+        business_category: {
+            required: 'Choose a business category',
+        }       
+    }     
   });     
 
   $('#submit-business-form-btn').click(function()
@@ -509,7 +514,7 @@ $(".businessSubcategory").chosen({
         phone_number: {
             minlength: jQuery.format("Enter at least {0} digits"),
             maxlength: jQuery.format("Please enter no more than {0} digits."),
-        }
+        }       
     }    
   });     
 

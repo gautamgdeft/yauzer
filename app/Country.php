@@ -13,6 +13,6 @@ class Country extends Model
 
     static function selectCountries()
     {
-    	return Country::pluck('country_name','country_name');
+    	return Country::where('id', '38')->orWhere('id', '230')->orderBy('id', 'DESC')->pluck('country_name','country_name');
     } 
 }

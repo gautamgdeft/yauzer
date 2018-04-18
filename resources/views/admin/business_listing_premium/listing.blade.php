@@ -58,25 +58,29 @@
                         <th>Business Added By</th>
                         <th>Email</th>
                         <th>Yauzers</th>
+                        <th>Premium</th>
                         <th>Action</th>
                      </tr>
                   
                   
                      @if(@sizeof($business))
                      @foreach($business as $loopinglistings)
-                     @if($loopinglistings->premium_status == false)
                      <tr class="tr_{{ $loopinglistings->id }}">
                         <td>{{ $loopinglistings->name }}</td>
                         <td>@if(@sizeof($loopinglistings->user)) <a data-toggle="tooltip" title="View Owner" href="{{ route('admin.show_owner',['slug' => $loopinglistings->user->slug]) }}">{{ $loopinglistings->user->name }}</a> @else No Owner Yet @endif</td>
                         <td>@if(@sizeof($loopinglistings->business_added_by)) <a data-toggle="tooltip" title="View User" href="{{ route('admin.show_owner',['slug' => $loopinglistings->business_added_by->slug]) }}">{{ $loopinglistings->business_added_by->name }}</a> @else No User @endif</td>
                         <td>{{ $loopinglistings->email }}</td>
                         <td>{{ $loopinglistings->yauzers->count() }}</td>
+                        @if($loopinglistings->premium_status == true)
+                         <td><button id="active" class="btn btn-success btn-flat" data-toggle="tooltip" title="" data-original-title="">Active Premium 12</button></td>
+                        @else
+                         <td><button id="inactive" class="btn btn-danger btn-flat" data-toggle="tooltip" title="" data-original-title="Non-Premium Business">Inactive</button></td>
+                        @endif
                         <td>
                           <button id="premiumEmail_{{ $loopinglistings->id }}" class="btn btn-success btn-flat send_premiumEmail" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Send Owner Premium Email"><i class="fa fa-envelope" aria-hidden="true"></i> Send Premium Business Email</button>                          
                         </td>
 
                      </tr>
-                     @endif
                      @endforeach
                      @endif
 

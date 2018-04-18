@@ -70,7 +70,7 @@ class BusinessController extends Controller
     	$user = Auth::user();
     	$business_categories = BusinessCategory::orderBy('id', 'desc')->where('status', 1)->get();
     	$country = Country::selectCountries(); 
-    	$business = $user->business;
+      $business = $user->business;
     	if(@sizeof($business->business_subcategory)){
     		$subcategoryArray = explode(',', $business->business_subcategory);
     	}else{

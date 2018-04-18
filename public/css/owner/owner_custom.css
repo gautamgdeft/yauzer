@@ -528,7 +528,7 @@ ul.commentboxlist li  .commentbox-content {
 ul.commentboxlist li .button-box {
     display: inline-block;
     position: absolute;
-    right: 0;
+    right: 5px;
     width: 62px;
     top: 20px;
 }

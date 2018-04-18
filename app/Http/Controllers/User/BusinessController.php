@@ -18,16 +18,28 @@ use App\Http\Requests;
 use Carbon\Carbon;
 use App\Mail\BusinessNotificationAdminMail;
 use App\Mail\PremiumBusinessAdminEmail;
+use App\Mail\BusinessDirectionsMail;
 use Illuminate\Support\Facades\DB;
 use GeoIP;
+use DateTime;
 
 class BusinessController extends Controller
 {
     public function yauzer_business()
     {
-    	$businesses = BusinessListing::orderBy('id', 'desc')->where('status', 1)->get();
+      #For Showing Selected Business
+      $uri_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+      $uri_segments = explode('/', $uri_path);
+      if(@sizeof($uri_segments[2])){
+        $choosedBusiness = BusinessListing::findBySlugOrFail($uri_segments[2]);
+      }else{
+        $uri_segments = NULL;
+        $choosedBusiness = NULL;
+      }
+
+      $businesses = BusinessListing::orderBy('id', 'desc')->where('status', 1)->get();
       $business_categories = BusinessCategory::orderBy('id', 'desc')->where('status', 1)->get();
-      return view('user.yauzer_business.index', compact('businesses','business_categories'));
+      return view('user.yauzer_business.index', compact('businesses','business_categories', 'uri_segments', 'choosedBusiness'));
     }
 
     public function check_business(Request $request)
@@ -138,6 +150,50 @@ class BusinessController extends Controller
     public function business_detail($slug)
     {
         $businessDetail = BusinessListing::findBySlugOrFail($slug);
+
+        //Hours-Section-Business-Hours
+        $carbon=Carbon::now();
+        $currentdayname = $carbon->format('l');
+       
+        $newbusinessHour = [];
+        if(sizeof($businessDetail->business_hour)){
+        $newbusinessHour['Sunday']        = $businessDetail->business_hour->sun_open .' - '. $businessDetail->business_hour->sun_close;
+        $newbusinessHour['Sunday_open']   = $businessDetail->business_hour->sun_open;         
+        $newbusinessHour['Sunday_close']  = $businessDetail->business_hour->sun_close;
+        $newbusinessHour['Sunday_status'] = $businessDetail->business_hour->sun_status;
+
+        $newbusinessHour['Monday']        = $businessDetail->business_hour->mon_open .' - '. $businessDetail->business_hour->mon_close;
+        $newbusinessHour['Monday_open']   = $businessDetail->business_hour->mon_open;         
+        $newbusinessHour['Monday_close']  = $businessDetail->business_hour->mon_close;        
+        $newbusinessHour['Monday_status'] = $businessDetail->business_hour->mon_status;        
+
+        $newbusinessHour['Tuesday']       = $businessDetail->business_hour->tue_open .' - '. $businessDetail->business_hour->tue_close;
+        $newbusinessHour['Tuesday_open']  = $businessDetail->business_hour->tue_open;         
+        $newbusinessHour['Tuesday_close'] = $businessDetail->business_hour->tue_close;
+        $newbusinessHour['Tuesday_status'] = $businessDetail->business_hour->tue_status;
+
+        $newbusinessHour['Wednesday']      = $businessDetail->business_hour->wed_open .' - '. $businessDetail->business_hour->wed_close;
+        $newbusinessHour['Wednesday_open']  = $businessDetail->business_hour->wed_open;         
+        $newbusinessHour['Wednesday_close'] = $businessDetail->business_hour->wed_close;
+        $newbusinessHour['Wednesday_status'] = $businessDetail->business_hour->wed_status;
+
+        $newbusinessHour['Thursday']  = $businessDetail->business_hour->thur_open .' - '. $businessDetail->business_hour->thur_close;
+        $newbusinessHour['Thursday_open']  = $businessDetail->business_hour->thur_open;         
+        $newbusinessHour['Thursday_close'] = $businessDetail->business_hour->thur_close;
+        $newbusinessHour['Thursday_status'] = $businessDetail->business_hour->thur_status;
+
+        $newbusinessHour['Friday']    = $businessDetail->business_hour->fri_open .' - '. $businessDetail->business_hour->fri_close;
+        $newbusinessHour['Friday_open']  = $businessDetail->business_hour->fri_open;         
+        $newbusinessHour['Friday_close'] = $businessDetail->business_hour->fri_close;        
+        $newbusinessHour['Friday_status'] = $businessDetail->business_hour->fri_status;
+        
+        $newbusinessHour['Saturday']  = $businessDetail->business_hour->sat_open .' - '. $businessDetail->business_hour->sat_close;                        
+        $newbusinessHour['Saturday_open']  = $businessDetail->business_hour->sat_open;         
+        $newbusinessHour['Saturday_close'] = $businessDetail->business_hour->sat_close;        
+        $newbusinessHour['Saturday_status'] = $businessDetail->business_hour->sat_status;
+        }else{
+          $newbusinessHour = NULL;
+        }
         
         //Interested-Business-Working
         if(@sizeof($businessDetail->interested_business->interested_businesses)){
@@ -150,7 +206,7 @@ class BusinessController extends Controller
           $interestedBusiness = NULL;
         }  
 
-        return view('home.business_detail', compact('businessDetail','interestedBusiness'));
+        return view('home.business_detail', compact('businessDetail','interestedBusiness', 'currentdayname', 'newbusinessHour'));
     }
 
     public function search_by_category($slug)
@@ -164,11 +220,27 @@ class BusinessController extends Controller
 
        $businesses = DB::select('SELECT * FROM (SELECT *, (' . $circle_radius . ' * acos(cos(radians(' . $lat . ')) * cos(radians(latitude)) * cos(radians(longitude) - radians(' . $lng . ')) + sin(radians(' . $lat . ')) * sin(radians(latitude)))) AS distance FROM business_listings) AS distances WHERE distance < ' . $max_distance . ' AND business_category = '.$businessCategory->id.' ORDER BY distance');
 
-       dd($businesses);
+       
        
        return view('home.category_search', compact('businesses'));     
                 
     }
+
+    public function sendBusinessDirections(Request $request)
+    {
+       $business = BusinessListing::find($request->id);
+       $location = GeoIP::getLocation();
+       $user_lat = $location->lat;
+       $user_lng = $location->lon;
+       $businessDirectionLink = 'https://www.google.com/maps/dir/'.$user_lat.','.$user_lng.'/'.$request->latitude.','.$request->longitude.'';
+
+       //Sending-Business-Directions
+       \Mail::to($request->email)->send(new BusinessDirectionsMail($business, $businessDirectionLink));
+       return redirect()->back()->withSuccess('Business Direction has been sent to your email successfuly');
+    } 
+
+
+
 
 
 

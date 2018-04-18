@@ -226,6 +226,7 @@ Route::get('/business-login', 'Auth\LoginController@showLoginForm')->name('owner
 Route::get('/what-is-yauzer', 'Cms\CmsController@what_is_yauzer')->name('user.what_is_yauzer');
 Route::get('business-detail/{slug}', 'User\BusinessController@business_detail')->name('user.business_detail');
 Route::get('category/{slug}', 'User\BusinessController@search_by_category')->name('user.business_by_category');
+Route::post('/sendBusinessDirections', 'User\BusinessController@sendBusinessDirections')->name('user.sendBusinessDirections'); 
 
 
 //Only-Auth-With-All-Role-Routes
@@ -242,6 +243,7 @@ Route::post('/checkemail', 'User\BusinessController@check_email')->name('user.ch
 Route::group(['middleware' => ['auth', 'user']], function () {
 
  Route::get('/yauzer-a-business', 'User\BusinessController@yauzer_business')->name('user.yauzer_business');
+ Route::get('/yauzer-business/{slug}', 'User\BusinessController@yauzer_business')->name('user.yauzer_named_business');
  Route::post('/yauzer-a-business', 'User\BusinessController@save_yauzer')->name('user.save_yauzer');
 
  Route::get('/dashboard', 'User\UserController@dashboard')->name('user.dashboard');
@@ -274,6 +276,8 @@ Route::group(['prefix' => 'owner','middleware' => ['auth', 'owner']], function (
 
  #Owner-Payment-Information
  Route::get('/payment-information', 'Owner\PaymentController@index')->name('owner.payment_information');
+ Route::get('/paypal/ec-checkout-success', 'Owner\PaymentController@success')->name('owner.payment_success');
+ Route::get('/payment/failed', 'Owner\PaymentController@failed')->name('owner.payment_failed');
 
  #Owner-Additional-Business-Information
  Route::get('/additional-biz-information', 'Owner\BusinessController@edit_biz_additional_info')->name('owner.edit_biz_additional_info');
