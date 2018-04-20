@@ -23,7 +23,7 @@
 
             <li class="{{ (\Request::route()->getName() == 'admin.users' || \Request::route()->getName() == 'admin.show_user_form' || \Request::route()->getName() == 'admin.show_edit_form' || \Request::route()->getName() == 'admin.show_customer' || \Request::route()->getName() == 'customer.search') ? 'active' : '' }}">
                 <a href="{{ route('admin.users') }}">
-                    <i class="fa fa-user"></i> <span>Customer Management</span>
+                    <i class="fa fa-user"></i> <span>User Management</span>
                 </a>
             </li>
 
@@ -39,13 +39,13 @@
                 </a>
             </li>
 
-            <li class="{{ (\Request::route()->getName() == 'admin.business_listing' || \Request::route()->getName() == 'admin.show_business' || \Request::route()->getName() == 'admin.show_edit_business_form' || \Request::route()->getName() == 'admin.new_picture_form' || \Request::route()->getName() == 'business.search') ? 'active' : '' }}">
+            <li class="{{ (\Request::route()->getName() == 'admin.business_listing' || \Request::route()->getName() == 'admin.show_business' || \Request::route()->getName() == 'admin.show_edit_business_form' || \Request::route()->getName() == 'business.search') ? 'active' : '' }}">
                 <a  href="{{ route('admin.business_listing') }}">
-                    <i class="fa fa-suitcase"></i> <span>Business Listings</span>
+                    <i class="fa fa-suitcase"></i> <span>Business Listings – Basic</span>
                 </a>
             </li>             
 
-            <li class="{{ (\Request::route()->getName() == 'admin.business_listing_premium' || \Request::route()->getName() == 'admin.show_business') ? 'active' : '' }}">
+            <li class="{{ (\Request::route()->getName() == 'admin.business_listing_premium' || \Request::route()->getName() == 'admin.show_edit_premium_business_form' || \Request::route()->getName() == 'admin.new_picture_form' || \Request::route()->getName() == 'admin.show_business_description_form' || \Request::route()->getName() == 'admin.new_yauzer_form' || \Request::route()->getName() == 'admin.edit_yauzer' || \Request::route()->getName() == 'admin.new_speciality_form' || \Request::route()->getName() == 'admin.edit_speciality' || \Request::route()->getName() == 'admin.show_premium_business' || \Request::route()->getName() == 'premium_business.search' ) ? 'active' : '' }}">
                 <a  href="{{ route('admin.business_listing_premium') }}">
                     <i class="fa fa-money"></i> <span>Business Listings – Premium</span>
                 </a>

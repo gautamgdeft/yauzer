@@ -36,15 +36,15 @@ Route::prefix('admin')->group(function()
 
 	//Customer-Management-Routes
     Route::any( '/search-customer', 'Admin\CustomerController@search')->name('customer.search');
-    Route::get('/customers', 'Admin\CustomerController@users')->name('admin.users');		
-    Route::get('/new-customer', 'Admin\CustomerController@new_user')->name('admin.show_user_form');		
-    Route::post('/new-customer', 'Admin\CustomerController@store_user')->name('admin.store_user');
+    Route::get('/users', 'Admin\CustomerController@users')->name('admin.users');		
+    Route::get('/new-user', 'Admin\CustomerController@new_user')->name('admin.show_user_form');		
+    Route::post('/new-user', 'Admin\CustomerController@store_user')->name('admin.store_user');
     Route::post('/delete-customer', 'Admin\CustomerController@destroy_user')->name('admin.destoy_user');
-    Route::get('/edit-customer/{slug}', 'Admin\CustomerController@edit_customer')->name('admin.show_edit_form');
-    Route::post('/update-customer/{slug}', 'Admin\CustomerController@update_customer')->name('admin.update_customer');
+    Route::get('/edit-user/{slug}', 'Admin\CustomerController@edit_customer')->name('admin.show_edit_form');
+    Route::post('/update-user/{slug}', 'Admin\CustomerController@update_customer')->name('admin.update_customer');
     Route::post('/update-registeration-status', 'Admin\CustomerController@update_reg_status')->name('admin.update_registeration_status');    
     Route::post('/update-customer-status', 'Admin\CustomerController@update_customer_status')->name('admin.update_customer_status');
-    Route::get('/view-customer/{slug}', 'Admin\CustomerController@show_customer')->name('admin.show_customer');
+    Route::get('/view-user/{slug}', 'Admin\CustomerController@show_customer')->name('admin.show_customer');
 
     //Owner-Management-Routes
     Route::any( '/search-owner', 'Admin\OwnerController@search')->name('owner.search');
@@ -85,17 +85,23 @@ Route::prefix('admin')->group(function()
 
     //Business-Listings-Routes
     Route::any( '/search-business', 'Admin\BusinessListingController@search')->name('business.search');
+    Route::post('/get-business-subcategory', 'Admin\BusinessListingController@get_subcategory')->name('admin.get_subcategory');
 	Route::get('/business-listings', 'Admin\BusinessListingController@business_listing')->name('admin.business_listing');
     Route::post('/delete-business', 'Admin\BusinessListingController@destroy_business')->name('admin.destroy_business');	
 	Route::post('/update-business-status', 'Admin\BusinessListingController@update_business_status')->name('admin.update_business_status');
     Route::get('/view-business/{slug}', 'Admin\BusinessListingController@show_business')->name('admin.show_business');
     Route::get('/edit-business/{slug}', 'Admin\BusinessListingController@edit_business')->name('admin.show_edit_business_form');    
     Route::post('/update-business/{slug}', 'Admin\BusinessListingController@update_business')->name('admin.update_business');
+    Route::post('/biz-basic-information/{slug}', 'Admin\BusinessListingController@update_biz_basic_info')->name('admin.update_biz_basic_info');
+    Route::get('/biz-change-status/{slug}', 'Admin\BusinessListingController@change_biz_status')->name('admin.change_biz_status');
+
 
     #Business-Listings-Premium-Routes
     Route::any( '/search-premium-business', 'Admin\BusinessListingController@search_premium')->name('premium_business.search');
     Route::get('/business-listings-premium', 'Admin\BusinessListingController@business_listing_premium')->name('admin.business_listing_premium');
     Route::post('/send-business-premium-email', 'Admin\BusinessListingController@business_premium_email_owner')->name('admin.business_premium_email_owner');
+    Route::get('/edit-premium-business/{slug}', 'Admin\BusinessListingController@edit_premium_business')->name('admin.show_edit_premium_business_form'); 
+    Route::get('/view-premium-business/{slug}', 'Admin\BusinessListingController@show_premium_business')->name('admin.show_premium_business');    
 
 
     //Business-Hours-Routes    
@@ -205,15 +211,19 @@ Route::prefix('admin')->group(function()
 
     //Manage-Contact-US-Routes
     Route::any( '/search-contact', 'Admin\ContactusController@search')->name('contact.search');
+    Route::any( '/search-by-date', 'Admin\ContactusController@search_by_date')->name('contact.search_by_date');
     Route::get('/listing-contacts', 'Admin\ContactusController@listing')->name('admin.contactListing');
     Route::post('/delete-contact', 'Admin\ContactusController@destroy_contact')->name('admin.destroy_contact');   
     Route::get('/view-contact-detail/{id}', 'Admin\ContactusController@contact_details')->name('admin.contactdetail');
+    Route::get('/export-contacts', 'Admin\ContactusController@export_contact')->name('admin.export_contact');
+
 
     //Report-Management-Routes                   
     Route::get('/report-management', 'Admin\ReportManagementController@show_reports')->name('admin.report_management');
     Route::get('/customer-export', 'Admin\ReportManagementController@customer_export')->name('admin.customer_export');
     Route::get('/owner-export', 'Admin\ReportManagementController@owner_export')->name('admin.owner_export');
-    Route::get('/business-listing-export', 'Admin\ReportManagementController@business_export')->name('admin.business_export');
+    Route::get('/business-basic-listing-export', 'Admin\ReportManagementController@basic_business_export')->name('admin.basic_business_export');    
+    Route::get('/business-premium-listing-export', 'Admin\ReportManagementController@premium_business_export')->name('admin.premium_business_export');
     Route::get('/yauzer-export', 'Admin\ReportManagementController@yauzer_export')->name('admin.yauzer_export');
 });
 
@@ -258,6 +268,7 @@ Route::group(['prefix' => 'owner','middleware' => ['auth', 'owner']], function (
 
  #Owner-Dashboard-Route
  Route::get('/dashboard', 'Owner\DashboardController@index')->name('owner.dashboard');
+ Route::get('/unauthorize-access', 'Owner\DashboardController@unautorize_access')->name('owner.unautorize_access');
 
  #Owner-Profile-Management-Routes
  Route::get('/profile', 'Owner\ProfileController@profile')->name('owner.profile');
@@ -276,8 +287,10 @@ Route::group(['prefix' => 'owner','middleware' => ['auth', 'owner']], function (
 
  #Owner-Payment-Information
  Route::get('/payment-information', 'Owner\PaymentController@index')->name('owner.payment_information');
+ Route::post('/process-payment', 'Owner\PaymentController@process_payment')->name('owner.process_payment');
  Route::get('/paypal/ec-checkout-success', 'Owner\PaymentController@success')->name('owner.payment_success');
  Route::get('/payment/failed', 'Owner\PaymentController@failed')->name('owner.payment_failed');
+ Route::get('/notify', 'Owner\PaymentController@notify')->name('owner.notify');
 
  #Owner-Additional-Business-Information
  Route::get('/additional-biz-information', 'Owner\BusinessController@edit_biz_additional_info')->name('owner.edit_biz_additional_info');

@@ -1,7 +1,11 @@
 function initialize() 
 {
     var input = document.getElementById('address');
-    var autocomplete = new google.maps.places.Autocomplete(input);
+    var options = {    
+    types: ['geocode'],
+    componentRestrictions: {country: ["us", "ca"]}
+    };
+    var autocomplete = new google.maps.places.Autocomplete(input, options);
     google.maps.event.addListener(autocomplete, 'place_changed', function () {
         var place = autocomplete.getPlace();
         document.getElementById('latitude').value = place.geometry.location.lat();
@@ -215,11 +219,10 @@ rules: {
   {
 
    if($('#yauzer_business').valid())
-    {  alert(1);
+    {  
       $('#store_yauzer_btn').prop('disabled', true);
       document.getElementById("yauzer_business").submit();
     }else{
-      alert(2);
       return false;
     }
   }); 

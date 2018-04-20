@@ -27,7 +27,7 @@
                         <td>{{ $businessListing->name }}</td>
                      </tr>
 
-{{--                      <tr>
+                     <tr>
                         <th scope="row">Business Owner</th>
                         <td>@if(@sizeof($businessListing->user)){{ $businessListing->user->name }}@else No Owner Yet @endif</td>
                      </tr>                      
@@ -35,7 +35,7 @@
                      <tr>
                         <th scope="row">Business Added By</th>
                         <td>@if(@sizeof($businessListing->business_added_by)){{ $businessListing->business_added_by->name }}@else No User Yet @endif</td>
-                     </tr>   --}}                       
+                     </tr>                         
                       
                      <tr>
                         <th scope="row">Business Category</th>
@@ -80,7 +80,7 @@
                         <td>{{ $businessListing->zipcode }}</td>
                      </tr>                     
 
-{{--                      <tr>
+                     <tr>
                         <th scope="row">Website</th>
                         <td>{{ $businessListing->website }}</td>
                      </tr>
@@ -88,7 +88,7 @@
                      <tr>
                         <th scope="row">Description</th>
                         <td>{!! html_entity_decode($businessListing->description) !!}</td>
-                     </tr>   --}}                   
+                     </tr>                     
 
                      <tr>
                         <th scope="row">Business Status</th>

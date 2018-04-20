@@ -1996,7 +1996,7 @@ color:#85c226;
 .addresscontainer iframe{ border:0; width:100%; min-height:280px; margin-bottom: 0;}
 .addresscontainer h4{font-size:24px; font-weight:normal; color:#444; margin-top:0; margin-bottom:10px;}
 .addresscontainer .table-responsive{border:0;}
-.addresscontainer .table td{border:0; padding:2px 0; color:#444; font-size:16px;}
+.addresscontainer .table td{border:0; padding:2px 0; color:#444; font-size:14px;}
 .redcolor{color:#ff0000 !important;}
 .greencolor{color:#87bf2a !important;}
 .addresscontainer .addresscontent{padding:8px 15px;}
@@ -2532,4 +2532,26 @@ p.business-timing {
 }
 p.business-timing i {
     margin-right: 10px;
+}
+.listing-pageview .alert-success{
+    margin-top: 25px;
+}
+.mb_toggle_hide .alert-success {
+    display: inline-block;
+    width: 100%;
+    margin-top: 20px;
+}
+.info_content {
+    max-width: 150px;
+    width: 100%;
+}
+.info_content h3 {
+    font-size: 15px !important;
+    margin: 0px 0px 10px !important;
+    line-height: 20px !important;
+}
+.info_content p {
+    font-size: 12px !important;
+    margin: 0px 0px 10px !important;
+    line-height: 18px !important;
 }

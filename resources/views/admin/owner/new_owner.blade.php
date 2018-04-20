@@ -107,7 +107,7 @@
 
 
                <div class="form-group{{ $errors->has('state') ? ' has-error' : '' }}">
-                  <label for="address">State</label>
+                  <label for="state">State</label>
                   <input type="text" class="form-control" id="state" name="state" value="{{ old('state') }}" required="required">
 
                   @if ($errors->has('state'))
@@ -173,5 +173,6 @@
 
 
 @section('custom_scripts')
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0fh0XyC8Pr0xbdKsTfu8Zl40u8fiqOpQ&libraries=places"></script>
 <script src="{{ asset('js/admin/owner.js') }}"></script>
 @endsection

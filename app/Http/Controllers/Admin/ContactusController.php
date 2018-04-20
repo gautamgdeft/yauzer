@@ -39,6 +39,23 @@ class ContactusController extends Controller
      }
 
       return view ( 'admin.contact_us.contact_listing' )->withMessage ( 'No Details found. Try to search again !' );
+  }
+
+  public function search_by_date(Request $request)
+  {
+
+      $filterContacts = ContactUS::whereBetween('created_at', [$request->start, $request->end])->paginate (10)->setPath ( '' );
+      $pagination = $filterContacts->appends ( array (
+            'start' => $request->start,
+            'end'   => $request->end
+        ) );
+      if (count ( $filterContacts ) > 0) {
+       return view ( 'admin.contact_us.contact_listing' )->withFilter ( $filterContacts )->withStart ( $request->start )->withEnd( $request->end );
+      }else{
+       return view ( 'admin.contact_us.contact_listing' )->withError ( 'No Details found. Try to search again !' );
+      }
+
+
   }    
 
   public function listing()
@@ -71,5 +88,27 @@ class ContactusController extends Controller
           return view ( 'admin.contact_us.contact_listing' )->withMessage('No Details found.');
         }
       }   
+  }
+
+  public function export_contact()
+  {
+        header("Content-type: text/csv");
+        header("Content-Disposition: attachment; filename=contacts.csv");
+        header("Pragma: no-cache");
+        header("Expires: 0");
+
+        $contacts = ContactUS::orderBy('id', 'desc')->get();
+        
+        $columns = array('ContactId', 'Name', 'Email', 'Message');
+
+        $file = fopen('php://output', 'w');
+        fputcsv($file, $columns);
+
+        foreach($contacts as $contact){
+
+             fputcsv($file, array($contact->id,$contact->name,$contact->email,$contact->message));
+
+        }
+        exit();    
   }
 }

@@ -147,7 +147,7 @@ class BusinessInfoController extends Controller
           }
         }
 
-        $route = 'admin/edit-business/'.$slug.'/#parentHorizontalTab9';
+        $route = 'admin/edit-premium-business/'.$slug.'/#parentHorizontalTab9';
         return redirect($route)->with("success","Business More Info has been updated successfuly"); 
         #return redirect()->route('admin.show_edit_business_form', ['slug' => $slug])->with("success"," Business More Info has been updated successfuly");
 

@@ -110,11 +110,14 @@ div.dataTables_filter input {
     height: 34px;
 }
 .box form{
-    max-width: 600px;
+    /*max-width: 600px;*/
+    width: auto !important;
     margin: 0 auto;
     width: 100%;
     padding: 0px;
     margin-top: 20px;
+    margin-bottom: 20px;
+    display: inline-block;
 }
 .box.box-primary .img-circle {
 	  margin-top: 20px;
@@ -581,7 +584,35 @@ ul.speciality_checks li:nth-child(7) {
     background-image: none;
     box-shadow: none; color:#fff !important;
 }
-
+/*******180420**********/
+.box-tools .input-group.date-group {
+    max-width: 421px;
+    width: 100%;
+    margin: 0px 0px 0px 10px;
+}
+.start,.end{display: inline-block;position: relative;}
+.start .error,.end .error{
+    position: absolute;
+    left: 70px;
+    bottom: -20px;
+    padding: 0px;
+    width: 130px;
+}
+.start label,.end label{
+  padding: 0px 10px;
+  margin: 0px;
+  vertical-align: middle;
+}
+.start label{
+    padding-left: 0px;
+}
+.start input.form-control,.end input.form-control {
+    width: 120px !important;
+    display: inline-block;
+}
+.src-filter .search-filter {
+    margin: 20px 0px 0px 15px !important;
+}
 
 /********Media Query***************/
 @media screen and (max-width: 599px){

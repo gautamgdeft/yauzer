@@ -81,6 +81,12 @@ class BusinessListing extends Model
     public function business_hour()
     {
      return $this->hasOne('App\BusinessHour', 'business_id');
+    }       
+
+    #Relation with Business Invoices
+    public function invoice()
+    {
+     return $this->hasOne('App\Invoice', 'business_id');
     }    
 
 

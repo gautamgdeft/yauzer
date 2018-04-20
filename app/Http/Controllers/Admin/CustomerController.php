@@ -145,7 +145,7 @@ class CustomerController extends Controller
             } 
 
             $user->update($request->all());
-			      Session::flash('success', 'Customer has been updated.');
+			      Session::flash('success', 'User has been updated.');
             return redirect()->route('admin.users');                      
 
     }
@@ -200,12 +200,12 @@ class CustomerController extends Controller
               {
               	$user->login_status  = true;
               	$user->save();
-              	return response(['msg' => 'Customer has been activated successfully', 'status' => 'success']); 
+              	return response(['msg' => 'User has been activated successfully', 'status' => 'success']); 
               	
               }else{
               	$user->login_status  = false;
               	$user->save();
-              	return response(['msg' => 'Customer has been deactivated successfully', 'status' => 'declined']); 
+              	return response(['msg' => 'User has been deactivated successfully', 'status' => 'declined']); 
               }	
     	 }    	
     }

@@ -1,3 +1,20 @@
+<style type="text/css">
+    
+a.disabled {
+   pointer-events: none;
+   cursor: default;
+}
+
+.skin-black .sidebar > .sidebar-menu > li > a{
+   
+}
+.skin-black .sidebar > .sidebar-menu > li.deactivated > a:hover{
+     background: #ccc;
+    color: #fff;
+}
+
+</style>
+
 <aside class="left-side sidebar-offcanvas">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
@@ -8,7 +25,6 @@
             </div>
             <div class="pull-left info">
                 <p>Hello, {{ Auth::user()->name }}</p>
-
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
@@ -22,7 +38,7 @@
             </li>
 
             <li class="{{ (\Request::route()->getName() == 'owner.edit_biz_basic_info') ? 'active' : '' }}">
-                <a href="{{ route('owner.edit_biz_basic_info') }}">
+                <a href="{{ route('owner.edit_biz_basic_info') }}" >
                     <i class="fa fa-briefcase"></i> <span>Biz Basic Information</span>
                 </a>
             </li>               
@@ -33,50 +49,50 @@
                 </a>
             </li>               
 
-            <li class="{{ (\Request::route()->getName() == 'owner.edit_biz_additional_info') ? 'active' : '' }}">
-                <a href="{{ route('owner.edit_biz_additional_info') }}">
+            <li class="{{ (\Request::route()->getName() == 'owner.edit_biz_additional_info') ? 'active' : '' }} @if(Auth::User()->business->premium_status == false) deactivated @endif">
+                <a href="{{ (Auth::User()->business->premium_status == false)? route('owner.unautorize_access') : route('owner.edit_biz_additional_info') }}" class="@if(Auth::User()->business->premium_status == false) deactivated @endif">
                     <i class="fa fa-briefcase"></i> <span>Additional Biz Information</span>
                 </a>
             </li>               
 
-            <li class="{{ (\Request::route()->getName() == 'owner.pictures_videos' || \Request::route()->getName() == 'owner.new_picture_form') ? 'active' : '' }}">
-                <a href="{{ route('owner.pictures_videos') }}">
+            <li class="{{ (\Request::route()->getName() == 'owner.pictures_videos' || \Request::route()->getName() == 'owner.new_picture_form') ? 'active' : '' }} @if(Auth::User()->business->premium_status == false) deactivated @endif">
+                <a href="{{ (Auth::User()->business->premium_status == false)? route('owner.unautorize_access') : route('owner.pictures_videos') }}" class="@if(Auth::User()->business->premium_status == false) deactivated @endif">
                     <i class="fa fa-picture-o"></i> <span>Pictures & Videos</span>
                 </a>
             </li>            
 
-            <li class="{{ (\Request::route()->getName() == 'owner.biz_description' || \Request::route()->getName() == 'owner.show_business_description_form') ? 'active' : '' }}">
-                <a href="{{ route('owner.biz_description') }}">
+            <li class="{{ (\Request::route()->getName() == 'owner.biz_description' || \Request::route()->getName() == 'owner.show_business_description_form') ? 'active' : '' }} @if(Auth::User()->business->premium_status == false) deactivated @endif">
+                <a href="{{ (Auth::User()->business->premium_status == false)? route('owner.unautorize_access') : route('owner.biz_description') }}" class="@if(Auth::User()->business->premium_status == false) deactivated @endif">
                     <i class="fa fa-briefcase"></i> <span>Biz Description</span>
                 </a>
             </li>             
 
-            <li class="{{ (\Request::route()->getName() == 'owner.biz_hours') ? 'active' : '' }}">
-                <a href="{{ route('owner.biz_hours') }}">
+            <li class="{{ (\Request::route()->getName() == 'owner.biz_hours') ? 'active' : '' }} @if(Auth::User()->business->premium_status == false) deactivated @endif">
+                <a href="{{ (Auth::User()->business->premium_status == false)? route('owner.unautorize_access') : route('owner.biz_hours') }}" class="@if(Auth::User()->business->premium_status == false) deactivated @endif">
                     <i class="fa fa-clock-o"></i> <span>Biz Hours</span>
                 </a>
             </li>             
 
-            <li class="{{ (\Request::route()->getName() == 'owner.biz_specialties' || \Request::route()->getName() == 'owner.new_speciality_form' || \Request::route()->getName() == 'owner.edit_speciality') ? 'active' : '' }}">
-                <a href="{{ route('owner.biz_specialties') }}">
+            <li class="{{ (\Request::route()->getName() == 'owner.biz_specialties' || \Request::route()->getName() == 'owner.new_speciality_form' || \Request::route()->getName() == 'owner.edit_speciality') ? 'active' : '' }} @if(Auth::User()->business->premium_status == false) deactivated @endif">
+                <a href="{{ (Auth::User()->business->premium_status == false)? route('owner.unautorize_access') : route('owner.biz_specialties') }}" class="@if(Auth::User()->business->premium_status == false) deactivated @endif">
                     <i class="fa fa-building-o"></i> <span>Biz Specialties</span>
                 </a>
             </li>              
 
-            <li class="{{ (\Request::route()->getName() == 'owner.biz_more_info') ? 'active' : '' }}">
-                <a href="{{ route('owner.biz_more_info') }}">
+            <li class="{{ (\Request::route()->getName() == 'owner.biz_more_info') ? 'active' : '' }} @if(Auth::User()->business->premium_status == false) deactivated @endif">
+                <a href="{{ (Auth::User()->business->premium_status == false)? route('owner.unautorize_access') : route('owner.biz_more_info') }}" class="@if(Auth::User()->business->premium_status == false) deactivated @endif">
                     <i class="fa fa-info"></i> <span>More Info</span>
                 </a>
             </li>                
 
-            <li class="{{ (\Request::route()->getName() == 'owner.discounts') ? 'active' : '' }}">
-                <a href="{{ route('owner.discounts') }}">
+            <li class="{{ (\Request::route()->getName() == 'owner.discounts') ? 'active' : '' }} @if(Auth::User()->business->premium_status == false) deactivated @endif">
+                <a href="{{ (Auth::User()->business->premium_status == false)? route('owner.unautorize_access') :route('owner.discounts') }}" class="@if(Auth::User()->business->premium_status == false) deactivated @endif">
                     <i class="fa fa-money"></i> <span>Discounts</span>
                 </a>
             </li>              
 
-            <li class="{{ (\Request::route()->getName() == 'owner.yauzers') ? 'active' : '' }}">
-                <a href="{{ route('owner.yauzers') }}">
+            <li class="{{ (\Request::route()->getName() == 'owner.yauzers') ? 'active' : '' }} @if(Auth::User()->business->premium_status == false) deactivated @endif">
+                <a href="{{ (Auth::User()->business->premium_status == false)? route('owner.unautorize_access') : route('owner.yauzers') }}" class="@if(Auth::User()->business->premium_status == false) deactivated @endif">
                     <i class="fa fa-comment"></i> <span>Yauzers</span>
                 </a>
             </li>            

@@ -74,15 +74,16 @@
                         <td>{{ $loopinglistings->email }}</td>
                         <td>{{ $loopinglistings->yauzers->count() }}</td>
                         <td>
-                          <button id="approve_business_{{ $loopinglistings->id }}" class="btn btn-success btn-flat approve_business @if($loopinglistings->status == '1') hide @endif" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Click to Approve Business">Approve Business</button>
+                          <button id="approve_business_{{ $loopinglistings->id }}" class="btn btn-danger btn-flat approve_business @if($loopinglistings->status == '1') hide @endif" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Click to Active">Inactive</button>
 
-                          <button id="reject_business_{{ $loopinglistings->id }}" class="btn btn-danger btn-flat approve_business @if($loopinglistings->status == '0') hide @endif" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Click to Reject Business">Reject Business</button>                               
+                          <button id="reject_business_{{ $loopinglistings->id }}" class="btn btn-success btn-flat approve_business @if($loopinglistings->status == '0') hide @endif" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Click to Inactive">Active</button>                               
                         </td>
                         <td>
                           <button class="btn btn-danger btn-flat delete_business" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Delete Business"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                           <a href="{{ route('admin.show_edit_business_form',['slug' => $loopinglistings->slug]) }}" class="btn btn-warning btn-flat" data-toggle="tooltip" title="Edit Business"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                           {{-- <a href="{{ route('admin.show_business_hours_form',['slug' => $loopinglistings->slug]) }}" class="btn btn-warning btn-flat">Edit Hours</a> --}}
                           <a href="{{ route('admin.show_business',['slug' => $loopinglistings->slug]) }}" class="btn btn-info btn-flat" data-toggle="tooltip" title="View Business"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                          <a href="{{ route('admin.change_biz_status',['slug' => $loopinglistings->slug]) }}" class="btn btn-info btn-flat" data-toggle="tooltip" title="Change Status"><i class="fa fa-refresh" aria-hidden="true"></i></a>
                        </td>
 
                      </tr>
@@ -125,15 +126,16 @@
                         <td>{{ $loopinglistings->email }}</td>
                         <td>{{ $loopinglistings->yauzers->count() }}</td>
                         <td>
-                          <button id="approve_business_{{ $loopinglistings->id }}" class="btn btn-success btn-flat approve_business @if($loopinglistings->status == '1') hide @endif" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Click to Approve Business">Approve Business</button>
+                          <button id="approve_business_{{ $loopinglistings->id }}" class="btn btn-success btn-flat approve_business @if($loopinglistings->status == '1') hide @endif" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Click to Active">Inactive</button>
 
-                          <button id="reject_business_{{ $loopinglistings->id }}" class="btn btn-danger btn-flat approve_business @if($loopinglistings->status == '0') hide @endif" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Click to Reject Business">Reject Business</button>                               
+                          <button id="reject_business_{{ $loopinglistings->id }}" class="btn btn-danger btn-flat approve_business @if($loopinglistings->status == '0') hide @endif" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Click to Inactive">Active</button>                               
                         </td>
                         <td>
                           <button class="btn btn-danger btn-flat delete_business" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Delete Business"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                           <a href="{{ route('admin.show_edit_business_form',['slug' => $loopinglistings->slug]) }}" class="btn btn-warning btn-flat" data-toggle="tooltip" title="Edit Business"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                           {{-- <a href="{{ route('admin.show_business_hours_form',['slug' => $loopinglistings->slug]) }}" class="btn btn-warning btn-flat">Edit Hours</a> --}}
                		      	<a href="{{ route('admin.show_business',['slug' => $loopinglistings->slug]) }}" class="btn btn-info btn-flat" data-toggle="tooltip" title="View Business"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                          <a href="{{ route('admin.change_biz_status',['slug' => $loopinglistings->slug]) }}" class="btn btn-info btn-flat" data-toggle="tooltip" title="Change Status"><i class="fa fa-refresh" aria-hidden="true"></i></a>                          
                        </td>
 
                      </tr>
@@ -240,12 +242,12 @@ $('.approve_business').click(function()
             {
               if ( response.status === 'success' ) 
                 {
-                   $('#approve_business_'+business_id).html('Approve Business');  
+                   $('#approve_business_'+business_id).html('Inactive');  
                    $('#approve_business_'+business_id).addClass('hide');
                    $('#reject_business_'+business_id).removeClass('hide');
                    $('#msgs').html("<div class='alert alert-success'>"+response.msg+"</div>");
                 }else{
-                   $('#reject_business_'+business_id).html('Reject Business'); 
+                   $('#reject_business_'+business_id).html('Active'); 
                    $('#reject_business_'+business_id).addClass('hide');         
                    $('#approve_business_'+business_id).removeClass('hide');
                    $('#msgs').html("<div class='alert alert-success'>"+response.msg+"</div>");

@@ -5,10 +5,10 @@
 <aside class="right-side">
    <!-- Content Header (Page header) -->
    <section class="content-header">
-      <h1> Edit Customer </h1>
+      <h1> Edit User </h1>
       <ol class="breadcrumb">
          <li><a href="{{ route('admin.dashboard') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-         <li class="active">Edit Customer</li>
+         <li class="active">Edit User</li>
       </ol>
    </section>
 
@@ -161,5 +161,6 @@
 
 
 @section('custom_scripts')
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0fh0XyC8Pr0xbdKsTfu8Zl40u8fiqOpQ&libraries=places"></script>
 <script src="{{ asset('js/admin/customer.js') }}"></script>
 @endsection

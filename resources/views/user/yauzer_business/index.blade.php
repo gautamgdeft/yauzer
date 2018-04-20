@@ -28,7 +28,7 @@
             
             <div class="col-md-6 col-sm-6">
               <div class="form-group">
-              <label for="headline">Businesses<span> *</span></label>
+              <label for="headline">Business Name<span> *</span></label>
               <select name="business_id" class="form-control form-input" id="business_select" required>
                  <option value="" disabled selected>Choose Business you want to yauzer</option>
                 @if(sizeof($businesses))
@@ -101,22 +101,22 @@
 
             <div class="col-md-6 col-sm-6">
               <div class="form-group">
-              <label for="headline">Phone Number<span> *</span></label>
-              <input type="text" id="phone_number" name="phone_number" value="{{ @sizeof($choosedBusiness)? $choosedBusiness->phone_number : '' }}" class="form-control form-input" placeholder="Enter Phone Number" disabled required>
+              <label for="headline">Phone Number</label>
+              <input type="text" id="phone_number" name="phone_number" value="{{ @sizeof($choosedBusiness)? $choosedBusiness->phone_number : '' }}" class="form-control form-input" placeholder="Enter Phone Number" disabled>
               </div>
             </div>
 
             <div class="col-md-6 col-sm-6">
               <div class="form-group">
-              <label for="headline">Website<span> *</span></label>
-              <input name="website" id="website" value="{{ @sizeof($choosedBusiness)? $choosedBusiness->website : '' }}" type="text" class="form-control form-input" placeholder="Enter Website" disabled required>
+              <label for="headline">Website</label>
+              <input name="website" id="website" value="{{ @sizeof($choosedBusiness)? $choosedBusiness->website : '' }}" type="text" class="form-control form-input" placeholder="Enter Website" disabled>
               </div>
             </div>
 
             <div class="col-md-6 col-sm-6">
               <div class="form-group">
-              <label for="headline">Email Address<span> *</span></label>
-              <input name="email" id="email" type="text" value="{{ @sizeof($choosedBusiness)? $choosedBusiness->email : '' }}" class="form-control form-input" placeholder="Enter Email Address" disabled required>
+              <label for="headline">Email Address</label>
+              <input name="email" id="email" type="text" value="{{ @sizeof($choosedBusiness)? $choosedBusiness->email : '' }}" class="form-control form-input" placeholder="Enter Email Address" disabled>
               </div>
             </div>
 

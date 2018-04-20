@@ -59,12 +59,14 @@
                         <th>Email</th>
                         <th>Yauzers</th>
                         <th>Premium</th>
+                        <th>Premium Email</th>
                         <th>Action</th>
                      </tr>
                   
                   
                      @if(@sizeof($business))
                      @foreach($business as $loopinglistings)
+
                      <tr class="tr_{{ $loopinglistings->id }}">
                         <td>{{ $loopinglistings->name }}</td>
                         <td>@if(@sizeof($loopinglistings->user)) <a data-toggle="tooltip" title="View Owner" href="{{ route('admin.show_owner',['slug' => $loopinglistings->user->slug]) }}">{{ $loopinglistings->user->name }}</a> @else No Owner Yet @endif</td>
@@ -72,13 +74,20 @@
                         <td>{{ $loopinglistings->email }}</td>
                         <td>{{ $loopinglistings->yauzers->count() }}</td>
                         @if($loopinglistings->premium_status == true)
-                         <td><button id="active" class="btn btn-success btn-flat" data-toggle="tooltip" title="" data-original-title="">Active Premium 12</button></td>
+                         <td><button id="active" class="btn btn-success btn-flat" data-toggle="tooltip" title="" data-original-title="">@if(sizeof($loopinglistings->invoice)) Active Premium {{ $loopinglistings->invoice->membership_plan }} @else Active Premium 0 @endif</button></td>
                         @else
                          <td><button id="inactive" class="btn btn-danger btn-flat" data-toggle="tooltip" title="" data-original-title="Non-Premium Business">Inactive</button></td>
                         @endif
                         <td>
-                          <button id="premiumEmail_{{ $loopinglistings->id }}" class="btn btn-success btn-flat send_premiumEmail" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Send Owner Premium Email"><i class="fa fa-envelope" aria-hidden="true"></i> Send Premium Business Email</button>                          
+                          <button id="premiumEmail_{{ $loopinglistings->id }}" class="btn btn-success btn-flat send_premiumEmail" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Send Owner Premium Email"><i class="fa fa-envelope" aria-hidden="true"></i> Send Email</button>
                         </td>
+
+                        <td>
+                          <button class="btn btn-danger btn-flat delete_business" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Delete Business"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                          <a href="{{ route('admin.show_edit_premium_business_form',['slug' => $loopinglistings->slug]) }}" class="btn btn-warning btn-flat" data-toggle="tooltip" title="Edit Business"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                          {{-- <a href="{{ route('admin.show_business_hours_form',['slug' => $loopinglistings->slug]) }}" class="btn btn-warning btn-flat">Edit Hours</a> --}}
+                          <a href="{{ route('admin.show_premium_business',['slug' => $loopinglistings->slug]) }}" class="btn btn-info btn-flat" data-toggle="tooltip" title="View Business"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        </td>  
 
                      </tr>
                      @endforeach
@@ -107,25 +116,38 @@
                         <th>Business Owner</th>
                         <th>Email</th>
                         <th>Yauzers</th>
+                        <th>Premium</th>
+                        <th>Premium Email</th>
                         <th>Action</th>
                      </tr>
                   
                   
                      @if(!is_null($details))
                      @foreach($details as $loopinglistings)
-                     @if($loopinglistings->premium_status == false)
-
-                     <tr class="tr_{{ $loopinglistings->id }}">
+                     
+                      <tr class="tr_{{ $loopinglistings->id }}">
                         <td>{{ $loopinglistings->name }}</td>
                         <td>@if(@sizeof($loopinglistings->user)) {{ $loopinglistings->user->name }} @else Deleted User @endif</td>
                         <td>{{ $loopinglistings->email }}</td>
                         <td>{{ $loopinglistings->yauzers->count() }}</td>
+                        @if($loopinglistings->premium_status == true)
+                         <td><button id="active" class="btn btn-success btn-flat" data-toggle="tooltip" title="" data-original-title="">Active Premium 12</button></td>
+                        @else
+                         <td><button id="inactive" class="btn btn-danger btn-flat" data-toggle="tooltip" title="" data-original-title="Non-Premium Business">Inactive</button></td>
+                        @endif
                         <td>
-                          <button id="premiumEmail_{{ $loopinglistings->id }}" class="btn btn-success btn-flat send_premiumEmail" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Send Owner Premium Email"><i class="fa fa-envelope" aria-hidden="true"></i> Send Premium Business Email</button>                              
+                          <button id="premiumEmail_{{ $loopinglistings->id }}" class="btn btn-success btn-flat send_premiumEmail" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Send Owner Premium Email"><i class="fa fa-envelope" aria-hidden="true"></i> Send Email</button>
                         </td>
 
+                        <td>
+                          <button class="btn btn-danger btn-flat delete_business" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Delete Business"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                          <a href="{{ route('admin.show_edit_premium_business_form',['slug' => $loopinglistings->slug]) }}" class="btn btn-warning btn-flat" data-toggle="tooltip" title="Edit Business"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                          {{-- <a href="{{ route('admin.show_business_hours_form',['slug' => $loopinglistings->slug]) }}" class="btn btn-warning btn-flat">Edit Hours</a> --}}
+                          <a href="{{ route('admin.show_premium_business',['slug' => $loopinglistings->slug]) }}" class="btn btn-info btn-flat" data-toggle="tooltip" title="View Business"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        </td>  
+
                      </tr>
-                     @endif
+                     
                      @endforeach
                      @endif
 
@@ -172,7 +194,8 @@
                    {
                     if ( response.status === 'success' ) 
                     {
-                     btn.html('Send Owner Premium Email').removeClass('btn btn-danger').addClass('btn btn-success').prop('disabled', false); 
+                     btn.html('Send Email').removeClass('btn btn-danger').addClass('btn btn-success').prop('disabled', false); 
+                     btn.prepend($("<i class='fa fa-envelope' aria-hidden='true' style='margin-right:3px;'></i>")).button();
                      $('#msgs').html("<div class='alert alert-success'>"+response.msg+"</div>");
                     }
                  },
@@ -180,12 +203,50 @@
                  {
                    if ( response.status === 422 ) 
                    {
-                     btn.html('Send Owner Premium Email').removeClass('btn btn-danger').addClass('btn btn-success').prop('disabled', false);
+                     btn.html('Send Email').removeClass('btn btn-danger').addClass('btn btn-success').prop('disabled', false);
+                     btn.prepend($("<i class='fa fa-envelope' aria-hidden='true' style='margin-right:3px;'></i>")).button();
                      $('#msgs').html("<div class='alert alert-error'>"+response.msg+"</div>");
                    }
                  }
      });
    });
+
+// Deleting-Category
+$(".delete_business").on("click", function() 
+{  
+  var confirmation = confirm("Are you sure you want to delete this business?");
+  if (confirmation) 
+  {    
+    $(this).html('Deleting...');
+    var business_id = $(this).data('id');
+    $.ajax({
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},     
+              url: "{{ route('admin.destroy_business') }}",
+              type: "post",
+              dataType: "JSON",
+              data: { 'id': $(this).data('id') },
+              success: function(response)
+              {
+                if ( response.status === 'success' ) 
+                {
+                   $('.tr_'+business_id).remove();
+                   $('#msgs').html("<div class='alert alert-success'>"+response.msg+"</div>");
+                }
+              },
+              error: function( response ) 
+              {
+                 if ( response.status === 422 ) 
+                 {
+                     $(this).html('Delete');
+                     $('#msgs').html("<div class='alert alert-error'>"+response.msg+"</div>");
+                 }
+              }
+
+
+      });
+  }
+    
+});   
  </script>
 @endsection
 

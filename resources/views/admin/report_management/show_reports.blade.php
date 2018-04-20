@@ -65,21 +65,44 @@
             <div class="small-box bg-green">
                <div class="inner">
                   <h3>
-                     {{ $total_business }}
+                     {{ $total_basic_business }}
                   </h3>
                   <p>
-                     Business
+                     Basic Businesses
                   </p>
                </div>
                <div class="icon">
                   <i class="fa fa-signal"></i>
                </div>
-               <a href="{{ route('admin.business_export') }}" class="small-box-footer">
+               <a href="{{ route('admin.basic_business_export') }}" class="small-box-footer">
                More info <i class="fa fa-arrow-circle-right"></i>
                </a>
             </div>
          </div>
          <!-- ./col -->
+
+         <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-blue">
+               <div class="inner">
+                  <h3>
+                     {{ $total_premium_business }}
+                  </h3>
+                  <p>
+                     Premium Businesses
+                  </p>
+               </div>
+               <div class="icon">
+                  <i class="fa fa-signal"></i>
+               </div>
+               <a href="{{ route('admin.premium_business_export') }}" class="small-box-footer">
+               More info <i class="fa fa-arrow-circle-right"></i>
+               </a>
+            </div>
+         </div>
+         <!-- ./col -->
+
+         
          <div class="col-lg-3 col-xs-6">
             <!-- small box -->
             <div class="small-box bg-yellow">

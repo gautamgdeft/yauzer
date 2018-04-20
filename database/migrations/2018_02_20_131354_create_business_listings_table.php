@@ -17,7 +17,7 @@ class CreateBusinessListingsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned()->default(0);
             $table->integer('added_by')->unsigned();
-            $table->string('email')->unique();
+            $table->string('email')->unique()->nullable();
             $table->string('name')->nullable();
             $table->string('business_category')->nullable();
             $table->string('business_subcategory')->nullable();

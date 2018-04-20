@@ -28,7 +28,7 @@ class BusinessInterestedController extends Controller
    	 $request['interested_businesses'] = implode(',', $request->interested_businesses);
    	 $businessInterestedInfo =  InterestedBusiness::updateOrCreate(['business_id' => $request->business_id], $request->all());
 
-     $route = 'admin/edit-business/'.$slug.'/#parentHorizontalTab10';
+     $route = 'admin/edit-premium-business/'.$slug.'/#parentHorizontalTab10';
      return redirect($route)->with("success","Interested Business has been added successfuly");      
      #return redirect()->route('admin.show_edit_business_form', ['slug' => $slug])->with("success","Interested Business has been added successfuly");
    }

@@ -24,4 +24,10 @@ class DashboardController extends Controller
     	}
     	return view('owner.dashboard.home', compact('yauzers'));
     }
+
+
+    public function unautorize_access()
+    {
+        return redirect()->route('owner.payment_information')->withError('Enter Payment information to access this option');
+    }
 }

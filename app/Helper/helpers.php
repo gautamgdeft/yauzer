@@ -101,6 +101,20 @@ function total_business()
   return $count;  
 }
 
+#Fetching-Total-Basic-Business-Count-Function
+function total_basic_business()
+{
+  $count = App\BusinessListing::where('premium_status', false)->count();
+  return $count;  
+}
+
+#Fetching-Total-Premium-Business-Count-Function
+function total_premium_business()
+{
+  $count = App\BusinessListing::where('premium_status', true)->count();
+  return $count;  
+}
+
 #Fetching-Yauzers-Count-Function
 function total_yauzers()
 {

@@ -28,7 +28,7 @@ class BusinessHourController extends Controller
     {   
     	   $business = BusinessListing::findBySlugOrFail($slug);
            $businessHours =  BusinessHour::updateOrCreate(['business_id' => $business->id], $request->all());
-           $route = 'admin/edit-business/'.$slug.'/#parentHorizontalTab2';
+           $route = 'admin/edit-premium-business/'.$slug.'/#parentHorizontalTab2';
            return redirect($route)->with("success","Business Hours updated successfully");
            //return Redirect::back()->with('success', 'Business Hours updated successfully');
     } 

@@ -1,7 +1,11 @@
 function initialize() 
 {
     var input = document.getElementById('address');
-    var autocomplete = new google.maps.places.Autocomplete(input);
+    var options = {    
+    types: ['geocode'],
+    componentRestrictions: {country: ["us", "ca"]}
+    };
+    var autocomplete = new google.maps.places.Autocomplete(input, options);
     google.maps.event.addListener(autocomplete, 'place_changed', function () {
         var place = autocomplete.getPlace();
         document.getElementById('latitude').value = place.geometry.location.lat();
@@ -382,6 +386,62 @@ $("#zipcode").keypress(function(event) {
       event.preventDefault();
    }
 });
+
+ //Getting-Business-Subcategies-From-Category-OnChange
+$('#business_category').on('change', function() 
+{
+     //If Business-Category-Id is present 
+     if($(this).val() != '')
+     {
+        $.ajax({
+         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},      
+         url: "/admin/get-business-subcategory",
+         type: "post",
+         dataType: "JSON",
+         data: { 'id': $(this).val() },
+         success: function(response)
+         { 
+            //Firstly-Empty-the-previous values of select box
+            $('#business_subcategory').html(' ');
+
+            if(response.status == 'success') 
+            {
+              $(response.businessSubcategories).each(function(){
+               $('#subcategory').removeClass('hide'); 
+               $('#business_subcategory').append("<option value='"+ this.id +"'>"+ this.name +"</option>");
+              });
+            }else{
+               $("#business_subcategory").trigger("chosen:updated");
+               $('#subcategory').addClass('hide'); 
+               $('#business_subcategory').append("<option value=''>No Subcategories Found</option>"); 
+            }
+            //Refreshing-Chosen-box-after-Ajax-Hitting
+            $("#business_subcategory").trigger("chosen:updated");
+         },
+         error: function( response ) 
+         {
+           if ( response.status === 422 ) 
+           {
+             $(this).html('Try Again');
+             $('#msgs').html("<div class='alert alert-danger'>"+response.msg+"</div>");
+           }
+         }
+
+       });
+
+     }else{
+
+      //If Business category is not present
+      $('#msgs').html("<div class='alert alert-danger'>Some error occured please choose category again.</div>");
+     }
+});
+
+//Business-Subcategory-Multiple-Choosen
+$(".businessSubcategory").chosen({
+  width: "100%",
+  placeholder_text_multiple: "Click to choose subcategories ..."
+  });
+
 
 }); //End-ready-function
 

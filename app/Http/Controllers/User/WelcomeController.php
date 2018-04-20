@@ -36,7 +36,6 @@ class WelcomeController extends Controller
     {
     	$sliderImages = SliderImage::orderBy('id', 'desc')->get();
         $businessCategory = BusinessCategory::where('status', '1')->get();
-        #$businesses = BusinessListing::withCount('yauzers')->orderBy('yauzers_count', 'desc')->take(8)->get();
         $businesses = BusinessListing::withCount('yauzers')->orderBy('yauzers_count', 'desc')->where('premium_status', true)->take(8)->get();
         return view('home.welcome', compact('sliderImages','businessCategory', 'businesses'));
     }

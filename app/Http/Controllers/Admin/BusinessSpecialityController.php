@@ -41,7 +41,7 @@ class BusinessSpecialityController extends Controller
        $speciality = new Speciality($request->all());
        $speciality->save();
 
-       $route = 'admin/edit-business/'.$slug.'/#parentHorizontalTab8';
+       $route = 'admin/edit-premium-business/'.$slug.'/#parentHorizontalTab8';
        return redirect($route)->with("success","Speciality has been added successfuly");       
        
        #return redirect()->route('admin.show_edit_business_form', ['slug' => $slug])->with("success","Speciality has been added successfuly");    
@@ -78,7 +78,7 @@ class BusinessSpecialityController extends Controller
 
             $speciality->update($request->all());
 
-       $route = 'admin/edit-business/'.$slug.'/#parentHorizontalTab8';
+       $route = 'admin/edit-premium-business/'.$slug.'/#parentHorizontalTab8';
        return redirect($route)->with("success","Speciality has been updated successfuly"); 
   
    }    

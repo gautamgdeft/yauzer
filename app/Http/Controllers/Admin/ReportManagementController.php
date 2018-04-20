@@ -25,11 +25,12 @@ class ReportManagementController extends Controller
 
     public function show_reports()
     {
-    	$total_customers = total_customers();
-    	$total_business  = total_business();
-    	$total_yauzers   = total_yauzers();
-    	$total_owners    = total_owners();
-    	return view('admin.report_management.show_reports', compact('total_customers', 'total_business', 'total_yauzers', 'total_owners'));
+        $total_customers = total_customers();
+        $total_basic_business  = total_basic_business();
+        $total_premium_business  = total_premium_business();
+        $total_yauzers   = total_yauzers();
+        $total_owners    = total_owners();   
+    	return view('admin.report_management.show_reports', compact('total_customers', 'total_basic_business', 'total_premium_business', 'total_yauzers', 'total_owners'));
     }
 
     public function customer_export()
@@ -77,14 +78,36 @@ class ReportManagementController extends Controller
         exit();
     }      
 
-    public function business_export()
+    public function basic_business_export()
     {
         header("Content-type: text/csv");
         header("Content-Disposition: attachment; filename=business_listing.csv");
         header("Pragma: no-cache");
         header("Expires: 0");
 
-        $reviews = BusinessListing::orderBy('id', 'desc')->get();
+        $reviews = BusinessListing::orderBy('id', 'desc')->where('premium_status', false)->get();
+        
+        $columns = array('BusinessID', 'Name', 'BusinessOwner', 'Address', 'City', 'State', 'Zipcode', 'Country', 'Phone Number', 'Website', 'Description', 'Latitude', 'Longitude');
+
+        $file = fopen('php://output', 'w');
+        fputcsv($file, $columns);
+
+        foreach($reviews as $review){
+
+             fputcsv($file, array($review->id,$review->name,$review->business_added_by->name,$review->address,$review->city,$review->state,$review->zipcode,$review->country,$review->phone_number,$review->website,$review->description,$review->latitude,$review->longitude));
+
+        }
+        exit();
+    }     
+
+    public function premium_business_export()
+    {
+        header("Content-type: text/csv");
+        header("Content-Disposition: attachment; filename=business_listing.csv");
+        header("Pragma: no-cache");
+        header("Expires: 0");
+
+        $reviews = BusinessListing::orderBy('id', 'desc')->where('premium_status', true)->get();
         
         $columns = array('BusinessID', 'Name', 'BusinessOwner', 'Address', 'City', 'State', 'Zipcode', 'Country', 'Phone Number', 'Website', 'Description', 'Latitude', 'Longitude');
 

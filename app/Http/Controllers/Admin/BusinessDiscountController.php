@@ -40,7 +40,7 @@ class BusinessDiscountController extends Controller
    	   $business = BusinessListing::findBySlugOrFail($slug);
 	     $businessDiscountInfo =  Discount::updateOrCreate(['business_id' => $business->id], $request->all());
        
-        $route = 'admin/edit-business/'.$slug.'/#parentHorizontalTab6';
+        $route = 'admin/edit-premium-business/'.$slug.'/#parentHorizontalTab6';
         return redirect($route)->with("success","Business update_business_discount has been updated successfully");
         #return Redirect::back()->with('success', 'Business update_business_discount has been updated successfully');
    }

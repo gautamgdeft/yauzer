@@ -32,10 +32,11 @@ class AdminController extends Controller
     public function index()
     {
         $total_customers = total_customers();
-        $total_business  = total_business();
+        $total_basic_business  = total_basic_business();
+        $total_premium_business  = total_premium_business();
         $total_yauzers   = total_yauzers();
         $total_owners    = total_owners();      
-        return view('admin.dashboard.index', compact('total_customers', 'total_business', 'total_yauzers', 'total_owners') , ['user' => Auth::user()]);
+        return view('admin.dashboard.index', compact('total_customers', 'total_basic_business', 'total_premium_business', 'total_yauzers', 'total_owners') , ['user' => Auth::user()]);
     }
 
     public function profile()

@@ -58,7 +58,7 @@ class BusinessListingController extends Controller
     #Business-Listing-Function
     public function business_listing()
     {
-    	$business_listing = BusinessListing::orderBy('id', 'desc')->paginate(10);
+    	$business_listing = BusinessListing::orderBy('id', 'desc')->where('premium_status', false)->paginate(10);
       return view('admin.business_listing.listing', ['business_listing' => $business_listing]);
     }
 
@@ -99,7 +99,7 @@ class BusinessListingController extends Controller
            
             if($businessListing->avatar != 'default.png')
             {
-              $path = '/uploads/businessAvatars/' . $category->avatar;
+              $path = '/uploads/businessAvatars/' . $businessListing->avatar;
               unlink(public_path() . $path);
             }
             BusinessListing::delete_business($businessListing);
@@ -123,8 +123,22 @@ class BusinessListingController extends Controller
        return view('admin.business_listing.show_business', ['businessListing' => $businessListing, 'business_subcategories' => $business_subcategories]);
     }
 
+    #Show-Premiun-Business-Form
+    public function show_premium_business($slug)
+    {
+       $businessListing = BusinessListing::findBySlugOrFail($slug);
+        if(@sizeof($businessListing->business_subcategory)){
+         $businessListing['business_subcategory'] = explode(',', $businessListing->business_subcategory);
+         $business_subcategories = BusinessSubcategory::whereIn('id', $businessListing->business_subcategory)->pluck('name'); 
+        }else{
+          $business_subcategories = NULL;
+        }       
+       
+       return view('admin.business_listing_premium.show_business', ['businessListing' => $businessListing, 'business_subcategories' => $business_subcategories]);      
+    }
+
     #Show-Edit-Business-Form-Function
-    public function edit_business($slug)
+    public function edit_premium_business($slug)
     {
        $country = Country::selectCountries();
        $allBusinesses = BusinessListing::all();
@@ -147,8 +161,65 @@ class BusinessListingController extends Controller
        $existing_db_business_info = BusinessMoreInfo::where('business_id', $businessListing->id)->pluck('business_info_id')->toArray();
        
 
-       return view('admin.business_listing.edit_business', ['businessListing' => $businessListing, 'country' => $country, 'businessHours' => $businessHours, 'businessPictures' => $businessPictures, 'businessPaymentInfo' => $businessPaymentInfo, 'businessDiscountInfo' => $businessDiscountInfo, 'businessYauzersInfo' => $businessYauzersInfo, 'businessSpecialitiesInfo' => $businessSpecialitiesInfo, 'allBusinesses' => $allBusinesses, 'intersetedBusinesses' => $intersetedBusinesses, 'businessInfo' => $businessInfo, 'existing_db_business_info' => $existing_db_business_info]);
+       return view('admin.business_listing_premium.edit_business', ['businessListing' => $businessListing, 'country' => $country, 'businessHours' => $businessHours, 'businessPictures' => $businessPictures, 'businessPaymentInfo' => $businessPaymentInfo, 'businessDiscountInfo' => $businessDiscountInfo, 'businessYauzersInfo' => $businessYauzersInfo, 'businessSpecialitiesInfo' => $businessSpecialitiesInfo, 'allBusinesses' => $allBusinesses, 'intersetedBusinesses' => $intersetedBusinesses, 'businessInfo' => $businessInfo, 'existing_db_business_info' => $existing_db_business_info]);
     }
+
+    public function edit_business($slug)
+    {
+      $business_categories = BusinessCategory::orderBy('id', 'desc')->where('status', 1)->get();
+      $country = Country::selectCountries(); 
+      $business = BusinessListing::findBySlugOrFail($slug);
+      if(@sizeof($business->business_subcategory)){
+        $subcategoryArray = explode(',', $business->business_subcategory);
+      }else{
+        $subcategoryArray = NULL;
+      }      
+      return view('admin.business_listing.edit_business', compact('business', 'country', 'business_categories', 'subcategoryArray'));
+    }
+
+    public function update_biz_basic_info(Request $request, $slug)
+    {
+      $business = BusinessListing::findBySlugOrFail($slug);
+
+       #Validating-Fields
+       $validatedData = $request->validate([
+            'name'              => 'required|string|max:255',
+            'business_category' => 'required',
+            'address'           => 'required|string',
+            'city'              => 'required|string',
+            'state'             => 'required|string',
+            'zipcode'           => 'required',
+            'country'           => 'required|string',
+            'avatar'            => 'image:jpg,png,jpeg,gif|unique:business_listings'
+        ]);
+
+        #Imploding Business Subcategories
+        if(@sizeof($request->business_subcategory)){
+         $request['business_subcategory'] = implode(',', $request->business_subcategory);
+        }else{
+         $request['business_subcategory'] = NULL; 
+        }
+        
+        $business->update($request->all());
+
+        #Updating Avatar If Present
+        if($request->hasFile('avatar'))
+        {   
+          $avatar = $request->file('avatar');
+           //Using Helper/helpers.php
+           uploadBusinessMainAvatar($avatar, $business);
+        } 
+
+       return redirect()->back()->withSuccess('You Business Basic Information has been updated successfully');      
+    }
+
+    public function change_biz_status($slug)
+    {
+      $business = BusinessListing::findBySlugOrFail($slug);
+      $business->premium_status = true;
+      $business->update();
+      return redirect()->back()->withSuccess('Business status has been changed to Premium successfully.');      
+    }    
 
     #Updating-Business-Function
     public function update_business(Request $request, $slug)
@@ -178,7 +249,7 @@ class BusinessListingController extends Controller
            uploadBusinessMainAvatar($avatar, $business);
         } 
 
-        return redirect()->route('admin.business_listing')->with("success","Business has been updated");       
+        return redirect()->back()->withSuccess("Business has been updated");       
     }
 
     public function search_premium(Request $request)
@@ -187,7 +258,8 @@ class BusinessListingController extends Controller
            if($search_parameter != "")
            {
 
-            $filterBusiness = BusinessListing::where ( 'name', 'LIKE', '%' . $search_parameter . '%' )->has('yauzers', '>=' , 15)->with('yauzers')->paginate (10)->setPath ( '' );
+            $filterBusiness = BusinessListing::where ( 'name', 'LIKE', '%' . $search_parameter . '%' )->where('premium_status', true)->has('yauzers', '>=' , 15)->with('yauzers')->paginate (10)->setPath ( '' );
+
             $pagination = $filterBusiness->appends ( array (
                   'search_parameter' => $request->search_parameter 
               ) );
@@ -225,6 +297,18 @@ class BusinessListingController extends Controller
         }  
 
     }
+
+    public function get_subcategory(Request $request)
+    {
+       $businessSubcategories = BusinessSubcategory::where('business_category_id', $request->id)->where('status', 1)->get();
+       if(@sizeof($businessSubcategories)){          
+        return response()->json(['status' => 'success', 'businessSubcategories' => $businessSubcategories]);
+       }else{
+        return response(['msg' => 'Cannot find the business subcategories. Try again', 'status' => 'failed']);  
+       }
+
+
+    }    
 
 
 }

@@ -7,6 +7,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use Srmklive\PayPal\Services\ExpressCheckout;
 use PayPal;
+use App\Invoice;
+use App\BusinessListing;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
+use Session;
  
 
 class PaymentController extends Controller
@@ -24,16 +29,27 @@ class PaymentController extends Controller
 
     public function index()
     {
- 		$recurring = true;
-        $cart = $this->getCheckoutData($recurring);
+        return view('owner.payments.index');    
+    }
+
+    public function process_payment(Request $request)
+    {
+        $explodedPlan = explode('_', $request->payment_plan);
+        $plan = $explodedPlan[0];
+        $amount = $explodedPlan[1];
+        $businessId = $explodedPlan[2];
+
+        $recurring = true;
+        $cart = $this->getCheckoutData($recurring, $plan, $amount, $businessId);
         
         try {
             $response = $this->provider->setExpressCheckout($cart, $recurring);
             return redirect($response['paypal_link']);
         } catch (\Exception $e) {
             $invoice = $this->createInvoice($cart, 'Invalid');
-            session()->put(['code' => 'danger', 'message' => "Error processing PayPal payment for Order $invoice->id!"]);
-        }          
+            Session::flash('error', 'Error processing PayPal payment for Order '.$invoice->id.'!');
+
+        }                
     }
 
     public function success(Request $request)
@@ -41,13 +57,32 @@ class PaymentController extends Controller
         $recurring = true;
         $token = $request->get('token');
         $PayerID = $request->get('PayerID');
+        $plan = $request->get('plan');
+        $amount = $request->get('amount');
+        $businessId = $request->get('business_id');
+        $business = BusinessListing::find($businessId);
 
-        $cart = $this->getCheckoutData($recurring);
+        $cart = $this->getCheckoutData($recurring, $plan, $amount, $businessId);
         // Verify Express Checkout Token
         $response = $this->provider->getExpressCheckoutDetails($token);
+
         if (in_array(strtoupper($response['ACK']), ['SUCCESS', 'SUCCESSWITHWARNING'])) {
             if ($recurring === true) {
-                $response = $this->provider->createMonthlySubscription($response['TOKEN'], 9.99, $cart['subscription_desc']);
+
+                switch($plan){
+                case 'Annually' :     
+                $response = $this->provider->createYearlySubscription($response['TOKEN'], $amount, $cart['subscription_desc']);
+                $month = 12;
+                break;
+                case 'Semi-Annually' :
+                $response = $this->provider->createSemiAnuallySubscription($response['TOKEN'], $amount, $cart['subscription_desc']);
+                $month = 6;
+                break;
+                case 'Quarterly' :
+                $response = $this->provider->createQuarterlySubscription($response['TOKEN'], $amount, $cart['subscription_desc']);
+                $month = 3;
+                break;
+                } 
                 if (!empty($response['PROFILESTATUS']) && in_array($response['PROFILESTATUS'], ['ActiveProfile', 'PendingProfile'])) {
                     $status = 'Processed';
                 } else {
@@ -58,20 +93,48 @@ class PaymentController extends Controller
                 $payment_status = $this->provider->doExpressCheckoutPayment($cart, $token, $PayerID);
                 $status = $payment_status['PAYMENTINFO_0_PAYMENTSTATUS'];
             }
-            $invoice = $this->createInvoice($cart, $status);
+           
+            //Creating Invoice
+            $invoice = $this->createInvoice($cart, $status, $month);
             if ($invoice->paid) {
-                session()->put(['code' => 'success', 'message' => "Order $invoice->id has been paid successfully!"]);
+                //Chaning Business To Premium Business
+                $business->premium_status = true;
+                $business->save();
+                Session::flash('success', 'Order '.$invoice->id.' has been paid successfully!');
             } else {
-                session()->put(['code' => 'danger', 'message' => "Error processing PayPal payment for Order $invoice->id!"]);
+                //Chaning Business To Non-Premium Business
+                $business->premium_status = false;
+                $business->save();
+                Session::flash('error', 'Error processing PayPal payment for Order '.$invoice->id.'!');
             }
-            return redirect('/');
+            
+            return redirect()->route('owner.payment_information');
         }
     }
 
     public function failed()
     {
-
+       Session::flash('error', 'Error processing PayPal payment. Please try again after some time'); 
+       return redirect()->route('owner.payment_information');
     }
+
+
+    /**
+     * Parse PayPal IPN.
+     *
+     * @param \Illuminate\Http\Request $request
+     */
+    public function notify(Request $request)
+    {
+        if (!($this->provider instanceof ExpressCheckout)) {
+            $this->provider = new ExpressCheckout();
+        }
+        $request->merge(['cmd' => '_notify-validate']);
+        $post = $request->all();
+        $response = (string) $this->provider->verifyIPN($post);
+        $logFile = 'ipn_log_'.Carbon::now()->format('Ymd_His').'.txt';
+        Storage::disk('local')->put($logFile, $response);
+    }    
 
 
 
@@ -82,50 +145,50 @@ class PaymentController extends Controller
      *
      * @return array
      */
-    protected function getCheckoutData($recurring)
+    protected function getCheckoutData($recurring, $plan, $amount, $businessId)
     {
     	$data = [];
-        #$order_id = Invoice::all()->count() + 1;
-        $order_id = 1;
+        $order_id = Invoice::all()->count() + 1;
         if ($recurring === true) {
             $data['items'] = [
                 [
-                    'name'  => 'Monthly Subscription '.config('paypal.invoice_prefix').' #'.$order_id,
-                    'price' => 20,
+                    'name'  => $plan.' Subscription '.config('paypal.invoice_prefix').' #'.$order_id,
+                    'price' => $amount,
                     'qty'   => 1,
+                    'business_id' => $businessId,
+                    'membership' => $plan,
                 ],
             ];
-            $data['return_url'] = url('/paypal/ec-checkout-success?mode=recurring');
-            $data['subscription_desc'] = 'Monthly Subscription '.config('paypal.invoice_prefix').' #'.$order_id;
+        $data['return_url'] = url('/owner/paypal/ec-checkout-success?mode=recurring&plan='.$plan.'&amount='.$amount.'&business_id='.$businessId.'');
+        $data['subscription_desc'] = $plan.' Subscription '.config('paypal.invoice_prefix').' #'.$order_id;
         }
         $data['invoice_id'] = config('paypal.invoice_prefix').'_'.$order_id;
         $data['invoice_description'] = "Order #$order_id Invoice";
         $data['cancel_url'] = url('/');
-        $total = 20;
+        $total = $amount;
         $data['total'] = $total;
         return $data;
     }    
 
 
-    protected function createInvoice($cart, $status)
+    protected function createInvoice($cart, $status, $month)
     {
-        $invoice = new Invoice();
-        $invoice->title = $cart['invoice_description'];
-        $invoice->price = $cart['total'];
-        if (!strcasecmp($status, 'Completed') || !strcasecmp($status, 'Processed')) {
-            $invoice->paid = 1;
+        $request = [];
+
+        $business_id = $cart['items'][0]['business_id'];
+        if (strcasecmp($status, 'Completed') || strcasecmp($status, 'Processed')) {
+            $request['paid']  = true;
         } else {
-            $invoice->paid = 0;
+            $request['paid']  = false;
         }
-        $invoice->save();
-        collect($cart['items'])->each(function ($product) use ($invoice) {
-            $item = new Item();
-            $item->invoice_id = $invoice->id;
-            $item->item_name = $product['name'];
-            $item->item_price = $product['price'];
-            $item->item_qty = $product['qty'];
-            $item->save();
-        });
+
+        $request['title'] = $cart['invoice_description'];
+        $request['business_id'] = $business_id;
+        $request['price'] = $cart['total'];
+        $request['membership']  = $cart['items'][0]['membership'];
+        $request['membership_plan']  = $month;
+        $invoice = Invoice::updateOrCreate(['business_id' => $business_id], $request);   
+        
         return $invoice;
     }    
 }

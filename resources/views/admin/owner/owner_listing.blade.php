@@ -57,8 +57,9 @@
                         <th>Email</th>
                         <th>Business Name</th>
                         <th>Image</th>
-                        <th>Customer Status</th>
-                        <th>Registration Status</th>
+                        <th>Owner Status</th>
+                        {{-- <th>Registration Status</th> --}}
+                        <th>Status</th>
                         <th>Action</th>
                      </tr>
                   
@@ -80,16 +81,21 @@
                         <td><img id="image_src" class="img-circle" src="/uploads/avatars/{{ $loopingUsers->avatar }}" style="height: 45px; width: 45px;"></td>
 
                         <td>
- 							            <button id="activate_user_{{ $loopingUsers->id }}" class="btn btn-success btn-flat activate_user @if($loopingUsers->login_status == '1') hide @endif" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Click to Activate Customer">Activate Customer</button>
+ 							            <button id="activate_user_{{ $loopingUsers->id }}" class="btn btn-danger btn-flat activate_user @if($loopingUsers->login_status == '1') hide @endif" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Click to Activate Customer">Inactive</button>
 
-	                        <button id="inactivate_user_{{ $loopingUsers->id }}" class="btn btn-danger btn-flat activate_user @if($loopingUsers->login_status == '0') hide @endif" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Click to Inactivate Customer">Inactivate Customer</button>                        	
+	                        <button id="inactivate_user_{{ $loopingUsers->id }}" class="btn btn-success btn-flat activate_user @if($loopingUsers->login_status == '0') hide @endif" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Click to Inactivate Customer">Active</button>                        	
                         </td>
 
-                        <td>
+{{--                         <td>
 	                        <button id="accept_reg_{{ $loopingUsers->id }}" class="btn btn-success btn-flat accept_reg @if($loopingUsers->registeration_status == '1') hide @endif" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Click to Accept Registration">Accept</button>
 
 	                        <button id="reject_reg_{{ $loopingUsers->id }}" class="btn btn-danger btn-flat accept_reg @if($loopingUsers->registeration_status == '0') hide @endif" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Click to Reject Registration">Reject</button>  
-                        </td>
+                        </td> --}}
+                        @if(@sizeof($loopingUsers->business))
+                        <td>{!! $loopingUsers->business->premium_status == true? html_entity_decode('<button class="btn btn-success btn-flat">Premium</button>') : html_entity_decode('<button class="btn btn-danger btn-flat">Basic</button>') !!}</td>
+                        @else
+                         <td>No Business</td> 
+                        @endif
 
                         <td><button class="btn btn-danger btn-flat delete_user" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Delete Owner"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                         <a href="{{ route('admin.edit_owner_form',['slug' => $loopingUsers->slug]) }}" class="btn btn-warning btn-flat" data-toggle="tooltip" title="Edit Owner"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
@@ -288,12 +294,12 @@ $(".activate_user").on("click", function()
             {
             	if ( response.status === 'success' ) 
 				{
-				   $('#activate_user_'+user_id).html('Activate Customer');	
+				   $('#activate_user_'+user_id).html('Inactive');	
 				   $('#activate_user_'+user_id).addClass('hide');
 				   $('#inactivate_user_'+user_id).removeClass('hide');
 				   $('#msgs').html("<div class='alert alert-success'>"+response.msg+"</div>");
 				}else{
-				   $('#inactivate_user_'+user_id).html('Inactivate Customer');	
+				   $('#inactivate_user_'+user_id).html('Active');	
 				   $('#inactivate_user_'+user_id).addClass('hide');					
 				   $('#activate_user_'+user_id).removeClass('hide');
 				   $('#msgs').html("<div class='alert alert-success'>"+response.msg+"</div>");

@@ -48,7 +48,7 @@ class BusinessYauzerController extends Controller
         \Mail::to('teamphp00@gmail.com')->send(new PremiumBusinessAdminEmail($yauzer->business));
        }       
 
-      $route = 'admin/edit-business/'.$slug.'/#parentHorizontalTab7';
+      $route = 'admin/edit-premium-business/'.$slug.'/#parentHorizontalTab7';
       return redirect($route)->with("success","Yauzer has been added successfuly");
 
       #return redirect()->route('admin.show_edit_business_form', ['slug' => $slug])->with("success","Yauzer has been added successfuly");     	   
@@ -88,7 +88,7 @@ class BusinessYauzerController extends Controller
 
             $yauzer->update($request->all());
 
-      $route = 'admin/edit-business/'.$slug.'/#parentHorizontalTab7';
+      $route = 'admin/edit-premium-business/'.$slug.'/#parentHorizontalTab7';
       return redirect($route)->with("success","Yauzer has been updated successfully");
 			#Session::flash('success', 'Yauzer has been updated.');
             #return redirect()->route('admin.show_edit_business_form',['slug' => $slug]);      
