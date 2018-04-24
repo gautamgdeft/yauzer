@@ -81,6 +81,10 @@ class PaymentController extends Controller
                 case 'Quarterly' :
                 $response = $this->provider->createQuarterlySubscription($response['TOKEN'], $amount, $cart['subscription_desc']);
                 $month = 3;
+                break;                
+                case 'Monthly' :
+                $response = $this->provider->createMonthlySubscription($response['TOKEN'], $amount, $cart['subscription_desc']);
+                $month = 1;
                 break;
                 } 
                 if (!empty($response['PROFILESTATUS']) && in_array($response['PROFILESTATUS'], ['ActiveProfile', 'PendingProfile'])) {

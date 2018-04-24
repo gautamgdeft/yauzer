@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Validator;
+use GeoIP;
+use Geocoder\Laravel\Facades\Geocoder;
 
 class WelcomeController extends Controller
 {
@@ -23,7 +25,7 @@ class WelcomeController extends Controller
         }else{
 
             $checkClaimedBusiness = BusinessListing::checkClaimedBusiness(Auth::user()->id);
-
+            
             if(sizeof($checkClaimedBusiness)){
              return redirect()->route('owner.dashboard');
             }else{
@@ -33,8 +35,13 @@ class WelcomeController extends Controller
     }
 
     public function index()
-    {
-    	$sliderImages = SliderImage::orderBy('id', 'desc')->get();
+    {   
+        #Getting-Lat-Lng-Of-User
+        #$location = GeoIP::getLocation();
+        #Getting Full Address From Location Geocoder
+        #$data = Geocoder::reverse($location->lat, $location->lon)->all();
+        #$formattedAddress = $data[0]->getformattedAddress();
+        $sliderImages = SliderImage::orderBy('id', 'desc')->get();
         $businessCategory = BusinessCategory::where('status', '1')->get();
         $businesses = BusinessListing::withCount('yauzers')->orderBy('yauzers_count', 'desc')->where('premium_status', true)->take(8)->get();
         return view('home.welcome', compact('sliderImages','businessCategory', 'businesses'));

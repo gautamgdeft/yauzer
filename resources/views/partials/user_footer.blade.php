@@ -20,13 +20,18 @@
             <div class="col-md-3 col-sm-4 col-xs-12"> 
              <div class="footer-links"> 
                <h4>Yauzer Links </h4>
-               <ul> 
-                <li> <a href="javascript:;">  What is a Yauzer</a> </li>
-                <li> <a href="javascript:;"> Yauzer for Business</a> </li>
-                <li> <a href="javascript:;"> Yauzer BLOG</a> </li>
-                <li> <a href="javascript:;"> Find a Business</a> </li>
-                <li> <a href="javascript:;"> Terms of Service</a> </li>
-                <li> <a href="javascript:;"> Privacy Policy</a> </li>
+               <ul>
+                @if ((Auth::user() && Auth::user()->roles->first()->name == 'owner')) 
+                 <li> <a href="{{ route('user.home') }}"> Yauzer for Business</a> </li>
+                @else
+                 <li><a href="{{ route('owner.login') }}">Yauzer for Business</a></li>
+                @endif
+
+                @if(@sizeof($footerMenus))
+                @foreach($footerMenus as $loopingFooterMenu)
+                 <li> <a href="{{ $loopingFooterMenu->url }}">  {{ $loopingFooterMenu->name }}</a> </li>
+                @endforeach
+                @endif
               </ul>
             </div>
           </div>

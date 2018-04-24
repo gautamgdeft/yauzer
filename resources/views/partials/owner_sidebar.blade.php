@@ -43,12 +43,12 @@ a.disabled {
                 </a>
             </li>               
 
-            <li class="{{ (\Request::route()->getName() == 'owner.payment_information') ? 'active' : '' }}">
-                <a href="{{ route('owner.payment_information') }}">
+            <li class="{{ (\Request::route()->getName() == 'owner.payment_information') ? 'active' : '' }} @if(Auth::User()->business->yauzers->count() < 15) deactivated @endif">
+                <a href="{{ Auth::User()->business->yauzers->count() < 15? route('owner.unautorize_access') : route('owner.payment_information') }}">
                     <i class="fa fa-credit-card"></i> <span>Payment Information</span>
                 </a>
             </li>               
-
+             
             <li class="{{ (\Request::route()->getName() == 'owner.edit_biz_additional_info') ? 'active' : '' }} @if(Auth::User()->business->premium_status == false) deactivated @endif">
                 <a href="{{ (Auth::User()->business->premium_status == false)? route('owner.unautorize_access') : route('owner.edit_biz_additional_info') }}" class="@if(Auth::User()->business->premium_status == false) deactivated @endif">
                     <i class="fa fa-briefcase"></i> <span>Additional Biz Information</span>

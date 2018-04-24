@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
@@ -15,6 +16,13 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191); //Solved by increasing StringLength
+
+        #Calling-Global-Function-For-Footer-Menu-Helpers.php
+        $footerMenus = footer_menus();
+        $headerMenus = header_menus();
+
+        View::share('headerMenus', $headerMenus);
+        View::share('footerMenus', $footerMenus);
     }
 
     /**

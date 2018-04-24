@@ -15,6 +15,7 @@ class CreateFooterMenusTable extends Migration
     {
         Schema::create('footer_menus', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('page_id')->unsigned();
             $table->string('name');
             $table->string('url');
             $table->string('slug');            

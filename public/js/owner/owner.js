@@ -4,12 +4,42 @@ function initialize()
     var options = {    
     types: ['geocode'],
     componentRestrictions: {country: ["us", "ca"]}
-    };    
+    };
+    var componentForm = {
+      street_number: 'short_name',
+      route: 'long_name',
+      locality: 'long_name',
+      administrative_area_level_1: 'short_name',
+      country: 'long_name',
+      postal_code: 'short_name'
+    };         
     var autocomplete = new google.maps.places.Autocomplete(input, options);
     google.maps.event.addListener(autocomplete, 'place_changed', function () {
         var place = autocomplete.getPlace();
+
+        for (var i = 0; i < place.address_components.length; i++) {
+          var addressType = place.address_components[i].types[0];
+          if (componentForm[addressType]) {
+            var val = place.address_components[i][componentForm[addressType]];
+
+            var addressType = addressType;
+            switch (addressType) { 
+              case 'locality': 
+                document.getElementById('city').value = val;
+                break;
+              case 'administrative_area_level_1': 
+                document.getElementById('state').value = val;
+                break;
+              case 'postal_code': 
+                document.getElementById('zipcode').value = val;
+                break;                  
+            }            
+          }
+        }
+
         document.getElementById('latitude').value = place.geometry.location.lat();
         document.getElementById('longitude').value = place.geometry.location.lng();
+        document.getElementById('address').value = place.name;
     });
 }
 google.maps.event.addDomListener(window, 'load', initialize);
@@ -74,7 +104,7 @@ function readURL(input) {
 $(document).ready(function()
 {
 
-  $.validator.setDefaults({ ignore: ":hidden:not(select)" });
+  //$.validator.setDefaults({ ignore: ":hidden:not(select)" });
 
   // validation of chosen on change
   if ($("select.chosen-select").length > 0) {
@@ -201,6 +231,7 @@ $(document).ready(function()
  
  $('#business_select').on('change', function() 
  {
+  $('#yauzer_for_business').validate().resetForm();
   //If Business Is Not In Our Db
   if($(this).val() == 'other')
   {
@@ -241,7 +272,6 @@ $(document).ready(function()
   }
   
   //Again adding disabled property to all fields
-  validator.resetForm();
   $('#address').prop('disabled', true);
   $('#city').prop('disabled', true);
   $('#state').prop('disabled', true);
@@ -348,7 +378,7 @@ $(".businessSubcategory").chosen({
 
 
   //Adding-Validations-On-Yauzer-A-Business-Form
-  var validator = $('#yauzer_for_business').validate({
+  $('#yauzer_for_business').validate({
   onfocusout: function (valueToBeTested) {
     $(valueToBeTested).valid();
   },
@@ -403,7 +433,7 @@ $(".businessSubcategory").chosen({
   //Submitting Yauzer-For-Business Form 
   $('#submit_business').click(function()
   {
-    if(validator.valid())
+    if($('#yauzer_for_business').valid())
     {
       $('#submit_business').prop('disabled', true);
       document.getElementById("yauzer_for_business").submit();
@@ -415,7 +445,7 @@ $(".businessSubcategory").chosen({
   //Submitting Yauzer-For-Business Form 
   $('#claim_business_btn').click(function()
   {
-    if(validator.valid())
+    if($('#yauzer_for_business').valid())
     {
       $('#submit_business').prop('disabled', true);
       document.getElementById("yauzer_for_business").submit();
@@ -424,6 +454,13 @@ $(".businessSubcategory").chosen({
     }
   }); 
 
+
+//Reset-Add-Yauzer-Form
+  $('.reset_form').click(function(){
+       var v = $("#yauzer_for_business").validate();
+       $(this).closest('form').find("input[type=text], textarea, select").val("");
+       v.resetForm();
+  });
 
   //Adding-Validations-On-Biz-Basic-Information-Form
   $('#edit-business-form').validate({

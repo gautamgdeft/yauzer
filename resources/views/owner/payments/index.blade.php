@@ -37,8 +37,9 @@
                       <label for="name">Select Business-Membership Plan</label>
                       <select class="form-control" name="payment_plan">
                         <option value="Annually_5_{{ Auth::User()->business->id }}">Annually $5</option>
-                        <option value="Semi-Annually_2_{{ Auth::User()->business->id }}">Semi-Annually $2</option>
-                        <option value="Quarterly_1_{{ Auth::User()->business->id }}">Quarterly $1</option>
+                        <option value="Semi-Annually_4_{{ Auth::User()->business->id }}">Semi-Annually $4</option>
+                        <option value="Quarterly_3_{{ Auth::User()->business->id }}">Quarterly $3</option>
+                        <option value="Monthly_2_{{ Auth::User()->business->id }}">Monthly $2</option>
                       </select>
                 </div>               
                                                                                                                         

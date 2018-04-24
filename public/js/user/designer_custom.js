@@ -91,7 +91,7 @@ $(document).ready(function () {
         navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
         margin: 30,
         nav: true,
-        loop: false,
+        loop: true,
         responsive: {
             0: {
                 items: 2
@@ -154,5 +154,5 @@ jQuery(window).scroll(function () {
 });
 
 $('#carousel-example-generic').carousel({
-    interval: 6000
+    interval: 5000
 });

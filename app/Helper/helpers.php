@@ -132,3 +132,17 @@ function total_owners()
   
   return $users;    
 }
+
+#Fetching-Footer-Menus
+function footer_menus()
+{
+  $footer_menus = App\FooterMenu::where('status', true)->get();
+  return $footer_menus;
+}
+
+#Fetching-Header-Menus
+function header_menus()
+{
+  $header_menus = App\HeaderMenu::where('status', true)->get();
+  return $header_menus;
+}

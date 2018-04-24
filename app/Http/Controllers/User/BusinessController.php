@@ -21,6 +21,7 @@ use App\Mail\PremiumBusinessAdminEmail;
 use App\Mail\BusinessDirectionsMail;
 use Illuminate\Support\Facades\DB;
 use GeoIP;
+use Geocoder\Laravel\Facades\Geocoder;
 use DateTime;
 
 class BusinessController extends Controller
@@ -82,7 +83,8 @@ class BusinessController extends Controller
               #Premium-Business-Notification-Email-Admin
               \Mail::to('teamphp00@gmail.com')->send(new PremiumBusinessAdminEmail($yauzer->business));
              }
-             return redirect()->back()->withSuccess('Congratulations you have successfully yauzered a business');
+             Session::flash('success_msz_business', 'Congratulations you have successfully yauzered a business.'); 
+             return redirect()->back();
   		
   		    }else{
             #If Business is not present in our db plus saving business and yauzer:-
@@ -220,10 +222,28 @@ class BusinessController extends Controller
 
        $businesses = DB::select('SELECT * FROM (SELECT *, (' . $circle_radius . ' * acos(cos(radians(' . $lat . ')) * cos(radians(latitude)) * cos(radians(longitude) - radians(' . $lng . ')) + sin(radians(' . $lat . ')) * sin(radians(latitude)))) AS distance FROM business_listings) AS distances WHERE distance < ' . $max_distance . ' AND business_category = '.$businessCategory->id.' ORDER BY distance');
 
-       
-       
        return view('home.category_search', compact('businesses'));     
                 
+    }
+
+
+    public function search_business(Request $request)
+    {
+       $data = Geocoder::geocode($request->geo_location_terms)->all();
+       $simpleAddress = $request->geo_location_terms;
+       $formattedAddress = explode(',', $request->geo_location_terms);
+       $circle_radius = 3959;
+       $max_distance = 50;
+       $lat = $data[0]->getcoordinates()->getlatitude();
+       $lng = $data[0]->getcoordinates()->getlongitude();
+       $parameter = $request->search_terms;
+       
+       if(sizeof($parameter)){
+       $businesses = DB::select('SELECT * FROM (SELECT *, (' . $circle_radius . ' * acos(cos(radians(' . $lat . ')) * cos(radians(latitude)) * cos(radians(longitude) - radians(' . $lng . ')) + sin(radians(' . $lat . ')) * sin(radians(latitude)))) AS distance FROM business_listings) AS distances WHERE distance < ' . $max_distance . ' AND name LIKE "%'.$parameter.'%" ORDER BY distance');
+       }else{
+       $businesses = DB::select('SELECT * FROM (SELECT *, (' . $circle_radius . ' * acos(cos(radians(' . $lat . ')) * cos(radians(latitude)) * cos(radians(longitude) - radians(' . $lng . ')) + sin(radians(' . $lat . ')) * sin(radians(latitude)))) AS distance FROM business_listings) AS distances WHERE distance < ' . $max_distance . ' ORDER BY distance');        
+       }
+       return view('home.main_search', compact('businesses', 'formattedAddress', 'parameter', 'simpleAddress'));                   
     }
 
     public function sendBusinessDirections(Request $request)

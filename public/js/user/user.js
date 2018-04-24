@@ -5,11 +5,40 @@ function initialize()
     types: ['geocode'],
     componentRestrictions: {country: ["us", "ca"]}
     };
+    var componentForm = {
+      street_number: 'short_name',
+      route: 'long_name',
+      locality: 'long_name',
+      administrative_area_level_1: 'short_name',
+      country: 'long_name',
+      postal_code: 'short_name'
+    };    
     var autocomplete = new google.maps.places.Autocomplete(input, options);
     google.maps.event.addListener(autocomplete, 'place_changed', function () {
         var place = autocomplete.getPlace();
+        
+        for (var i = 0; i < place.address_components.length; i++) {
+          var addressType = place.address_components[i].types[0];
+          if (componentForm[addressType]) {
+            var val = place.address_components[i][componentForm[addressType]];
+
+            var addressType = addressType;
+            switch (addressType) { 
+              case 'locality': 
+                document.getElementById('city').value = val;
+                break;
+              case 'administrative_area_level_1': 
+                document.getElementById('state').value = val;
+                break;
+              case 'postal_code': 
+                document.getElementById('zipcode').value = val;
+                break;                  
+            }            
+          }
+        }
         document.getElementById('latitude').value = place.geometry.location.lat();
         document.getElementById('longitude').value = place.geometry.location.lng();
+        document.getElementById('address').value = place.name;
     });
 }
 google.maps.event.addDomListener(window, 'load', initialize);
@@ -361,6 +390,7 @@ rules: {
   //If Business Is Not In Our Db
   if($(this).val() == 'other')
   {
+        $('#yauzer_heading_text').text('Congratulations, you’re the first to Yauzer this business');
         $('#business_name').removeClass('hide');
         $('#category').removeClass('hide');
         $('#name').val('');
@@ -375,6 +405,8 @@ rules: {
         $('#store_yauzer_btn').prop('disabled', false).val('');     
 
   }else{ 
+  
+  $('#yauzer_heading_text').text('Welcome, you’re about to Yauzer a business');
   
   //If Business Exist In Our Db
   if(!$('#business_name').hasClass('hide')){

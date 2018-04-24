@@ -90,8 +90,12 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                <ul class="nav navbar-nav">
-                  <li class="active"><a href="javascript:void(0)">Find a Business</a></li>
-                  <li><a href="{{ route('user.what_is_yauzer') }}">What is Yauzer </a></li>
+                  @if(@sizeof($headerMenus))
+                  @foreach($headerMenus as $loopingHeaderMenu)
+                   <li><a href="{{ $loopingHeaderMenu->url }}">{{ $loopingHeaderMenu->name }}</a></li>
+                  @endforeach 
+                  @endif
+                   
                   @if ((Auth::user() && Auth::user()->roles->first()->name == 'owner'))
                   <li><a href="{{ route('user.home') }}">Yauzer for Business</a></li>
                   @elseif((Auth::user() && Auth::user()->roles->first()->name == 'user'))

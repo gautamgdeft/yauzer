@@ -4,25 +4,25 @@
 
 
 <div class="container">
-{{--    <div class="row">
+   <div class="row">
       <div class="col-sm-12">
          <div class="location-search ">
             <div class="col-sm-4">
-               <h2> Miami, FL Attorneys </h2>
-               <h5> Personal Injury Lawyer </h5>
+               <h2> @if(array_key_exists('0', $formattedAddress)) {{ $formattedAddress[0] }} @endif @if(array_key_exists('1', $formattedAddress)) {{ $formattedAddress[1] }}, @endif @if(array_key_exists('2', $formattedAddress)) {{ $formattedAddress[2] }} @endif @if(array_key_exists('3', $formattedAddress)) {{ $formattedAddress[3] }} @endif </h2>
+               <h5> {{ $parameter }} </h5>
                <a href="javascript:;"> Change Location </a>
             </div>
             <div class="col-sm-8">
-               <form>
+               <form name="search-form" id="search-form" method="get" action="{{ route('user.search_business') }}">
                   <ul class="search-bar">
                      <li>
                         <div class="form-group">
-                           <input type="text" class="form-control" placeholder="Personal Injury Lawyer" />
+                           <input type="text" name="search_terms" class="form-control" placeholder="Search" value="{{ $parameter }}" /> 
                         </div>
                      </li>
                      <li>
                         <div class="form-group">
-                           <input type="text" class="form-control" placeholder="Location" />
+                           <input type="text" id="address" name="geo_location_terms" class="form-control" placeholder="Location" value="{{ $simpleAddress }}" />
                         </div>
                      </li>
                      <li>
@@ -35,7 +35,7 @@
             </div>
          </div>
       </div>
-   </div> --}}
+   </div>
    <div id="msgs">
     @if(session('success'))
      <div class="alert alert-success">
@@ -241,4 +241,5 @@ function initMap() {
 google.maps.event.addDomListener(window, 'load', initMap);
 </script>
 
+ <script src="{{ asset('js/user/user.js') }}"></script>
 @endsection

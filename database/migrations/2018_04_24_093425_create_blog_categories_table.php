@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHeaderMenusTable extends Migration
+class CreateBlogCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateHeaderMenusTable extends Migration
      */
     public function up()
     {
-        Schema::create('header_menus', function (Blueprint $table) {
+        Schema::create('blog_categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('page_id')->unsigned();
-            $table->string('name');
-            $table->string('url');
-            $table->string('slug');            
-            $table->boolean('status')->default(true);             
+            $table->string('name')->nullable();
+            $table->string('slug');
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateHeaderMenusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('header_menus');
+        Schema::dropIfExists('blog_categories');
     }
 }

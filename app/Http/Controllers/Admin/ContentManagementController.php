@@ -322,12 +322,14 @@ public function headermenus()
 
 public function show_header_menu_form()
 {
-  return view('admin.content_management.header_menu.show_header_menu_form');
+  $pages = Page::all();
+  return view('admin.content_management.header_menu.show_header_menu_form', compact('pages'));
 }
 
 public function store_header_menu(Request $request)
 {
    $validatedData = $request->validate([
+     'page_id' => 'required',
      'name'    => 'required|string',
      'url'     => 'required|url'
    ]);
@@ -335,6 +337,7 @@ public function store_header_menu(Request $request)
   $headerMenu = new HeaderMenu;
   $headerMenu->name = $request->name;
   $headerMenu->url  = $request->url;
+  $headerMenu->page_id  = $request->page_id;
 
   $headerMenu->save();   
 
@@ -378,7 +381,8 @@ return response(['msg' => 'Failed deleting the menu', 'status' => 'failed']);
 public function edit_header_menu($slug)
 {
     $headerMenu = HeaderMenu::findBySlugOrFail($slug);
-    return view('admin.content_management.header_menu.edit_header_menu', compact('headerMenu'));
+    $pages = Page::all();
+    return view('admin.content_management.header_menu.edit_header_menu', compact('headerMenu', 'pages'));
 }
 
 public function update_header_menu(Request $request, $slug)
@@ -386,6 +390,7 @@ public function update_header_menu(Request $request, $slug)
  $headerMenu = HeaderMenu::findBySlugOrFail($slug);
 
  $validatedData = $request->validate([
+     'page_id' => 'required',
      'name'    => 'required|string',
      'url'     => 'required|url'
  ]);
@@ -393,6 +398,7 @@ public function update_header_menu(Request $request, $slug)
 
  $headerMenu->name = $request->input('name');
  $headerMenu->url  = $request->input('url');
+ $headerMenu->page_id  = $request->input('page_id');
  $headerMenu->save();
 
  Session::flash('success', 'Menu has been updated.');
@@ -423,6 +429,16 @@ public function search_footer_menu(Request $request)
         return view ( 'admin.content_management.footer_menu.listing' )->withMessage ( 'No Details found. Try to search again !' );
 } 
 
+public function get_menu_links(Request $request)
+{
+    $menu_url = Page::where('id', $request->id)->where('status', 1)->first();
+    if(@sizeof($menu_url)){          
+    return response()->json(['status' => 'success', 'menu_url' => $menu_url->pageurl, 'page_name' => $menu_url->name]);
+    }else{
+    return response(['msg' => 'Cannot find the menu url. Try again', 'status' => 'failed']);  
+    }
+}
+
 public function footermenus()
 {
   $footerMenus = FooterMenu::orderBy('id', 'desc')->paginate(10);
@@ -431,12 +447,14 @@ public function footermenus()
 
 public function show_footer_menu_form()
 {
-  return view('admin.content_management.footer_menu.show_footer_menu_form');
+  $pages = Page::all();
+  return view('admin.content_management.footer_menu.show_footer_menu_form', compact('pages'));
 }
 
 public function store_footer_menu(Request $request)
 {
    $validatedData = $request->validate([
+     'page_id' => 'required', 
      'name'    => 'required|string',
      'url'     => 'required|url'
    ]);
@@ -444,6 +462,7 @@ public function store_footer_menu(Request $request)
   $footerMenu = new FooterMenu;
   $footerMenu->name = $request->name;
   $footerMenu->url  = $request->url;
+  $footerMenu->page_id  = $request->page_id;
 
   $footerMenu->save();   
 
@@ -486,8 +505,9 @@ return response(['msg' => 'Failed deleting the menu', 'status' => 'failed']);
 
 public function edit_footer_menu($slug)
 {
+    $pages = Page::all();
     $footerMenu = FooterMenu::findBySlugOrFail($slug);
-    return view('admin.content_management.footer_menu.edit_footer_menu', compact('footerMenu'));
+    return view('admin.content_management.footer_menu.edit_footer_menu', compact('footerMenu', 'pages'));
 }
 
 public function update_footer_menu(Request $request, $slug)
@@ -495,6 +515,7 @@ public function update_footer_menu(Request $request, $slug)
  $footerMenu = FooterMenu::findBySlugOrFail($slug);
 
  $validatedData = $request->validate([
+     'page_id' => 'required',
      'name'    => 'required|string',
      'url'     => 'required|url'
  ]);
@@ -502,6 +523,7 @@ public function update_footer_menu(Request $request, $slug)
 
  $footerMenu->name = $request->input('name');
  $footerMenu->url  = $request->input('url');
+ $footerMenu->page_id  = $request->input('page_id');
  $footerMenu->save();
 
  Session::flash('success', 'Menu has been updated.');
@@ -510,8 +532,8 @@ public function update_footer_menu(Request $request, $slug)
 
 public function view_footer_menu($slug)
 {
-       $footerMenu = FooterMenu::findBySlugOrFail($slug);
-       return view('admin.content_management.footer_menu.view_footer_menu', ['footerMenu' => $footerMenu]);  
+   $footerMenu = FooterMenu::findBySlugOrFail($slug);
+   return view('admin.content_management.footer_menu.view_footer_menu', ['footerMenu' => $footerMenu]);  
 }
 
 public function faqs()

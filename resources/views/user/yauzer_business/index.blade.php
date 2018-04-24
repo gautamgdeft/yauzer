@@ -7,16 +7,24 @@
     <div class="row">
       <div class="col-md-12">
         <div class="blog-form-heading">
-          <h2>Congratulations, you’re the first to Yauzer the business</h2>
+          <h2 id="yauzer_heading_text">Welcome, you’re about to Yauzer a business</h2>
         </div>
         <div class="blog-form-container padding-less" id="padding-less">
 
           <div id="msgs">
-           @if(session('success'))
-           <div class="alert alert-success">
-            {{ session('success') }}
-          </div>
-          @endif
+             @if(session('success'))
+             <div class="alert alert-success">
+              {{ session('success') }}
+            </div>
+            @endif
+
+            @if(Session::has('success_msz_business'))
+            <div class="custom-alert custom-alert-success">
+              {{ Session::get('success_msz_business') }}
+              <p>Do you want to Yauzer another business? <a class="yes_btn_yauzer" href="{{ route('user.yauzer_business') }}">Yes</a> <a class="no_btn_yauzer" href="{{ route('home.welcome') }}">No</a></p>
+            </div>
+            @endif
+
           </div>
 
           <form name="yauzer_business" id="yauzer_business" method="Post" action="{{ route('user.save_yauzer') }}">
@@ -36,7 +44,7 @@
                  <option value="{{ $loopingBusiness->id }}" @if($uri_segments[2] == $loopingBusiness->slug) selected="selected" @endif>{{ $loopingBusiness->name }}</option>
                 @endforeach
                 @endif
-                 <option value="other">Other Business</option>
+                 <option value="other">NEW BUSINESS</option>
               </select>  
               </div>
             </div>            
@@ -139,7 +147,7 @@
             <div class="col-md-12 col-sm-12">
 							<div id="yauzer_div" class="form-group">
               <label>Rating</label>
-              <input id="input-21e" value="0" type="text" class="form-control rating" data-min=0 data-max=5 data-step=1 data-size="xs" name="rating" title="">
+              <input id="input-21e" value="5" type="text" class="form-control rating" data-min=0 data-max=5 data-step=1 data-size="xs" name="rating" title="">
 							</div>
             </div>
 

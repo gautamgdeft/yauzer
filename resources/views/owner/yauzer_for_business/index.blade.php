@@ -7,7 +7,7 @@
     <div class="row">
       <div class="col-md-12">
         <div class="blog-form-heading">
-          <h2>Congratulations, Claim or Add your business</h2>
+          <h2>Congratulations, Claim or Add business</h2>
         </div>
         <div class="blog-form-container padding-less" id="padding-less">
 
@@ -37,7 +37,7 @@
                  <option value="{{ $loopingBusiness->id }}">{{ $loopingBusiness->name }}</option>
                 @endforeach
                 @endif
-                 <option value="other">Other Business</option>
+                 <option value="other">NEW BUSINESS</option>
               </select>  
               </div>
             </div>            
@@ -102,28 +102,28 @@
 
             <div class="col-md-6 col-sm-6">
               <div class="form-group">
-              <label for="headline">Phone Number<span> *</span></label>
-              <input type="text" id="phone_number" name="phone_number" class="form-control form-input" placeholder="Enter Phone Number" disabled required>
+              <label for="headline">Phone Number</label>
+              <input type="text" id="phone_number" name="phone_number" class="form-control form-input" placeholder="Enter Phone Number" disabled>
               </div>
             </div>
 
             <div class="col-md-6 col-sm-6">
               <div class="form-group">
-              <label for="headline">Website<span> *</span></label>
-              <input name="website" id="website" type="text" class="form-control form-input" placeholder="Enter Website" disabled required>
+              <label for="headline">Website</label>
+              <input name="website" id="website" type="text" class="form-control form-input" placeholder="Enter Website" disabled>
               </div>
             </div>
 
             <div class="col-md-6 col-sm-6">
               <div class="form-group">
-              <label for="headline">Email Address<span> *</span></label>
-              <input name="email" id="email" type="text" class="form-control form-input" placeholder="Enter Email Address" disabled required>
+              <label for="headline">Email Address</label>
+              <input name="email" id="email" type="text" class="form-control form-input" placeholder="Enter Email Address" disabled>
               </div>
             </div>
 
             <div class="blog-form-button-container">
               <button id="claim_business_btn" name="clain_business" value="claimed" class="blog-form-submit" type="submit" disabled> Claim Business</button>              
-              <button id="submit_business" class="blog-form-submit hide" type="submit"> Submit</button>
+              <button id="submit_business" class="blog-form-submit hide" type="submit"> Add Business</button>
               <button type="button" class="blog-form-cancel reset_form">Cancel</button>
             </div>
 

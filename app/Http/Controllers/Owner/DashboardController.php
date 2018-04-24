@@ -28,6 +28,11 @@ class DashboardController extends Controller
 
     public function unautorize_access()
     {
-        return redirect()->route('owner.payment_information')->withError('Enter Payment information to access this option');
+        if(Auth::user()->business->yauzers->count() < 15){
+        return redirect()->route('owner.dashboard')->withError('Business must contain maximum 15 yauzers and payment informaton to access all these options');
+        }else{
+
+        return redirect()->route('owner.payment_information')->withError('Enter Payment information to access this option');            
+        }
     }
 }

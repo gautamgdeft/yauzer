@@ -20,12 +20,9 @@ use Carbon\Carbon;
                   <div class="item"><img src="{{ asset('uploads/businessAvatars/no_picture.png') }}"></div>
                   @endif
                </div>
-               <div class="addresswrapper">
-                  @php
-                  $addressArray = explode(',', $businessDetail->address);
-                  @endphp                    
+               <div class="addresswrapper">                  
                   <h4>{{ $businessDetail->name }}</h4>
-                  <p>{{ $addressArray[0] }}<br/>{{ $addressArray[1] }}, {{ $addressArray[2] }} {{ $businessDetail->zipcode }}</p>
+                  <p>{{ $businessDetail->address }}<br/>{{ $businessDetail->city }}, {{ $businessDetail->state }} {{ $businessDetail->zipcode }}</p>
                   <p><span>Phone:</span> <a href="tele:{{ $businessDetail->phone_number }}">{{ $businessDetail->phone_number }}</a><br/>
                      <span>Email:</span> <a href="mailto:{{ $businessDetail->email }}">{{ $businessDetail->email }}</a><br/>
                      <span>Website:</span> <a class="web-detail" target="_blank" href="{{ $businessDetail->website }}">{{ $businessDetail->website }}</a>
@@ -48,13 +45,13 @@ use Carbon\Carbon;
                   <div class="addresscontent">
                      <h4>Show your love</h4>
                      <ul class="social-icons">
-                        <li><a href="javascript:void(0)"><img src="{{ asset('images/icon-yauzer.png') }}" alt="Yauzer"/></a></li>
-                        <li><a href="javascript:void(0)"><img src="{{ asset('images/icon-heart.png') }}" alt="Heart"/></a></li>
-                        <li><a href="javascript:void(0)"><img src="{{ asset('images/icon-fb.png') }}" alt="Facebook"/></a></li>
-                        <li><a href="javascript:void(0)"><img src="{{ asset('images/icon-twitter.png') }}" alt="Twitter"/></a></li>
-                        <li><a href="javascript:void(0)"><img src="{{ asset('images/icon-instagram.png') }}" alt="Instagram"/></a></li>
-                        <li><a href="javascript:void(0)"><img src="{{ asset('images/icon-gplus.png') }}" alt="Google Plus"/></a></li>
-                        <li><a href="javascript:void(0)"><img src="{{ asset('images/icon-youtube.png') }}" alt="Youtube"/></a></li>
+                     <li><a href="{{ route('user.yauzer_business') }}"><img src="{{ asset('images/icon-yauzer.png') }}" alt="Yauzer"/></a></li>
+                     <li><a href="javascript:void(0)"><img src="{{ asset('images/icon-heart.png') }}" alt="Heart"/></a></li>
+                     <li><a href="{{ Share::load(Request::url(), "Check this out Business $businessDetail->name")->facebook() }}"><img src="{{ asset('images/icon-fb.png') }}" alt="Facebook"/></a></li>
+                     <li><a href="{{ Share::load(Request::url(), "Check this out Business $businessDetail->name")->twitter() }}"><img src="{{ asset('images/icon-twitter.png') }}" alt="Twitter"/></a></li>
+                     <li><a href="{{ Share::load(Request::url(), "Check this out Business $businessDetail->name")->gplus() }}"><img src="{{ asset('images/icon-gplus.png') }}" alt="Google Plus"/></a></li>
+                     <li><a href="javascript:void(0)"><img src="{{ asset('images/icon-instagram.png') }}" alt="Instagram"/></a></li>
+                     <li><a href="javascript:void(0)"><img src="{{ asset('images/icon-youtube.png') }}" alt="Youtube"/></a></li>
                      </ul>
 
                      @if(sizeof($businessDetail->yauzers))
@@ -232,12 +229,12 @@ use Carbon\Carbon;
 
                <div class="lawyer-listing business-listing listing-adds">
                  <figure>
-                     <a href="javascript:void(0)"  class="red-eyes">
+                     <a href="{{ route('user.business_detail',['slug' => $loopingInterstedBusiness->slug]) }}"  class="red-eyes">
                      <img src="/uploads/businessAvatars/{{ $loopingInterstedBusiness->avatar }}" alt=""/>
                      </a>
                      <figcaption>
                         <div class="content">
-                           <h3>{{ $loopingInterstedBusiness->name }}</h3>
+                           <a href="{{ route('user.business_detail',['slug' => $loopingInterstedBusiness->slug]) }}"><h3>{{ $loopingInterstedBusiness->name }}</h3></a>
                            <p class="address-text">{{ $loopingInterstedBusiness->address }} {{ $loopingInterstedBusiness->zipcode }}</p>
                            <p class="address-text adds-text"><a href="tel:3051234567" class="hidden-xs"><i class="fa fa-phone"></i>{{ $loopingInterstedBusiness->phone_number }}</a><a href="tel:{{ $loopingInterstedBusiness->phone_number }}" class="visibile-xs">Call Now</a>
                               <a href="mailto:david@helfand.com"><i class="fa fa-envelope"></i>{{ $loopingInterstedBusiness->email }}</a>

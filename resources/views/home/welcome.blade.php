@@ -42,19 +42,15 @@
          <div class="main-text slider-content banner-form-section">
             <div class="col-md-12 text-center">
                <div class="banner-form">
-                  <form>
+                  <form name="search-form" id="search-form" method="get" action="{{ route('user.search_business') }}">
                      <div class=" form-group"> 
-                        <input type="search" placeholder="Search">
+                        <input type="text" name="search_terms" placeholder="Search" required>
                      </div>
                      <div class=" form-group">
-                        <select class="selectpicker" title="Location">
-                           <option> Lorem</option>
-                           <option> Lorem</option>
-                           <option> Lorem</option>
-                        </select>
+                        <input type="text" id="address" name="geo_location_terms" placeholder="Location" required>
                      </div>
                      <div class=" form-group"> 
-                        <button class="search-btn">Search <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>
+                        <button type="submit" class="search-btn">Search <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>
                      </div>
                   </form>
                </div>
@@ -183,12 +179,9 @@
                                        <img src="/uploads/businessAvatars/{{ $loopingBusiness->avatar }}" alt="img">
                                     </figure>
                                  <div class="business-detail-text">
-                                       @php
-                                         $addressArray = explode(',', $loopingBusiness->address);
-                                       @endphp
                                        <h2>{{ $loopingBusiness->name }}</h2>
-                                       <p>{{ $addressArray[0] }} <br>
-                                          {{ $addressArray[1] }}, {{ $addressArray[2] }} {{ $loopingBusiness->zipcode }}
+                                       <p>{{ $loopingBusiness->address }} <br>
+                                          {{ $loopingBusiness->city }}, {{ $loopingBusiness->state }} {{ $loopingBusiness->zipcode }}
                                        </p>
                                        <a href="javascript:void" class="phoneno">Phone: {{ $loopingBusiness->phone_number }}</a>
                                        <span>E-mail:<a href="{{ $loopingBusiness->email }}">{{ $loopingBusiness->email }}</a></span>
@@ -218,14 +211,11 @@
             <div class="business-detail">
                <figure>
                   <img src="/uploads/businessAvatars/{{ $loopingBusiness->avatar }}" alt="img">
-               </figure>
-               @php
-                 $addressArray = explode(',', $loopingBusiness->address);
-               @endphp               
+               </figure>         
                <div class="business-detail-text">
                   <h2>{{ $loopingBusiness->name }}</h2>
-                  <p>{{ $addressArray[0] }} <br>
-                     {{ $addressArray[1] }}, {{ $addressArray[2] }} {{ $loopingBusiness->zipcode }}
+                  <p>{{ $loopingBusiness->address }} <br>
+                     {{ $loopingBusiness->city }}, {{ $loopingBusiness->state }} {{ $loopingBusiness->zipcode }}
                   </p>
                   <a href="tel:{{ $loopingBusiness->phone_number }}" class="phoneno">Phone: {{ $loopingBusiness->phone_number }}</a>
                   <span>E-mail:<a href="{{ $loopingBusiness->email }}">{{ $loopingBusiness->email }}</a></span>
@@ -360,4 +350,39 @@
 </section>
 <!-- Blog Ends -->
 
+@endsection
+
+
+
+@section('custom_scripts')
+ <script src="{{ asset('js/user/user.js') }}"></script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+            var owl = $('.owl-carousel');
+             owl.owlCarousel({
+        navText : ["<i class='fa fa-angle-left'></i>","<i class='fa fa-angle-right'></i>"],
+              margin: 30,
+              nav: true,
+              loop: true,
+              responsive: {
+                0: {
+                  items: 1
+                },
+                600: {
+                  items: 2
+                },
+                991: {
+                  items: 2
+                },
+                992: {
+                  items: 3
+                }
+              }
+            })
+       
+       
+
+       
+          })
+ </script>
 @endsection

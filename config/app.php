@@ -166,6 +166,8 @@ return [
         Unisharp\Ckeditor\ServiceProvider::class,
         \Torann\GeoIP\GeoIPServiceProvider::class,
         Srmklive\PayPal\Providers\PayPalServiceProvider::class,
+        Geocoder\Laravel\Providers\GeocoderService::class,
+        Chencha\Share\ShareServiceProvider::class,
 
 
         /*
@@ -233,6 +235,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'GeoIP' => \Torann\GeoIP\Facades\GeoIP::class,
         'PayPal' => Srmklive\PayPal\Facades\PayPal::class,
+        'Share' => Chencha\Share\ShareFacade::class,
 
     ],
 

@@ -8,9 +8,33 @@ use App\Page;
 
 class CmsController extends Controller
 {
-    public function what_is_yauzer()
+    public function render_cms($slug)
     {
-        $page = Page::findBySlugOrFail('what-is-yauzer');
-    	return view('cms.what_is_yauzer', compact('page'));
+        switch($slug)
+        {
+            case 'what-is-yauzer' :
+              $page = Page::findBySlugOrFail($slug);
+	          return view('cms.cms', compact('page'));
+              break;
+
+            case 'terms-of-service' :
+              $page = Page::findBySlugOrFail($slug);
+	          return view('cms.cms', compact('page'));
+              break;    
+
+            case 'privacy-policy' :
+              $page = Page::findBySlugOrFail($slug);
+	          return view('cms.cms', compact('page'));
+              break;            
+
+            case 'yauzer-blog' :
+              dd('Blog-Page');
+              break;            
+
+            case 'find-a-business' :
+              dd('Find a business');
+              break;
+        }
+
     }
 }

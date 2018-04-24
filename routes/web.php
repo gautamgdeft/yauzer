@@ -178,6 +178,7 @@ Route::prefix('admin')->group(function()
     Route::get('/view-slider-image/{slug}', 'Admin\ContentManagementController@view_slider_image')->name('admin.view_slider_image');    	        		       			   	      
 
     //Manage-Header-Menu-Routes
+    Route::post('/get-menu-links', 'Admin\ContentManagementController@get_menu_links')->name('admin.get_menu_links');     
     Route::any( '/search-header-menu', 'Admin\ContentManagementController@search_header_menu')->name('headermenu.search'); 
     Route::get('/header-menus', 'Admin\ContentManagementController@headermenus')->name('admin.headermenus');
     Route::get('/new-header-menu', 'Admin\ContentManagementController@show_header_menu_form')->name('admin.show_header_menu_form');
@@ -225,6 +226,18 @@ Route::prefix('admin')->group(function()
     Route::get('/business-basic-listing-export', 'Admin\ReportManagementController@basic_business_export')->name('admin.basic_business_export');    
     Route::get('/business-premium-listing-export', 'Admin\ReportManagementController@premium_business_export')->name('admin.premium_business_export');
     Route::get('/yauzer-export', 'Admin\ReportManagementController@yauzer_export')->name('admin.yauzer_export');
+
+    //Blog-Management
+
+     //Blog-Categories-Routes
+    Route::get('/blog-categories', 'Admin\BlogController@listingCategories')->name('admin.listingCategories');
+    Route::post('/update-blog-category-status', 'Admin\BlogController@update_blog_category_status')->name('admin.update_blog_category_status');
+    Route::post('/delete-blog-category', 'Admin\BlogController@destroy_category')->name('admin.destroy_blog_category');
+    Route::get('/new-blog-category', 'Admin\BlogController@new_category')->name('admin.show_blog_category_form');
+    Route::post('/new-blog-category', 'Admin\BlogController@store_category')->name('admin.store_blog_category');
+    Route::get('/edit-blog-category/{slug}', 'Admin\BlogController@edit_category')->name('admin.edit_blog_category_form');
+    Route::post('/update-blog-category/{slug}', 'Admin\BlogController@update_category')->name('admin.update_blog_category');
+    Route::get('/view-blog-category/{slug}', 'Admin\BlogController@show_category')->name('admin.show_blog_category');    
 });
 
 
@@ -233,10 +246,10 @@ Route::prefix('admin')->group(function()
 Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
 Route::get('/', 'User\WelcomeController@index')->name('home.welcome');
 Route::get('/business-login', 'Auth\LoginController@showLoginForm')->name('owner.login');
-Route::get('/what-is-yauzer', 'Cms\CmsController@what_is_yauzer')->name('user.what_is_yauzer');
 Route::get('business-detail/{slug}', 'User\BusinessController@business_detail')->name('user.business_detail');
 Route::get('category/{slug}', 'User\BusinessController@search_by_category')->name('user.business_by_category');
-Route::post('/sendBusinessDirections', 'User\BusinessController@sendBusinessDirections')->name('user.sendBusinessDirections'); 
+Route::post('/sendBusinessDirections', 'User\BusinessController@sendBusinessDirections')->name('user.sendBusinessDirections');
+Route::get('/search-business', 'User\BusinessController@search_business')->name('user.search_business');
 
 
 //Only-Auth-With-All-Role-Routes
@@ -338,4 +351,6 @@ Route::group(['prefix' => 'owner','middleware' => ['auth', 'owner']], function (
  
 
 });    
-
+   
+  #CMS-Routes-For-Frontend 
+  Route::get('/{slug}', 'Cms\CmsController@render_cms');

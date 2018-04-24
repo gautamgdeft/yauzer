@@ -101,3 +101,7 @@
 
 
 @endsection
+
+@section('custom_scripts')
+ <script src="{{ asset('js/user/user.js') }}"></script>
+@endsection

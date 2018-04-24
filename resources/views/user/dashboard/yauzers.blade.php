@@ -24,10 +24,10 @@
             <div class="page-header">
                <h1><small class="pull-right">{{ $yauzers->count() }} Yauzer</small> Yauzers </h1>
             </div>
-            <div class="comments-list">
+            <div class="comments-list" id="myList">
                @if(@sizeof($yauzers))
                @foreach($yauzers as $loopingYauzer)
-               <div class="media">
+               <div class="media liist">
                   <a class="media-left" href="#">
                   <img class="img-circle" src="/uploads/businessAvatars/{{ $loopingYauzer->business->avatar }}">
                   </a>
@@ -72,10 +72,53 @@
                @else
                No Yauzer
                @endif
+               <div id="loadMore">Load more</div>
+               <div id="showLess">Show Less</div>
             </div>
          </div>
       </div>
    </div>
 </div>
 
+@endsection
+
+<style type="text/css">
+ 
+#myList .liist{ display:none;
+}
+#loadMore {
+    color:green;
+    cursor:pointer;
+}
+#loadMore:hover {
+    color:black;
+}
+#showLess {
+    color:red;
+    cursor:pointer;
+}
+#showLess:hover {
+    color:black;
+}
+
+</style>
+
+@section('custom_scripts')
+ <script type="text/javascript">
+    
+$(document).ready(function () {
+    size_li = $("#myList .liist").length;
+    x=5;
+    $('#myList .liist:lt('+x+')').show();
+    $('#loadMore').click(function () {
+        x= (x+5 <= size_li) ? x+5 : size_li;
+        $('#myList .liist:lt('+x+')').show();
+    });
+    $('#showLess').click(function () {
+        x=(x-5<0) ? 3 : x-5;
+        $('#myList .liist').not(':lt('+x+')').hide();
+    });
+});    
+
+ </script>
 @endsection

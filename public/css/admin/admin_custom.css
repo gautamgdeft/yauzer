@@ -110,14 +110,12 @@ div.dataTables_filter input {
     height: 34px;
 }
 .box form{
-    /*max-width: 600px;*/
-    width: auto !important;
+    max-width: 600px;
     margin: 0 auto;
     width: 100%;
     padding: 0px;
     margin-top: 20px;
     margin-bottom: 20px;
-    display: inline-block;
 }
 .box.box-primary .img-circle {
 	  margin-top: 20px;
@@ -612,6 +610,10 @@ ul.speciality_checks li:nth-child(7) {
 }
 .src-filter .search-filter {
     margin: 20px 0px 0px 15px !important;
+}
+.box .src-filter form {
+    width: auto;
+    display: inline-block;
 }
 
 /********Media Query***************/
