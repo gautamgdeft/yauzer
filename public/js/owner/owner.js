@@ -156,9 +156,10 @@ $(document).ready(function()
           maxlength: 50, 
       },            
       "phone_number": {
-          number: true,
-          minlength: 3,
-          maxlength: 16,
+          required: true,
+          phoneUS: true,
+          maxlength: 20,
+          minlength: 10   
       },
       valueToBeTested: {
           required: true,
@@ -395,9 +396,10 @@ $(".businessSubcategory").chosen({
       },           
 
       "phone_number": {
-          number: true,
-          minlength: 3,
-          maxlength: 16,
+          required: true,
+          phoneUS: true,
+          maxlength: 20,
+          minlength: 10   
       },
 
       "website": {
@@ -534,9 +536,10 @@ $(".businessSubcategory").chosen({
       },     
 
       "phone_number": {
-          number: true,
-          minlength: 8,
-          maxlength: 16,
+          required: true,
+          phoneUS: true,
+          maxlength: 20,
+          minlength: 10   
       },        
       "fax_number": {
           number: true,
@@ -587,6 +590,10 @@ $(".businessSubcategory").chosen({
   $.validator.addMethod("alphanumeric", function (value, element) {
     return this.optional(element) || /^[a-z\d\-_\s]+$/i.test(value);
   }, "Please enter alpha-numeric characters only.");  
+
+  $.validator.addMethod("phoneUS", function (value, element) {
+  return this.optional(element) || value == value.match(/^(?=.*[0-9])[- +()0-9]+$/);
+}, "Please specify a valid phone number.");  
 
 
 //Reset-Add-Yauzer-Form

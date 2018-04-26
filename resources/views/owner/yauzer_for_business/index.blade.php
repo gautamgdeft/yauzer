@@ -103,9 +103,10 @@
             <div class="col-md-6 col-sm-6">
               <div class="form-group">
               <label for="headline">Phone Number</label>
-              <input type="text" id="phone_number" name="phone_number" class="form-control form-input" placeholder="Enter Phone Number" disabled>
+              <input type="text" id="phone_number" name="phone_number" class="form-control form-input input-medium bfh-phone" data-country="US" placeholder="Enter Phone Number" data-country="US" disabled>
               </div>
             </div>
+
 
             <div class="col-md-6 col-sm-6">
               <div class="form-group">

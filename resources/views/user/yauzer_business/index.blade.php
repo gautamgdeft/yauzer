@@ -110,7 +110,7 @@
             <div class="col-md-6 col-sm-6">
               <div class="form-group">
               <label for="headline">Phone Number</label>
-              <input type="text" id="phone_number" name="phone_number" value="{{ @sizeof($choosedBusiness)? $choosedBusiness->phone_number : '' }}" class="form-control form-input" placeholder="Enter Phone Number" disabled>
+              <input type="text" id="phone_number" name="phone_number" value="{{ @sizeof($choosedBusiness)? $choosedBusiness->phone_number : '' }}" class="form-control form-input input-medium bfh-phone" data-country="US" data-number="{{ @sizeof($choosedBusiness)? $choosedBusiness->phone_number : '' }}" placeholder="Enter Phone Number" disabled>
               </div>
             </div>
 

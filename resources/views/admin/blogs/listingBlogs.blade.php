@@ -7,10 +7,10 @@
 <aside class="right-side">
  <!-- Content Header (Page header) -->
  <section class="content-header">
-  <h1> Blog Categories </h1>
+  <h1> Manage Blogs </h1>
   <ol class="breadcrumb">
    <li><a href="{{ route('admin.dashboard') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-   <li class="active">Blog Categories</li>
+   <li class="active">Manage Blogs</li>
  </ol>
 </section>
 
@@ -27,10 +27,11 @@
   <div class="col-xs-12">
    <div class="box">
     <div class="box-header">
+    <a href="{{ route('admin.show_blog_form') }}" class="btn bg-olive btn-flat">Add New Blog</a>
     <a href="{{ route('admin.show_blog_category_form') }}" class="btn bg-olive btn-flat">Add New Category</a>
 
     <div class="box-tools src-filter">
-        <form action="{{ route('contact.search') }}" method="POST" role="search">
+        <form action="{{ route('blogMain.search') }}" method="POST" role="search">
           {{ csrf_field() }}
           <div class="input-group">
               <input type="text" name="search_parameter" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search" value="@if(isset($details)) {{ $query }} @endif"/>
@@ -41,7 +42,7 @@
         </form>
 
         @if(isset($details))
-          <a href="{{ route('admin.contactListing') }}" class="btn btn-danger btn-flat search-filter">Clear Filter</a>
+          <a href="{{ route('admin.listingBlogs') }}" class="btn btn-danger btn-flat search-filter">Clear Filter</a>
         @endif   
 
     </div>      
@@ -49,31 +50,33 @@
      <!-- /.box-header -->
 
     {{-- All Contacts Result Display --}}
-    @if(isset($blogCategories))
+    @if(isset($blogs))
     <div class="box-body table-responsive no-padding">
       <table class="table table-hover table-bordered">
         
          <tr>
-          <th>Name</th>
+          <th>Title</th>
+          <th>Date Created</th>
           <th>Status</th>
           <th>Action</th>
         </tr>
       
       
-        @if(!is_null($blogCategories))
-        @foreach($blogCategories as $loopingCategories)
-        <tr class="tr_{{ $loopingCategories->id }}">
-          <td>{{ $loopingCategories->name }}</td>
+        @if(!is_null($blogs))
+        @foreach($blogs as $loopingblogs)
+        <tr class="tr_{{ $loopingblogs->id }}">
+          <td>{{ $loopingblogs->title }}</td>
+          <td>{{ $loopingblogs->created_at->format('m-d-Y')  }}</td>
           <td>
 
-            <button id="active_{{ $loopingCategories->id }}" class="btn btn-success btn-flat active_category @if($loopingCategories->status == '0') hide @endif" data-id="{{ $loopingCategories->id }}" data-toggle="tooltip" title="Click to Inactive">Active</button>
+            <button id="active_{{ $loopingblogs->id }}" class="btn btn-success btn-flat active_category @if($loopingblogs->status == '0') hide @endif" data-id="{{ $loopingblogs->id }}" data-toggle="tooltip" title="Click to Inactive">Active</button>
 
-            <button id="inactive_{{ $loopingCategories->id }}" class="btn btn-danger btn-flat active_category @if($loopingCategories->status == '1') hide @endif" data-id="{{ $loopingCategories->id }}" data-toggle="tooltip" title="Click to Active">Inactive</button>                                                    
+            <button id="inactive_{{ $loopingblogs->id }}" class="btn btn-danger btn-flat active_category @if($loopingblogs->status == '1') hide @endif" data-id="{{ $loopingblogs->id }}" data-toggle="tooltip" title="Click to Active">Inactive</button>                                                    
           </td>
           <td>
-            <button class="btn btn-danger btn-flat delete_category" data-id="{{ $loopingCategories->id }}" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-            <a href="{{ route('admin.edit_blog_category_form',['slug' => $loopingCategories->slug]) }}" class="btn btn-warning btn-flat" data-toggle="tooltip" title="" data-original-title="Edit Blog Category"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>            
-            <a href="{{ route('admin.show_blog_category', ['slug' => $loopingCategories->slug]) }}" class="btn btn-info btn-flat" data-toggle="tooltip" title="View"><i class="fa fa-eye" aria-hidden="true"></i></a>
+            <button class="btn btn-danger btn-flat delete_blog" data-id="{{ $loopingblogs->id }}" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+            <a href="{{ route('admin.edit_blog_form',['slug' => $loopingblogs->slug]) }}" class="btn btn-warning btn-flat" data-toggle="tooltip" title="" data-original-title="Edit Blog"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>            
+            <a href="{{ route('admin.show_blog', ['slug' => $loopingblogs->slug]) }}" class="btn btn-info btn-flat" data-toggle="tooltip" title="View"><i class="fa fa-eye" aria-hidden="true"></i></a>
           </td>
 
         </tr>
@@ -85,7 +88,7 @@
 
 <div class="box-footer clearfix">
     <ul class="pagination pagination-sm no-margin pull-right">
-        <li>@if($blogCategories){!! $blogCategories->render() !!}@endif</li>
+        <li>@if($blogs){!! $blogs->render() !!}@endif</li>
     </ul>
 </div>
 
@@ -100,21 +103,27 @@
         
          <tr>
           <th>Name</th>
-          <th>Email</th>
-          <th>Message</th>
+          <th>Date Created</th>
+          <th>Status</th>
           <th>Action</th>
         </tr>
       
       
         @if(!is_null($details))
-        @foreach($details as $loopingcontacts)
-        <tr class="tr_{{ $loopingcontacts->id }}">
-          <td>{{ $loopingcontacts->name }}</td>
-          <td>{{ $loopingcontacts->email }}</td>
-          <td>{{ $loopingcontacts->message }}</td>
+        @foreach($details as $loopingblogs)
+        <tr class="tr_{{ $loopingblogs->id }}">
+          <td>{{ $loopingblogs->title }}</td>
+          <td>{{ $loopingblogs->created_at->format('m-d-Y')  }}</td>
           <td>
-            <button class="btn btn-danger btn-flat delete_contact" data-id="{{ $loopingcontacts->id }}" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-            <a href="" class="btn btn-info btn-flat" data-toggle="tooltip" title="View"><i class="fa fa-eye" aria-hidden="true"></i></a>            
+
+            <button id="active_{{ $loopingblogs->id }}" class="btn btn-success btn-flat active_category @if($loopingblogs->status == '0') hide @endif" data-id="{{ $loopingblogs->id }}" data-toggle="tooltip" title="Click to Inactive">Active</button>
+
+            <button id="inactive_{{ $loopingblogs->id }}" class="btn btn-danger btn-flat active_category @if($loopingblogs->status == '1') hide @endif" data-id="{{ $loopingblogs->id }}" data-toggle="tooltip" title="Click to Active">Inactive</button>                                                    
+          </td>
+          <td>
+            <button class="btn btn-danger btn-flat delete_blog" data-id="{{ $loopingblogs->id }}" data-toggle="tooltip" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+            <a href="{{ route('admin.edit_blog_form',['slug' => $loopingblogs->slug]) }}" class="btn btn-warning btn-flat" data-toggle="tooltip" title="" data-original-title="Edit Blog"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>            
+            <a href="{{ route('admin.show_blog', ['slug' => $loopingblogs->slug]) }}" class="btn btn-info btn-flat" data-toggle="tooltip" title="View"><i class="fa fa-eye" aria-hidden="true"></i></a>
           </td>
 
         </tr>
@@ -153,16 +162,16 @@
   $(document).ready(function(){
 
 // Deleting-Contact
-$(".delete_category").on("click", function() 
+$(".delete_blog").on("click", function() 
 {    
   var confirmation = confirm("Are you sure you want to delete this?");
   if (confirmation) 
   {    
   	$(this).html('Deleting...');
-  	var contact_id = $(this).data('id');
+  	var blog_id = $(this).data('id');
   	$.ajax({
      headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},    	
-     url: "{{ route('admin.destroy_blog_category') }}",
+     url: "{{ route('admin.destroy_blog') }}",
      type: "post",
      dataType: "JSON",
      data: { 'id': $(this).data('id') },
@@ -170,7 +179,7 @@ $(".delete_category").on("click", function()
      {
       if ( response.status === 'success' ) 
       {
-       $('.tr_'+contact_id).remove();
+       $('.tr_'+blog_id).remove();
        $('#msgs').html("<div class='alert alert-success'>"+response.msg+"</div>");
      }
    },
@@ -198,7 +207,7 @@ $('.active_category').click(function()
 
   $.ajax({
    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},      
-   url: "{{ route('admin.update_blog_category_status') }}",
+   url: "{{ route('admin.update_blog_status') }}",
    type: "post",
    dataType: "JSON",
    data: { 'id': $(this).data('id') },

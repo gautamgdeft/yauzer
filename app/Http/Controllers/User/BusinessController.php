@@ -38,7 +38,7 @@ class BusinessController extends Controller
         $choosedBusiness = NULL;
       }
 
-      $businesses = BusinessListing::orderBy('id', 'desc')->where('status', 1)->get();
+      $businesses = BusinessListing::orderBy('name', 'asc')->where('status', 1)->get();
       $business_categories = BusinessCategory::orderBy('id', 'desc')->where('status', 1)->get();
       return view('user.yauzer_business.index', compact('businesses','business_categories', 'uri_segments', 'choosedBusiness'));
     }
@@ -114,8 +114,9 @@ class BusinessController extends Controller
                 #Premium-Business-Notification-Email-Admin
                 \Mail::to('teamphp00@gmail.com')->send(new PremiumBusinessAdminEmail($yauzer->business));
                }
-
-    	         return redirect()->back()->withSuccess('Congratulations you have successfully added a business and yauzered it.');
+             
+             Session::flash('success_msz_business', 'Congratulations you have successfully added a business and yauzered it.'); 
+             return redirect()->back();
   		     }
   
 
@@ -259,7 +260,19 @@ class BusinessController extends Controller
        return redirect()->back()->withSuccess('Business Direction has been sent to your email successfuly');
     } 
 
-
+    public function love_business(Request $request)
+    {
+            if(Session::has('love')){
+              return response(['msg' => 'Business has been already loved by you.', 'status' => 'repeated']);                
+            }else{
+              Session::put('love', 'exist');
+              $businessLove = BusinessListing::find($request->id);
+              $addLove = $businessLove->love + 1;
+              $request['love'] = $addLove;
+              $businessLove->update($request->all());
+              return response(['msg' => 'Business has been loved successfully.', 'status' => 'success']);    
+            }   
+    }
 
 
 

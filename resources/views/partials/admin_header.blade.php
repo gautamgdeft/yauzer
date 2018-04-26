@@ -239,16 +239,16 @@
                      </div>
                   </li> --}}
                   <!-- Menu Footer-->
-                  <li class="user-footer">
-                     <div class="pull-left">
-                        <a href="{{ route('admin.profile') }}" class="btn btn-default btn-flat">Profile</a>
-                     </div>
-                     <div class="pull-mid">
+                     <li class="user-footer">
+                     <a href="{{ route('admin.profile') }}" class="btn btn-default btn-flat">Profile</a>
+                     </li>
+                     
+                     <li>
                         <a href="{{ route('admin.showChangePasswordForm') }}" class="btn btn-default btn-flat">Change Password</a>
-                     </div>
-                     <div class="pull-right">
+                     </li>
+                     <li>
                         <a href="{{ route('admin.logout') }}" class="btn btn-default btn-flat">Sign out</a>
-                     </div>
+                     </li>
                   </li>
                </ul>
             </li>

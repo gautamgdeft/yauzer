@@ -27,8 +27,8 @@ class CmsController extends Controller
 	          return view('cms.cms', compact('page'));
               break;            
 
-            case 'yauzer-blog' :
-              dd('Blog-Page');
+            case 'blog' :
+              return redirect()->route('showBlogs');
               break;            
 
             case 'find-a-business' :

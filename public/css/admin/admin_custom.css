@@ -640,3 +640,42 @@ ul.speciality_checks li:nth-child(7) {
 }	
 }
 
+/*** 180426 ***/
+.navbar-nav > .user-menu > .dropdown-menu > li.user-footer{
+    background-color: transparent !important;
+}
+.navbar-nav > .user-menu > .dropdown-menu > li , .navbar-nav > .user-menu > .dropdown-menu > li.user-footer{
+    display: block;
+    padding-left: 37%;
+    width: auto;
+    text-align: left;
+    margin-bottom: 5px;
+    position: relative;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.navbar-nav > .user-menu > .dropdown-menu > li:first-child:before{
+    display: none;
+}
+.navbar-nav > .user-menu > .dropdown-menu > li:before , .navbar-nav > .user-menu > .dropdown-menu > li.user-footer:before{
+    content: "\f105";
+    font-family: 'FontAwesome';
+    color: #84c225;
+    font-size: 17px;
+    top: -1px;
+    position: absolute;
+    margin-left: -11px;
+}
+.navbar-nav > .user-menu > .dropdown-menu > li a, .navbar-nav > .user-menu > .dropdown-menu > li.user-footer a {
+    display: inline-block;
+    color: #111 !important;
+    background: transparent !important;
+    padding: 0;
+    font-weight: 500;
+    font-size: 13px;
+    border: none !important;
+}
+.navbar-nav > .user-menu > .dropdown-menu > li a:hover, .navbar-nav > .user-menu > .dropdown-menu > li.user-footer a:hover{
+    background: transparent  !important;
+    color: #84c225 !important;
+}

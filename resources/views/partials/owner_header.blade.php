@@ -239,16 +239,10 @@
                      </div>
                   </li> --}}
                   <!-- Menu Footer-->
-                  <li class="user-footer">
-                     <div class="pull-left">
-                        <a href="{{ route('owner.profile') }}" class="btn btn-default btn-flat">Profile</a>
-                     </div>
-                     <div class="pull-mid">
-                        <a href="{{ route('owner.changepasswordform') }}" class="btn btn-default btn-flat">Change Password</a>
-                     </div>
-                     <div class="pull-right">
-                        <a href="{{ route('owner.logout') }}" class="btn btn-default btn-flat">Sign out</a>
-                     </div>
+                     <li class="user-footer">
+                        <a href="{{ route('owner.profile') }}" class="btn btn-default btn-flat">Profile</a></li>
+                     <li>   <a href="{{ route('owner.changepasswordform') }}" class="btn btn-default btn-flat">Change Password</a></li>
+                     <li>   <a href="{{ route('owner.logout') }}" class="btn btn-default btn-flat">Sign out</a>
                   </li>
                </ul>
             </li>

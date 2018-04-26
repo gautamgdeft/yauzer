@@ -35,6 +35,7 @@ class CreateBusinessListingsTable extends Migration
             $table->string('longitude')->nullable();
             $table->boolean('status')->default(false);
             $table->boolean('premium_status')->default(false);
+            $table->bigInteger('love')->default(0);
             $table->string('slug');
             $table->timestamps();
         });

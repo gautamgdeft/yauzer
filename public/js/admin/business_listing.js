@@ -85,9 +85,10 @@ $(document).ready(function()
       },    
 
       "phone_number": {
-          number: true,
-          minlength: 8,
-          maxlength: 16,
+          required: true,
+          phoneUS: true,
+          maxlength: 20,
+          minlength: 10 
       },  
       valueToBeTested: {
           required: true,
@@ -415,6 +416,11 @@ $("#zipcode").keypress(function(event) {
       event.preventDefault();
    }
 });
+
+
+ $.validator.addMethod("phoneUS", function (value, element) {
+    return this.optional(element) || value == value.match(/^(?=.*[0-9])[- +()0-9]+$/);
+  }, "Please specify a valid phone number.");    
 
  //Getting-Business-Subcategies-From-Category-OnChange
 $('#business_category').on('change', function() 

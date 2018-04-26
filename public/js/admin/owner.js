@@ -45,9 +45,10 @@ $(document).ready(function()
           maxlength: 50, 
       },            
       "phone_number": {
-          number: true,
-          minlength: 8,
-          maxlength: 16,
+          required: true,
+          phoneUS: true,
+          maxlength: 20,
+          minlength: 10  
       },
       valueToBeTested: {
           required: true,
@@ -88,9 +89,10 @@ $(document).ready(function()
           maxlength: 50, 
       },            
       "phone_number": {
-          number: true,
-          minlength: 8,
-          maxlength: 16,
+          required: true,
+          phoneUS: true,
+          maxlength: 20,
+          minlength: 10  
       },     
       valueToBeTested: {
           required: true,
@@ -171,6 +173,10 @@ $(document).ready(function()
     return this.optional(element) || /^[a-zA-Z .]+$/i.test(value);
     }, "Only letters are allowed.");       
 
+
+    $.validator.addMethod("phoneUS", function (value, element) {
+      return this.optional(element) || value == value.match(/^(?=.*[0-9])[- +()0-9]+$/);
+    }, "Please specify a valid phone number."); 
 
 $("#zipcode").keypress(function(event) {
   if ( event.which == 45 ) {

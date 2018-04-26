@@ -12,7 +12,10 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Validator;
 use GeoIP;
+use App\Blog;
+use Carbon\Carbon;
 use Geocoder\Laravel\Facades\Geocoder;
+use Session;
 
 class WelcomeController extends Controller
 {
@@ -44,7 +47,8 @@ class WelcomeController extends Controller
         $sliderImages = SliderImage::orderBy('id', 'desc')->get();
         $businessCategory = BusinessCategory::where('status', '1')->get();
         $businesses = BusinessListing::withCount('yauzers')->orderBy('yauzers_count', 'desc')->where('premium_status', true)->take(8)->get();
-        return view('home.welcome', compact('sliderImages','businessCategory', 'businesses'));
+        $blogs = Blog::orderBy('id', 'desc')->get();
+        return view('home.welcome', compact('sliderImages','businessCategory', 'businesses', 'blogs'));
     }
 
 

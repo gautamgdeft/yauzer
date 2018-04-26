@@ -207,9 +207,10 @@ rules: {
       },           
 
       "phone_number": {
-          number: true,
-          minlength: 3,
-          maxlength: 16,
+          required: true,
+          phoneUS: true,
+          maxlength: 20,
+          minlength: 10   
       },
 
       "website": {
@@ -280,9 +281,10 @@ rules: {
       maxlength: 25, 
   },
   "phone_number": {
-      number: true,
-      minlength: 8,
-      maxlength: 16,
+          required: true,
+          phoneUS: true,
+          maxlength: 20,
+          minlength: 10   
   },  
   "city": {
       required: true,
@@ -377,6 +379,11 @@ rules: {
   $.validator.addMethod("alphanumeric", function (value, element) {
     return this.optional(element) || /^[a-z\d\-_\s]+$/i.test(value);
   }, "Please enter alpha-numeric characters only.");  
+
+
+  $.validator.addMethod("phoneUS", function (value, element) {
+  return this.optional(element) || value == value.match(/^(?=.*[0-9])[- +()0-9]+$/);
+}, "Please specify a valid phone number.");    
 
 
 

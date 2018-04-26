@@ -240,62 +240,24 @@
          <div class="col-sm-12">
             <div id="blog-carousel">
                <div class="owl-carousel owl-theme pos-rel">
+                  @if(@sizeof($blogs))
+                  @foreach($blogs as $loopingBlogs)
                   <div class="item">
                      <div class="blog-image pos-rel">
-                        <img src="{{ asset('images/blog-img-1.png') }}" alt="img">
+                        <img src="/uploads/blogavatars/{{ $loopingBlogs->avatar }}" alt="img">
                         <div class="blog-img-content">
-                           <span>25</span>
-                           <span>JAN</span>
-                           <span>2017</span>
+                           <span>{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $loopingBlogs->created_at)->day }}</span>
+                           <span>{{ strtoupper(Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $loopingBlogs->created_at)->format('M')) }}</span>
+                           <span>{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $loopingBlogs->created_at)->year }}</span>
                         </div>
                      </div>
                      <div class="blog-desc">
-                        <h4>Landscaping</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiu <a href="javascript:void(0);">Read More</a></p>
+                        <h4>{{ $loopingBlogs->title }}</h4>
+                        <p>{!! \Illuminate\Support\Str::words($loopingBlogs->description, 12, '...') !!} <a href="{{ route('showsingleBlog',['slug' => $loopingBlogs->slug]) }}">Read More</a></p>
                      </div>
-                  </div>
-                  <div class="item">
-                     <div class="blog-image pos-rel">
-                        <img src="{{ asset('images/blog-img-2.png') }}" alt="img">
-                        <div class="blog-img-content">
-                           <span>26</span>
-                           <span>JAN</span>
-                           <span>2017</span>
-                        </div>
-                     </div>
-                     <div class="blog-desc">
-                        <h4>Design Idea</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiu <a href="javascript:void(0);">Read More</a></p>
-                     </div>
-                  </div>
-                  <div class="item">
-                     <div class="blog-image pos-rel">
-                        <img src="{{ asset('images/blog-img-3.png') }}" alt="img">
-                        <div class="blog-img-content">
-                           <span>27</span>
-                           <span>JAN</span>
-                           <span>2017</span>
-                        </div>
-                     </div>
-                     <div class="blog-desc">
-                        <h4>Hotel Bath Hunt</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiu <a href="javascript:void(0);">Read More</a></p>
-                     </div>
-                  </div>
-                  <div class="item">
-                     <div class="blog-image pos-rel">
-                        <img src="{{ asset('images/blog-img-1.png') }}" alt="img">
-                        <div class="blog-img-content">
-                           <span>28</span>
-                           <span>JAN</span>
-                           <span>2017</span>
-                        </div>
-                     </div>
-                     <div class="blog-desc">
-                        <h4>Landscaping</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiu <a href="javascript:void(0);">Read More</a></p>
-                     </div>
-                  </div>
+                  </div> 
+                  @endforeach
+                  @endif
                </div>
             </div>
          </div>
@@ -303,48 +265,24 @@
    </div>
    <div class="business-slider-mobile">
       <ul class="business-slider-list blog-slider-list">
+         @if(@sizeof($blogs))
+         @foreach($blogs as $loopingBlogs)         
          <li>
             <div class="blog-image pos-rel">
-               <img src="images/blog-img-1.png" alt="img">
+               <img src="/uploads/blogavatars/{{ $loopingBlogs->avatar }}" alt="img">
                <div class="blog-img-content">
-                  <span>25</span>
-                  <span>JAN</span>
-                  <span>2017</span>
+                  <span>{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $loopingBlogs->created_at)->day }}</span>
+                  <span>{{ strtoupper(Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $loopingBlogs->created_at)->format('M')) }}</span>
+                  <span>{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $loopingBlogs->created_at)->year }}</span>
                </div>
             </div>
             <div class="blog-desc">
-               <h4>Landscaping</h4>
-               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiu <a href="javascript:void(0);">Read More</a></p>
+               <h4>{{ $loopingBlogs->title }}</h4>
+               <p>{!! \Illuminate\Support\Str::words($loopingBlogs->description, 12, '...') !!} <a href="{{ route('showsingleBlog',['slug' => $loopingBlogs->slug]) }}">Read More</a></p>
             </div>
          </li>
-         <li>
-            <div class="blog-image pos-rel">
-               <img src="images/blog-img-2.png" alt="img">
-               <div class="blog-img-content">
-                  <span>26</span>
-                  <span>JAN</span>
-                  <span>2017</span>
-               </div>
-            </div>
-            <div class="blog-desc">
-               <h4>Design Idea</h4>
-               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiu <a href="javascript:void(0);">Read More</a></p>
-            </div>
-         </li>
-         <li>
-            <div class="blog-image pos-rel">
-               <img src="images/blog-img-3.png" alt="img">
-               <div class="blog-img-content">
-                  <span>27</span>
-                  <span>JAN</span>
-                  <span>2017</span>
-               </div>
-            </div>
-            <div class="blog-desc">
-               <h4>Hotel Bath Hunt</h4>
-               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiu <a href="javascript:void(0);">Read More</a></p>
-            </div>
-         </li>
+         @endforeach
+         @endif         
       </ul>
    </div>
 </section>

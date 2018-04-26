@@ -237,7 +237,19 @@ Route::prefix('admin')->group(function()
     Route::post('/new-blog-category', 'Admin\BlogController@store_category')->name('admin.store_blog_category');
     Route::get('/edit-blog-category/{slug}', 'Admin\BlogController@edit_category')->name('admin.edit_blog_category_form');
     Route::post('/update-blog-category/{slug}', 'Admin\BlogController@update_category')->name('admin.update_blog_category');
-    Route::get('/view-blog-category/{slug}', 'Admin\BlogController@show_category')->name('admin.show_blog_category');    
+    Route::get('/view-blog-category/{slug}', 'Admin\BlogController@show_category')->name('admin.show_blog_category');
+    Route::any( '/search-blog-category', 'Admin\BlogController@search')->name('blog.search'); 
+
+    //Blog-Listings-Routes
+    Route::get('/blog-listings', 'Admin\BlogController@listingBlogs')->name('admin.listingBlogs');
+    Route::post('/update-blog-status', 'Admin\BlogController@update_blog_status')->name('admin.update_blog_status');
+    Route::post('/delete-blog', 'Admin\BlogController@destroy_blog')->name('admin.destroy_blog');  
+    Route::any( '/search-blog', 'Admin\BlogController@searchBlog')->name('blogMain.search'); 
+    Route::get('/view-blog/{slug}', 'Admin\BlogController@show_blog')->name('admin.show_blog'); 
+    Route::get('/new-blog', 'Admin\BlogController@new_blog')->name('admin.show_blog_form');
+    Route::post('/new-blog', 'Admin\BlogController@store_blog')->name('admin.store_blog');    
+    Route::get('/edit-blog/{slug}', 'Admin\BlogController@edit_blog')->name('admin.edit_blog_form');
+    Route::post('/update-blog/{slug}', 'Admin\BlogController@update_blog')->name('admin.update_blog');       
 });
 
 
@@ -250,6 +262,10 @@ Route::get('business-detail/{slug}', 'User\BusinessController@business_detail')-
 Route::get('category/{slug}', 'User\BusinessController@search_by_category')->name('user.business_by_category');
 Route::post('/sendBusinessDirections', 'User\BusinessController@sendBusinessDirections')->name('user.sendBusinessDirections');
 Route::get('/search-business', 'User\BusinessController@search_business')->name('user.search_business');
+Route::get('/blog', 'User\BlogController@showBlogs')->name('showBlogs');
+Route::get('/blog/{slug}', 'User\BlogController@showsingleBlogDetail')->name('showsingleBlog');
+Route::get('/blog-category/{categoryid}', 'User\BlogController@categoryfilterBlogs')->name('categoryfilterBlogs');
+Route::post('/love-business', 'User\BusinessController@love_business');
 
 
 //Only-Auth-With-All-Role-Routes

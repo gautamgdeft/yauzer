@@ -44,9 +44,11 @@ use Carbon\Carbon;
                   <div id='gmap_canvas' style='height:280px;'></div>
                   <div class="addresscontent">
                      <h4>Show your love</h4>
+                        <div id="lovemsz">
+                        </div>                     
                      <ul class="social-icons">
                      <li><a href="{{ route('user.yauzer_business') }}"><img src="{{ asset('images/icon-yauzer.png') }}" alt="Yauzer"/></a></li>
-                     <li><a href="javascript:void(0)"><img src="{{ asset('images/icon-heart.png') }}" alt="Heart"/></a></li>
+                     <li><a href="javascript:void(0)" id="loveBusiness" data-id="{{ $businessDetail->id }}"><img src="{{ asset('images/icon-heart.png') }}" alt="Heart"/><span class="love_{{ $businessDetail->id }}">{{ $businessDetail->love }}</span></a></li>
                      <li><a href="{{ Share::load(Request::url(), "Check this out Business $businessDetail->name")->facebook() }}"><img src="{{ asset('images/icon-fb.png') }}" alt="Facebook"/></a></li>
                      <li><a href="{{ Share::load(Request::url(), "Check this out Business $businessDetail->name")->twitter() }}"><img src="{{ asset('images/icon-twitter.png') }}" alt="Twitter"/></a></li>
                      <li><a href="{{ Share::load(Request::url(), "Check this out Business $businessDetail->name")->gplus() }}"><img src="{{ asset('images/icon-gplus.png') }}" alt="Google Plus"/></a></li>
@@ -161,6 +163,15 @@ use Carbon\Carbon;
                      </ul>
                   @endif 
 
+
+                 @if(sizeof($businessDetail->discounts))
+                     <div class="bluebox hidden-lg hidden-md">
+                        <h2>{{ $businessDetail->discounts->discount_title }}</h2>
+                        <p>{{ $businessDetail->discounts->description }}</p>
+                        <p class="bluebox-date">Valid thru {{ Carbon::parse($businessDetail->discounts->valid_thru)->format('d/m/y') }}</p>
+                     </div>
+                  @endif
+                 
                   @if(sizeof($businessDetail->yauzers))
                   <div class="commentbox">
                   <div class="row">
@@ -215,7 +226,7 @@ use Carbon\Carbon;
             <div class="col-sm-4">
                <div class="right-section">
                   @if(sizeof($businessDetail->discounts))
-                     <div class="bluebox">
+                     <div class="bluebox hidden-sm hidden-xs">
                         <h2>{{ $businessDetail->discounts->discount_title }}</h2>
                         <p>{{ $businessDetail->discounts->description }}</p>
                         <p class="bluebox-date">Valid thru {{ Carbon::parse($businessDetail->discounts->valid_thru)->format('d/m/y') }}</p>
@@ -437,6 +448,64 @@ use Carbon\Carbon;
       });infowindow.open(map,marker);
       }
         google.maps.event.addDomListener(window, 'load', init_map);
-                     
+   
+ $(document).ready(function()
+ {
+     $('#loveBusiness').click(function()
+     {
+        var id = $(this).data('id');
+        $.ajax({
+         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},      
+         url: "/love-business",
+         type: "post",
+         dataType: "JSON",
+         data: { 'id': $(this).data('id') },
+         success: function(response)
+         { 
+            if(response.status == 'success') 
+            {
+              $('.love_'+id).text(parseInt($('.love_'+id).text()) + parseInt(1)); 
+              $('#lovemsz').html("<div class='alert alert-success'>"+response.msg+"</div>");
+              hideSuccessMsz();
+
+            }else{
+              $('#lovemsz').html("<div class='alert alert-danger'>"+response.msg+"</div>"); 
+              hideErrorMsz();
+            }
+         },
+         error: function( response ) 
+         {
+           if ( response.status === 422 ) 
+           {
+             $(this).html('Try Again');
+             $('#lovemsz').html("<div class='alert alert-danger'>"+response.msg+"</div>");
+           }
+         }
+
+       });           
+
+
+     }); 
+
+ hideSuccessMsz();
+ hideErrorMsz();
+ });  
+
+
+function hideSuccessMsz()
+{
+   setTimeout(function() {
+   $('.alert-success').fadeOut('fast');
+   }, 8000);    
+}
+
+function hideErrorMsz()
+{
+   setTimeout(function() {
+   $('.alert-danger').fadeOut('fast');
+   }, 8000);
+}
+
 </script> 
+ <script src="{{ asset('js/user/owl.carousel.min.js') }}"></script>
 @endsection

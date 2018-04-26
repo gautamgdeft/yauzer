@@ -40,24 +40,23 @@
            <div class="footer-links blogs"> 
              <h4>Recent Blogs </h4>
              <ul> 
-              <li> 
+              @if(@sizeof($blogs))
+              @foreach($blogs as $key => $loopingBlogs)
+              @if($key <= 2) 
+           <li> 
+            <a href="{{ route('showsingleBlog',['slug' => $loopingBlogs->slug]) }}">
                <div class="left-img">
-                <figure> <img src="{{ asset('images/recent-blog-img1.png') }}" alt=""/> </figure>
+                <figure> <img src="/uploads/blogavatars/{{ $loopingBlogs->avatar }}" alt="img"> </figure>
               </div>
               <div class="right-content"> 
-               <p class="running-text">Within the construction industry as their overdraft </p> 
-               <p class="time-sec"> <img src="{{ asset('images/watch-icon.png') }}" alt=""/> January 22, 2016</p>
+               <p class="running-text">{{ $loopingBlogs->title }}</p> 
+               <p class="time-sec"> <img src="{{ asset('images/watch-icon.png') }}" alt=""/> {{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $loopingBlogs->created_at)->format('F') }} {{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $loopingBlogs->created_at)->day }}, {{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $loopingBlogs->created_at)->year }}</p>
              </div>
+            </a> 
            </li>
-           <li> 
-             <div class="left-img">
-              <figure> <img src="{{ asset('images/recent-blog-img1.png') }}" alt=""/> </figure>
-            </div>
-            <div class="right-content"> 
-             <p class="running-text">Within the construction industry as their overdraft </p> 
-             <p class="time-sec"> <img src="{{ asset('images/watch-icon.png') }}" alt=""/> January 22, 2016</p>
-           </div>
-         </li>
+           @endif
+           @endforeach
+           @endif
        </ul>
      </div>
    </div>

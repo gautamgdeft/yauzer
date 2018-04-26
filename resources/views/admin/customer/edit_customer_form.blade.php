@@ -120,7 +120,7 @@
 
                <div class="form-group{{ $errors->has('phone_number') ? ' has-error' : '' }}">
                   <label for="phone_number">Phone Number</label>
-                  <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ $user->phone_number }}" required="required">
+                  <input type="text" class="form-control input-medium bfh-phone" data-number="{{ $user->phone_number }}" id="phone_number" name="phone_number" value="{{ $user->phone_number }}" data-country="US" required="required">
 
                   @if ($errors->has('phone_number'))
                     <span class="help-block">

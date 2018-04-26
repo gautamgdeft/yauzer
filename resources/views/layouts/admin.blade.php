@@ -47,6 +47,7 @@
     <script src="{{ asset('js/admin/easyResponsiveTabs.js') }}"></script>   
     <script src="{{ asset('js/validate.min.js') }}"></script>    
     <script src="{{ asset('js/star-rating.js') }}"></script>    
+    <script src="{{ asset('js/bootstrap-formhelpers-phone.js') }}"></script>    
     <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>    
     <script src="{{ asset('js/admin/sparkline/jquery.sparkline.min.js') }}"></script>
     <script src="{{ asset('js/admin/jvectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>

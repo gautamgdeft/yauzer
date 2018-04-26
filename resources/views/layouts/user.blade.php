@@ -45,6 +45,7 @@
     <script src="{{ asset('js/user/bootstrap-select.min.js') }}"></script>
     <script src="{{ asset('js/validate.min.js') }}"></script>    
     <script src="{{ asset('js/star-rating.js') }}"></script> 
+    <script src="{{ asset('js/bootstrap-formhelpers-phone.js') }}"></script>  
     <script src="//cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"></script>
     <script src="{{ asset('js/admin/timepicker/bootstrap-timepicker.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>     

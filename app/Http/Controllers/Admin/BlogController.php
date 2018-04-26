@@ -10,7 +10,10 @@ use Illuminate\Support\Facades\Validator;
 use Session;
 use Hash;
 use App\BlogCategory;
+use App\Blog;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use Image;
 
 class BlogController extends Controller
 {
@@ -24,15 +27,33 @@ class BlogController extends Controller
         $this->middleware('auth:admin');
     }
 
+    public function search(Request $request)
+    {
+           $search_parameter = $request->search_parameter;
+           if($search_parameter != "")
+           {
+
+            $filterCategories = BlogCategory::where ( 'name', 'LIKE', '%' . $search_parameter . '%' )->paginate (10)->setPath ( '' );
+            $pagination = $filterCategories->appends ( array (
+                  'search_parameter' => $request->search_parameter 
+              ) );
+              
+            if (count ( $filterCategories ) > 0)
+            return view ( 'admin.blogs.blog_categories.listing_categories' )->withDetails ( $filterCategories )->withQuery ( $search_parameter );
+           }
+
+            return view ( 'admin.blogs.blog_categories.listing_categories' )->withMessage ( 'No Details found. Try to search again !' );
+    }    
+
     public function listingCategories()
     {
       $blogCategories = BlogCategory::paginate(10);
-      return view('admin.blogs.listing_categories', compact('blogCategories'));
+      return view('admin.blogs.blog_categories.listing_categories', compact('blogCategories'));
     }
 
     public function new_category()
     {
-    	return view('admin.blogs.new_category');
+    	return view('admin.blogs.blog_categories.new_category');
     }
 
 
@@ -45,7 +66,7 @@ class BlogController extends Controller
 
 	        //Storing-Data
     		$blog_category = new BlogCategory($request->all());
-            $blog_category->save();
+        $blog_category->save();
 
          return redirect()->route('admin.listingCategories')
                         ->with("success","Blog Category has been added successfully");                                  
@@ -55,7 +76,7 @@ class BlogController extends Controller
     public function edit_category($slug)
     {
     	$category = BlogCategory::findBySlugOrFail($slug);
-    	return view('admin.blogs.edit_blog_category_form', ['category' => $category]);    
+    	return view('admin.blogs.blog_categories.edit_blog_category_form', ['category' => $category]);    
     }
 
 
@@ -115,6 +136,153 @@ class BlogController extends Controller
     public function show_category($slug)
     {
        $category = BlogCategory::findBySlugOrFail($slug);
-       return view('admin.blogs.show_blog_category', ['category' => $category]);
-    }        
+       return view('admin.blogs.blog_categories.show_blog_category', ['category' => $category]);
+    }
+
+
+
+
+
+    public function listingBlogs()
+    {
+      $blogs = Blog::orderBy('id', 'desc')->paginate(10);
+      return view('admin.blogs.listingBlogs', compact('blogs'));  
+    }  
+
+    public function update_blog_status(Request $request)
+    {
+       if ( $request->input('id') ) 
+       {
+              $blog = Blog::find($request->input('id'));
+
+              if($blog->status == false)
+              {
+                $blog->status  = true;
+                $blog->save();
+                return response(['msg' => 'Blog status has been activated successfully', 'status' => 'success']); 
+                
+              }else{
+                $blog->status  = false;
+                $blog->save();
+                return response(['msg' => 'Blog status has been deactivated successfully', 'status' => 'declined']); 
+              } 
+       }
+
+       return response(['msg' => 'Failed changing the status of blog', 'status' => 'failed']);
+    }    
+
+
+    public function destroy_blog(Request $request)
+    {
+      if ( $request->input('id') ) 
+      {
+            $blog = Blog::find($request->input('id'));
+            if($blog->avatar != 'default.png')
+            {
+              $path = '/uploads/blogavatars/' . $blog->avatar;
+              unlink(public_path() . $path);
+            }            
+            $blog->delete();
+            return response(['msg' => 'Blog has been deleted successfully', 'status' => 'success']);
+        }
+
+            return response(['msg' => 'Failed deleting the blog', 'status' => 'failed']);      
+    } 
+
+    public function searchBlog(Request $request)
+    {
+           $search_parameter = $request->search_parameter;
+           if($search_parameter != "")
+           {
+
+            $filterCategories = Blog::where ( 'title', 'LIKE', '%' . $search_parameter . '%' )->paginate (10)->setPath ( '' );
+            $pagination = $filterCategories->appends ( array (
+                  'search_parameter' => $request->search_parameter 
+              ) );
+              
+            if (count ( $filterCategories ) > 0)
+            return view ( 'admin.blogs.listingBlogs' )->withDetails ( $filterCategories )->withQuery ( $search_parameter );
+           }
+
+            return view ( 'admin.blogs.listingBlogs' )->withMessage ( 'No Details found. Try to search again !' );
+    }
+
+    public function new_blog()
+    {
+      $blogcategories = BlogCategory::orderBy('id', 'desc')->get();
+      return view('admin.blogs.new_blog', compact('blogcategories'));
+    }
+
+    public function show_blog($slug)
+    {
+       $blog = Blog::findBySlugOrFail($slug);
+       return view('admin.blogs.show_blog', compact('blog'));
+    }   
+
+    public function store_blog(Request $request)
+    {
+       //Validating-Category-Data
+           $validatedData = $request->validate([
+          'title'         => 'required|string|max:50',
+          'metatitle'     => 'required|string|max:50',
+          'metakeywords'  => 'required',
+          'metadescription'     => 'required',
+          'description'   => 'required',
+          'avatar'       => 'unique:blogs'
+           ]);
+
+
+        //Storing-Data
+        $blog = new Blog($request->all());
+        $blog->save();
+         if($request->hasFile('avatar'))
+         {   
+             $avatar = $request->file('avatar');
+          
+             //Using Helper/helpers.php
+             uploadBlogAvatar($avatar, $blog);
+         }
+              
+
+         return redirect()->route('admin.listingBlogs')
+                        ->with("success","Blog has been added successfully"); 
+    }     
+
+
+    public function edit_blog($slug)
+    {
+      $blogcategories = BlogCategory::orderBy('id', 'desc')->get();
+      $blog = Blog::findBySlugOrFail($slug);
+      return view('admin.blogs.edit_blog', compact('blogcategories', 'blog'));
+    }
+
+    public function update_blog(Request $request, $slug)
+    {
+        $blog = Blog::findBySlugOrFail($slug);
+
+       //Validating-Category-Data
+           $validatedData = $request->validate([
+          'title'         => 'required|string|max:50',
+          'metatitle'     => 'required|string|max:50',
+          'metakeywords'  => 'required',
+          'metadescription'     => 'required',
+          'description'   => 'required',
+          'avatar'       => 'unique:blogs'
+           ]);
+
+            //Updating Category
+            $blog->update($request->all());
+
+            if($request->hasFile('avatar'))
+            {   
+               $avatar = $request->file('avatar');
+           
+               //Using Helper/helpers.php
+               uploadBlogAvatar($avatar, $blog);
+            } 
+
+            Session::flash('success', 'Blog has been updated successfully.');
+            
+            return redirect()->route('admin.listingBlogs');  
+    }         
 }

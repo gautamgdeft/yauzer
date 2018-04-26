@@ -69,14 +69,15 @@ class BusinessCategoryController extends Controller
 	                   'name'          => $request->input('name'),                  
                        ));
 
+	      $business_category->save();
+        
          //Saving Category Avatar
-	         if($request->hasFile('avatar'))
-	          {   
-	            $avatar = $request->file('avatar');
+           if($request->hasFile('avatar'))
+            {   
+              $avatar = $request->file('avatar');
 
-	            //Using Helper/helpers.php
-	            uploadBusinessAvatar($avatar, $business_category);
-	            $business_category->save();
+              //Using Helper/helpers.php
+              uploadBusinessAvatar($avatar, $business_category);
 	          }
 
          return redirect()->route('admin.business_category_listing')

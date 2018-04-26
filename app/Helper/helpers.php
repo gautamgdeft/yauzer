@@ -83,6 +83,22 @@ function uploadSliderAvatar($avatar, $sliderImage)
   return true;
 }
 
+#Upload-Blog-Avatar-Function
+function uploadBlogAvatar($avatar, $blog) 
+{
+  $filename = time() . '.' . $avatar->getClientOriginalExtension();
+  $path = '/uploads/blogavatars/' . $filename;
+  Image::make($avatar)->resize(843, 400)->save( public_path($path));
+  $blog->update(
+    array(
+      'avatar' => $filename,
+    ));
+  return true;
+}
+
+
+
+
 #Fetching-Customer-Count-Function
 function total_customers()
 {

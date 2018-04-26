@@ -52,7 +52,7 @@
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Phone Number</label>
-                        <input type="text" class="form-control border-input" placeholder="Phone number" name="phone_number" value="{{ Auth::user()->phone_number }}" required>
+                        <input type="text" class="form-control border-input input-medium bfh-phone" placeholder="Phone number" data-country="US" data-number="{{ Auth::user()->phone_number }}" name="phone_number" value="{{ Auth::user()->phone_number }}" required>
                      </div>
                   </div>
                </div>

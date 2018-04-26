@@ -18,7 +18,7 @@ class BusinessController extends Controller
 {
     public function yauzer_business()
     {
-		$businesses = BusinessListing::orderBy('id', 'desc')->where('status', 1)->where('user_id', '')->orWhere('user_id', NULL)->get();
+		$businesses = BusinessListing::orderBy('name', 'asc')->where('status', 1)->where('user_id', '')->orWhere('user_id', NULL)->get();
         $business_categories = BusinessCategory::orderBy('id', 'desc')->where('status', 1)->get();    	
     	return view('owner.yauzer_for_business.index', compact('businesses','business_categories'));
     }

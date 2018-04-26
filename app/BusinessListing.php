@@ -11,7 +11,7 @@ class BusinessListing extends Model
     use Sluggable;
     use SluggableScopeHelpers;
 
-    protected $fillable = ['name', 'address', 'city', 'state', 'zipcode', 'country', 'phone_number', 'avatar', 'website', 'latitude', 'longitude', 'user_id', 'added_by', 'email', 'business_category', 'business_subcategory', 'status'];
+    protected $fillable = ['name', 'address', 'city', 'state', 'zipcode', 'country', 'phone_number', 'avatar', 'website', 'latitude', 'longitude', 'user_id', 'added_by', 'email', 'business_category', 'business_subcategory', 'love', 'status'];
 
     protected $hidden = [
         'latitude', 'longitude',

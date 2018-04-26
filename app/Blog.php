@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 
-class BlogCategory extends Model
+class Blog extends Model
 {
 	use Sluggable;
     use SluggableScopeHelpers;
@@ -16,7 +16,7 @@ class BlogCategory extends Model
     {
         return [
             'slug' => [
-                'source' => 'name'
+                'source' => 'title'
             ]
         ];
     }
@@ -27,20 +27,19 @@ class BlogCategory extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'status',
+        'blog_category_id', 'title', 'description', 'avatar', 'metatitle', 'metakeywords', 'metadescription', 'status',
     ];
 
 
     public static function findBySlugOrFail($slug)
     {
-         return $blogCategory = BlogCategory::findBySlug($slug);
-    }
+         return $blog = Blog::findBySlug($slug);
+    }  
 
 
-    #Relation with Blogs
-    public function blogs()
+    #Relation with BlogCategory
+    public function blogcategory()
     {
-     return $this->hasMany('App\Blog');
-    }    
-
+     return $this->belongsTo('App\BlogCategory', 'blog_category_id');
+    }       
 }
