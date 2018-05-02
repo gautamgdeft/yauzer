@@ -38,7 +38,17 @@ class BusinessController extends Controller
         $choosedBusiness = NULL;
       }
 
-      $businesses = BusinessListing::orderBy('name', 'asc')->where('status', 1)->get();
+       #$businesses = BusinessListing::orderBy('name', 'asc')->where('status', 1)->get();
+       $location = GeoIP::getLocation();
+       $circle_radius = 3959;
+       $max_distance = 50;
+       $lat = $location->lat;
+       $lng = $location->lon;
+       $status = 1;
+
+      #Showing business default list according to user Geo-ip address
+      $businesses = DB::select('SELECT * FROM (SELECT *, (' . $circle_radius . ' * acos(cos(radians(' . $lat . ')) * cos(radians(latitude)) * cos(radians(longitude) - radians(' . $lng . ')) + sin(radians(' . $lat . ')) * sin(radians(latitude)))) AS distance FROM business_listings) AS distances WHERE distance < ' . $max_distance . ' AND status = '.$status.' ORDER BY name ASC');
+      
       $business_categories = BusinessCategory::orderBy('id', 'desc')->where('status', 1)->get();
       return view('user.yauzer_business.index', compact('businesses','business_categories', 'uri_segments', 'choosedBusiness'));
     }
@@ -135,6 +145,25 @@ class BusinessController extends Controller
         return response(['msg' => 'Cannot find the business subcategories. Try again', 'status' => 'failed']);	
        }
 
+
+    }
+
+    public function get_business(Request $request)
+    {
+       $circle_radius = 3959;
+       $max_distance = 50;
+       $lat = $request->lat;
+       $lng = $request->long;
+       $status = 1;
+
+      #Showing business default list according to user Geo-ip address
+      $businesses = DB::select('SELECT * FROM (SELECT *, (' . $circle_radius . ' * acos(cos(radians(' . $lat . ')) * cos(radians(latitude)) * cos(radians(longitude) - radians(' . $lng . ')) + sin(radians(' . $lat . ')) * sin(radians(latitude)))) AS distance FROM business_listings) AS distances WHERE distance < ' . $max_distance . ' AND status = '.$status.' ORDER BY name ASC');
+
+       if(@sizeof($businesses)){          
+        return response()->json(['status' => 'success', 'businesses' => $businesses]);
+       }else{
+        return response(['msg' => 'Cannot find the business. Try again', 'status' => 'failed']);  
+       }
 
     }
 

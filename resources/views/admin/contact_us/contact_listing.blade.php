@@ -27,7 +27,7 @@
   <div class="col-xs-12">
    <div class="box">
     <div class="box-header">
-    <a href="{{ route('admin.export_contact') }}" class="btn bg-olive btn-flat"><i class="fa fa-cloud-download"></i> Export Contacts</a>
+    <a id="export" data-export="export" class="btn bg-olive btn-flat"><i class="fa fa-cloud-download"></i> Export Contacts</a> 
 
     <div class="box-tools src-filter">
         <form action="{{ route('contact.search') }}" method="POST" role="search">
@@ -74,7 +74,7 @@
     {{-- All Contacts Result Display --}}
     @if(isset($contact_listing))
     <div class="box-body table-responsive no-padding">
-      <table class="table table-hover table-bordered">
+      <table class="table table-hover table-bordered" id="export_table">
         
          <tr>
           <th>Name</th>
@@ -114,7 +114,7 @@
     @if(isset($filter) && !isset($details))
     <div class="box-body table-responsive no-padding">
       <p> The Search results for your query from <b class="cstm-bold"> {{ $start }} </b> to <b class="cstm-bold"> {{ $end }} </b> are :</p>
-      <table class="table table-hover table-bordered">
+      <table class="table table-hover table-bordered" id="export_table">
         
          <tr>
           <th>Name</th>
@@ -156,7 +156,7 @@
     @if(isset($details) && !isset($filter))
     <div class="box-body table-responsive no-padding">
       <p> The Search results for your query <b class="cstm-bold"> {{ $query }} </b> are :</p>
-      <table class="table table-hover table-bordered">
+      <table class="table table-hover table-bordered" id="export_table">
         
          <tr>
           <th>Name</th>
@@ -280,6 +280,11 @@ $(".delete_contact").on("click", function()
 
 });
 
+//Export Functionality as CSV
+$("#export").click(function(){
+    $("#export_table").tableToCSV();
+});
+
 });    
 </script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
@@ -298,6 +303,9 @@ $(".delete_contact").on("click", function()
         })
     });   
 </script>
+
+ <script src="{{ asset('js/user/jquery.tabletoCSV.js') }}"></script>
 @endsection
 
 
+  

@@ -216,7 +216,7 @@ Route::prefix('admin')->group(function()
     Route::get('/listing-contacts', 'Admin\ContactusController@listing')->name('admin.contactListing');
     Route::post('/delete-contact', 'Admin\ContactusController@destroy_contact')->name('admin.destroy_contact');   
     Route::get('/view-contact-detail/{id}', 'Admin\ContactusController@contact_details')->name('admin.contactdetail');
-    Route::get('/export-contacts', 'Admin\ContactusController@export_contact')->name('admin.export_contact');
+    // Route::get('/export-contacts', 'Admin\ContactusController@export_contact')->name('admin.export_contact');
 
 
     //Report-Management-Routes                   
@@ -274,6 +274,7 @@ Route::group(['middleware' => ['auth']], function () {
 Route::get('/home', 'User\WelcomeController@checkuser')->name('user.home');
 Route::post('/check-business', 'User\BusinessController@check_business')->name('user.check_business');
 Route::post('/get-business-subcategory', 'User\BusinessController@get_subcategory')->name('user.get_subcategory');
+Route::post('/get-business', 'User\BusinessController@get_business')->name('user.get_business');
 Route::post('/checkemail', 'User\BusinessController@check_email')->name('user.checkEmail'); 
 
 });

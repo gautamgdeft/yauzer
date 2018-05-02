@@ -43,6 +43,27 @@ function initialize()
 }
 google.maps.event.addDomListener(window, 'load', initialize);
 
+// Used for checking business lat lng for another location
+function newinitialize() 
+{
+    var input = document.getElementById('location');
+    var options = {    
+    types: ['geocode'],
+    componentRestrictions: {country: ["us", "ca"]}
+    };
+    var autocomplete = new google.maps.places.Autocomplete(input, options);
+    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+    var place = autocomplete.getPlace();
+
+    var lat = place.geometry.location.lat();
+    var lng = place.geometry.location.lng();
+    
+    document.getElementById('businesslatitude').value = place.geometry.location.lat();
+    document.getElementById('businesslongitude').value = place.geometry.location.lng();    
+});
+}
+google.maps.event.addDomListener(window, 'load', newinitialize);
+
 $(document).ready(function()
 {
 	//$.validator.setDefaults({ ignore: ":hidden:not(select)" });
@@ -399,6 +420,7 @@ rules: {
   {
         $('#yauzer_heading_text').text('Congratulations, you’re the first to Yauzer this business');
         $('#business_name').removeClass('hide');
+        $('#business_location').addClass('hide');
         $('#category').removeClass('hide');
         $('#name').val('');
         $('#address').prop('disabled', false).val('');
@@ -418,7 +440,10 @@ rules: {
   //If Business Exist In Our Db
   if(!$('#business_name').hasClass('hide')){
     $('#business_name').addClass('hide');
-  }  
+  }    
+
+  $('#business_location').removeClass('hide');
+
 
   if(!$('#category').hasClass('hide')){
     $('#category').addClass('hide');
@@ -568,6 +593,46 @@ $("#zipcode").keypress(function(event) {
   var detail = $('.web-detail').text();
   var urlNoProtocola = detail.replace(/^https?\:\/\//i, "");
   $('.web-detail').text(urlNoProtocola);
+
+
+ $('#shuffleBusiness').click(function() 
+ {
+        var lat =  $('#businesslatitude').val();
+        var long = $('#businesslongitude').val();
+
+        $.ajax({
+         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},      
+         url: "/get-business",
+         type: "post",
+         dataType: "JSON",
+         data: { 'lat': lat, 'long': long },
+         success: function(response)
+         { 
+            //Firstly-Empty-the-previous values of select Refreshing-Chosen-box-after-Ajax-Hitting
+            $('#business_select option').remove();
+
+            if(response.status == 'success') 
+            {
+              $('#business_select').append('<option value="" disabled="" selected="">Choose Business you want to yauzer</option>');
+              $(response.businesses).each(function(){
+               $('#business_select').append("<option value='"+ this.id +"'>"+ this.name +"</option>");
+              });
+              $('#business_select').selectpicker('refresh');
+            }else{           
+               $('#business_select').append("<option value=''>No Business found for this location</option>"); 
+            }
+         },
+         error: function( response ) 
+         {
+           if ( response.status === 422 ) 
+           {
+             $(this).html('Try Again');
+             $('#msgs').html("<div class='alert alert-danger'>"+response.msg+"</div>");
+           }
+         }
+
+       });    
+ });
 
 }); //End-Ready-Function
 

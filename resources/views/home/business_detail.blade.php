@@ -48,7 +48,7 @@ use Carbon\Carbon;
                         </div>                     
                      <ul class="social-icons">
                      <li><a href="{{ route('user.yauzer_business') }}"><img src="{{ asset('images/icon-yauzer.png') }}" alt="Yauzer"/></a></li>
-                     <li><a href="javascript:void(0)" id="loveBusiness" data-id="{{ $businessDetail->id }}"><img src="{{ asset('images/icon-heart.png') }}" alt="Heart"/><span class="love_{{ $businessDetail->id }}">{{ $businessDetail->love }}</span></a></li>
+                     <li><a data-toggle="tooltip" title="Business love" href="javascript:void(0)" id="loveBusiness" data-id="{{ $businessDetail->id }}"><img src="{{ asset('images/icon-heart.png') }}" alt="Heart"/><span class="love_{{ $businessDetail->id }} {{ $businessDetail->love > 9? 'cstm-position' : '' }}">{{ $businessDetail->love }}</span></a></li>
                      <li><a href="{{ Share::load(Request::url(), "Check this out Business $businessDetail->name")->facebook() }}"><img src="{{ asset('images/icon-fb.png') }}" alt="Facebook"/></a></li>
                      <li><a href="{{ Share::load(Request::url(), "Check this out Business $businessDetail->name")->twitter() }}"><img src="{{ asset('images/icon-twitter.png') }}" alt="Twitter"/></a></li>
                      <li><a href="{{ Share::load(Request::url(), "Check this out Business $businessDetail->name")->gplus() }}"><img src="{{ asset('images/icon-gplus.png') }}" alt="Google Plus"/></a></li>
@@ -435,7 +435,8 @@ use Carbon\Carbon;
    function init_map(){
 
 
-      var myOptions = { zoom:10,center:new google.maps.LatLng({{ $businessDetail->latitude }},{{ $businessDetail->longitude }}),mapTypeId: google.maps.MapTypeId.ROADMAP };
+      var myOptions = { zoom:10,center:new google.maps.LatLng({{ $businessDetail->latitude }},{{ $businessDetail->longitude }}),mapTypeId: google.maps.MapTypeId.ROADMAP, mapTypeControl: true,
+    mapTypeControlOptions: {position: google.maps.ControlPosition.LEFT_CENTER} };
 
       map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
 
@@ -464,6 +465,10 @@ use Carbon\Carbon;
          { 
             if(response.status == 'success') 
             {
+              if(parseInt($('.love_'+id).text() + parseInt(1)) > 9 && !$('.love_'+id).hasClass('cstm-position'))
+              {
+                $('.love_'+id).addClass('cstm-position');
+              } 
               $('.love_'+id).text(parseInt($('.love_'+id).text()) + parseInt(1)); 
               $('#lovemsz').html("<div class='alert alert-success'>"+response.msg+"</div>");
               hideSuccessMsz();

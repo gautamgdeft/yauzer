@@ -90,25 +90,25 @@ class ContactusController extends Controller
       }   
   }
 
-  public function export_contact()
-  {
-        header("Content-type: text/csv");
-        header("Content-Disposition: attachment; filename=contacts.csv");
-        header("Pragma: no-cache");
-        header("Expires: 0");
+  // public function export_contact()
+  // {
+  //       header("Content-type: text/csv");
+  //       header("Content-Disposition: attachment; filename=contacts.csv");
+  //       header("Pragma: no-cache");
+  //       header("Expires: 0");
 
-        $contacts = ContactUS::orderBy('id', 'desc')->get();
+  //       $contacts = ContactUS::orderBy('id', 'desc')->get();
         
-        $columns = array('ContactId', 'Name', 'Email', 'Message');
+  //       $columns = array('ContactId', 'Name', 'Email', 'Message');
 
-        $file = fopen('php://output', 'w');
-        fputcsv($file, $columns);
+  //       $file = fopen('php://output', 'w');
+  //       fputcsv($file, $columns);
 
-        foreach($contacts as $contact){
+  //       foreach($contacts as $contact){
 
-             fputcsv($file, array($contact->id,$contact->name,$contact->email,$contact->message));
+  //            fputcsv($file, array($contact->id,$contact->name,$contact->email,$contact->message));
 
-        }
-        exit();    
-  }
+  //       }
+  //       exit();    
+  // }
 }

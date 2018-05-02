@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Schema;
+use App\Blog;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,9 +21,11 @@ class AppServiceProvider extends ServiceProvider
         #Calling-Global-Function-For-Footer-Menu-Helpers.php
         $footerMenus = footer_menus();
         $headerMenus = header_menus();
+        $blogs = Blog::orderBy('id', 'desc')->get();
 
         View::share('headerMenus', $headerMenus);
         View::share('footerMenus', $footerMenus);
+        View::share('blogs', $blogs);
     }
 
     /**

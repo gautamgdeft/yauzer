@@ -2750,7 +2750,7 @@ h1.blog-heading {
 a#loveBusiness{
     position: relative;
 }
-a#loveBusiness span.love_9 {
+a#loveBusiness span {
     position: absolute;
     left: 0;
     right: 0;
@@ -2792,4 +2792,75 @@ ul.user-login li ul.dropdown-menu li a {
 ul.user-login li ul.dropdown-menu li a:hover{
     background: transparent;
     color: #84c225;
+}
+.cstm-position{
+
+    top: 20px !important;
+    bottom: inherit !important;
+    color: #444 !important;
+    font-weight: bold;
+}
+/** 180430 **/
+
+.location-box {
+    position: relative;
+}
+.search-button-1 {
+    position: absolute;
+    right: 15px;
+    top: 43px;
+}
+.form-group.location-box input {
+    padding: 0 55px 0 30px;
+}
+.blog-post ul li,
+.blog-post ol li {
+    line-height: 30px;
+    color: #727272;
+    list-style-position: inside;
+}
+
+.blog-post ul,
+.blog-post ol {
+    margin-bottom:  30px;
+}
+
+
+
+
+.form-group.new-selectbox ul li a {
+    background: #f0eeee;
+    border-radius:  0;
+}
+.form-group.new-selectbox ul li {
+    margin-bottom: 1px;
+}
+.form-group.new-selectbox ul li a:hover, .form-group.new-selectbox ul li.selected a {
+    background: #a6ce39;
+}
+.form-group.new-selectbox ul li.disabled a:hover,
+.form-group.new-selectbox ul li.disabled.selected a {
+    background: #f0eeee!important;
+}
+.form-group.new-selectbox ul li.disabled a:hover span, .form-group.new-selectbox ul li.disabled.selected a span{
+    color:#444!important;
+} 
+.form-group.new-selectbox ul li a:hover span, .form-group.new-selectbox ul li.selected a span {
+    color:  #fff;
+}
+.form-group.new-selectbox .btn-group {
+    padding: 0;
+    border: none;
+}
+.form-group.new-selectbox ul li a span {
+    color: #444;
+}
+.form-group.new-selectbox button span {
+    color: #444;
+}
+.form-group.new-selectbox ul.dropdown-menu.inner {
+    background: transparent;
+}
+.dropdown-menu.open {
+    background: #f0eeee;
 }

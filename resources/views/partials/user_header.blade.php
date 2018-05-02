@@ -48,7 +48,9 @@
                               <p>{{ Auth::user()->name }}</p>
                               </li>
                               @if (Auth::user()->roles->first()->name == 'owner')
-                              <li><a href="{{ route('owner.dashboard') }}">Dashboard</a></li>
+{{--                               @if (@sizeof(Auth::user()->business))
+                               <li><a href="{{ route('owner.dashboard') }}">Dashboard</a></li>
+                              @endif --}}
                               <li><a href="{{ route('owner.login') }}">Yauzer for Business </a></li>
                               @else
                               <li><a href="{{ route('user.dashboard') }}">Dashboard</a></li>

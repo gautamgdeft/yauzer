@@ -32,9 +32,25 @@
             {{ csrf_field() }}
             
             <input type="hidden" name="latitude" id="latitude">
-            <input type="hidden" name="longitude" id="longitude">
-            
-            <div class="col-md-6 col-sm-6">
+            <input type="hidden" name="longitude" id="longitude">            
+
+            {{-- User for checking business on another location --}}
+            <input type="hidden" name="businesslatitude" id="businesslatitude">
+            <input type="hidden" name="businesslongitude" id="businesslongitude">
+
+
+
+
+
+            <div class="col-md-6 col-sm-6" id="business_location">
+              <div class="form-group location-box">  
+              <label for="headline">Business Location</label>
+              <input type="text" id="location" name="location" class="form-control form-input" placeholder="Type location to get Business from another Location">
+              <button type="button" class="search-button-1" id="shuffleBusiness"><i class="fa fa-search"></i></button>
+              </div>
+            </div> 
+
+{{--             <div class="col-md-6 col-sm-6">
               <div class="form-group">
               <label for="headline">Business Name<span> *</span></label>
               <select name="business_id" class="form-control form-input" id="business_select" required>
@@ -46,6 +62,21 @@
                 @endif
                  <option value="other">NEW BUSINESS</option>
               </select>  
+              </div>
+            </div> --}}             
+
+            <div class="col-md-6 col-sm-6">
+              <div class="form-group new-selectbox">
+              <label for="headline">Business Name<span> *</span></label>
+               <select name="business_id" class="form-control form-input selectpicker" id="business_select" required>
+                 <option value="" disabled selected>Choose Business you want to yauzer</option>
+                @if(sizeof($businesses))
+                @foreach($businesses as $loopingBusiness)
+                 <option value="{{ $loopingBusiness->id }}" @if($uri_segments[2] == $loopingBusiness->slug) selected="selected" @endif>{{ $loopingBusiness->name }}</option>
+                @endforeach
+                @endif
+                 <option value="other">NEW BUSINESS</option>
+              </select>
               </div>
             </div>            
 
