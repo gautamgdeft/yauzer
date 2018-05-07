@@ -38,7 +38,9 @@ class BusinessController extends Controller
         $choosedBusiness = NULL;
       }
 
-       #$businesses = BusinessListing::orderBy('name', 'asc')->where('status', 1)->get();
+       if(@sizeof($choosedBusiness)){
+        $businesses = BusinessListing::where('slug', $uri_segments[2])->get();
+       }else{ 
        $location = GeoIP::getLocation();
        $circle_radius = 3959;
        $max_distance = 50;
@@ -48,6 +50,7 @@ class BusinessController extends Controller
 
       #Showing business default list according to user Geo-ip address
       $businesses = DB::select('SELECT * FROM (SELECT *, (' . $circle_radius . ' * acos(cos(radians(' . $lat . ')) * cos(radians(latitude)) * cos(radians(longitude) - radians(' . $lng . ')) + sin(radians(' . $lat . ')) * sin(radians(latitude)))) AS distance FROM business_listings) AS distances WHERE distance < ' . $max_distance . ' AND status = '.$status.' ORDER BY name ASC');
+       }
       
       $business_categories = BusinessCategory::orderBy('id', 'desc')->where('status', 1)->get();
       return view('user.yauzer_business.index', compact('businesses','business_categories', 'uri_segments', 'choosedBusiness'));
@@ -291,10 +294,11 @@ class BusinessController extends Controller
 
     public function love_business(Request $request)
     {
-            if(Session::has('love')){
+            if(Session::has('love') && $request->id == $request->session()->get('businessId')){
               return response(['msg' => 'Business has been already loved by you.', 'status' => 'repeated']);                
             }else{
               Session::put('love', 'exist');
+              Session::put('businessId', $request->id);
               $businessLove = BusinessListing::find($request->id);
               $addLove = $businessLove->love + 1;
               $request['love'] = $addLove;
@@ -317,7 +321,7 @@ class BusinessController extends Controller
       $total_yauzer_per_day = Yauzer::where('user_id', $user_id)->whereDate('created_at', $today_date)->where('ip_address', $user_ip)->count();
 
       if($total_yauzer_per_day < 5){
-      return $getting_Business = Yauzer::where('business_id', $business_id)->where('user_id', $user_id)->whereDate('created_at', $today_date)->where('ip_address', $user_ip)->count();
+        return $getting_Business = Yauzer::where('business_id', $business_id)->where('user_id', $user_id)->whereDate('created_at', $today_date)->where('ip_address', $user_ip)->count();
       }else{
       	return 'total_yauzer_per_day_limit_exceeded';
       }

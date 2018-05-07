@@ -55,7 +55,7 @@ class UserController extends Controller
 
     public function yauzers()
     {
-        $yauzers = Yauzer::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->whereHas('business',function ($q) { $q->where('status', '1'); })->get(); 
+        $yauzers = Yauzer::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->whereHas('business',function ($q) { $q->where('status', '1'); })->paginate(5); 
         return view('user.dashboard.yauzers', compact('yauzers'));
     }
 

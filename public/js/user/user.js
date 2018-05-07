@@ -386,6 +386,47 @@ rules: {
   });  
 
 
+//Adding-Validations-On-Contact-Us-Form
+$('#contact_form').validate({
+onfocusout: function (valueToBeTested) {
+  $(valueToBeTested).valid();
+},
+
+highlight: function(element) {
+  $('element').removeClass("error");
+},
+
+rules: {
+  
+  "name": {
+      character_with_space: true,
+      maxlength: 50, 
+  },
+  'email': {
+      customemail: true,
+  },
+
+  valueToBeTested: {
+      required: true,
+  }
+
+},
+});   
+
+
+  //Submitting Register Form 
+  $('#submit_contact_form').click(function()
+  {
+    if($('#contact_form').valid())
+    {
+      $('#submit_contact_form').prop('disabled', true);
+      $('#contact_form').submit();
+    }else{
+      return false;
+    }
+  });  
+
+
   //Only-Character-Add-Method
   $.validator.addMethod("character_with_space", function (value, element) {
   return this.optional(element) || /^[a-zA-Z .]+$/i.test(value);
@@ -599,6 +640,8 @@ $("#zipcode").keypress(function(event) {
  {
         var lat =  $('#businesslatitude').val();
         var long = $('#businesslongitude').val();
+        var locationname = $('#location').val();
+        $('#textt').text('Searching Businesses for '+locationname);
 
         $.ajax({
          headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},      
@@ -606,6 +649,15 @@ $("#zipcode").keypress(function(event) {
          type: "post",
          dataType: "JSON",
          data: { 'lat': lat, 'long': long },
+         beforeSend: function(){
+            $('.loading').removeClass('hide');
+         },
+         complete: function(){
+            setTimeout(function () {
+            $('.loading').addClass('hide');
+            $('.bootstrap-select').addClass('open');
+            }, 4000)
+         },
          success: function(response)
          { 
             //Firstly-Empty-the-previous values of select Refreshing-Chosen-box-after-Ajax-Hitting
@@ -674,24 +726,24 @@ return true;
 
 /*---- End Function For Checking Image Extension For Valid Image Selection ---*/ 
 
-// Start Image Preview
+    // Start Image Preview
 
-function readURL(input) {
+    function readURL(input) {
 
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
-    reader.onload = function (e) {
-        $('#image_src').css('display', 'block');
-        $('#image_src').attr('src', e.target.result);
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#image_src').css('display', 'block');
+            $('#image_src').attr('src', e.target.result);
 
-        $('#avatar').removeClass('validate_error');
-        $("#avatar").next('label').remove();
+            $('#avatar').removeClass('validate_error');
+            $("#avatar").next('label').remove();
+        }
+        reader.readAsDataURL(input.files[0]);
+      }
     }
-    reader.readAsDataURL(input.files[0]);
-  }
-}
 
-//  End Image Preview 
+    //  End Image Preview 
 
     function applyValidate(formid){
       $('#'+formid).validate({

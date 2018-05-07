@@ -49,11 +49,11 @@ use Carbon\Carbon;
                      <ul class="social-icons">
                      <li><a href="{{ route('user.yauzer_business') }}"><img src="{{ asset('images/icon-yauzer.png') }}" alt="Yauzer"/></a></li>
                      <li><a data-toggle="tooltip" title="Business love" href="javascript:void(0)" id="loveBusiness" data-id="{{ $businessDetail->id }}"><img src="{{ asset('images/icon-heart.png') }}" alt="Heart"/><span class="love_{{ $businessDetail->id }} {{ $businessDetail->love > 9? 'cstm-position' : '' }}">{{ $businessDetail->love }}</span></a></li>
-                     <li><a href="{{ Share::load(Request::url(), "Check this out Business $businessDetail->name")->facebook() }}"><img src="{{ asset('images/icon-fb.png') }}" alt="Facebook"/></a></li>
-                     <li><a href="{{ Share::load(Request::url(), "Check this out Business $businessDetail->name")->twitter() }}"><img src="{{ asset('images/icon-twitter.png') }}" alt="Twitter"/></a></li>
-                     <li><a href="{{ Share::load(Request::url(), "Check this out Business $businessDetail->name")->gplus() }}"><img src="{{ asset('images/icon-gplus.png') }}" alt="Google Plus"/></a></li>
-                     <li><a href="javascript:void(0)"><img src="{{ asset('images/icon-instagram.png') }}" alt="Instagram"/></a></li>
-                     <li><a href="javascript:void(0)"><img src="{{ asset('images/icon-youtube.png') }}" alt="Youtube"/></a></li>
+                     <li><a target="_blank" href="{{ Share::load(Request::url(), "Check this out Business $businessDetail->name")->facebook() }}"><img src="{{ asset('images/icon-fb.png') }}" alt="Facebook"/></a></li>
+                     <li><a target="_blank" href="{{ Share::load(Request::url(), "Check this out Business $businessDetail->name")->twitter() }}"><img src="{{ asset('images/icon-twitter.png') }}" alt="Twitter"/></a></li>
+                     <li><a target="_blank" href="{{ Share::load(Request::url(), "Check this out Business $businessDetail->name")->gplus() }}"><img src="{{ asset('images/icon-gplus.png') }}" alt="Google Plus"/></a></li>
+                     <li><a target="_blank" href="{{ Share::load(Request::url(), "Check this out Business $businessDetail->name")->linkedin() }}"><img src="{{ asset('images/linkedin-icon.png') }}" alt="Linkedin"/></a></li>
+                     <li><a target="_blank" href="{{ Share::load(Request::url(), "Check this out Business $businessDetail->name")->pinterest() }}"><img src="{{ asset('images/icon-Pinterest.png') }}" alt="Pinterest"/></a></li>
                      </ul>
 
                      @if(sizeof($businessDetail->yauzers))

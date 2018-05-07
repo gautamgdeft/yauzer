@@ -266,6 +266,8 @@ Route::get('/blog', 'User\BlogController@showBlogs')->name('showBlogs');
 Route::get('/blog/{slug}', 'User\BlogController@showsingleBlogDetail')->name('showsingleBlog');
 Route::get('/blog-category/{categoryid}', 'User\BlogController@categoryfilterBlogs')->name('categoryfilterBlogs');
 Route::post('/love-business', 'User\BusinessController@love_business');
+Route::get('/contact-us', 'Cms\CmsController@contactus')->name('contactus');
+Route::post('/contact-us', 'Cms\CmsController@contactus')->name('contactus');
 
 
 //Only-Auth-With-All-Role-Routes

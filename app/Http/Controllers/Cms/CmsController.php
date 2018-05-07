@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Cms;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Page;
+use App\ContactUS;
 
 class CmsController extends Controller
 {
@@ -36,5 +37,18 @@ class CmsController extends Controller
               break;
         }
 
+    }
+
+    public function contactus(Request $request)
+    {
+      if ($request->method() == 'POST')
+      {
+         $contact = new ContactUS($request->all());
+         $contact->save();
+         return redirect()->back()->with("success","Thanks for contacting us with your comments and questions. We'll respond to you very soon.");
+
+      }else{
+      return view('cms.contactus');
+      }
     }
 }

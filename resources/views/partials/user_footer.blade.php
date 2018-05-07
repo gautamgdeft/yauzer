@@ -4,12 +4,12 @@
             <div class="row"> 
              <div class="col-md-3 col-sm-12  col-xs-12"> 
               <div class="footer-logo-outr">
-                <a href="index.html" class="footer-logo"> <img src="{{ asset('images/logo.png') }}" alt=""/> </a>
+                <a href="{{ route('home.welcome') }}" class="footer-logo"> <img src="{{ asset('images/logo.png') }}" alt=""/> </a>
               </div>
               <div class="get-in-touch-list">
                 <ul> 
 
-                  <li> <i class="fa fa-envelope"> </i><a href="javascript:;"> Contact Us </a>
+                  <li> <i class="fa fa-envelope"> </i><a href="{{ route('contactus') }}"> Contact Us </a>
                   </li>
                   <li> <i class="fa fa-map-marker"> </i> <!--Visit Us--><a href="{{ route('user.yauzer_business') }}">Yauzer a Business</a></li>
                   

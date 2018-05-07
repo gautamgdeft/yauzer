@@ -2864,3 +2864,90 @@ ul.user-login li ul.dropdown-menu li a:hover{
 .dropdown-menu.open {
     background: #f0eeee;
 }
+
+/** 180502 **/
+.yauzers-list .col-sm-12.text-center.pagination-ceontent {
+    border: none;
+    margin: 0!important;
+    padding: 0;
+}
+.contact-us-wrapper .profile-content.contact-page {
+    float: left;
+    width:100%;
+    padding: 0;
+}
+.contact-us-wrapper .profile-content.contact-page h4.title {
+    font-size: 30px;
+    border: none;
+    color: #222;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.contact-us-wrapper {
+    float: left;
+    width: 100%;
+    padding: 80px 0 30px 0;
+}
+.contact-us-wrapper .yauzer-contact-heading {
+    display: inline-block;
+    width:100%;
+    padding-bottom:20px;
+}
+.contact-us-wrapper .form-group {
+    margin-bottom: 30px;
+}
+.contact-us-wrapper .contactus-icons {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    display: inline-block;
+    line-height: 30px;
+    border: 1px solid #85c226;
+    border-radius: 100%;
+    vertical-align: middle;
+}
+.contact-us-wrapper .contactus-icons i {
+    color: #85c226;
+}
+.contact-us-wrapper .contactus-details {
+    width: calc(100% - 45px);
+    margin-left: 10px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.contact-us-wrapper .contactus-details p {
+    font-weight: bold;
+    font-size: 16px;
+    color: #222;
+}
+.contact-us-wrapper .contactus-left .contact-list-container {
+    margin-bottom: 15px;
+}
+.contact-us-wrapper .profile-content.contact-page label {
+    font-size:18px;
+}
+.contact-us-wrapper .profile-content.contact-page label span {
+color:#ff0000;
+}
+.contact-us-wrapper .profile-content.contact-page input {
+    height: 50px;
+}
+@media (max-width: 991px) {
+    .contact-us-wrapper .contactus-details p {
+        font-size:14px;
+    }
+}
+@media (max-width:767px) {
+    .yauzer-contact-heading h2 {
+    padding: 0;
+}
+.contact-us-wrapper {
+    padding: 60px 0 10px 0;
+}
+}
+
+@media (max-width: 480px) {
+    .contact-us-wrapper .btn.btn-info.btn-fill.btn-wd {
+        width:100%;
+    }
+}

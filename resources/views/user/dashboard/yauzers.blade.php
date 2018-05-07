@@ -1,5 +1,6 @@
 @extends('layouts.user')
 @section('content')
+
 <div class="blog-form-wrapper create-listing list-new">
 <div class="container">
    <div class="row profile">
@@ -24,7 +25,7 @@
             <div class="page-header">
                <h1><small class="pull-right">{{ $yauzers->count() }} Yauzer</small> Yauzers </h1>
             </div>
-            <div class="comments-list" id="myList">
+            <div class="comments-list yauzers-list" id="myList">
                @if(@sizeof($yauzers))
                @foreach($yauzers as $loopingYauzer)
                <div class="media liist">
@@ -68,12 +69,15 @@
                      </div>
                   </div>
                </div>
-               @endforeach 
+               @endforeach
+                
+                <div class="col-sm-12 text-center pagination-ceontent margin-bottom">
+                 @if($yauzers){!! $yauzers->render() !!}@endif
+                </div>                
+
                @else
                No Yauzer
                @endif
-               <div id="loadMore">Load more</div>
-               <div id="showLess">Show Less</div>
             </div>
          </div>
       </div>
@@ -82,43 +86,7 @@
 
 @endsection
 
-<style type="text/css">
- 
-#myList .liist{ display:none;
-}
-#loadMore {
-    color:green;
-    cursor:pointer;
-}
-#loadMore:hover {
-    color:black;
-}
-#showLess {
-    color:red;
-    cursor:pointer;
-}
-#showLess:hover {
-    color:black;
-}
-
-</style>
 
 @section('custom_scripts')
- <script type="text/javascript">
-    
-$(document).ready(function () {
-    size_li = $("#myList .liist").length;
-    x=5;
-    $('#myList .liist:lt('+x+')').show();
-    $('#loadMore').click(function () {
-        x= (x+5 <= size_li) ? x+5 : size_li;
-        $('#myList .liist:lt('+x+')').show();
-    });
-    $('#showLess').click(function () {
-        x=(x-5<0) ? 3 : x-5;
-        $('#myList .liist').not(':lt('+x+')').hide();
-    });
-});    
 
- </script>
 @endsection
