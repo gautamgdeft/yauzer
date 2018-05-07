@@ -119,7 +119,6 @@ class BusinessCategoryController extends Controller
 
     } 
 
-
     public function destroy_category(Request $request)
     {
     	if ( $request->input('id') ) 

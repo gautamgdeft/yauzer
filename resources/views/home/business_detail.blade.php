@@ -2,7 +2,7 @@
 @section('content')
 
 @php
-use Carbon\Carbon;
+ use Carbon\Carbon;
 @endphp
 
 <div class="cstm_banner business-banner-inner"></div>

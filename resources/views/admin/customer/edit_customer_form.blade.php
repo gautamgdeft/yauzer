@@ -24,6 +24,10 @@
          <!-- form start -->
          <form id="edit-customer-form" role="form" action="{{ route('admin.update_customer',['slug' => $user->slug]) }}" enctype="multipart/form-data" method="POST">
          	{{ csrf_field() }}
+
+
+             <!--Hidden Fields-->
+
             <div class="box-body">
                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                   <label for="name">Name</label>
