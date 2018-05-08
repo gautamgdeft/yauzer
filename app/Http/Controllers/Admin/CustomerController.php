@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use Mail;
 use App\Mail\WelcomeMail;
+use File;
 
 class CustomerController extends Controller
 {
@@ -138,6 +139,10 @@ class CustomerController extends Controller
 
             if($request->hasFile('avatar'))
             {   
+              $usersImage = public_path("uploads/avatars/{$user->avatar}"); // get previous image from folder
+              if (File::exists($usersImage)) { // unlink or remove previous image from folder
+                  unlink($usersImage);
+              }              
                $avatar = $request->file('avatar');
            
                //Using Helper/helpers.php
@@ -145,6 +150,7 @@ class CustomerController extends Controller
             } 
 
             $user->update($request->all());
+
 			      Session::flash('success', 'User has been updated.');
             return redirect()->route('admin.users');                      
 

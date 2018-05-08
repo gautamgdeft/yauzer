@@ -14,6 +14,7 @@ use App\Blog;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Image;
+use File;
 
 class BlogController extends Controller
 {
@@ -259,6 +260,7 @@ class BlogController extends Controller
     public function update_blog(Request $request, $slug)
     {
         $blog = Blog::findBySlugOrFail($slug);
+        $previousImage = $blog->avatar;
 
        //Validating-Category-Data
            $validatedData = $request->validate([
@@ -275,6 +277,10 @@ class BlogController extends Controller
 
             if($request->hasFile('avatar'))
             {   
+              $blogImage = public_path("uploads/blogavatars/{$previousImage}"); // get previous image from folder
+              if (File::exists($blogImage)) { // unlink or remove previous image from folder
+              unlink($blogImage);
+              }            
                $avatar = $request->file('avatar');
            
                //Using Helper/helpers.php

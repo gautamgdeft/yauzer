@@ -11,6 +11,7 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Validator;
 use Session;
 use Hash;
+use File;
 
 class AdminController extends Controller
 {
@@ -60,6 +61,10 @@ class AdminController extends Controller
 
                 if($request->hasFile('avatar'))
                 {   
+                  $usersImage = public_path("uploads/avatars/{$user->avatar}"); // get previous image from folder
+                  if (File::exists($usersImage)) { // unlink or remove previous image from folder
+                      unlink($usersImage);
+                  }                     
                  $avatar = $request->file('avatar');
                  $filename = time() . '.' . $avatar->getClientOriginalExtension();
                  $path = '/uploads/avatars/' . $filename;

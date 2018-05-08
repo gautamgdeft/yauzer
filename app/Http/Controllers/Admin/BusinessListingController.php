@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Mail\BusinessStatusMail;
 use App\Mail\PremiumBusinessOwnerEmail;
+use File;
 
 class BusinessListingController extends Controller
 {
@@ -180,6 +181,7 @@ class BusinessListingController extends Controller
     public function update_biz_basic_info(Request $request, $slug)
     {
       $business = BusinessListing::findBySlugOrFail($slug);
+      $previousImage = $business->avatar;
 
        #Validating-Fields
        $validatedData = $request->validate([
@@ -205,6 +207,12 @@ class BusinessListingController extends Controller
         #Updating Avatar If Present
         if($request->hasFile('avatar'))
         {   
+
+          $businessImage = public_path("uploads/businessAvatars/{$previousImage}"); // get previous image from folder
+          if (File::exists($businessImage)) { // unlink or remove previous image from folder
+              unlink($businessImage);
+          }   
+
           $avatar = $request->file('avatar');
            //Using Helper/helpers.php
            uploadBusinessMainAvatar($avatar, $business);
@@ -225,7 +233,8 @@ class BusinessListingController extends Controller
     public function update_business(Request $request, $slug)
     {  
        $business = BusinessListing::findBySlugOrFail($slug);
-        
+       $previousImage = $business->avatar;
+
        #Validating-Fields
        $validatedData = $request->validate([
             'name'              => 'required|string|max:255',
@@ -244,6 +253,10 @@ class BusinessListingController extends Controller
         #Updating Avatar If Present
         if($request->hasFile('avatar'))
         {   
+          $businessImage = public_path("uploads/businessAvatars/{$previousImage}"); // get previous image from folder
+          if (File::exists($businessImage)) { // unlink or remove previous image from folder
+              unlink($businessImage);
+          }            
           $avatar = $request->file('avatar');
            //Using Helper/helpers.php
            uploadBusinessMainAvatar($avatar, $business);

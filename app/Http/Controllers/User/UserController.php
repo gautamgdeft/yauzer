@@ -9,6 +9,7 @@ use App\Country;
 use App\Yauzer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use File;
 
 class UserController extends Controller
 {
@@ -36,6 +37,11 @@ class UserController extends Controller
 
             if($request->hasFile('avatar'))
             {   
+
+              $usersImage = public_path("uploads/avatars/{$user->avatar}"); // get previous image from folder
+              if (File::exists($usersImage)) { // unlink or remove previous image from folder
+                  unlink($usersImage);
+              }                   
                $avatar = $request->file('avatar');
            
                //Using Helper/helpers.php

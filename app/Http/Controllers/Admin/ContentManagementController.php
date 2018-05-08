@@ -20,6 +20,7 @@ use Session;
 use Hash;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
+use File;
 
 class ContentManagementController extends Controller
 {
@@ -261,6 +262,7 @@ public function edit_slider_image($slug)
 public function update_slider_image(Request $request, $slug)
 {
  $sliderImage = SliderImage::findBySlugOrFail($slug);
+ $previousImage = $sliderImage->avatar;
 
  $validatedData = $request->validate([
    'image_alt_text' => 'required|string',
@@ -277,6 +279,11 @@ public function update_slider_image(Request $request, $slug)
 
  if($request->hasFile('avatar'))
  {   
+
+    $slideImage = public_path("uploads/sliderAvatars/{$previousImage}"); // get previous image from folder
+    if (File::exists($slideImage)) { // unlink or remove previous image from folder
+        unlink($slideImage);
+    }       
    $avatar = $request->file('avatar');
 
                //Using Helper/helpers.php
