@@ -442,7 +442,7 @@
 
       marker = new google.maps.Marker({map: map, position: new google.maps.LatLng({{ $businessDetail->latitude }},{{ $businessDetail->longitude}})});
 
-      infowindow = new google.maps.InfoWindow({content:'@if(@sizeof($businessDetail))<div class="main_map"><div class="map-img"><img id="image_src" class="img-circle" src="/uploads/businessAvatars/{{ $businessDetail->avatar }}" style="height: 45px; width: 45px;"></div><div class="map-text"><h4>{{ $businessDetail->name }}</h4><p>{{ $businessDetail->address }}</p></div></div> @endif'});
+      infowindow = new google.maps.InfoWindow({content:'@if(@sizeof($businessDetail))<div class="main_map"><div class="map-img"><img id="image_src" class="img-circle" src="/uploads/businessAvatars/{{ $businessDetail->avatar }}" style="height: 45px; width: 45px;"></div><div class="map-text"><h4>{{ $businessDetail->name }}</h4><p>{{ $businessDetail->address }}</p><p>{{ $businessDetail->city }}, {{ $businessDetail->state }} {{ $businessDetail->zipcode }}</p></div></div> @endif'});
 
       google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);
 

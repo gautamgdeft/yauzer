@@ -51,12 +51,12 @@
     <script src="{{ asset('js/admin/timepicker/bootstrap-timepicker.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>     
     <script src="{{ asset('js/user/owl.carousel.js') }}"></script>
- {{--    <script src="{{ asset('js/user/owl.carousel.min.js') }}"></script> --}}
+    {{--    <script src="{{ asset('js/user/owl.carousel.min.js') }}"></script> --}}
     <script src="{{ asset('js/user/jquery.scrolling-tabs.js') }}"></script>
     <script src="{{ asset('js/user/designer_custom.js') }}"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0fh0XyC8Pr0xbdKsTfu8Zl40u8fiqOpQ&libraries=places"></script>
     @if(Auth::check() && Auth::user()->isUser())
-     <script src="{{ asset('js/user/user.js') }}"></script>
+      <script src="{{ asset('js/user/user.js') }}"></script>
     @endif
 
     @yield('custom_scripts')
