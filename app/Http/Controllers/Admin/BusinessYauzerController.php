@@ -26,7 +26,7 @@ class BusinessYauzerController extends Controller
    public function new_yauzer($slug)
    {
    	$business = BusinessListing::findBySlugOrFail($slug);
-   	return view ( 'admin.business_listing.partials.business_yauzers.new_yauzer_form', compact('slug','business') );
+   	return view ( 'admin.business_listing_premium.partials.business_yauzers.new_yauzer_form', compact('slug','business') );
    }
 
    public function store_yauzer(Request $request, $slug)
@@ -71,7 +71,7 @@ class BusinessYauzerController extends Controller
    {
        $business = BusinessListing::findBySlugOrFail($slug);
        $yauzer = Yauzer::find($yauzer_id);
-       return view ( 'admin.business_listing.partials.business_yauzers.edit_yauzer', compact('slug','business', 'yauzer') );
+       return view ( 'admin.business_listing_premium.partials.business_yauzers.edit_yauzer', compact('slug','business', 'yauzer') );
    }
 
    public function update_yauzer($yauzer_id, $slug, Request $request)

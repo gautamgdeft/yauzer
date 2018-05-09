@@ -26,7 +26,7 @@ class BusinessSpecialityController extends Controller
    public function new_speciality($slug)
    {
    	$business = BusinessListing::findBySlugOrFail($slug);
-   	return view ( 'admin.business_listing.partials.business_specialties.new_speciality_form', compact('slug','business') );
+   	return view ( 'admin.business_listing_premium.partials.business_specialties.new_speciality_form', compact('slug','business') );
    }
 
    public function store_speciality(Request $request, $slug)
@@ -63,7 +63,7 @@ class BusinessSpecialityController extends Controller
    {
        $business = BusinessListing::findBySlugOrFail($slug);
        $speciality = Speciality::findBySlugOrFail($speciality_slug);
-       return view ( 'admin.business_listing.partials.business_specialties.edit_speciality', compact('slug','business', 'speciality') );
+       return view ( 'admin.business_listing_premium.partials.business_specialties.edit_speciality', compact('slug','business', 'speciality') );
    }
 
    public function update_speciality($speciality_slug, $slug, Request $request)

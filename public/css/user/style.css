@@ -2932,6 +2932,19 @@ color:#ff0000;
 .contact-us-wrapper .profile-content.contact-page input {
     height: 50px;
 }
+div#yauzer_div span {
+    color: red;
+}
+
+
+
+
+
+
+
+
+
+
 @media (max-width: 991px) {
     .contact-us-wrapper .contactus-details p {
         font-size:14px;

@@ -17,7 +17,7 @@ class BusinessPictureController extends Controller
 
 	public function new_picture($slug)
     {
-       return view('admin.business_listing.partials.business_pictures.new_picture', compact('slug'));
+       return view('admin.business_listing_premium.partials.business_pictures.new_picture', compact('slug'));
     }
 
     public function store_picture(Request $request, $slug)

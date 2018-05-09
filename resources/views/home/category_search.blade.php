@@ -1,7 +1,95 @@
 @extends('layouts.user')
 @section('content')
 
+{{-- <style>
+body {font-family: Arial, Helvetica, sans-serif;}
 
+#myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {    
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+    from {-webkit-transform:scale(0)} 
+    to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+    .modal-content {
+        width: 100%;
+    }
+}
+</style> --}}
 
 <div class="container">
 {{--    <div class="row">
@@ -54,8 +142,8 @@
                <div class="col-sm-4 col-xs-6 premium_cstm_biz">
                   <figure>
                      <a href="javascript:void(0)"  class="red-eyes">
-                     <span><img src="{{ asset('images/red-eyes.png') }}"></span>
-                     <img style="width:236px; height:213px;" src="/uploads/businessAvatars/{{ $loopingBusiness->avatar }}" alt=""/>
+                     <span class="sam"><img src="{{ asset('images/red-eyes.png') }}"></span>
+                     <img class="thumnil-img" style="width:236px; height:213px;" src="/uploads/businessAvatars/{{ $loopingBusiness->avatar }}" alt=""/>
                      </a>
                      <figcaption>
                         <div class="content">
@@ -166,6 +254,14 @@
    </div>
 </div>
 
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="img01">
+  <div id="caption"></div>
+</div>
+
+
 @endsection
 
 @section('custom_scripts')
@@ -175,7 +271,8 @@ function initMap() {
     var map;
     var bounds = new google.maps.LatLngBounds();
     var mapOptions = {
-        mapTypeId: 'roadmap'
+        mapTypeId: 'roadmap',
+        mapTypeControlOptions: {position: google.maps.ControlPosition.LEFT_BOTTOM} 
     };
                     
     // Display a map on the web page
@@ -239,6 +336,29 @@ function initMap() {
 }
 // Load initialize function
 google.maps.event.addDomListener(window, 'load', initMap);
+
+
+
+// Get the modal
+// var modal = document.getElementById('myModal');
+
+// var modalImg = document.getElementById("img01");
+// var captionText = document.getElementById("caption");
+
+// $(document).ready(function(){
+// $('.sam').click(function()
+// {
+//     modal.style.display = "block";
+//     modalImg.src = $(this).next().attr('src');
+//     captionText.innerHTML = $(this).parent().next().find('h3').text();      
+// });
+
+
+// // When the user clicks on <span> (x), close the modal
+// $('.close').click(function(){
+//     modal.style.display = "none";
+// });
+// });
 </script>
 
 @endsection

@@ -26,7 +26,7 @@ class BusinessDescriptionController extends Controller
     public function edit_description_form(Request $request, $slug)
     {
 	  $businessListing = BusinessListing::findBySlugOrFail($slug);
- 	  return view('admin.business_listing.partials.business_description.edit_description_form', ['businessListing' => $businessListing, 'slug' => $slug]);    	 
+ 	  return view('admin.business_listing_premium.partials.business_description.edit_description_form', ['businessListing' => $businessListing, 'slug' => $slug]);    	 
 	  }
 
     public function update_business_description(Request $request, $slug)
