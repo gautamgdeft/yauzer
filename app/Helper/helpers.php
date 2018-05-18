@@ -96,6 +96,45 @@ function uploadBlogAvatar($avatar, $blog)
   return true;
 }
 
+#Upload-Business-Default-CMS-Avatar-Function
+function uploadBusinessBackgroundImg($avatar, $sitecms) 
+{
+  $filename = time() . '.' . $avatar->getClientOriginalExtension();
+  $path = '/uploads/siteCMSAvatars/' . $filename;
+  Image::make($avatar)->resize(1920, 485)->save( public_path($path));
+  $sitecms->update(
+    array(
+      'default_bg_image' => $filename,
+    ));
+  return true;
+}
+
+#Upload-Business-Default-CMS-Avatar-Function
+function uploadSignupBackgroundImg($avatar1, $sitecms) 
+{
+  $filename = 'signup' . '.' . $avatar1->getClientOriginalExtension();
+  $path = '/uploads/siteCMSAvatars/' . $filename;
+  Image::make($avatar1)->resize(1920, 1006)->save( public_path($path));
+  $sitecms->update(
+    array(
+      'signup_bg_image' => $filename,
+    ));
+  return true;
+}
+
+#Upload-Business-Default-CMS-Avatar-Function
+function uploadLoginBackgroundImg($avatar2, $sitecms) 
+{
+  $filename = 'login' . '.' . $avatar2->getClientOriginalExtension();
+  $path = '/uploads/siteCMSAvatars/' . $filename;
+  Image::make($avatar2)->resize(1920, 1335)->save( public_path($path));
+  $sitecms->update(
+    array(
+      'login_bg_image' => $filename,
+    ));
+  return true;
+}
+
 
 
 

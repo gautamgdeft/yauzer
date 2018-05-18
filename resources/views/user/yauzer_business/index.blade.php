@@ -159,7 +159,7 @@
     <div class="row">
       <div class="col-md-12">
         <div class="blog-form-heading">
-          <h2 id="yauzer_heading_text">Welcome, you’re about to Yauzer a business</h2>
+          <h2 id="yauzer_heading_text">Now you can Yauzer your favorite business!</h2>
         </div>
         <div class="blog-form-container padding-less" id="padding-less">
 
@@ -197,7 +197,7 @@
             <div class="col-md-6 col-sm-6 {{ @sizeof($uri_segments)? 'hide' : '' }}" id="business_location">
               <div class="form-group location-box">  
               <label for="headline">Business Location</label>
-              <input type="text" id="location" name="location" class="form-control form-input" placeholder="Type location to get Business from another Location">
+              <input type="text" id="location" name="location" class="form-control form-input" placeholder="Type location if other than local">
               <button type="button" class="search-button-1" id="shuffleBusiness"><i class="fa fa-search"></i></button>
               </div>
             </div> 
@@ -217,10 +217,25 @@
               </div>
             </div> --}}             
 
-            <div class="col-md-6 col-sm-6">
+{{--             <div class="col-md-6 col-sm-6">
               <div class="form-group new-selectbox">
               <label for="headline">Business Name<span> *</span></label>
                <select name="business_id" class="form-control form-input selectpicker" id="business_select" required>
+                 <option value="" disabled selected>Choose Business you want to yauzer</option>
+                @if(sizeof($businesses))
+                @foreach($businesses as $loopingBusiness)
+                 <option value="{{ $loopingBusiness->id }}" @if($uri_segments[2] == $loopingBusiness->slug) selected="selected" @endif>{{ $loopingBusiness->name }}</option>
+                @endforeach
+                @endif
+                 <option value="other">NEW BUSINESS</option>
+              </select>
+              </div>
+            </div>      --}}         
+
+            <div class="col-md-6 col-sm-6">
+              <div class="form-group new-selectbox">
+              <label for="headline">Business Name<span> *</span></label>
+               <select name="business_id" class="form-control form-input chosen-select business_select" id="business_select" tabindex="2" required>
                  <option value="" disabled selected>Choose Business you want to yauzer</option>
                 @if(sizeof($businesses))
                 @foreach($businesses as $loopingBusiness)
@@ -343,6 +358,9 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+
   </div>
 </div>
 

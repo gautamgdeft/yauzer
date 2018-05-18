@@ -303,7 +303,7 @@ section.banner_sec{ float: left; width: 100%;}
 .main-text.slider-content{ position: absolute; top:30%; left: 0; right: 0; width: 1140px; margin: auto;}
 .main-text.slider-content.banner-form-section{ top: 42%}
 .slider-content h3{ color: #ffffff; font-size: 24px; padding-bottom:10px;}
-.slider-content h2{ color: #85c226; font-size:45px; padding-bottom:10px; font-weight: 700;}
+.slider-content h2{ color: #85c226; font-size:45px; padding-bottom:10px; font-weight: normal;}
 .banner-form{ width: 60%; display: inline-block; background:rgba(0,0,0,0.2); padding: 20px 15px;
  border-radius: 40px; border:1px solid rgba(255,255,255,0.6); margin-top: 20px;}
  .banner-form .form-group{ display: inline-block; width: 37%; margin-bottom: 0; padding-right: 20px; vertical-align: top;}
@@ -393,7 +393,7 @@ section.yauzer-blog-sec.dr-find-sec{ padding-top: 0; padding-bottom: 30px;}
 
 
 .heading-text hr{ border-color: #a7a7a7;}
-.heading-text h2 {    margin-top: -20px;    display: inline-block;    position: relative;    top: -22px;
+.heading-text h1 {    margin-top: -20px;    display: inline-block;    position: relative;    top: -22px;
     background: #ffff;    padding: 0 20px;}
 
 
@@ -718,7 +718,7 @@ a.footer-logo{ padding-top: 5px; display: inline-block;}
 
 /* business sec */
 
-.business-sec .heading-text h2{ background: #fbf5f5; margin-bottom:30px;}
+.business-sec .heading-text h1{ background: #fbf5f5; margin-bottom:30px;}
 .business-sec{background:url(/images/business-bg.png); background-repeat:no-repeat; background-size:cover; padding:85px 0px; }
 .sec-head-desc{font-size:18px; color:#222222; text-align:center; padding-top:30px; max-width:80%; margin:auto;}
 .business-sec .nav.nav-tabs{margin:35px auto 25px; border:none; width:100%; }
@@ -2027,7 +2027,7 @@ color:#85c226;
 .left-content p{margin-bottom:20px;}
 .left-content h4{margin:10px 0; font-size:18px; font-weight:bold;color:#444;}
 .left-content ul{list-style:none; margin:0 0 20px 20px;}
-.left-content ul li{position:relative; padding-left:20px; line-height:24px;}
+.left-content ul li{position:relative; padding-left:20px; line-height:24px; text-indent: 10px;}
 .left-content ul.bulletlists li:after, .left-content ul.checklists ul.bulletlists li:after{content:"\f111"; position:absolute; left:0; top:0;font-family: fontAwesome; font-size:10px; color:#85c226;}
 .left-content ul.checklists ul.bulletlists{margin-left:0;}
 .left-content ul.checklists li:after{content:"\f14a"; position:absolute; left:0; top:0;font-family: fontAwesome; font-size:15px; color:#85c226;}
@@ -2182,7 +2182,7 @@ ul.yauzeredtime-status li {
     border-radius: 0;
     font-weight: 300;
     z-index: 9;
-    font-size: 12px;
+    font-size: 16px;
 }
 .business-sec .business-detail .btn-more:after{ position: absolute; content:""; left: -6px; top: 0; background-color: #81bb29; height: 100%; width: 100%; z-index: -1; transform: skew(19deg); -webkit-transform: skew(19deg); -moz-transform: skew(19deg); -ms-transform: skew(19deg); -o-transform: skew(19deg);}
 .business-sec .business-detail .btn-more:before{ position: absolute; content: ""; right: 0; bottom: -15px; height: 15px;  width: 9px; z-index: -2; border-top: 12px solid #81bb29; border-right: 10px solid transparent;}
@@ -2325,7 +2325,8 @@ border-radius: 40px;box-shadow: none;border: 1px solid #d6d6d6;padding: 0 30px;f
 .profile-content form button.btn:hover,.modal-footer .btn:hover{background: #ffffff;border: 1px solid #a6ce39;color: #a6ce39;}
 .page-header{font-size: 24px;color: #222222;width: 100%;padding-bottom: 15px;margin-bottom: 15px; border-bottom: 1px solid #ccc;margin: 0px;width:100%;}
 .page-header small {font-size: 13px;line-height: 24px;}
-.profile-content .media {width: 100%;display: inline-block;margin-top: 20px;}
+
+.profile-content .media:first-child {width: 100%;display: inline-block;margin-top: 20px!important;}
 .profile-content .media  a.media-left {width: 20%;display: inline-block;vertical-align: middle;text-align: center;}
 .profile-content .media  a.media-left .img-circle{width: 110px;height: 110px;border: 1px solid #ccc;border-radius: 50%;}
 .profile-content .media  .media-body{position: relative;width: 79%;display: inline-block;vertical-align: middle;
@@ -2362,7 +2363,7 @@ border-top-right-radius: 4px;}
 .lawyer-listing.business-listing.listing-adds figure .red-eyes {
     width: 100px;
     height: 100px;
-    border-radius:  100%;
+    border-radius:0;
     overflow: hidden;
     display:  block;
     margin:  0 auto;
@@ -2659,9 +2660,10 @@ h1.blog-heading {
 }
 .custom-recent-post h2,.custom-archives-post h2,.custom-categories-post h2{
     color: #333333;
-    font-size: 22px;
+    font-size: 25px;
     line-height: 22px;
     margin: 20px 0 12px;
+    font-weight: 600;
 }
 .custom-recent-post ul {
     margin: 0px 0px 20px;
@@ -2825,9 +2827,6 @@ ul.user-login li ul.dropdown-menu li a:hover{
     margin-bottom:  30px;
 }
 
-
-
-
 .form-group.new-selectbox ul li a {
     background: #f0eeee;
     border-radius:  0;
@@ -2935,8 +2934,159 @@ color:#ff0000;
 div#yauzer_div span {
     color: red;
 }
+/** 180515 **/
 
+.basic-button-container {
+    float:  left;
+    width:  100%;
+    text-align:  center;
+}
 
+.basic-button-container .read-btn {
+    padding: 5px 130px;
+    font-size:  18px;
+    font-weight: 400;
+}
+a.editor-btn {
+    background: #85c226;
+    padding: 1px 15px;
+    border-radius: 100px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 5px;
+    display: inline-block;
+    margin-right: 10px;
+}
+.chosen-container-single .chosen-single {
+    height: 50px;
+    border-radius: 50px;
+    box-shadow: none;
+    border: 1px solid #d6d6d6;
+    padding: 0 30px;
+    font-weight: 400 !important;
+    background: transparent;
+}
+.chosen-container-single .chosen-single span {
+    height: 100%;
+    line-height: 3.7;
+    color:#555;
+}
+div#yauzer_div .caption span.label.label-success.badge-success,
+div#yauzer_div .caption span.label.label-danger.badge-danger,
+div#yauzer_div .caption span.label.label-warning.badge-warning,
+div#yauzer_div .caption span.label.label-info.badge-info,
+div#yauzer_div .caption span.label.label-primary.badge-primary {
+    color:#fff;
+}
+.chosen-container-single .chosen-single div {
+    position: absolute;
+    top: 13px;
+    right: 13px;
+    display: block;
+    width: 18px;
+    height: 18px;
+}
+.chosen-container-active.chosen-with-drop .chosen-single {
+    border-radius: 50px;
+    background-image: none;
+    box-shadow: none;
+}
+.chosen-container .chosen-drop {
+    border-top:1px solid #aaa;
+}
+div#myList .media {
+    margin: 0;
+}
+.blog-title h2.date {
+    margin-left:  65px;
+    font-size:  14px;
+    margin-top:  -15px;
+    color: #85c226;
+}
+
+.blog-title a {
+    position:  relative;
+    color: #333333;
+    top: -8px;
+}
+.custom-social-icon ul li {
+    list-style:  none;
+    display:  inline-block;
+}
+
+.custom-social-icon ul li a {
+    font-size:  30px;
+    color:  #85c226;
+}
+.custom-social-icon ul li a:hover {
+    color:#398c97;
+}
+
+.custom-social-icon ul li + li {
+    margin-left:  10px;
+}
+.custom-social-icon h2 {
+    color:#333;
+    font-size: 22px;
+}
+.custom-sidebar h2 {
+    font-size: 25px;
+    font-weight: 600;
+}
+/*17-05-2018*/
+.cstm_banner.business-banner-inner {
+    background-size: cover;
+}
+
+.banner-search-form {
+    width: 100%;
+    background-color: rgba(251, 251, 251, 0.5 );
+    margin-bottom: 40px;
+    padding: 10px;
+    display: inline-block;
+
+}
+.banner-search-form input{
+    width: 100%;
+    height: 39px;
+    border-radius: 30px;
+    border: none;
+    padding-left: 15px;
+}
+.banner-search-form .form-group{
+    display: inline-block;
+    width: 47%;
+    margin-bottom: 0;
+    padding-right: 8px;
+    vertical-align: top;
+}
+.banner-search-form .form-group:last-child {
+    width: 20%;
+    padding-right: 0;
+}
+.banner-search-form .search-btn{
+    width: 100%;
+    background: #85c226;
+    height: 39px;
+    border-radius: 30px;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    display: inline-block;
+}
+.banner-search-form h1 {
+    font-size: 26px;
+    font-weight: bold;
+    line-height: 39px;
+    color: #333;
+}
+.banner-search-form .form-group:nth-child(2) {
+    width: 30%;
+}
+.search-wrapper{width: 100%; display: inline-block; padding: 0px 80px;}
+/*/****/
 
 
 

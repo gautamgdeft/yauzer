@@ -13,13 +13,15 @@
             @if(@sizeof($blogs))
             @foreach($blogs as $loopingBlogs)
             <div class="blog-post">
-               <h1 class="blog-title">
-                  <div class="dateboard">{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $loopingBlogs->created_at)->format('M') }}<br><span>{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $loopingBlogs->created_at)->day }}</span></span></div>
-                  {{ $loopingBlogs->title }}
-               </h1>
-               <h2 class="date"></h2>
+               <div class="blog-title">
+
+                  <div class="dateboard">{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $loopingBlogs->created_at)->format('M') }}<br><span>{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $loopingBlogs->created_at)->day }}</span></div>
+                  <a href="{{ route('showsingleBlog',['slug' => $loopingBlogs->slug]) }}"> {{ $loopingBlogs->title }} </a>
+                  <h2 class="date">Posted by: {{ @sizeof($loopingBlogs->blogcontributor) ? $loopingBlogs->blogcontributor->title : 'Admin' }}&nbsp;&nbsp;&nbsp;&nbsp;{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $loopingBlogs->created_at)->format('F') }} {{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $loopingBlogs->created_at)->day }}, {{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $loopingBlogs->created_at)->year }}
+               </h2>
+               </div>
                <div class="blog-img-view">
-                  <img src="/uploads/blogavatars/{{ $loopingBlogs->avatar }}" alt="img">
+                  <a href="{{ route('showsingleBlog',['slug' => $loopingBlogs->slug]) }}"><img src="/uploads/blogavatars/{{ $loopingBlogs->avatar }}" alt="img"></a>
                </div>
                <p class="blog-content">{!! \Illuminate\Support\Str::words($loopingBlogs->description, 70, '...') !!}</p>
                <a class="post-link" href="{{ route('showsingleBlog',['slug' => $loopingBlogs->slug]) }}">Read More...</a>

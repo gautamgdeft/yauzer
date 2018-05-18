@@ -9,7 +9,50 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    @if(\Request::route()->getName() == 'user.business_detail' && $businessDetail->premium_status == true)
+
+        <title>{{ str_replace(['{business_name}', '{category}', '{business_address}', '{zip_code}', '{city}', '{state}'], [$businessDetail->name, $businessDetail->category->name, $businessDetail->address, $businessDetail->zipcode, $businessDetail->city, $businessDetail->state], $premiumseoDetail->metatitle) }}</title>
+        <meta name="title" content="{{ str_replace(['{business_name}', '{category}', '{business_address}', '{zip_code}', '{city}', '{state}'], [$businessDetail->name, $businessDetail->category->name, $businessDetail->address, $businessDetail->zipcode, $businessDetail->city, $businessDetail->state], $premiumseoDetail->metatitle) }}">
+        <meta name="keywords" content="{{ str_replace(['{business_name}', '{category}', '{business_address}', '{zip_code}', '{city}', '{state}'], [$businessDetail->name, $businessDetail->category->name, $businessDetail->address, $businessDetail->zipcode, $businessDetail->city, $businessDetail->state], $premiumseoDetail->metakeywords) }}">
+        <meta name="description" content="{{ str_replace(['{business_name}', '{category}', '{business_address}', '{zip_code}', '{city}', '{state}'], [$businessDetail->name, $businessDetail->category->name, $businessDetail->address, $businessDetail->zipcode, $businessDetail->city, $businessDetail->state], $premiumseoDetail->metadescription) }}">
+
+    @endif    
+
+    @if(\Request::route()->getName() == 'user.business_detail' && $businessDetail->premium_status == false)
+
+        <title>{{ str_replace(['{business_name}', '{category}', '{business_address}', '{zip_code}', '{city}', '{state}'], [$businessDetail->name, $businessDetail->category->name, $businessDetail->address, $businessDetail->zipcode, $businessDetail->city, $businessDetail->state], $basicseoDetail->metatitle) }}</title>
+        <meta name="title" content="{{ str_replace(['{business_name}', '{category}', '{business_address}', '{zip_code}', '{city}', '{state}'], [$businessDetail->name, $businessDetail->category->name, $businessDetail->address, $businessDetail->zipcode, $businessDetail->city, $businessDetail->state], $basicseoDetail->metatitle) }}">
+        <meta name="keywords" content="{{ str_replace(['{business_name}', '{category}', '{business_address}', '{zip_code}', '{city}', '{state}'], [$businessDetail->name, $businessDetail->category->name, $businessDetail->address, $businessDetail->zipcode, $businessDetail->city, $businessDetail->state], $basicseoDetail->metakeywords) }}">
+        <meta name="description" content="{{ str_replace(['{business_name}', '{category}', '{business_address}', '{zip_code}', '{city}', '{state}'], [$businessDetail->name, $businessDetail->category->name, $businessDetail->address, $businessDetail->zipcode, $businessDetail->city, $businessDetail->state], $basicseoDetail->metadescription) }}">
+
+    @endif    
+
+    @if(\Request::route()->getName() == 'user.search_business')
+
+        <title>{{ str_replace(['{city}', '{state}'], [$formattedAddress[0], $formattedAddress[1]], $cityseoDetail->metatitle) }}</title>
+        <meta name="title" content="{{ str_replace(['{city}', '{state}'], [$formattedAddress[0], $formattedAddress[1]], $cityseoDetail->metatitle) }}">
+        <meta name="keywords" content="{{ str_replace(['{city}', '{state}'], [$formattedAddress[0], $formattedAddress[1]], $cityseoDetail->metakeywords) }}">
+        <meta name="description" content="{{ str_replace(['{city}', '{state}'], [$formattedAddress[0], $formattedAddress[1]], $cityseoDetail->metadescription) }}">
+
+    @endif    
+
+    @if(\Request::route()->getName() == 'user.business_by_category')
+
+        <title>{{ str_replace(['{category}', '{city}', '{state}'], [$businessCategory->name, $location->city, $location->state_name], $categoryseoDetail->metatitle) }}</title>
+        <meta name="title" content="{{ str_replace(['{city}', '{state}'], [$businessCategory->name, $location->city, $location->state_name], $categoryseoDetail->metatitle) }}">
+        <meta name="keywords" content="{{ str_replace(['{city}', '{state}'], [$businessCategory->name, $location->city, $location->state_name], $categoryseoDetail->metakeywords) }}">
+        <meta name="description" content="{{ str_replace(['{city}', '{state}'], [$businessCategory->name, $location->city, $location->state_name], $categoryseoDetail->metadescription) }}">
+
+    @endif    
+
+    @if(\Request::route()->getName() == 'home.welcome')
+
+        <title>{{ $homeseoDetail->metatitle }}</title>
+        <meta name="title" content="{{ $homeseoDetail->metatitle }}">
+        <meta name="keywords" content="{{ $homeseoDetail->metakeywords }}">
+        <meta name="description" content="{{ $homeseoDetail->metadescription }}">
+
+    @endif
     
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,900" rel="stylesheet">

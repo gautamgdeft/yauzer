@@ -208,7 +208,9 @@ Route::prefix('admin')->group(function()
     Route::post('/destroy-faq', 'Admin\ContentManagementController@destroy_faq')->name('admin.destroy_faq');
     Route::get('/edit-faq/{slug}', 'Admin\ContentManagementController@edit_faq')->name('admin.edit_faq_form');
     Route::post('/update-faq/{slug}', 'Admin\ContentManagementController@update_faq')->name('admin.update_faq');
-    Route::get('/view-faq/{slug}', 'Admin\ContentManagementController@view_faq')->name('admin.view_faq');       
+    Route::get('/view-faq/{slug}', 'Admin\ContentManagementController@view_faq')->name('admin.view_faq');
+
+    Route::post('/upload/uploadckeditor', 'Admin\ContentManagementController@uploadckeditor')->name('uploadckeditor');       
 
     //Manage-Contact-US-Routes
     Route::any( '/search-contact', 'Admin\ContactusController@search')->name('contact.search');
@@ -238,7 +240,18 @@ Route::prefix('admin')->group(function()
     Route::get('/edit-blog-category/{slug}', 'Admin\BlogController@edit_category')->name('admin.edit_blog_category_form');
     Route::post('/update-blog-category/{slug}', 'Admin\BlogController@update_category')->name('admin.update_blog_category');
     Route::get('/view-blog-category/{slug}', 'Admin\BlogController@show_category')->name('admin.show_blog_category');
-    Route::any( '/search-blog-category', 'Admin\BlogController@search')->name('blog.search'); 
+    Route::any( '/search-blog-category', 'Admin\BlogController@search')->name('blog.search');
+
+     //Blog-Contributor-Routes
+    Route::get('/blog-contributors', 'Admin\BlogController@listingContributors')->name('admin.listingContributors');
+    Route::post('/update-blog-contributor-status', 'Admin\BlogController@update_blog_contributor_status')->name('admin.update_blog_contributor_status');  
+    Route::post('/delete-blog-contributor', 'Admin\BlogController@destroy_contributor')->name('admin.destroy_blog_contributor');   
+    Route::get('/new-blog-contributor', 'Admin\BlogController@new_contributor')->name('admin.show_blog_contributor_form');
+    Route::post('/new-blog-contributor', 'Admin\BlogController@store_contributor')->name('admin.store_blog_contributor');     
+    Route::get('/edit-blog-contributor/{slug}', 'Admin\BlogController@edit_contributor')->name('admin.edit_blog_contributor_form');
+    Route::post('/update-blog-contributor/{slug}', 'Admin\BlogController@update_contributor')->name('admin.update_blog_contributor');
+    Route::get('/view-blog-contributor/{slug}', 'Admin\BlogController@show_contributor')->name('admin.show_blog_contributor');
+    Route::any( '/search-blog-contributor', 'Admin\BlogController@searchContributor')->name('contributor.search');          
 
     //Blog-Listings-Routes
     Route::get('/blog-listings', 'Admin\BlogController@listingBlogs')->name('admin.listingBlogs');
@@ -249,9 +262,24 @@ Route::prefix('admin')->group(function()
     Route::get('/new-blog', 'Admin\BlogController@new_blog')->name('admin.show_blog_form');
     Route::post('/new-blog', 'Admin\BlogController@store_blog')->name('admin.store_blog');    
     Route::get('/edit-blog/{slug}', 'Admin\BlogController@edit_blog')->name('admin.edit_blog_form');
-    Route::post('/update-blog/{slug}', 'Admin\BlogController@update_blog')->name('admin.update_blog');       
+    Route::post('/update-blog/{slug}', 'Admin\BlogController@update_blog')->name('admin.update_blog');
+
+    //Site-Admin-Seo-Routes
+    Route::get('/site-seo', 'Admin\SeoController@index')->name('admin.listingseo');
+    Route::get('/edit-seo/{slug}', 'Admin\SeoController@edit_seo')->name('admin.edit_seo_form');
+    Route::post('/update-seo/{slug}', 'Admin\SeoController@update_seo')->name('admin.update_seo');
+    Route::get('/view-seo/{slug}', 'Admin\SeoController@show_seo')->name('admin.show_seo');
+
+    //Site-CMS-Routes
+    Route::get('/site-cms', 'Admin\ContentManagementController@sitecms')->name('admin.sitecms');  
+    Route::post('/update-home-cms', 'Admin\ContentManagementController@update_home_cms')->name('admin.update_home_cms');  
+    Route::post('/update-business-default', 'Admin\ContentManagementController@update_business_image')->name('admin.update_business_image');
+    Route::post('/update-logs-images', 'Admin\ContentManagementController@update_log_images')->name('admin.update_log_images');        
 });
 
+
+
+Route::post('/vendor/unisharp/uploads', 'User\BusinessController@uploads');
 
 
 //Frontend-User-Routes
@@ -268,6 +296,7 @@ Route::get('/blog-category/{categoryid}', 'User\BlogController@categoryfilterBlo
 Route::post('/love-business', 'User\BusinessController@love_business');
 Route::get('/contact-us', 'Cms\CmsController@contactus')->name('contactus');
 Route::post('/contact-us', 'Cms\CmsController@contactus')->name('contactus');
+
 
 
 //Only-Auth-With-All-Role-Routes

@@ -540,7 +540,7 @@
         displayOnly: false,
         rtl: false,
         showClear: true,
-        showCaption: true,
+        showCaption: true,     
         starCaptionClasses: {
             0.5: 'label label-danger badge-danger',
             1: 'label label-danger badge-danger',
@@ -568,18 +568,30 @@
     };
 
     $.fn.ratingLocales.en = {
-        defaultCaption: '{rating} Stars',
+        //defaultCaption: '{rating} Stars',
+        defaultCaption: '',
         starCaptions: {
+            // 0.5: 'Half Star',
+            // 1: 'One Star',
+            // 1.5: 'One & Half Star',
+            // 2: 'Two Stars',
+            // 2.5: 'Two & Half Stars',
+            // 3: 'Three Stars',
+            // 3.5: 'Three & Half Stars',
+            // 4: 'Four Stars',
+            // 4.5: 'Four & Half Stars',
+            // 5: 'Five Stars'            
+
             0.5: 'Half Star',
-            1: 'One Star',
+            1: 'Needs Improvement',
             1.5: 'One & Half Star',
-            2: 'Two Stars',
+            2: '',
             2.5: 'Two & Half Stars',
-            3: 'Three Stars',
+            3: '',
             3.5: 'Three & Half Stars',
-            4: 'Four Stars',
+            4: '',
             4.5: 'Four & Half Stars',
-            5: 'Five Stars'
+            5: 'Supreme Awesomenes'
         },
         clearButtonTitle: 'Clear',
         clearCaption: 'Not Rated'

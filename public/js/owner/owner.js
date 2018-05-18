@@ -244,7 +244,7 @@ $(document).ready(function()
         $('#state').prop('disabled', false).val('');
         $('#zipcode').prop('disabled', false).val('');
         $('#phone_number').prop('disabled', false).val('');
-        $('#website').prop('disabled', false).val('');
+        $('#website').prop('disabled', false).val('http://');
         $('#email').prop('disabled', false).val('');
         $('#claim_business_btn').addClass('hide');     
         $('#submit_business').removeClass('hide');
@@ -273,13 +273,13 @@ $(document).ready(function()
   }
   
   //Again adding disabled property to all fields
-  $('#address').prop('disabled', true);
-  $('#city').prop('disabled', true);
-  $('#state').prop('disabled', true);
-  $('#zipcode').prop('disabled', true);
-  $('#phone_number').prop('disabled', true);
-  $('#website').prop('disabled', true);
-  $('#email').prop('disabled', true);
+  $('#address').prop('disabled', false);
+  $('#city').prop('disabled', false);
+  $('#state').prop('disabled', false);
+  $('#zipcode').prop('disabled', false);
+  $('#phone_number').prop('disabled', false);
+  $('#website').prop('disabled', false);
+  $('#email').prop('disabled', false);
   $('#claim_business_btn').removeClass('hide'); 
      
 
@@ -376,7 +376,10 @@ $(".businessSubcategory").chosen({
   placeholder_text_multiple: "Click to choose subcategories ..."
   });
 
-
+$(".business_select").chosen({
+  width: "100%",
+  placeholder_text_multiple: "Click to choose Business ..."
+  });
 
   //Adding-Validations-On-Yauzer-A-Business-Form
   $('#yauzer_for_business').validate({
@@ -403,7 +406,7 @@ $(".businessSubcategory").chosen({
       },
 
       "website": {
-          url: true,
+          customURL: true,
       },
 
       "email": {
@@ -584,7 +587,12 @@ $(".businessSubcategory").chosen({
   //Email-Add-Method
   $.validator.addMethod("customemail", function (value, element) {
     return this.optional(element) || /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
-  }, "Please enter a valid email address.");  
+  }, "Please enter a valid email address."); 
+
+    //Email-Add-Method
+  $.validator.addMethod("customURL", function (value, element) {
+    return this.optional(element) || /(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/.test(value);
+  }, "Please enter a valid URL.");  
 
   //Alphanumeric-Add-Method
   $.validator.addMethod("alphanumeric", function (value, element) {
@@ -825,7 +833,6 @@ $('#update-discount-form-btn').click(function()
     return false;
   }
 });
-
 
 }); //End-ready-function	
 

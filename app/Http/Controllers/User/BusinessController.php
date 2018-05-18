@@ -10,6 +10,8 @@ use App\BusinessSubcategory;
 use App\Yauzer;
 use App\User;
 use App\BusinessInfo;
+use App\SiteSeo;
+use App\SiteCms;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -23,6 +25,8 @@ use Illuminate\Support\Facades\DB;
 use GeoIP;
 use Geocoder\Laravel\Facades\Geocoder;
 use DateTime;
+use Image;
+use File;
 
 class BusinessController extends Controller
 {
@@ -185,7 +189,24 @@ class BusinessController extends Controller
     public function business_detail($slug)
     {
         $businessDetail = BusinessListing::findBySlugOrFail($slug);
+        $businessCMSdata = SiteCms::where('slug', 'business')->first();
 
+        //Interested-Business-Working
+        if(@sizeof($businessDetail->interested_business->interested_businesses)){
+          $explodedArray = explode(',', $businessDetail->interested_business->interested_businesses);
+          $interestedBusiness = [];
+          foreach ($explodedArray as $businessId) {
+          $interestedBusiness[] = BusinessListing::find($businessId);
+          }
+        }else{
+          $interestedBusiness = NULL;
+        }  
+
+        if($businessDetail->premium_status == false){
+         
+         return view('home.basic_business_detail', compact('businessDetail','interestedBusiness'));
+ 
+        }else{  
         //Hours-Section-Business-Hours
         $carbon=Carbon::now();
         $currentdayname = $carbon->format('l');
@@ -229,19 +250,9 @@ class BusinessController extends Controller
         }else{
           $newbusinessHour = NULL;
         }
-        
-        //Interested-Business-Working
-        if(@sizeof($businessDetail->interested_business->interested_businesses)){
-          $explodedArray = explode(',', $businessDetail->interested_business->interested_businesses);
-          $interestedBusiness = [];
-          foreach ($explodedArray as $businessId) {
-          $interestedBusiness[] = BusinessListing::find($businessId);
-          }
-        }else{
-          $interestedBusiness = NULL;
-        }  
-
-        return view('home.business_detail', compact('businessDetail','interestedBusiness', 'currentdayname', 'newbusinessHour'));
+         
+        return view('home.business_detail', compact('businessDetail','interestedBusiness', 'currentdayname', 'newbusinessHour', 'businessCMSdata'));
+        }
     }
 
     public function search_by_category($slug)
@@ -255,7 +266,7 @@ class BusinessController extends Controller
 
        $businesses = DB::select('SELECT * FROM (SELECT *, (' . $circle_radius . ' * acos(cos(radians(' . $lat . ')) * cos(radians(latitude)) * cos(radians(longitude) - radians(' . $lng . ')) + sin(radians(' . $lat . ')) * sin(radians(latitude)))) AS distance FROM business_listings) AS distances WHERE distance < ' . $max_distance . ' AND business_category = '.$businessCategory->id.' ORDER BY distance');
 
-       return view('home.category_search', compact('businesses'));     
+       return view('home.category_search', compact('businesses', 'businessCategory', 'location'));     
                 
     }
 
@@ -305,6 +316,29 @@ class BusinessController extends Controller
               $businessLove->update($request->all());
               return response(['msg' => 'Business has been loved successfully.', 'status' => 'success']);    
             }   
+    }
+
+
+    public function uploads(Request $request)
+    {
+
+      $CKEditor = $request->CKEditor;
+      $funcNum = $request->CKEditorFuncNum;
+      $message = $url = '';
+      if ($request->hasFile('upload')) {
+          $avatar = $request->file('upload');
+
+            $filename = time() . '.' . $avatar->getClientOriginalName();
+            $path = '/uploads/ckeditor/' . $filename;
+            Image::make($avatar)->save( public_path($path));
+
+
+
+      } else {
+          $message = 'No file uploaded.';
+      }
+      return '<script>window.parent.CKEDITOR.tools.callFunction('.$funcNum.', "'.$path.'", "'.$message.'")</script>';
+
     }
 
 

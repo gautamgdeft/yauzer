@@ -616,6 +616,14 @@ ul.speciality_checks li:nth-child(7) {
     display: inline-block;
 }
 
+section.content.basic-listing-page tbody tr th:first-child,
+section.content.premium-listing-page tbody tr th:first-child  {
+    width: 240px;
+}
+section.content.premium-listing-page tbody tr th:nth-child(4) {
+    width:140px;
+} 
+
 /********Media Query***************/
 @media screen and (max-width: 599px){
   .hours ul.open-down .input-group .input-small{

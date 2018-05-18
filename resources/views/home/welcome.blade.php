@@ -6,7 +6,7 @@
 <!-- banner sec -->
 <section class="banner_sec">
    <div class="slider-inner">
-      <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="10000">
          <!-- Wrapper for slides -->
          <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
@@ -67,9 +67,8 @@
       <div class="row">
          <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 padding0 ">
             <div class="share-content-inner">
-               <p>Did you ever a had business that you couldn't wait to tell it to your friends? </p>
-               <p>Here you can share it with the world! </p>
-               <a href="javascript:;" class="read-btn"> Read more </a>
+               {!! $homeCMSdata->description_ckeditor !!}
+               <a href="/what-is-yauzer" class="read-btn"> Read more </a>
             </div>
          </div>
       </div>
@@ -80,7 +79,7 @@
 <section class="yauzer-blog-sec dr-find-sec">
    <div class="text-center heading-text">
       <hr>
-      <h2 class="sec-title pos-rel"> FIND  <span>YOUR ZEN</span></h2>
+      {!! $homeCMSdata->first_section !!}
    </div>
    <div class="container">
       <div class="row">
@@ -162,7 +161,7 @@
 <section class="business-sec gallery-sec">
    <div class="text-center heading-text">
       <hr>
-      <h2 class="sec-title pos-rel"> MOST  <span>YAUZERED<sup>TM</sup> BUSINESS</span></h2>
+      {!! $homeCMSdata->second_section !!}
    </div>
    <div class="container">
       <div class="row">
@@ -187,7 +186,7 @@
                                        <span>E-mail:<a href="{{ $loopingBusiness->email }}">{{ $loopingBusiness->email }}</a></span>
                                        <span>Web:<a target="_blank" href="{{ $loopingBusiness->website }}" class="web">{{ $loopingBusiness->website }}</a></span>
                                     </div>
-                                    <a href="{{ route('user.business_detail',['slug' => $loopingBusiness->slug]) }}" class="btn-more">More About This Biz</a> 
+                                    <a rel="nofollow" href="{{ route('user.business_detail',['slug' => $loopingBusiness->slug]) }}" class="btn-more">More About This Biz</a> 
                                  </div>
                         </div>
                         @endforeach
@@ -221,7 +220,7 @@
                   <span>E-mail:<a href="{{ $loopingBusiness->email }}">{{ $loopingBusiness->email }}</a></span>
                   <span>Web:<a class="web" target="_blank" href="{{ $loopingBusiness->website }}">{{ $loopingBusiness->website }}</a></span>
                </div>
-               <a href="{{ route('user.business_detail',['slug' => $loopingBusiness->slug]) }}" class="btn-more">More About This Biz</a> 
+               <a rel="nofollow" href="{{ route('user.business_detail',['slug' => $loopingBusiness->slug]) }}" class="btn-more">More About This Biz</a> 
             </div>
          </li>
          @endforeach
@@ -233,7 +232,7 @@
 <section class="yauzer-blog-sec">
    <div class="text-center heading-text">
       <hr>
-      <h2 class="sec-title pos-rel"> YAUZER BLOG: <span class="block">POPULAR ARTICLES AND INTERVIEWS</span></h2>
+      {!! $homeCMSdata->third_section !!}
    </div>
    <div class="container">
       <div class="row">
@@ -244,7 +243,7 @@
                   @foreach($blogs as $loopingBlogs)
                   <div class="item">
                      <div class="blog-image pos-rel">
-                        <img src="/uploads/blogavatars/{{ $loopingBlogs->avatar }}" alt="img">
+                        <a href="{{ route('showsingleBlog',['slug' => $loopingBlogs->slug]) }}"><img src="/uploads/blogavatars/{{ $loopingBlogs->avatar }}" alt="img"></a>
                         <div class="blog-img-content">
                            <span>{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $loopingBlogs->created_at)->day }}</span>
                            <span>{{ strtoupper(Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $loopingBlogs->created_at)->format('M')) }}</span>
@@ -252,7 +251,7 @@
                         </div>
                      </div>
                      <div class="blog-desc">
-                        <h4>{{ $loopingBlogs->title }}</h4>
+                        <a href="{{ route('showsingleBlog',['slug' => $loopingBlogs->slug]) }}"><h4>{{ $loopingBlogs->title }}</h4></a>
                         <p>{!! \Illuminate\Support\Str::words($loopingBlogs->description, 12, '...') !!} <a href="{{ route('showsingleBlog',['slug' => $loopingBlogs->slug]) }}">Read More</a></p>
                      </div>
                   </div> 

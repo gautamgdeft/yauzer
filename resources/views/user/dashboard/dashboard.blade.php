@@ -92,6 +92,47 @@
                   </div>
                </div>
                <div class="row">
+                  <div class="col-md-6">
+                     <div class="form-group">
+                        <label>Age Group</label>
+                        <select class="form-control border-input" id="agegroup" name="age_group" required>
+                           <option value="">Choose Age Group</option>
+                           @if(!is_null($agegroups))
+                           @foreach($agegroups as $loopingages)  
+                           <option value="{{ $loopingages->id }}" @if($loopingages->id == Auth::user()->age_group) selected="selected" @endif>{{ $loopingages->title }}</option>
+                           @endforeach
+                           @endif
+                        </select>
+                     </div>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="form-group">
+                        <label>Income</label>
+                        <select class="form-control border-input" id="country" name="income" value="{{ old('country') }}" required>
+                           <option value="">Choose Income</option>
+                           @if(!is_null($income))
+                           @foreach($income as $income)  
+                           <option value="{{ $income->id }}" @if($income->id == Auth::user()->income) selected="selected" @endif>{{ $income->title }}</option>
+                           @endforeach
+                           @endif
+                        </select>
+                     </div>
+                  </div>                  
+                  <div class="col-md-6">
+                     <div class="form-group">
+                        <label>Education</label>
+                        <select class="form-control border-input" id="education" name="education" required>
+                           <option value="">Choose Education</option>
+                           @if(!is_null($education))
+                           @foreach($education as $education)  
+                           <option value="{{ $education->id }}" @if($education->id == Auth::user()->education) selected="selected" @endif>{{ $education->title }}</option>
+                           @endforeach
+                           @endif
+                        </select>
+                     </div>
+                  </div>
+               </div>               
+               <div class="row">
                   <div class="col-md-12">
                      <div class="form-group">
                         <label>Address</label>

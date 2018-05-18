@@ -153,6 +153,8 @@ jQuery(window).scroll(function () {
     }
 });
 
+jQuery(document).ready(function () {
 $('#carousel-example-generic').carousel({
-    interval: 5000
+    interval: 1000 * 10
+});
 });

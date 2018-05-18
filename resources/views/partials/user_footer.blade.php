@@ -69,6 +69,7 @@
            <li><a href="javascript:void(0)"><i class="fa fa-facebook-f"></i></a></li>
            <li><a href="javascript:void(0)"><i class="fa fa-twitter"></i></a></li>
            <li><a href="javascript:void(0)"><i class="fa fa-instagram"></i></a></li>
+           <li><a href="javascript:void(0)"><i class="fa fa-google-plus"></i></a></li>
          </ul>
        </div>
      </div>
@@ -81,7 +82,7 @@
   <div class="container"> 
     <div class="row"> 
      <div class="col-sm-12 col-xs-12">  
-      <p>© COPYRIGHT 2018 YAUZER.COM ALL RIGHTS RESERVED <p>
+      <p>© {{ $homeCMSdata->copyright_info }} <p>
       </div>
     </div>
   </div>

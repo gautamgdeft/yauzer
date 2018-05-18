@@ -19,7 +19,7 @@ class BusinessController extends Controller
     public function yauzer_business()
     {
 		$businesses = BusinessListing::orderBy('name', 'asc')->where('status', 1)->where('user_id', '')->orWhere('user_id', NULL)->get();
-        $business_categories = BusinessCategory::orderBy('id', 'desc')->where('status', 1)->get();    	
+    $business_categories = BusinessCategory::orderBy('id', 'desc')->where('status', 1)->get();    	
     	return view('owner.yauzer_for_business.index', compact('businesses','business_categories'));
     }
 
@@ -38,10 +38,17 @@ class BusinessController extends Controller
        if(isset($request->checkPost)){
         #Claiming Business
        	$businesses = BusinessListing::get_business($request->business_id);
-       	$businesses->user_id = \Auth::user()->id;
+          $businesses->user_id = \Auth::user()->id;
+          $businesses->address = $request->address;
+          $businesses->city = $request->city;
+          $businesses->state = $request->state;
+          $businesses->zipcode = $request->zipcode;
+          $businesses->phone_number = $request->phone_number;
+          $businesses->website = $request->website;
+         	$businesses->email = $request->email;
         $businesses->save();
 
-       	return redirect()->route('owner.dashboard')->withSuccess('Congratulations you have successfully claimed your business.');
+       	return redirect()->route('owner.dashboard')->withSuccess('Congratulations you have successfully claimed your business.')->with('popupMessage', 'True');;
 
        }else{
        	#If business is not present in db saving it into db
@@ -55,11 +62,11 @@ class BusinessController extends Controller
         
         $request['status'] = true; //Approved-Business-Status
         $business = new BusinessListing($request->all());
-	    $business->save();
+	      $business->save();
 
 	    #Business-Notification-Email-Admin
         \Mail::to('teamphp00@gmail.com')->send(new BusinessNotificationAdminMail($business));
-    	return redirect()->route('owner.dashboard')->withSuccess('Congratulations you have successfully added business.');   
+    	return redirect()->route('owner.dashboard')->withSuccess('Congratulations you have successfully added business.')->with('popupMessage', 'True');   
 
        }
 

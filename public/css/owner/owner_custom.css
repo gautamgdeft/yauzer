@@ -631,6 +631,15 @@ ul.speciality_checks li:nth-child(7) {
     background: transparent  !important;
     color: #84c225 !important;
 }
+
+#shareModal p {
+    text-align:  center;
+}
+
+#shareModal p a + a {
+    margin-left: 10px;
+}
+
 /********Media Query***************/
 @media screen and (max-width: 599px){
   .hours ul.open-down .input-group .input-small{

@@ -15,7 +15,7 @@ class CmsController extends Controller
         {
             case 'what-is-yauzer' :
               $page = Page::findBySlugOrFail($slug);
-	          return view('cms.cms', compact('page'));
+            return view('cms.cms', compact('page'));
               break;
 
             case 'terms-of-service' :
@@ -51,4 +51,5 @@ class CmsController extends Controller
       return view('cms.contactus');
       }
     }
+
 }

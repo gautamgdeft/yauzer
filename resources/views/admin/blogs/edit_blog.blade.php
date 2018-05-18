@@ -43,6 +43,27 @@
                     </span>
                   @endif
 
+               </div>                
+
+
+               <div class="form-group{{ $errors->has('blog_contributor_id') ? ' has-error' : '' }}">
+                  <label for="blog_contributor_id">Blog Contributor</label>
+                  
+                  <select class="form-control" name="blog_contributor_id" id="blog_contributor_id" required> 
+                    <option value="">Select Blog Category</option>
+                    @if(sizeof($blogcontributors))
+                    @foreach($blogcontributors as $loopingcontributors)
+                     <option value="{{ $loopingcontributors->id }}" @if($loopingcontributors->id == $blog->blog_contributor_id) selected="selected" @endif>{{ $loopingcontributors->title }}</option>
+                    @endforeach
+                    @endif
+                  </select> 
+
+                  @if ($errors->has('blog_contributor_id')) 
+                    <span class="help-block">
+                        <strong>{{ $errors->first('blog_contributor_id') }}</strong>
+                    </span>
+                  @endif
+
                </div>                             
 
                <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
@@ -117,6 +138,18 @@
                     </span>
                   @endif
 
+               </div>                 
+
+               <div class="form-group{{ $errors->has('created_at') ? ' has-error' : '' }}">
+                  <label for="created_at">Date Published</label>
+                  <input type="text" class="form-control created_at" id="created_at" name="created_at" value="{{ Carbon\Carbon::parse($blog->created_at)->format('m/d/Y') }}" required="required">
+
+                  @if ($errors->has('created_at'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('created_at') }}</strong>
+                    </span>
+                  @endif
+
                </div>                
 
             </div>            
@@ -139,6 +172,8 @@
 
 @section('custom_scripts')  
 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
 
  <script type="text/javascript">
   
@@ -180,8 +215,13 @@
   readURL(this);
   });
 
-
+$('.created_at').datepicker({
+    format: 'mm/dd/yyyy',
+    autoclose: true,
+    todayHighlight: true    
 });
+
+}); //EndReadyFunction
 
 
 /*---- Start Function For Checking Image Extension For Valid Image Selection ---*/

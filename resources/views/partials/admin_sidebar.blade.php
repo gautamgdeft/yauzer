@@ -90,7 +90,7 @@
                 </a>
             </li>
                         
-            <li class="treeview {{ (\Request::route()->getName() == 'admin.listingCategories' || \Request::route()->getName() == 'admin.show_blog_category_form' || \Request::route()->getName() == 'admin.edit_blog_category_form' || \Request::route()->getName() == 'admin.show_blog_category' || \Request::route()->getName() == 'blog.array_search' || \Request::route()->getName() == 'admin.listingBlogs' || \Request::route()->getName() == 'blogMain.search' || \Request::route()->getName() == 'admin.show_blog' || \Request::route()->getName() == 'admin.show_blog_form' || \Request::route()->getName() == 'admin.edit_blog_form') ? 'active' : '' }}">
+            <li class="treeview {{ (\Request::route()->getName() == 'admin.listingCategories' || \Request::route()->getName() == 'admin.show_blog_category_form' || \Request::route()->getName() == 'admin.edit_blog_category_form' || \Request::route()->getName() == 'admin.show_blog_category' || \Request::route()->getName() == 'blog.array_search' || \Request::route()->getName() == 'admin.listingBlogs' || \Request::route()->getName() == 'blogMain.search' || \Request::route()->getName() == 'admin.show_blog' || \Request::route()->getName() == 'admin.show_blog_form' || \Request::route()->getName() == 'admin.edit_blog_form' || \Request::route()->getName() == 'admin.listingContributors' || \Request::route()->getName() == 'admin.show_blog_contributor_form' || \Request::route()->getName() == 'admin.edit_blog_contributor_form' || \Request::route()->getName() == 'admin.show_blog_contributor' || \Request::route()->getName() == 'contributor.search') ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-rss"></i>
                     <span>Blog Management</span>
@@ -98,7 +98,8 @@
                 </a>
                 <ul class="treeview-menu">
                     <li class="{{ (\Request::route()->getName() == 'admin.listingCategories' || \Request::route()->getName() == 'admin.show_blog_category_form' || \Request::route()->getName() == 'admin.edit_blog_category_form' || \Request::route()->getName() == 'admin.show_blog_category' || \Request::route()->getName() == 'blog.search') ? 'active' : '' }}"><a href="{{ route('admin.listingCategories') }}"><i class="fa fa-angle-double-right"></i> Blog Categories</a></li>
-                    <li class="{{ (\Request::route()->getName() == 'admin.listingBlogs' || \Request::route()->getName() == 'blogMain.search' || \Request::route()->getName() == 'admin.show_blog' || \Request::route()->getName() == 'admin.show_blog_form' || \Request::route()->getName() == 'admin.edit_blog_form') ? 'active' : '' }}"><a href="{{ route('admin.listingBlogs') }}"><i class="fa fa-angle-double-right"></i> Blog Listing</a></li>
+                    <li class="{{ (\Request::route()->getName() == 'admin.listingContributors' || \Request::route()->getName() == 'admin.show_blog_contributor_form' || \Request::route()->getName() == 'admin.edit_blog_contributor_form' || \Request::route()->getName() == 'admin.show_blog_contributor' || \Request::route()->getName() == 'contributor.search') ? 'active' : '' }}"><a href="{{ route('admin.listingContributors') }}"><i class="fa fa-angle-double-right"></i> Blog Contributors</a></li>                    
+                    <li class="{{ (\Request::route()->getName() == 'admin.listingBlogs' || \Request::route()->getName() == 'blogMain.search' || \Request::route()->getName() == 'admin.show_blog' || \Request::route()->getName() == 'admin.show_blog_form' || \Request::route()->getName() == 'admin.edit_blog_form' ) ? 'active' : '' }}"><a href="{{ route('admin.listingBlogs') }}"><i class="fa fa-angle-double-right"></i> Blog Listing</a></li>
                 </ul>
             </li>            
 
@@ -112,6 +113,17 @@
                     <li class="{{ (\Request::route()->getName() == 'admin.contactListing' || \Request::route()->getName() == 'contact.search') ? 'active' : '' }}"><a href="{{ route('admin.contactListing') }}"><i class="fa fa-angle-double-right"></i> Contact Listing</a></li>
                 </ul>
             </li>
+
+            <li class="treeview {{ (\Request::route()->getName() == 'admin.listingseo' || \Request::route()->getName() == 'admin.edit_seo_form' || \Request::route()->getName() == 'admin.show_seo' || \Request::route()->getName() == 'admin.sitecms') ? 'active' : '' }}">
+                <a href="">
+                    <i class="fa fa-cog"></i> <span>Site Admin</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ (\Request::route()->getName() == 'admin.listingseo' || \Request::route()->getName() == 'admin.edit_seo_form' || \Request::route()->getName() == 'admin.show_seo') ? 'active' : '' }}"><a href="{{ route('admin.listingseo') }}"><i class="fa fa-angle-double-right"></i> Site Seo</a></li>
+                    <li class="{{ (\Request::route()->getName() == 'admin.sitecms') ? 'active' : '' }}"><a href="{{ route('admin.sitecms') }}"><i class="fa fa-angle-double-right"></i> Site CMS</a></li>
+                </ul>                
+            </li>            
         </ul>
     </section>
     <!-- /.sidebar -->

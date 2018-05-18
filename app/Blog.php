@@ -27,7 +27,7 @@ class Blog extends Model
      * @var array
      */
     protected $fillable = [
-        'blog_category_id', 'title', 'description', 'avatar', 'metatitle', 'metakeywords', 'metadescription', 'status',
+        'blog_category_id', 'title', 'description', 'avatar', 'metatitle', 'metakeywords', 'metadescription', 'status', 'created_at', 'blog_contributor_id',
     ];
 
 
@@ -41,5 +41,11 @@ class Blog extends Model
     public function blogcategory()
     {
      return $this->belongsTo('App\BlogCategory', 'blog_category_id');
+    }     
+
+    #Relation with BlogContributor
+    public function blogcontributor()
+    {
+     return $this->belongsTo('App\BlogContributor', 'blog_contributor_id');
     }       
 }

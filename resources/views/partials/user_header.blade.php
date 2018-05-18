@@ -23,12 +23,11 @@
                   <li><a href="javascript:;"> <i class="fa fa-facebook" aria-hidden="true"></i> </a> </li>
                   <li><a href="javascript:;"> <i class="fa fa-google-plus" aria-hidden="true"></i> </a> </li>
                   <li><a href="javascript:;"> <i class="fa fa-twitter" aria-hidden="true"></i> </a> </li>
-                  <li><a href="javascript:;"> <i class="fa fa-whatsapp" aria-hidden="true"></i> </a> </li>
-                  <li><a href="javascript:;"> <i class="fa fa-skype" aria-hidden="true"></i> </a> </li>
+                  <li><a href="javascript:;"> <i class="fa fa-instagram" aria-hidden="true"></i> </a> </li>
                </ul>
             </div>
             <div class="col-sm-4 col-xs-12 pull-right login-sec">
-               <div class="wanna-text"><a href="javascript:;"> Wanna Yauz?  </a></div>
+               <div class="wanna-text"><a href="/what-is-yauzer"> Wanna Yauz?  </a></div>
                <div class="top-nav-link text-right">
                   <ul class="user-login">
 

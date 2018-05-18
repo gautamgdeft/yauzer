@@ -22,7 +22,7 @@
                  @endif
 				</div>
 
- <section class="content">
+ <section class="content premium-listing-page">
    <div class="row">
       <div class="col-xs-12">
          <div class="box">

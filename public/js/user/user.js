@@ -235,7 +235,7 @@ rules: {
       },
 
       "website": {
-          url: true,
+          customURL: true,
       },
 
       "email": {
@@ -437,6 +437,11 @@ rules: {
     return this.optional(element) || /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
   }, "Please enter a valid email address.");  
 
+  //Email-Add-Method
+  $.validator.addMethod("customURL", function (value, element) {
+    return this.optional(element) || /(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/.test(value);
+  }, "Please enter a valid URL.");  
+
   //Alphanumeric-Add-Method
   $.validator.addMethod("alphanumeric", function (value, element) {
     return this.optional(element) || /^[a-z\d\-_\s]+$/i.test(value);
@@ -469,14 +474,14 @@ rules: {
         $('#state').prop('disabled', false).val('');
         $('#zipcode').prop('disabled', false).val('');
         $('#phone_number').prop('disabled', false).val('');
-        $('#website').prop('disabled', false).val('');
+        $('#website').prop('disabled', false).val('http://');
         $('#email').prop('disabled', false).val('');
         $('#yauzer').prop('disabled', false).val('');
         $('#store_yauzer_btn').prop('disabled', false).val('');     
 
   }else{ 
   
-  $('#yauzer_heading_text').text('Welcome, you’re about to Yauzer a business');
+  $('#yauzer_heading_text').text('Now you can Yauzer your favorite business!');
   
   //If Business Exist In Our Db
   if(!$('#business_name').hasClass('hide')){
@@ -600,6 +605,11 @@ $(".businessSubcategory").chosen({
   placeholder_text_multiple: "Click to choose subcategories ..."
   });
 
+$(".business_select").chosen({
+  width: "100%",
+  placeholder_text_multiple: "Click to choose Business ..."
+  });
+
 
 //Image Preview Code
 $("#avatar").change(function () 
@@ -655,7 +665,7 @@ $("#zipcode").keypress(function(event) {
          complete: function(){
             setTimeout(function () {
             $('.loading').addClass('hide');
-            $('.bootstrap-select').addClass('open');
+            $('#business_select').trigger("chosen:open");
             }, 4000)
          },
          success: function(response)
@@ -669,10 +679,12 @@ $("#zipcode").keypress(function(event) {
               $(response.businesses).each(function(){
                $('#business_select').append("<option value='"+ this.id +"'>"+ this.name +"</option>");
               });
-              $('#business_select').selectpicker('refresh');
+              $(".business_select").trigger("chosen:updated");
+
             }else{           
                $('#business_select').append("<option value=''>No Business found for this location</option>"); 
             }
+            
          },
          error: function( response ) 
          {
@@ -685,6 +697,11 @@ $("#zipcode").keypress(function(event) {
 
        });    
  });
+
+//Rating removing Stars text
+$('.rating-stars').mouseover(function(){
+   if($('.caption').find('span').text() == ''){ $('.caption').addClass('hide'); }else{$('.caption').removeClass('hide');}
+});
 
 }); //End-Ready-Function
 

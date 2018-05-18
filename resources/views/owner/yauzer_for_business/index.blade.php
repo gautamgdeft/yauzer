@@ -30,7 +30,7 @@
             <div class="col-md-6 col-sm-6">
               <div class="form-group">
               <label for="headline">Business Name<span> *</span></label>
-              <select name="business_id" class="form-control form-input" id="business_select" required>
+              <select name="business_id" class="form-control form-input business_select chosen-select" id="business_select" tabindex="2" required>
                  <option value="" disabled selected>Claim or Add Your Business</option>
                 @if(sizeof($businesses))
                 @foreach($businesses as $loopingBusiness)
@@ -50,9 +50,9 @@
             </div>            
 
             <div class="col-md-6 col-sm-6 hide" id="category">
-              <div class="form-group">
+              <div class="form-group new-selectbox">
               <label for="headline">Business Category<span> *</span></label>
-              <select name="business_category" class="form-control form-input" id="business_category" required>
+              <select name="business_category" class="form-control form-input selectpicker" id="business_category" required>
                 @if(sizeof($business_categories))
                  <option value="" disabled selected>Choose Business Category</option>
                 @foreach($business_categories as $loopingCategory)
@@ -102,8 +102,8 @@
 
             <div class="col-md-6 col-sm-6">
               <div class="form-group">
-              <label for="headline">Phone Number</label>
-              <input type="text" id="phone_number" name="phone_number" class="form-control form-input input-medium bfh-phone" data-country="US" placeholder="Enter Phone Number" data-country="US" disabled>
+              <label for="headline">Phone Number<span> *</span></label>
+              <input type="text" id="phone_number" name="phone_number" class="form-control form-input input-medium bfh-phone" data-country="US" placeholder="Enter Phone Number" data-country="US" disabled required>
               </div>
             </div>
 
@@ -117,8 +117,8 @@
 
             <div class="col-md-6 col-sm-6">
               <div class="form-group">
-              <label for="headline">Email Address</label>
-              <input name="email" id="email" type="text" class="form-control form-input" placeholder="Enter Email Address" disabled>
+              <label for="headline">Email Address<span> *</span></label>
+              <input name="email" id="email" type="text" class="form-control form-input" placeholder="Enter Email Address" disabled required>
               </div>
             </div>
 

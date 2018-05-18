@@ -53,6 +53,11 @@
       margin: 0 3px;	
 }
 #profile-detail.owl-theme .owl-controls .owl-page{width:82px; height:82px;}
+/*17-05-2018*/
+.banner-search-form h1{font-size:25px;}
+.banner-search-form .form-group{width:45%;}
+.banner-search-form .form-group:last-child{width:23%;}
+/****************/
 }
 
 
@@ -285,6 +290,12 @@ button.search-btn{ width: 100%;}
 .location-search .col-sm-4:after{ height: 100%; bottom: inherit; top: 0;}
 #profile-detail.owl-theme .owl-controls .owl-page{width:65px; height:65px;}
 .addresscontainer .addresscontent ul li img{max-width:28px;}
+/*17-05-2018*/
+.search-wrapper{padding: 0;}
+.banner-search-form h1 {
+    font-size: 22px;
+}
+/************/
 
 }
 @media (max-width:991px){
@@ -333,6 +344,7 @@ p.business-timing span {
     font-size: 14px;
     margin-right:10px;
 }
+.banner-search-form .search-btn{font-size:14px;}
 }
 @media only screen and (max-width:850px){
 .grid .owl-prev{ left:0px;}
@@ -420,6 +432,7 @@ section.business-sec.gallery-sec .right-sm-side {
 
 .blog-form-wrapper {
     padding: 31px 0 40px;
+    margin-top:80px;
 }
 .wrap button {
     width: 20px;
@@ -514,6 +527,9 @@ ul.top-social-sec{ text-align: center;}
 .location-search .col-sm-4:after{ display: none;}
 
 .inner-pages .dr-header nav.navbar{ background: #85c226;}
+/*17-05-2018*/
+
+/************/
 
 }
 
@@ -601,36 +617,52 @@ ul.top-social-sec{ text-align: center;}
     left: 0;
     right: 0;
 }
-     header.dr-header .login-sec{
-      z-index:9;
-         margin-top: 0px;
-         -webkit-transition: all 0.3s ease-in-out;
+/*header.dr-header{
+        position: fixed;
+    z-index: 999;
+    -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
     -ms-transition: all 0.3s ease-in-out;
     -o-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
+    top: 0;
+    left: 0;
+    right: 0;
+
+}*/
+     header.dr-header .login-sec{
+      z-index:9;
+         margin-top: 0px;
+         -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
     }
      header.dr-header.sticky .login-sec{
       z-index: -1;
          opacity: 0;
          margin-top: -50px;
-         -webkit-transition: all 0.3s ease-in-out;
-    -moz-transition: all 0.3s ease-in-out;
-    -ms-transition: all 0.3s ease-in-out;
-    -o-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
+         -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
     }
      header.dr-header.sticky nav.navbar .collapse.in,  header.dr-header.sticky nav.navbar .collapsing {
     top: 108px;
 }
+/*     header.dr-header nav.navbar .collapse.in,  header.dr-header nav.navbar .collapsing {
+    top: 108px;
+}*/
     .form-background{
         background: none;
     }
@@ -748,7 +780,7 @@ section.yauzer-blog-sec.dr-find-sec h3 span{
     .heading-text hr{
         display: none;
     }
-    .business-sec .heading-text h2 {
+    .business-sec .heading-text h1 {
         
     margin-bottom: 10px;
 }
@@ -773,7 +805,7 @@ section.yauzer-blog-sec.dr-find-sec h3 span{
 section.business-sec.gallery-sec .tab-content, #blog-carousel{display:none;}
 .business-slider-mobile{display:block; width:100%; overflow-y:hidden; overflow:auto;padding:0 15px 15px;}
 .business-slider-list{display: -webkit-inline-flex; display: inline-flex; list-style:none;}
-.business-slider-list li{-webkit-box-flex: 0 1 auto; -moz-box-flex: 0 1 auto; -webkit-flex: 0 1 auto;-ms-flex: 0 1 auto; flex: 0 1 auto; width: 270px; margin-right: 15px;/*box-shadow: 0 0 3px 0 rgba(0,0,0,.12), 0 1px 3px 0 rgba(0,0,0,.12); */overflow:hidden;}
+.business-slider-list li{-webkit-box-flex: 0 1 auto; -moz-box-flex: 0 1 auto; -webkit-flex: 0 1 auto;-ms-flex: 0 1 auto; flex: 0 1 auto; width: 270px; margin-right: 15px;/*box-shadow: 0 0 3px 0 rgba(0,0,0,.12), 0 1px 3px 0 rgba(0,0,0,.12); */overflow:visible;}
 .business-slider-list li figcaption{background:#fff; padding:15px;}
 .business-slider-list li figcaption h2{font-size:16px; font-weight:bold; text-align:center; color:#000;}
 .business-slider-list.blog-slider-list li a{box-shadow:none; padding-left:0; margin-top:5px;}
@@ -934,6 +966,20 @@ section.business-sec.gallery-sec .read-btn{margin-top:20px;}
 .lawyer-listing.business-listing.listing-adds:nth-child(odd) {
     margin-right:20px;
 }
+/*18-05-2018*/
+.item.no-picutre {
+    display: none;
+}
+.listing-pageview .addresswrapper.no-picture-content {
+    margin-top: 136px;
+}
+form#register_form {
+    padding: 15px;
+}
+.form-signup [type="radio"]:checked + label:before, .form-signup [type="radio"]:not(:checked) + label:before{
+        border: 1px solid #464646;
+}
+/***********/
 }
 
 
@@ -1178,6 +1224,18 @@ p.business-timing span {
 .bluebox p {
     padding:5px 10px;
 } 
+.banner-search-form .form-group {
+    width: 100%;
+    margin-bottom:20px;
+        padding-right: 0;
+}
+.banner-search-form .form-group:nth-child(2){width: 100%;}
+.banner-search-form .form-group:last-child{width:50%; margin: 0px auto; display: block;}
+.banner-search-form h1 {
+    font-size: 20px;
+    padding-bottom: 15px;
+    text-align: center;
+}
 }
 @media (max-width:479px) {
 /*****180402*****/
@@ -1244,6 +1302,7 @@ ul.user-login li ul.dropdown-menu{left: -80%;}
     width: 60px;
     height: 60px;
 }
+.banner-search-form h1{font-size:16px;}
 }
 @media (max-width:375px){
    

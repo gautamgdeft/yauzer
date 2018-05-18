@@ -29,14 +29,16 @@
                @if(@sizeof($yauzers))
                @foreach($yauzers as $loopingYauzer)
                <div class="media liist">
-                  <a class="media-left" href="#">
-                  <img class="img-circle" src="/uploads/businessAvatars/{{ $loopingYauzer->business->avatar }}">
-                  </a>
                   <div class="media-body cstm-txt">
                      <p class="pull-right"><i class="fa fa-clock-o" aria-hidden="true"></i><small>{{ $loopingYauzer->updated_at->diffForHumans() }}</small></p>
                      <h4 class="media-heading user_name">{{ $loopingYauzer->business->name }}</h4>
                      {{ $loopingYauzer->yauzer }}
-                     <small class="edit-text"><a href="javascript:void(0)" data-toggle="modal" data-target="#editYauzer{{ $loopingYauzer->id }}"><i data-toggle="tooltip" title="Edit Yauzer" data-placement="bottom" class="fa fa-pencil-square-o" aria-hidden="true"></i></a></small>
+                     <small class="edit-text">
+                        <a href="javascript:void(0)" data-toggle="modal" data-target="#editYauzer{{ $loopingYauzer->id }}"><i data-toggle="tooltip" title="Edit Yauzer" data-placement="bottom" class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                        <a target="_blank" href="{{ Share::load(route('user.business_detail',['slug' => $loopingYauzer->business->slug]), $loopingYauzer->business->name.' '.$loopingYauzer->yauzer, url($loopingYauzer->business->avatar))->facebook() }}"><i data-toggle="tooltip" title="Share on Facebook" data-placement="bottom" class="fa fa-facebook" aria-hidden="true"></i></a>                        
+                        <a target="_blank" href="{{ Share::load(route('user.business_detail',['slug' => $loopingYauzer->business->slug]), $loopingYauzer->business->name.' '.$loopingYauzer->yauzer)->twitter() }}"><i data-toggle="tooltip" title="Share on Twitter" data-placement="bottom" class="fa fa-twitter" aria-hidden="true"></i></a>                        
+                        <a target="_blank" href="{{ Share::load(route('user.business_detail',['slug' => $loopingYauzer->business->slug]), $loopingYauzer->business->name.' '.$loopingYauzer->yauzer)->linkedin() }}"><i data-toggle="tooltip" title="Share on Linkedin" data-placement="bottom" class="fa fa-linkedin" aria-hidden="true"></i></a>                        
+                     </small>
                   </div>
                </div>
                

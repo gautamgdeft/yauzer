@@ -4,7 +4,7 @@
 
 
 <!--Form Starts-->
-<div class="form-background-2">
+<div class="form-background-2" style="background-image: url({{ asset('uploads/siteCMSAvatars/'.$loginSignImage->signup_bg_image) }});">
    <div class="container">
       <div class="row">
          <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8 col-xs-offset-1 col-xs-10 padding0">

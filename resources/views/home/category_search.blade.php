@@ -1,6 +1,5 @@
 @extends('layouts.user')
 @section('content')
-
 {{-- <style>
 body {font-family: Arial, Helvetica, sans-serif;}
 
@@ -210,9 +209,9 @@ body {font-family: Arial, Helvetica, sans-serif;}
                         <figure>
                            <figcaption>
                               <div class="content">
-                                 <h3> {{ $loopingBusiness->name }}</h3>
+                                 <a href="{{ route('user.business_detail',['slug' => $loopingBusiness->slug]) }}"><h3> {{ $loopingBusiness->name }}</h3></a>
                                  <p class="address-text">{{ $loopingBusiness->address }}<br/>{{ $loopingBusiness->city }}, {{ $loopingBusiness->state }} {{ $loopingBusiness->zipcode }}</p>
-                                 <a href="{{ route('user.yauzer_named_business',['slug' => $loopingBusiness->slug]) }}" class="btn-more"> Yauzer This Biz </a>
+                                 <a href="{{ route('user.business_detail',['slug' => $loopingBusiness->slug]) }}" class="btn-more"> Yauzer This Biz </a>
                               </div>
                            </figcaption>
                         </figure>

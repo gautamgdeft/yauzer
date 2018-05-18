@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Session;
 use Hash;
 use App\BlogCategory;
+use App\BlogContributor;
 use App\Blog;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -62,7 +63,7 @@ class BlogController extends Controller
     {
     	 //Validating-Category-Data
            $validatedData = $request->validate([
-        	'name'         => 'required|string|max:255',
+        	  'name'         => 'required|string',
            ]);
 
 	        //Storing-Data
@@ -141,7 +142,118 @@ class BlogController extends Controller
     }
 
 
+    public function listingContributors()
+    {
+      $blogContributors = BlogContributor::paginate(10);
+      return view('admin.blogs.blog_contributors.listing_contributors', compact('blogContributors'));
+    }   
 
+
+    public function update_blog_contributor_status(Request $request)
+    {
+       if ( $request->input('id') ) 
+       {
+              $contributor = BlogContributor::find($request->input('id'));
+
+              if($contributor->status == false)
+              {
+                $contributor->status  = true;
+                $contributor->save();
+                return response(['msg' => 'Blog Contributor status has been activated successfully', 'status' => 'success']); 
+                
+              }else{
+                $contributor->status  = false;
+                $contributor->save();
+                return response(['msg' => 'Blog Contributor status has been deactivated successfully', 'status' => 'declined']); 
+              } 
+       }
+
+       return response(['msg' => 'Failed changing the status of blog contributor', 'status' => 'failed']);
+    }
+
+    public function destroy_contributor(Request $request)
+    {
+      if ( $request->input('id') ) 
+      {
+            $contributor = BlogContributor::find($request->input('id'));
+            $contributor->delete();
+            return response(['msg' => 'Blog Contributor has been deleted successfully', 'status' => 'success']);
+        }
+
+            return response(['msg' => 'Failed deleting the blog contributor', 'status' => 'failed']);      
+    }    
+
+    public function new_contributor()
+    {
+      return view('admin.blogs.blog_contributors.new_contributor');
+    }
+
+
+    public function store_contributor(Request $request)
+    {
+       //Validating-Category-Data
+           $validatedData = $request->validate([
+            'title'         => 'required|string',
+           ]);
+
+          //Storing-Data
+        $blog_contributor = new BlogContributor($request->all());
+        $blog_contributor->save();
+
+         return redirect()->route('admin.listingContributors')
+                        ->with("success","Blog Contributor has been added successfully");                                  
+    } 
+
+
+    public function edit_contributor($slug)
+    {
+      $contributor = BlogContributor::findBySlugOrFail($slug);
+      return view('admin.blogs.blog_contributors.edit_contributor', ['contributor' => $contributor]);    
+    }
+
+
+    public function update_contributor(Request $request, $slug)
+    {
+        $contributor = BlogContributor::findBySlugOrFail($slug);
+
+            //Validating-Category-Data
+        $validatedData = $request->validate([
+              'title'         => 'required|string|max:255',
+            ]);
+
+            //Updating Category
+            $contributor->update($request->all());
+
+            Session::flash('success', 'Blog Contributor has been updated.');
+            
+            return redirect()->route('admin.listingContributors');                      
+
+    }  
+
+
+    public function show_contributor($slug)
+    {
+       $contributor = BlogContributor::findBySlugOrFail($slug);
+       return view('admin.blogs.blog_contributors.show_contributor', ['contributor' => $contributor]);
+    }    
+
+    public function searchContributor(Request $request)
+    {
+           $search_parameter = $request->search_parameter;
+           if($search_parameter != "")
+           {
+
+            $filterCategories = BlogContributor::where ( 'title', 'LIKE', '%' . $search_parameter . '%' )->paginate (10)->setPath ( '' );
+            $pagination = $filterCategories->appends ( array (
+                  'search_parameter' => $request->search_parameter 
+              ) );
+              
+            if (count ( $filterCategories ) > 0)
+            return view ( 'admin.blogs.blog_contributors.listing_contributors' )->withDetails ( $filterCategories )->withQuery ( $search_parameter );
+           }
+
+            return view ( 'admin.blogs.blog_contributors.listing_contributors' )->withMessage ( 'No Details found. Try to search again !' );
+    }     
 
 
     public function listingBlogs()
@@ -211,7 +323,8 @@ class BlogController extends Controller
     public function new_blog()
     {
       $blogcategories = BlogCategory::orderBy('id', 'desc')->get();
-      return view('admin.blogs.new_blog', compact('blogcategories'));
+      $blogcontributors = BlogContributor::orderBy('id', 'desc')->get();
+      return view('admin.blogs.new_blog', compact('blogcategories', 'blogcontributors'));
     }
 
     public function show_blog($slug)
@@ -253,13 +366,16 @@ class BlogController extends Controller
     public function edit_blog($slug)
     {
       $blogcategories = BlogCategory::orderBy('id', 'desc')->get();
+      $blogcontributors = BlogContributor::orderBy('id', 'desc')->get();
       $blog = Blog::findBySlugOrFail($slug);
-      return view('admin.blogs.edit_blog', compact('blogcategories', 'blog'));
+      return view('admin.blogs.edit_blog', compact('blogcategories', 'blog', 'blogcontributors'));
     }
 
     public function update_blog(Request $request, $slug)
     {
         $blog = Blog::findBySlugOrFail($slug);
+        $formatdate = Carbon::parse($request->created_at)->format('Y-m-d');
+        $request['created_at'] = $formatdate;        
         $previousImage = $blog->avatar;
 
        //Validating-Category-Data

@@ -91,8 +91,14 @@ a.disabled {
                 </a>
             </li>              
 
-            <li class="{{ (\Request::route()->getName() == 'owner.yauzers') ? 'active' : '' }} @if(Auth::User()->business->premium_status == false) deactivated @endif">
+{{--             <li class="{{ (\Request::route()->getName() == 'owner.yauzers') ? 'active' : '' }} @if(Auth::User()->business->premium_status == false) deactivated @endif">
                 <a href="{{ (Auth::User()->business->premium_status == false)? route('owner.unautorize_access') : route('owner.yauzers') }}" class="@if(Auth::User()->business->premium_status == false) deactivated @endif">
+                    <i class="fa fa-comment"></i> <span>Yauzers</span>
+                </a>
+            </li>    --}}          
+
+             <li class="{{ (\Request::route()->getName() == 'owner.yauzers') ? 'active' : '' }}">
+                <a href="{{ route('owner.yauzers') }}">
                     <i class="fa fa-comment"></i> <span>Yauzers</span>
                 </a>
             </li>            

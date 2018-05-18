@@ -29,6 +29,7 @@
     <div class="box-header">
     <a href="{{ route('admin.show_blog_form') }}" class="btn bg-olive btn-flat">Add New Blog</a>
     <a href="{{ route('admin.show_blog_category_form') }}" class="btn bg-olive btn-flat">Add New Category</a>
+    <a href="{{ route('admin.show_blog_contributor_form') }}" class="btn bg-olive btn-flat">Add New Contributor</a>
 
     <div class="box-tools src-filter">
         <form action="{{ route('blogMain.search') }}" method="POST" role="search">
@@ -56,6 +57,7 @@
         
          <tr>
           <th>Title</th>
+          <th>Contributor</th>
           <th>Date Created</th>
           <th>Status</th>
           <th>Action</th>
@@ -66,6 +68,7 @@
         @foreach($blogs as $loopingblogs)
         <tr class="tr_{{ $loopingblogs->id }}">
           <td>{{ $loopingblogs->title }}</td>
+          <td>{{ @sizeof($loopingblogs->blogcontributor) ? $loopingblogs->blogcontributor->title : 'Admin' }}</td>
           <td>{{ $loopingblogs->created_at->format('m-d-Y')  }}</td>
           <td>
 
@@ -103,6 +106,7 @@
         
          <tr>
           <th>Name</th>
+          <th>Contributor</th>
           <th>Date Created</th>
           <th>Status</th>
           <th>Action</th>
@@ -113,6 +117,7 @@
         @foreach($details as $loopingblogs)
         <tr class="tr_{{ $loopingblogs->id }}">
           <td>{{ $loopingblogs->title }}</td>
+          <td>{{ @sizeof($loopingblogs->blogcontributor) ? $loopingblogs->blogcontributor->title : 'Admin' }}</td>          
           <td>{{ $loopingblogs->created_at->format('m-d-Y')  }}</td>
           <td>
 

@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Country;
 use App\Yauzer;
+use App\AgeGroup;
+use App\Income;
+use App\Education;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use File;
@@ -17,7 +20,10 @@ class UserController extends Controller
     {    
          $splitName = explode(' ', Auth::user()->name, 2);
          $countries = Country::selectCountries();
-    	 return view('user.dashboard.dashboard', compact('countries','splitName'));														
+         $agegroups = AgeGroup::all();
+         $income = Income::all();
+         $education = Education::all();
+    	 return view('user.dashboard.dashboard', compact('countries','splitName','agegroups','income','education'));														
     }
 
     public function update_profile(Request $request)

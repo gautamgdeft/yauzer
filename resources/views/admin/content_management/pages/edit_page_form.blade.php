@@ -124,15 +124,6 @@ $(document).ready(function()
           maxlength: 50,
           alphanumeric: true, 
       },      
-      "metatitle": {
-          alphanumeric: true, 
-      },      
-      "metakeywords": {
-          alphanumeric: true, 
-      },      
-      "metadescription": {
-          alphanumeric: true, 
-      },
       valueToBeTested: {
           required: true,
       }

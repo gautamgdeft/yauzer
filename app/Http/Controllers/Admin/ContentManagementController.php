@@ -13,6 +13,7 @@ use App\BusinessListing;
 use App\HeaderMenu;
 use App\FooterMenu;
 use App\Faq;
+use App\SiteCms;
 use Image;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Validator;
@@ -632,5 +633,84 @@ public function update_faq(Request $request, $slug)
  Session::flash('success', 'FAQ has been updated.');
  return redirect()->route('admin.faqs');    
 }
+
+// Site CMS Pages Function For Home Page 
+public function sitecms()
+{
+ $homecms = SiteCms::where('slug', 'home')->first();
+ $default_bg_image = SiteCms::where('slug', 'business')->first(); 
+ $login_signup_img = SiteCms::where('slug', 'signup-login')->first(); 
+ return view('admin.content_management.site_cms.index', compact('homecms', 'default_bg_image', 'login_signup_img'));   
+}
+
+public function update_home_cms(Request $request)
+{
+   $sitecms = SiteCms::where('slug', 'home')->first();
+   $sitecms->update($request->all());
+   Session::flash('success', 'FAQ has been updated.');
+   return redirect()->route('admin.sitecms');  
+}
+
+public function update_business_image(Request $request)
+{
+   $sitecms = SiteCms::where('slug', 'business')->first();
+
+         //Saving Business Picture Avatar
+           if($request->hasFile('default_bg_image'))
+            {   
+
+              $default_bg_image = public_path("uploads/siteCMSAvatars/{$sitecms->default_bg_image}"); // get previous image from folder
+              if (File::exists($default_bg_image)) { // unlink or remove previous image from folder
+                  unlink($default_bg_image);
+              }   
+
+              $avatar = $request->file('default_bg_image');
+
+              //Using Helper/helpers.php
+              uploadBusinessBackgroundImg($avatar, $sitecms);
+            }  
+
+            Session::flash('success', 'Owner has been updated.');
+            return redirect()->route('admin.sitecms');              
+}
+
+public function update_log_images(Request $request)
+{
+
+        $sitecms = SiteCms::where('slug', 'signup-login')->first();
+       
+         //Saving Business Picture Avatar
+           if($request->hasFile('signup_bg_image'))
+            {   
+              $signup_bg_image = public_path("uploads/siteCMSAvatars/{$sitecms->signup_bg_image}"); 
+
+              // get previous image from folder
+              if (File::exists($signup_bg_image)) { // unlink or remove previous image from folder
+                  unlink($signup_bg_image);
+              }               
+
+              $avatar1 = $request->file('signup_bg_image');
+
+              //Using Helper/helpers.php
+              uploadSignupBackgroundImg($avatar1, $sitecms);
+            } 
+
+         //Saving Business Picture Avatar
+           if($request->hasFile('login_bg_image'))
+            {
+              $login_bg_image = public_path("uploads/siteCMSAvatars/{$sitecms->login_bg_image}");
+
+              if (File::exists($login_bg_image)) { // unlink or remove previous image from folder
+                  unlink($login_bg_image);
+              }   
+
+              $avatar2 = $request->file('login_bg_image');
+              uploadLoginBackgroundImg($avatar2, $sitecms);
+            }
+
+            Session::flash('success', 'Owner has been updated.');
+            return redirect()->route('admin.sitecms');   
+}
+
 
 }

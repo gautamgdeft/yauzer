@@ -43,6 +43,26 @@
                     </span>
                   @endif
 
+               </div>                
+
+               <div class="form-group{{ $errors->has('blog_contributor_id') ? ' has-error' : '' }}">
+                  <label for="blog_contributor_id">Blog Contributor</label>
+                  
+                  <select class="form-control" name="blog_contributor_id" id="blog_contributor_id" required> 
+                    <option value="">Select Blog Contributor</option>
+                    @if(sizeof($blogcontributors))
+                    @foreach($blogcontributors as $loopingcontributors)
+                     <option value="{{ $loopingcontributors->id }}">{{ $loopingcontributors->title }}</option>
+                    @endforeach
+                    @endif
+                  </select> 
+
+                  @if ($errors->has('blog_contributor_id')) 
+                    <span class="help-block">
+                        <strong>{{ $errors->first('blog_contributor_id') }}</strong>
+                    </span>
+                  @endif
+
                </div>                             
 
                <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
@@ -136,7 +156,6 @@
 
 
 @section('custom_scripts')  
-
 
  <script type="text/javascript">
   

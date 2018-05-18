@@ -35,4 +35,14 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// Simplify the dialog windows.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
+
+	// Construct path to file upload route
+	
+		// Useful if your dev and prod URLs are different
+		var path = CKEDITOR.basePath.split('/');
+		path[ path.length-2 ] = 'uploads';
+		config.filebrowserUploadUrl = path.join('/').replace(/\/+$/, '');
+
+		// Add plugin
+		config.extraPlugins = 'filebrowser';
 };

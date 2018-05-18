@@ -6,11 +6,11 @@
          <div class="col-md-12 col-sm-12 col-xs-12">
             @if(@sizeof($singleBlog))
             <div class="blog-post">
-               <h1 class="blog-title">
-                  <div class="dateboard">{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $singleBlog->created_at)->format('M') }}<br><span>{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $singleBlog->created_at)->day }}</span></span></div>
+               <div class="blog-title">
+                  <div class="dateboard">{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $singleBlog->created_at)->format('M') }}<br><span>{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $singleBlog->created_at)->day }}</span></div>
                   {{ $singleBlog->title }}
-               </h1>
-               <h2 class="date"></h2>
+               <h2 class="date">Posted by: {{ @sizeof($singleBlog->blogcontributor) ? $singleBlog->blogcontributor->title : 'Admin' }} &nbsp;&nbsp;&nbsp;&nbsp; {{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $singleBlog->created_at)->format('F') }} {{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $singleBlog->created_at)->day }}, {{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $singleBlog->created_at)->year }}</h2>
+               </div>
                <div class="blog-img-view">
                   <img src="/uploads/blogavatars/{{ $singleBlog->avatar }}" alt="img">
                </div>
