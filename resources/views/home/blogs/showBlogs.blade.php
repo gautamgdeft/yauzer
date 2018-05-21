@@ -3,7 +3,7 @@
 <div class="yauzer-blog-heading">
    <div class="text-center heading-text">
       <hr>
-      <h2 class="sec-title pos-rel"> Yauzer  <span>Blog</span></h2>
+      <h2 class="sec-title blog-header pos-rel"> Yauzer  <span>Blog</span></h2>
    </div>
 </div>
 <div class="container">
@@ -16,9 +16,9 @@
                <div class="blog-title">
 
                   <div class="dateboard">{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $loopingBlogs->created_at)->format('M') }}<br><span>{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $loopingBlogs->created_at)->day }}</span></div>
-                  <a href="{{ route('showsingleBlog',['slug' => $loopingBlogs->slug]) }}"> {{ $loopingBlogs->title }} </a>
-                  <h2 class="date">Posted by: {{ @sizeof($loopingBlogs->blogcontributor) ? $loopingBlogs->blogcontributor->title : 'Admin' }}&nbsp;&nbsp;&nbsp;&nbsp;{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $loopingBlogs->created_at)->format('F') }} {{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $loopingBlogs->created_at)->day }}, {{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $loopingBlogs->created_at)->year }}
-               </h2>
+                  <a class="cstm-blog-title" href="{{ route('showsingleBlog',['slug' => $loopingBlogs->slug]) }}"> {{ $loopingBlogs->title }} </a>
+                  <h4 class="date">Posted by: {{ @sizeof($loopingBlogs->blogcontributor) ? $loopingBlogs->blogcontributor->title : 'Admin' }}&nbsp;&nbsp;&nbsp;&nbsp;{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $loopingBlogs->created_at)->format('F') }} {{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $loopingBlogs->created_at)->day }}, {{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $loopingBlogs->created_at)->year }}
+               </h4>
                </div>
                <div class="blog-img-view">
                   <a href="{{ route('showsingleBlog',['slug' => $loopingBlogs->slug]) }}"><img src="/uploads/blogavatars/{{ $loopingBlogs->avatar }}" alt="img"></a>

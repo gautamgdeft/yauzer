@@ -605,11 +605,6 @@ $(".businessSubcategory").chosen({
   placeholder_text_multiple: "Click to choose subcategories ..."
   });
 
-$(".business_select").chosen({
-  width: "100%",
-  placeholder_text_multiple: "Click to choose Business ..."
-  });
-
 
 //Image Preview Code
 $("#avatar").change(function () 
@@ -665,7 +660,7 @@ $("#zipcode").keypress(function(event) {
          complete: function(){
             setTimeout(function () {
             $('.loading').addClass('hide');
-            $('#business_select').trigger("chosen:open");
+            $('#business_select').select2('open');  
             }, 4000)
          },
          success: function(response)
@@ -679,8 +674,6 @@ $("#zipcode").keypress(function(event) {
               $(response.businesses).each(function(){
                $('#business_select').append("<option value='"+ this.id +"'>"+ this.name +"</option>");
               });
-              $(".business_select").trigger("chosen:updated");
-
             }else{           
                $('#business_select').append("<option value=''>No Business found for this location</option>"); 
             }

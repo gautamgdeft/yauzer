@@ -8,8 +8,8 @@
             <div class="blog-post">
                <div class="blog-title">
                   <div class="dateboard">{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $singleBlog->created_at)->format('M') }}<br><span>{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $singleBlog->created_at)->day }}</span></div>
-                  {{ $singleBlog->title }}
-               <h2 class="date">Posted by: {{ @sizeof($singleBlog->blogcontributor) ? $singleBlog->blogcontributor->title : 'Admin' }} &nbsp;&nbsp;&nbsp;&nbsp; {{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $singleBlog->created_at)->format('F') }} {{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $singleBlog->created_at)->day }}, {{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $singleBlog->created_at)->year }}</h2>
+                  <h5 class="cstm-blog-title">{{ $singleBlog->title }}</h5>
+               <h4 class="date">Posted by: {{ @sizeof($singleBlog->blogcontributor) ? $singleBlog->blogcontributor->title : 'Admin' }} &nbsp;&nbsp;&nbsp;&nbsp; {{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $singleBlog->created_at)->format('F') }} {{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $singleBlog->created_at)->day }}, {{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $singleBlog->created_at)->year }}</h4>
                </div>
                <div class="blog-img-view">
                   <img src="/uploads/blogavatars/{{ $singleBlog->avatar }}" alt="img">

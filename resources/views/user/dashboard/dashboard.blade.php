@@ -31,28 +31,28 @@
                <div class="row">
                   <div class="col-md-6">
                      <div class="form-group">
-                        <label>First Name</label>
+                        <label>First Name<span>*</span></label>
                         <input type="text" class="form-control border-input" placeholder="First Name" name="firstname" value="{{ strtok(Auth::user()->name, ' ') }}" required>
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Last Name</label>
-                        <input type="text" class="form-control border-input" placeholder="Last Name" name="lastname" value="@if(!empty($splitName[1])){{ $splitName['1'] }}@endif" required>
+                        <input type="text" class="form-control border-input" placeholder="Last Name" name="lastname" value="@if(!empty($splitName[1])){{ $splitName['1'] }}@endif">
                      </div>
                   </div>
                </div>
                <div class="row">
                   <div class="col-md-6">
                      <div class="form-group">
-                        <label>Email Address</label>
+                        <label>Email Address<span>*</span></label>
                         <input type="text" class="form-control border-input" disabled="" placeholder="Email Address" name="email" value="{{ Auth::user()->email }}" required>
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Phone Number</label>
-                        <input type="text" class="form-control border-input input-medium bfh-phone" placeholder="Phone number" data-country="US" data-number="{{ Auth::user()->phone_number }}" name="phone_number" value="{{ Auth::user()->phone_number }}" required>
+                        <input type="text" class="form-control border-input input-medium bfh-phone" placeholder="Phone number" data-country="US" data-number="{{ Auth::user()->phone_number }}" name="phone_number" value="{{ Auth::user()->phone_number }}">
                      </div>
                   </div>
                </div>
@@ -60,13 +60,13 @@
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>City</label>
-                        <input type="text" class="form-control border-input" placeholder="City" name="city" value="{{ Auth::user()->city }}" required>
+                        <input type="text" class="form-control border-input" placeholder="City" name="city" value="{{ Auth::user()->city }}">
                      </div>
                   </div>
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>State</label>
-                        <input type="text" class="form-control border-input" placeholder="State" name="state" value="{{ Auth::user()->state }}" required>
+                        <input type="text" class="form-control border-input" placeholder="State" name="state" value="{{ Auth::user()->state }}">
                      </div>
                   </div>
                </div>
@@ -74,7 +74,7 @@
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Country</label>
-                        <select class="form-control border-input" id="country" name="country" value="{{ old('country') }}" required>
+                        <select class="form-control border-input" id="country" name="country" value="{{ old('country') }}">
                            <option value="">Choose Country</option>
                            @if(!is_null($countries))
                            @foreach($countries as $loopingCountries)  
@@ -87,7 +87,7 @@
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Zip Code</label>
-                        <input type="text" class="form-control border-input" id="zipcode" placeholder="ZIP Code" name="zipcode" value="{{ Auth::user()->zipcode }}" required>
+                        <input type="text" class="form-control border-input" id="zipcode" placeholder="ZIP Code" name="zipcode" value="{{ Auth::user()->zipcode }}">
                      </div>
                   </div>
                </div>
@@ -95,7 +95,7 @@
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Age Group</label>
-                        <select class="form-control border-input" id="agegroup" name="age_group" required>
+                        <select class="form-control border-input" id="agegroup" name="age_group">
                            <option value="">Choose Age Group</option>
                            @if(!is_null($agegroups))
                            @foreach($agegroups as $loopingages)  
@@ -108,7 +108,7 @@
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Income</label>
-                        <select class="form-control border-input" id="country" name="income" value="{{ old('country') }}" required>
+                        <select class="form-control border-input" id="income" name="income" value="{{ old('country') }}">
                            <option value="">Choose Income</option>
                            @if(!is_null($income))
                            @foreach($income as $income)  
@@ -121,7 +121,7 @@
                   <div class="col-md-6">
                      <div class="form-group">
                         <label>Education</label>
-                        <select class="form-control border-input" id="education" name="education" required>
+                        <select class="form-control border-input" id="education" name="education">
                            <option value="">Choose Education</option>
                            @if(!is_null($education))
                            @foreach($education as $education)  
@@ -136,7 +136,7 @@
                   <div class="col-md-12">
                      <div class="form-group">
                         <label>Address</label>
-                        <input type="text" class="form-control border-input" placeholder="Address" name="address" value="{{ Auth::user()->address }}" required>
+                        <input type="text" class="form-control border-input" placeholder="Address" name="address" value="{{ Auth::user()->address }}">
                      </div>
                   </div>
                </div>
@@ -163,22 +163,24 @@
 </div>
     </div>
 
+@endsection
 
+@section('custom_scripts')
 
-
-
-
-
-
-
-
-
-
-<style type="text/css">
-	
-
-
-</style>
-
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('#agegroup').select2({
+        placeholder: 'Choose Age Group'
+      });      
+      $('#income').select2({
+        placeholder: 'Choose Income'
+      });      
+      $('#education').select2({
+        placeholder: 'Choose Education'
+      });
+  });
+  </script>
 
 @endsection

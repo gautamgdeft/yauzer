@@ -7,7 +7,7 @@
     $('[data-toggle="tooltip"]').tooltip(); 
 
 
-    CKEDITOR.replace( 'description-ckeditor' );
+
 
 	  $("#default_bg_image").change(function () 
 	  {
@@ -17,9 +17,13 @@
 	  {
 	   readURLSignup(this);
 	  });	  
-	  $("#login_bg_image").change(function () 
+    $("#login_bg_image").change(function () 
+    {
+     readURLLogin(this);
+    });	  
+    $("#picture_coming_soon").change(function () 
 	  {
-	   readURLLogin(this);
+	   readURLSoon(this);
 	  });
 
     });
@@ -102,6 +106,21 @@ function readURLLogin(input) {
 
         $('#login_bg_image').removeClass('validate_error');
         $("#login_bg_image").next('label').remove();
+    }
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+function readURLSoon(input) {
+
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $('#image_src3').css('display', 'block');
+        $('#image_src3').attr('src', e.target.result);
+
+        $('#picture_coming_soon').removeClass('validate_error');
+        $("#picture_coming_soon").next('label').remove();
     }
     reader.readAsDataURL(input.files[0]);
   }

@@ -235,7 +235,7 @@
             <div class="col-md-6 col-sm-6">
               <div class="form-group new-selectbox">
               <label for="headline">Business Name<span> *</span></label>
-               <select name="business_id" class="form-control form-input chosen-select business_select" id="business_select" tabindex="2" required>
+               <select name="business_id" class="form-control form-input" id="business_select" tabindex="2" required>
                  <option value="" disabled selected>Choose Business you want to yauzer</option>
                 @if(sizeof($businesses))
                 @foreach($businesses as $loopingBusiness)
@@ -364,4 +364,23 @@
   </div>
 </div>
 
+@endsection
+
+@section('custom_scripts')
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css">
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#business_select').select2({
+      placeholder: 'Choose Business you want to yauzer'
+    });
+    $('#business_category').select2({
+      width: "100%",
+      placeholder: 'Choose Business Category'
+    });    
+});
+</script>
 @endsection

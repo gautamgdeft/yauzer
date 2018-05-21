@@ -12,6 +12,6 @@ class SiteCms extends Model
      * @var array
      */
     protected $fillable = [
-        'description_ckeditor', 'first_section', 'second_section', 'third_section', 'copyright_info','default_bg_image','signup_bg_image','login_bg_image',
+        'description_ckeditor', 'first_section', 'second_section', 'third_section', 'copyright_info','default_bg_image','signup_bg_image','login_bg_image','picture_coming_soon',
     ];
 }

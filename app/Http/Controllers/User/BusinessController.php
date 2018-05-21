@@ -204,7 +204,7 @@ class BusinessController extends Controller
 
         if($businessDetail->premium_status == false){
          
-         return view('home.basic_business_detail', compact('businessDetail','interestedBusiness'));
+         return view('home.basic_business_detail', compact('businessDetail','interestedBusiness', 'businessCMSdata'));
  
         }else{  
         //Hours-Section-Business-Hours

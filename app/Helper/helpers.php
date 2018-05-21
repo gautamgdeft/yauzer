@@ -110,6 +110,19 @@ function uploadBusinessBackgroundImg($avatar, $sitecms)
 }
 
 #Upload-Business-Default-CMS-Avatar-Function
+function uploadBusinessComingsoon($avatar, $sitecms) 
+{
+  $filename = 'coming_soon' . time() . '.' . $avatar->getClientOriginalExtension();
+  $path = '/uploads/siteCMSAvatars/' . $filename;
+  Image::make($avatar)->resize(475, 283)->save( public_path($path));
+  $sitecms->update(
+    array(
+      'picture_coming_soon' => $filename,
+    ));
+  return true;
+}
+
+#Upload-Business-Default-CMS-Avatar-Function
 function uploadSignupBackgroundImg($avatar1, $sitecms) 
 {
   $filename = 'signup' . '.' . $avatar1->getClientOriginalExtension();

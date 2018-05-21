@@ -396,6 +396,9 @@ section.yauzer-blog-sec.dr-find-sec{ padding-top: 0; padding-bottom: 30px;}
 .heading-text h1 {    margin-top: -20px;    display: inline-block;    position: relative;    top: -22px;
     background: #ffff;    padding: 0 20px;}
 
+    .heading-text h2 {    margin-top: -20px;    display: inline-block;    position: relative;    top: -22px;
+    background: #ffff;    padding: 0 20px;}
+
 
 /*== gallery sec ==*/
 section.yauzer-blog-sec.gallery-sec{ padding-top: 0;}
@@ -718,7 +721,7 @@ a.footer-logo{ padding-top: 5px; display: inline-block;}
 
 /* business sec */
 
-.business-sec .heading-text h1{ background: #fbf5f5; margin-bottom:30px;}
+.business-sec .heading-text h2{ background: #fbf5f5; margin-bottom:30px;}
 .business-sec{background:url(/images/business-bg.png); background-repeat:no-repeat; background-size:cover; padding:85px 0px; }
 .sec-head-desc{font-size:18px; color:#222222; text-align:center; padding-top:30px; max-width:80%; margin:auto;}
 .business-sec .nav.nav-tabs{margin:35px auto 25px; border:none; width:100%; }
@@ -1949,7 +1952,7 @@ color:#85c226;
 /* dlw */
 .business-banner-inner{background:url(/images/business-banner-image.jpg) center center no-repeat; padding:150px 15px; float:left; width:100%; min-height:485px;}
 .youzer-profile-details{ margin-top: -120px; float: left; width: 100%;}
-.cstm_banner.business-banner-inner{min-height: 230px; padding:115px 15px;}
+.cstm_banner.business-banner-inner{min-height: 230px; /*padding:115px 15px;*/ padding: 32px 15px 97px 15px;}
 
 /* Profile slider css */
 #profile-detail{margin-bottom:15px;}
@@ -2022,12 +2025,12 @@ color:#85c226;
 .addresswrapper p a{color:#85c226;}
 .addresswrapper p a:hover{color:#444;}
 .addresswrapper p span{width:65px; display:inline-block;}
-.addresswrapper .read-btn{padding:5px 35px; font-size:18px;font-weight:400;}
+.addresswrapper .read-btn{padding:5px 35px; font-size:18px;font-weight:400; margin-bottom: 15px;}
 .left-content{margin:15px 0;}
 .left-content p{margin-bottom:20px;}
 .left-content h4{margin:10px 0; font-size:18px; font-weight:bold;color:#444;}
 .left-content ul{list-style:none; margin:0 0 20px 20px;}
-.left-content ul li{position:relative; padding-left:20px; line-height:24px; text-indent: 10px;}
+.left-content ul li{position:relative; padding-left:20px; line-height:24px; text-indent: 20px;}
 .left-content ul.bulletlists li:after, .left-content ul.checklists ul.bulletlists li:after{content:"\f111"; position:absolute; left:0; top:0;font-family: fontAwesome; font-size:10px; color:#85c226;}
 .left-content ul.checklists ul.bulletlists{margin-left:0;}
 .left-content ul.checklists li:after{content:"\f14a"; position:absolute; left:0; top:0;font-family: fontAwesome; font-size:15px; color:#85c226;}
@@ -2361,8 +2364,8 @@ border-top-right-radius: 4px;}
 }
 
 .lawyer-listing.business-listing.listing-adds figure .red-eyes {
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    height: 150px;
     border-radius:0;
     overflow: hidden;
     display:  block;
@@ -2388,7 +2391,7 @@ border-top-right-radius: 4px;}
 
 .lawyer-listing.business-listing.listing-adds figure .red-eyes img {
     width: 100%;
-    object-fit:  cover;
+    /*object-fit:  cover;*/
     height: 100%;
 }
 .lawyer-listing.business-listing.listing-adds figcaption .content p a {
@@ -2403,7 +2406,7 @@ ul.yauzeredtime-status li {
     padding: 0;
 }
 .listing-pageview .left-content p {
-    text-align: justify;
+    text-align: left;
 }
 .listing-pageview .left-content ul {
     margin: 0;
@@ -2999,11 +3002,13 @@ div#yauzer_div .caption span.label.label-primary.badge-primary {
 div#myList .media {
     margin: 0;
 }
-.blog-title h2.date {
+.blog-title h4.date {
     margin-left:  65px;
     font-size:  14px;
     margin-top:  -15px;
     color: #85c226;
+    display: inline-block;
+    vertical-align: top;
 }
 
 .blog-title a {
@@ -3087,6 +3092,64 @@ div#myList .media {
 }
 .search-wrapper{width: 100%; display: inline-block; padding: 0px 80px;}
 /*/****/
+
+/*21-05-2018*/
+.blog-post h2 {
+    font-size: 18px;
+    font-weight: bold;
+}
+.cstm-blog-title {
+    font-size: 24px;
+    display: inline-block;
+    width: calc(100% - 70px);
+    line-height: normal;
+    vertical-align: top;
+}
+a.cstm-blog-title{vertical-align: middle;}
+.blog-post .dateboard{
+    width:45px;
+     vertical-align: top;
+ }
+ /** 180551 **/
+ .selection span.select2-selection.select2-selection--single {
+    height: 50px;
+    border: 1px solid #d6d6d6;
+    border-radius: 50px;
+    padding: 0 30px;
+    font-weight: 400;
+ }
+ .selection span#select2-business_select-container {
+    line-height: 48px;
+ }
+ .select2-container--default .select2-selection--single .select2-selection__arrow {
+    height:50px!important;
+    right:15px!important;
+ }
+ .select2-container--default.select2-container--open.select2-container--below .select2-selection--single, .select2-container--default.select2-container--open.select2-container--below .select2-selection--multiple {
+    border-radius: 50px!important;
+ }
+ .select2-container--open .select2-dropdown--below {
+    border-top: 1px solid #aaa!important;
+ }
+ .select2-container--default.select2-container--open.select2-container--above .select2-selection--single, .select2-container--default.select2-container--open.select2-container--above .select2-selection--multiple {
+    border-radius: 50px!important;
+ }
+ .select2-container--open .select2-dropdown--above {
+    border-bottom: 1px solid #aaa!important;
+ }
+ .select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 48px !important;
+}
+#user_profile_form .selection span.select2-selection.select2-selection--single {
+    height:40px;
+}
+#user_profile_form .select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 38px!important;
+}
+#user_profile_form .select2-container--default .select2-selection--single .select2-selection__arrow {
+    height:40px!important;
+}
+/************/
 
 
 

@@ -21,6 +21,7 @@ class CreateSiteCmsTable extends Migration
             $table->text('third_section')->nullable();
             $table->text('copyright_info')->nullable();
             $table->string('default_bg_image')->nullable();
+            $table->string('picture_coming_soon')->nullable();
             $table->string('signup_bg_image')->nullable();
             $table->string('login_bg_image')->nullable();
             $table->string('slug')->nullable();

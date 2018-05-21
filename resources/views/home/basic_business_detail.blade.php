@@ -17,7 +17,7 @@
                   <div class="item"><img src="/uploads/businessAvatars/{{ $loopingPictures->avatar }}"></div>
                   @endforeach
                   @else
-                  <div class="item no-picutre"><img src="{{ asset('uploads/businessAvatars/no_picture.png') }}"></div>
+                  <div class="item no-picutre"><img src="{{ asset('uploads/siteCMSAvatars/'.$businessCMSdata->picture_coming_soon) }}"></div>
                   @endif
                </div>
                <div class="addresswrapper @if(!@sizeof($businessDetail->business_pictures)) no-picture-content @endif">                  

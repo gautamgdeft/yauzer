@@ -434,6 +434,7 @@ section.business-sec.gallery-sec .right-sm-side {
     padding: 31px 0 40px;
     margin-top:80px;
 }
+.blog-form-wrapper.create-listing.list-new{margin-top: 20px;}
 .wrap button {
     width: 20px;
     height: 20px;
@@ -443,7 +444,7 @@ section.business-sec.gallery-sec .right-sm-side {
     font-size: 14px !important;
 }
 .blog-form-wrapper.create-listing .blog-form-heading {
-    margin-top: 30px;
+    margin-top: 0px;
 }
 
 
@@ -763,6 +764,11 @@ ul.top-social-sec{ text-align: center;}
     .sec-title {
     font-size: 18px !important;
 }
+    .sec-title.blog-header {
+    font-size: 18px !important;
+    display: block;
+    text-align: center;
+}
    
 section.yauzer-blog-sec.dr-find-sec h3 span{
    display: inline-block !important;font-size: 20px;
@@ -780,7 +786,7 @@ section.yauzer-blog-sec.dr-find-sec h3 span{
     .heading-text hr{
         display: none;
     }
-    .business-sec .heading-text h1 {
+    .business-sec .heading-text h2 {
         
     margin-bottom: 10px;
 }
@@ -980,6 +986,8 @@ form#register_form {
         border: 1px solid #464646;
 }
 /***********/
+.cstm-blog-title {
+    font-size: 18px;
 }
 
 
@@ -1236,6 +1244,8 @@ p.business-timing span {
     padding-bottom: 15px;
     text-align: center;
 }
+/*21-05-2018*/
+.blog-form-wrapper.create-listing.list-new{margin-top: 0;}
 }
 @media (max-width:479px) {
 /*****180402*****/
@@ -1243,6 +1253,7 @@ p.business-timing span {
 .profile-content .media .media-body{ width: 100%;}
 .profile .col-md-3,.profile .col-md-9{padding: 0px;}
 ul.user-login li ul.dropdown-menu{left: -80%;}
+.blog-title h4.date{font-size: 12px;}
 
 }
 @media (max-width:400px) {
@@ -1303,6 +1314,7 @@ ul.user-login li ul.dropdown-menu{left: -80%;}
     height: 60px;
 }
 .banner-search-form h1{font-size:16px;}
+.basic-button-container .read-btn{width:100%; padding: 5px 0;}
 }
 @media (max-width:375px){
    
@@ -1314,6 +1326,17 @@ ul.user-login li ul.dropdown-menu{left: -80%;}
     header.dr-header.sticky nav.navbar .collapse.in, header.dr-header.sticky nav.navbar .collapsing {
     top: 98px;
 }
+/*21-05-2018*/
+.form-group.location-box input {
+    padding: 0 30px 0 15px;
+}
+button#shuffleBusiness.search-button-1{
+    right: 4px;
+    top: 42px;
+}
+
+.blog-form-container .form-input{font-size: 13px;}
+/*************/
 }
 @media (max-width:370px){
  ul.user-login li ul.dropdown-menu{left: -103%;} 

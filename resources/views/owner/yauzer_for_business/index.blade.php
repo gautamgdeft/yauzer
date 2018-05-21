@@ -30,7 +30,7 @@
             <div class="col-md-6 col-sm-6">
               <div class="form-group">
               <label for="headline">Business Name<span> *</span></label>
-              <select name="business_id" class="form-control form-input business_select chosen-select" id="business_select" tabindex="2" required>
+              <select name="business_id" class="form-control form-input" id="business_select" tabindex="2" required>
                  <option value="" disabled selected>Claim or Add Your Business</option>
                 @if(sizeof($businesses))
                 @foreach($businesses as $loopingBusiness)
@@ -50,9 +50,9 @@
             </div>            
 
             <div class="col-md-6 col-sm-6 hide" id="category">
-              <div class="form-group new-selectbox">
+              <div class="form-group">
               <label for="headline">Business Category<span> *</span></label>
-              <select name="business_category" class="form-control form-input selectpicker" id="business_category" required>
+              <select name="business_category" class="form-control form-input" id="business_category" tabindex="2" required>
                 @if(sizeof($business_categories))
                  <option value="" disabled selected>Choose Business Category</option>
                 @foreach($business_categories as $loopingCategory)
@@ -139,5 +139,20 @@
 
 
 @section('custom_scripts')
+
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('#business_select').select2({
+        placeholder: 'Choose Business you want to yauzer'
+      });      
+      $('#business_category').select2({
+        width: "100%",
+        placeholder: 'Choose Business Category'
+      });
+  });
+  </script>
   <script src="{{ asset('js/owner/owner.js') }}"></script>
+
 @endsection

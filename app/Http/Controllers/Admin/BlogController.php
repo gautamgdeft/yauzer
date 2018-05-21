@@ -337,8 +337,8 @@ class BlogController extends Controller
     {
        //Validating-Category-Data
            $validatedData = $request->validate([
-          'title'         => 'required|string|max:50',
-          'metatitle'     => 'required|string|max:50',
+          'title'         => 'required|string',
+          'metatitle'     => 'required|string',
           'metakeywords'  => 'required',
           'metadescription'     => 'required',
           'description'   => 'required',
@@ -380,8 +380,8 @@ class BlogController extends Controller
 
        //Validating-Category-Data
            $validatedData = $request->validate([
-          'title'         => 'required|string|max:50',
-          'metatitle'     => 'required|string|max:50',
+          'title'         => 'required|string',
+          'metatitle'     => 'required|string',
           'metakeywords'  => 'required',
           'metadescription'     => 'required',
           'description'   => 'required',

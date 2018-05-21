@@ -647,13 +647,13 @@ public function update_home_cms(Request $request)
 {
    $sitecms = SiteCms::where('slug', 'home')->first();
    $sitecms->update($request->all());
-   Session::flash('success', 'FAQ has been updated.');
+   Session::flash('success', 'Home page CMS has been updated successfully.');
    return redirect()->route('admin.sitecms');  
 }
 
 public function update_business_image(Request $request)
 {
-   $sitecms = SiteCms::where('slug', 'business')->first();
+           $sitecms = SiteCms::where('slug', 'business')->first();
 
          //Saving Business Picture Avatar
            if($request->hasFile('default_bg_image'))
@@ -668,9 +668,25 @@ public function update_business_image(Request $request)
 
               //Using Helper/helpers.php
               uploadBusinessBackgroundImg($avatar, $sitecms);
+            }         
+
+           //Saving Business Picture Cominf Soon Avatar
+           if($request->hasFile('picture_coming_soon'))
+            {   
+
+              $picture_coming_soon = public_path("uploads/siteCMSAvatars/{$sitecms->picture_coming_soon}"); // get previous image from folder
+
+              if (File::exists($picture_coming_soon)) { // unlink or remove previous image from folder
+                  unlink($picture_coming_soon);
+              }   
+
+              $avatar = $request->file('picture_coming_soon');
+
+              //Using Helper/helpers.php
+              uploadBusinessComingsoon($avatar, $sitecms);
             }  
 
-            Session::flash('success', 'Owner has been updated.');
+            Session::flash('success', 'Business Page CMS has been updated successfully.');
             return redirect()->route('admin.sitecms');              
 }
 
@@ -708,7 +724,7 @@ public function update_log_images(Request $request)
               uploadLoginBackgroundImg($avatar2, $sitecms);
             }
 
-            Session::flash('success', 'Owner has been updated.');
+            Session::flash('success', 'Log In & Sign Up CMS has been updated successsfully');
             return redirect()->route('admin.sitecms');   
 }
 
