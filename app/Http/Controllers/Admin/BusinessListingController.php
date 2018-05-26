@@ -19,6 +19,7 @@ use App\Speciality;
 use App\InterestedBusiness;
 use App\BusinessInfo;
 use App\BusinessMoreInfo;
+use App\Pricing;
 use Image;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Validator;
@@ -44,7 +45,7 @@ class BusinessListingController extends Controller
            if($search_parameter != "")
            {
 
-            $filterBusiness = BusinessListing::where ( 'name', 'LIKE', '%' . $search_parameter . '%' )->paginate (10)->setPath ( '' );
+            $filterBusiness = BusinessListing::select('business_listings.*','business_listings.name as businessname')->where ( 'business_listings.name', 'LIKE', '%' . $search_parameter . '%' )->withCount('yauzers')->sortable()->paginate (50)->setPath ( '' );
             $pagination = $filterBusiness->appends ( array (
                   'search_parameter' => $request->search_parameter 
               ) );
@@ -54,12 +55,27 @@ class BusinessListingController extends Controller
            }
 
             return view ( 'admin.business_listing.listing' )->withMessage ( 'No Details found. Try to search again !' );
-    }      
+    }   
+
+    #Business-Search-Between-Dates
+    public function search_by_date_business(Request $request)
+    {
+        $filterBusiness = BusinessListing::select('business_listings.*','business_listings.name as businessname')->whereBetween('business_listings.created_at', [$request->start, $request->end])->withCount('yauzers')->sortable()->paginate (50)->setPath ( '' );
+        $pagination = $filterBusiness->appends ( array (
+              'start' => $request->start,
+              'end'   => $request->end
+          ) );
+        if (count ( $filterBusiness ) > 0) {
+         return view ( 'admin.business_listing.listing' )->withFilter ( $filterBusiness )->withStart ( $request->start )->withEnd( $request->end );
+        }else{
+         return view ( 'admin.business_listing.listing' )->withError ( 'No Details found. Try to search again !' );
+        }      
+    }   
 
     #Business-Listing-Function
     public function business_listing()
     {
-    	$business_listing = BusinessListing::orderBy('id', 'desc')->where('premium_status', false)->paginate(10);
+    	$business_listing = BusinessListing::withCount('yauzers')->sortable()->orderBy('id', 'desc')->where('premium_status', false)->paginate(50);
       return view('admin.business_listing.listing', ['business_listing' => $business_listing]);
     }
 
@@ -267,11 +283,12 @@ class BusinessListingController extends Controller
 
     public function search_premium(Request $request)
     {
+           $plans = Pricing::where('type', 'price')->pluck('yauzer');
            $search_parameter = $request->search_parameter;
            if($search_parameter != "")
            {
 
-            $filterBusiness = BusinessListing::where ( 'name', 'LIKE', '%' . $search_parameter . '%' )->where('premium_status', true)->has('yauzers', '>=' , 15)->with('yauzers')->paginate (10)->setPath ( '' );
+            $filterBusiness = BusinessListing::where ( 'business_listings.name', 'LIKE', '%' . $search_parameter . '%' )->has('yauzers', '>=' , $plans[0])->with('yauzers')->withCount('yauzers')->sortable()->paginate (50)->setPath ( '' );
 
             $pagination = $filterBusiness->appends ( array (
                   'search_parameter' => $request->search_parameter 
@@ -285,9 +302,25 @@ class BusinessListingController extends Controller
             return view ( 'admin.business_listing_premium.listing' )->withDetails ( $filterBusiness )->withMessage ( 'No Details found. Try to search again !' );      
     }
 
+    public function search_premium_by_date(Request $request)
+    {
+        $plans = Pricing::where('type', 'price')->pluck('yauzer');
+        $filterBusiness = BusinessListing::select('business_listings.*','business_listings.name as businessname')->whereBetween('business_listings.created_at', [$request->start, $request->end])->has('yauzers', '>=' , $plans[0])->with('yauzers')->withCount('yauzers')->sortable()->paginate (50)->setPath ( '' );
+        $pagination = $filterBusiness->appends ( array (
+              'start' => $request->start,
+              'end'   => $request->end
+          ) );
+        if (count ( $filterBusiness ) > 0) {
+         return view ( 'admin.business_listing_premium.listing' )->withFilter ( $filterBusiness )->withStart ( $request->start )->withEnd( $request->end );
+        }else{
+         return view ( 'admin.business_listing_premium.listing' )->withError ( 'No Details found. Try to search again !' );
+        }      
+    }
+
     public function business_listing_premium()
     {
-      $business = BusinessListing::has('yauzers', '>=' , 1)->with('yauzers')->paginate(10);
+      $plans = Pricing::where('type', 'price')->pluck('yauzer');
+      $business = BusinessListing::has('yauzers', '>=' , $plans[0])->withCount('yauzers')->with('yauzers')->sortable()->paginate(50);
       $details = NULL;
        return view('admin.business_listing_premium.listing', compact('business', 'details'));
     }

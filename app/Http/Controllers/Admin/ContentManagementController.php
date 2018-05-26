@@ -640,7 +640,8 @@ public function sitecms()
  $homecms = SiteCms::where('slug', 'home')->first();
  $default_bg_image = SiteCms::where('slug', 'business')->first(); 
  $login_signup_img = SiteCms::where('slug', 'signup-login')->first(); 
- return view('admin.content_management.site_cms.index', compact('homecms', 'default_bg_image', 'login_signup_img'));   
+ $result_cms = SiteCms::where('slug', 'result-page')->first(); 
+ return view('admin.content_management.site_cms.index', compact('homecms', 'default_bg_image', 'login_signup_img','result_cms'));   
 }
 
 public function update_home_cms(Request $request)
@@ -726,6 +727,32 @@ public function update_log_images(Request $request)
 
             Session::flash('success', 'Log In & Sign Up CMS has been updated successsfully');
             return redirect()->route('admin.sitecms');   
+}
+
+public function update_result_section(Request $request)
+{
+   $resultcms = SiteCms::where('slug', 'result-page')->first();
+
+    //Saving Business Picture Avatar
+     if($request->hasFile('default_bg_image'))
+      {   
+
+        $default_bg_image = public_path("uploads/siteCMSAvatars/{$resultcms->default_bg_image}"); // get previous image from folder
+        if (File::exists($default_bg_image)) { // unlink or remove previous image from folder
+            unlink($default_bg_image);
+        }   
+        
+        $resultcms->update($request->all());
+        $avatar = $request->file('default_bg_image');
+        //Using Helper/helpers.php
+        uploadResultBackgroundImg($avatar, $resultcms);
+      }else{
+        $resultcms->update($request->all());
+      }    
+        
+          
+      Session::flash('success', 'Result Page Cms has been updated successfully');
+      return redirect()->route('admin.sitecms');         
 }
 
 

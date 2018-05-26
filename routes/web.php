@@ -36,6 +36,7 @@ Route::prefix('admin')->group(function()
 
 	//Customer-Management-Routes
     Route::any( '/search-customer', 'Admin\CustomerController@search')->name('customer.search');
+    Route::any( '/search-by-date-customer', 'Admin\CustomerController@search_by_date_customer')->name('customer.search_by_date_customer');    
     Route::get('/users', 'Admin\CustomerController@users')->name('admin.users');		
     Route::get('/new-user', 'Admin\CustomerController@new_user')->name('admin.show_user_form');		
     Route::post('/new-user', 'Admin\CustomerController@store_user')->name('admin.store_user');
@@ -48,6 +49,7 @@ Route::prefix('admin')->group(function()
 
     //Owner-Management-Routes
     Route::any( '/search-owner', 'Admin\OwnerController@search')->name('owner.search');
+    Route::any( '/search-by-date-owner', 'Admin\OwnerController@search_by_date_owner')->name('owner.search_by_date_owner'); 
     Route::get('/owners', 'Admin\OwnerController@owners')->name('admin.owners');
 	Route::get('/new-owner', 'Admin\OwnerController@new_owner')->name('admin.show_owner_form');		
     Route::post('/new-owner', 'Admin\OwnerController@store_owner')->name('admin.store_owner');
@@ -85,6 +87,7 @@ Route::prefix('admin')->group(function()
 
     //Business-Listings-Routes
     Route::any( '/search-business', 'Admin\BusinessListingController@search')->name('business.search');
+    Route::any( '/search-by-date-business', 'Admin\BusinessListingController@search_by_date_business')->name('business.search_by_date_business');     
     Route::post('/get-business-subcategory', 'Admin\BusinessListingController@get_subcategory')->name('admin.get_subcategory');
 	Route::get('/business-listings', 'Admin\BusinessListingController@business_listing')->name('admin.business_listing');
     Route::post('/delete-business', 'Admin\BusinessListingController@destroy_business')->name('admin.destroy_business');	
@@ -98,6 +101,7 @@ Route::prefix('admin')->group(function()
 
     #Business-Listings-Premium-Routes
     Route::any( '/search-premium-business', 'Admin\BusinessListingController@search_premium')->name('premium_business.search');
+    Route::any( '/search-premium-business-date', 'Admin\BusinessListingController@search_premium_by_date')->name('premium_business.search_by_date');
     Route::get('/business-listings-premium', 'Admin\BusinessListingController@business_listing_premium')->name('admin.business_listing_premium');
     Route::post('/send-business-premium-email', 'Admin\BusinessListingController@business_premium_email_owner')->name('admin.business_premium_email_owner');
     Route::get('/edit-premium-business/{slug}', 'Admin\BusinessListingController@edit_premium_business')->name('admin.show_edit_premium_business_form'); 
@@ -229,6 +233,10 @@ Route::prefix('admin')->group(function()
     Route::get('/business-premium-listing-export', 'Admin\ReportManagementController@premium_business_export')->name('admin.premium_business_export');
     Route::get('/yauzer-export', 'Admin\ReportManagementController@yauzer_export')->name('admin.yauzer_export');
 
+    //Pricing-Management-Routes
+    Route::get('/pricing-management', 'Admin\PricingManagementController@show_page')->name('admin.pricing_management');    
+    Route::post('/store-plans', 'Admin\PricingManagementController@store_plans')->name('admin.store_plans');    
+
     //Blog-Management
 
      //Blog-Categories-Routes
@@ -274,7 +282,8 @@ Route::prefix('admin')->group(function()
     Route::get('/site-cms', 'Admin\ContentManagementController@sitecms')->name('admin.sitecms');  
     Route::post('/update-home-cms', 'Admin\ContentManagementController@update_home_cms')->name('admin.update_home_cms');  
     Route::post('/update-business-default', 'Admin\ContentManagementController@update_business_image')->name('admin.update_business_image');
-    Route::post('/update-logs-images', 'Admin\ContentManagementController@update_log_images')->name('admin.update_log_images');        
+    Route::post('/update-logs-images', 'Admin\ContentManagementController@update_log_images')->name('admin.update_log_images'); 
+    Route::post('/update-result-section', 'Admin\ContentManagementController@update_result_section')->name('admin.update_result_section');        
 });
 
 
@@ -392,7 +401,10 @@ Route::group(['prefix' => 'owner','middleware' => ['auth', 'owner']], function (
 
   #Owner-Yauzers-Routes
    Route::get('/biz-yauzers', 'Owner\BusinessYauzerController@index')->name('owner.yauzers');    
-   Route::post('/store-yauzer', 'Owner\BusinessYauzerController@respondYauzer')->name('owner.respond_yauzer');    
+   Route::post('/store-yauzer', 'Owner\BusinessYauzerController@respondYauzer')->name('owner.respond_yauzer');
+
+  #Owner-Market-Get-More-Yauzers-Section-Routes
+  Route::get('/market-it-get-more-yauzers', 'Owner\BusinessController@market_get_yauzers')->name('owner.market_get_yauzers');         
 
   #Owner-Logout-Route
    Route::get('/logout', 'Owner\ProfileController@logout')->name('owner.logout');

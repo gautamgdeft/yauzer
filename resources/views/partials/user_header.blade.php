@@ -20,10 +20,10 @@
             </div>
             <div class="col-sm-4 col-xs-12 pull-left">
                <ul class="top-social-sec">
-                  <li><a href="javascript:;"> <i class="fa fa-facebook" aria-hidden="true"></i> </a> </li>
-                  <li><a href="javascript:;"> <i class="fa fa-google-plus" aria-hidden="true"></i> </a> </li>
-                  <li><a href="javascript:;"> <i class="fa fa-twitter" aria-hidden="true"></i> </a> </li>
-                  <li><a href="javascript:;"> <i class="fa fa-instagram" aria-hidden="true"></i> </a> </li>
+                  <li><a href="javascript:;"> {{-- <i class="fa fa-facebook" aria-hidden="true"></i> --}} </a> </li>
+                  <li><a href="javascript:;"> {{-- <i class="fa fa-google-plus" aria-hidden="true"></i> --}} </a> </li>
+                  <li><a href="javascript:;"> {{-- <i class="fa fa-twitter" aria-hidden="true"></i> --}} </a> </li>
+                  <li><a href="javascript:;"> {{-- <i class="fa fa-instagram" aria-hidden="true"></i> --}} </a> </li>
                </ul>
             </div>
             <div class="col-sm-4 col-xs-12 pull-right login-sec">

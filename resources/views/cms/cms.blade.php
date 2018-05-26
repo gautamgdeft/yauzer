@@ -7,7 +7,6 @@
 <div class="container">
 <div class="youzer-details-container">
 <div class="youzer-details-heading">
-<h2>&nbsp;</h2>
 
 
  

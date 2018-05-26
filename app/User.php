@@ -7,12 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
+use Kyslik\ColumnSortable\Sortable;
 
 class User extends Authenticatable
 {
     use Notifiable;
     use Sluggable;
     use SluggableScopeHelpers;
+    use Sortable;
 
     /**
      * The attributes that are mass assignable.
@@ -32,6 +34,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public $sortable = ['name', 'email', 'created_at'];
+
 
     public function sluggable()
     {
@@ -40,7 +44,20 @@ class User extends Authenticatable
                 'source' => 'name'
             ]
         ];
+    } 
+
+    public function yauzerSortable($query, $direction)
+    {
+        return $query->leftjoin('yauzers', 'users.id', '=', 'yauzers.user_id')
+                    ->orderBy('yauzers_count', $direction)->distinct('yauzer.user_id');
     }    
+
+    public function businessnameSortable($query, $direction)
+    {
+        return $query->leftjoin('business_listings', 'users.id', '=', 'business_listings.user_id')
+                    ->orderBy('business_listings.name', $direction);
+    }  
+
      #Relation with Business
      public function business()
      {

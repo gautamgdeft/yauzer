@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Validator;
 use App\Yauzer;
+use App\Pricing;
 
 class DashboardController extends Controller
 {
@@ -28,8 +29,9 @@ class DashboardController extends Controller
 
     public function unautorize_access()
     {
-        if(Auth::user()->business->yauzers->count() < 15){
-        return redirect()->route('owner.dashboard')->withError('Business must contain maximum 15 yauzers and payment informaton to access all these options');
+        $plans = Pricing::where('type', 'price')->pluck('yauzer');
+        if(Auth::user()->business->yauzers->count() < $plans[0]){
+        return redirect()->route('owner.dashboard')->withError('Business must contain maximum '.$plans[0].' yauzers and payment informaton to access all these options');
         }else{
 
         return redirect()->route('owner.payment_information')->withError('Enter Payment information to access this option');            

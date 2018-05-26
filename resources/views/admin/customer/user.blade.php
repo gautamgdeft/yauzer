@@ -28,7 +28,8 @@
          <div class="box">
             <div class="box-header">
                <a href="{{ route('admin.show_user_form') }}" class="btn bg-olive btn-flat">Add New User</a>
-              <div class="box-tools">
+               <a id="export" data-export="export" class="btn bg-olive btn-flat"><i class="fa fa-cloud-download"></i> Export Users</a> 
+              <div class="box-tools src-filter">
                   <form action="{{ route('customer.search') }}" method="POST" role="search">
                     {{ csrf_field() }}
                     <div class="input-group">
@@ -42,6 +43,25 @@
                   @if(isset($details))
                    <a href="{{ route('admin.users') }}" class="btn btn-danger btn-flat search-filter">Clear Filter</a>
                   @endif
+
+                 <form action="{{ route('customer.search_by_date_customer') }}" id="filter_by_date" method="POST" role="search">
+                    {{ csrf_field() }}
+                  <div class="input-group date-group">
+                        <div class="start">
+                        <label>Start-Date</label>
+                        <input type="text" id="start" name="start" class="form-control input-sm pull-right" style="width: 150px;" value="@if(isset($filter)) {{ $start }} @endif" placeholder="Start Date" required />
+                        </div>
+
+                        <div class="end">
+                        <label>End-Date</label>
+                        <input type="text" id="end" name="end" class="form-control input-sm pull-right" style="width: 150px;" value="@if(isset($filter)) {{ $end }} @endif" placeholder="End Date" required />
+                        </div>
+
+                        <div class="input-group-btn">
+                            <button type="submit" id="filter_by_date_btn" class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                        </div>              
+                  </div> 
+                  </form>                  
               </div>               
             </div>
             <!-- /.box-header -->
@@ -49,14 +69,15 @@
             {{-- All Customer Result Display --}}
             @if(isset($allusers))
             <div class="box-body table-responsive no-padding">
-               <table class="table table-hover table-bordered">
+               <table class="table table-hover table-bordered" id="export_table">
                      <tr>
-                        <th>Name</th>
-                        <th>Email</th>
+                        <th>@sortablelink('name')</th>
+                        <th>@sortablelink('email')</th>
                         <th>Image</th>
                         <th>User Status</th>
                         {{-- <th>Registration Status</th> --}}
-                        <th>Yauzers</th>
+                        <th>@sortablelink('yauzer')</th>
+                        <th>@sortablelink('created_at', 'Created At')</th>
                         <th>Action</th>
                      </tr>
                   
@@ -68,9 +89,9 @@
                         <td><img id="image_src" class="img-circle" src="/uploads/avatars/{{ $loopingUsers->avatar }}" style="height: 45px; width: 45px;"></td>
 
                         <td>
- 							            <button id="activate_user_{{ $loopingUsers->id }}" class="btn btn-danger btn-flat activate_user @if($loopingUsers->login_status == '1') hide @endif" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Click to Activate User">Inactive</button>
+ 							            <button id="activate_user_{{ $loopingUsers->id }}" class="btn btn-danger btn-flat activate_user @if($loopingUsers->login_status == '1') hide @else ok @endif" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Click to Activate User">Inactive</button>
 
-	                        <button id="inactivate_user_{{ $loopingUsers->id }}" class="btn btn-success btn-flat activate_user @if($loopingUsers->login_status == '0') hide @endif" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Click to Inactivate User">Active</button>                        	
+	                        <button id="inactivate_user_{{ $loopingUsers->id }}" class="btn btn-success btn-flat activate_user @if($loopingUsers->login_status == '0') hide @else ok @endif" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Click to Inactivate User">Active</button>                        	
                         </td>
 
 {{--                         <td>
@@ -80,9 +101,11 @@
                         </td> --}}
 
                         <td>
-                             {{ $loopingUsers->yauzers->count() }}
-                        </td>  
+                             {{ $loopingUsers->yauzers_count }}
+                        </td> 
 
+                        <td> {{ Carbon\Carbon::parse($loopingUsers->created_at)->format('m/d/Y') }} </td>
+                             
                         <td><button class="btn btn-danger btn-flat delete_user" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Delete User"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                         <a href="{{ route('admin.show_edit_form',['slug' => $loopingUsers->slug]) }}" class="btn btn-warning btn-flat" data-toggle="tooltip" title="Edit User"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
              			      <a href="{{ route('admin.show_customer',['slug' => $loopingUsers->slug]) }}" class="btn btn-info btn-flat" data-toggle="tooltip" title="View User"><i class="fa fa-eye" aria-hidden="true"></i></a>
@@ -104,16 +127,18 @@
             @endif               
 
             {{-- Searching Result Customer Display --}}
-            @if(isset($details))
+            @if(isset($details) && !isset($filter))
             <div class="box-body table-responsive no-padding">
               <p> The Search results for your query <b class="cstm-bold"> {{ $query }} </b> are :</p>
-               <table class="table table-hover table-bordered">
+               <table class="table table-hover table-bordered" id="export_table">
                      <tr>
-                        <th>Name</th>
-                        <th>Email</th>
+                        <th>@sortablelink('name')</th>
+                        <th>@sortablelink('email')</th>
                         <th>Image</th>
                         <th>User Status</th>
-                        <th>Registration Status</th>
+                        <th>@sortablelink('yauzer')</th>
+                        {{-- <th>Registration Status</th> --}}
+                        <th>@sortablelink('created_at', 'Created At')</th>
                         <th>Action</th>
                      </tr>
                   
@@ -125,16 +150,22 @@
                         <td><img id="image_src" class="img-circle" src="/uploads/avatars/{{ $loopingUsers->avatar }}" style="height: 45px; width: 45px;"></td>
 
                         <td>
-                          <button id="activate_user_{{ $loopingUsers->id }}" class="btn btn-danger btn-flat activate_user @if($loopingUsers->login_status == '1') hide @endif" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Click to Activate User">Inactive</button>
+                          <button id="activate_user_{{ $loopingUsers->id }}" class="btn btn-danger btn-flat activate_user @if($loopingUsers->login_status == '1') hide @else ok @endif" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Click to Activate User">Inactive</button>
 
-                          <button id="inactivate_user_{{ $loopingUsers->id }}" class="btn btn-success btn-flat activate_user @if($loopingUsers->login_status == '0') hide @endif" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Click to Inactivate User">Active</button>                          
+                          <button id="inactivate_user_{{ $loopingUsers->id }}" class="btn btn-success btn-flat activate_user @if($loopingUsers->login_status == '0') hide @else ok @endif" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Click to Inactivate User">Active</button>                          
                         </td>
 
                         <td>
+                             {{ $loopingUsers->yauzers_count }}
+                        </td>                        
+
+{{--                         <td>
                           <button id="accept_reg_{{ $loopingUsers->id }}" class="btn btn-success btn-flat accept_reg @if($loopingUsers->registeration_status == '1') hide @endif" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Click to Accept Registration">Accept</button>
 
                           <button id="reject_reg_{{ $loopingUsers->id }}" class="btn btn-danger btn-flat accept_reg @if($loopingUsers->registeration_status == '0') hide @endif" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Click to Reject Registration">Reject</button>  
-                        </td>
+                        </td> --}}
+
+                         <td> {{ Carbon\Carbon::parse($loopingUsers->created_at)->format('m/d/Y') }} </td>
 
                         <td><button class="btn btn-danger btn-flat delete_user" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Delete User"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                         <a href="{{ route('admin.show_edit_form',['slug' => $loopingUsers->slug]) }}" class="btn btn-warning btn-flat" data-toggle="tooltip" title="Edit User"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
@@ -151,6 +182,70 @@
             <div class="box-footer clearfix">
                 <ul class="pagination pagination-sm no-margin pull-right">
                     <li>@if($details){!! $details->render() !!}@endif</li>
+                </ul>
+            </div>
+
+            @elseif(isset($message))
+            <p>{{ $message }}</p>
+            @endif             
+
+
+            {{-- Searching Result Customer Display --}}
+           @if(isset($filter) && !isset($details))
+            <div class="box-body table-responsive no-padding">
+            <p> The Search results for your query from <b class="cstm-bold"> {{ $start }} </b> to <b class="cstm-bold"> {{ $end }} </b> are :</p>
+               <table class="table table-hover table-bordered" id="export_table">
+                     <tr>
+                        <th>@sortablelink('name')</th>
+                        <th>@sortablelink('email')</th>
+                        <th>Image</th>
+                        <th>User Status</th>
+                        <th>@sortablelink('yauzer')</th>
+                        {{-- <th>Registration Status</th> --}}
+                        <th>@sortablelink('created_at', 'Created At')</th>
+                        <th>Action</th>
+                     </tr>
+                  
+                     @if(!is_null($filter))
+                     @foreach($filter as $loopingUsers)
+                     <tr class="tr_{{ $loopingUsers->id }}">
+                        <td>{{ $loopingUsers->name }}</td>
+                        <td>{{ $loopingUsers->email }}</td>
+                        <td><img id="image_src" class="img-circle" src="/uploads/avatars/{{ $loopingUsers->avatar }}" style="height: 45px; width: 45px;"></td>
+
+                        <td>
+                          <button id="activate_user_{{ $loopingUsers->id }}" class="btn btn-danger btn-flat activate_user @if($loopingUsers->login_status == '1') hide @else ok @endif" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Click to Activate User">Inactive</button>
+
+                          <button id="inactivate_user_{{ $loopingUsers->id }}" class="btn btn-success btn-flat activate_user @if($loopingUsers->login_status == '0') hide @else ok @endif" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Click to Inactivate User">Active</button>                          
+                        </td>
+
+                        <td>
+                             {{ $loopingUsers->yauzers_count }}
+                        </td>                        
+
+{{--                         <td>
+                          <button id="accept_reg_{{ $loopingUsers->id }}" class="btn btn-success btn-flat accept_reg @if($loopingUsers->registeration_status == '1') hide @endif" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Click to Accept Registration">Accept</button>
+
+                          <button id="reject_reg_{{ $loopingUsers->id }}" class="btn btn-danger btn-flat accept_reg @if($loopingUsers->registeration_status == '0') hide @endif" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Click to Reject Registration">Reject</button>  
+                        </td> --}}
+
+                         <td> {{ Carbon\Carbon::parse($loopingUsers->created_at)->format('m/d/Y') }} </td>
+
+                        <td><button class="btn btn-danger btn-flat delete_user" data-id="{{ $loopingUsers->id }}" data-toggle="tooltip" title="Delete User"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                        <a href="{{ route('admin.show_edit_form',['slug' => $loopingUsers->slug]) }}" class="btn btn-warning btn-flat" data-toggle="tooltip" title="Edit User"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                        <a href="{{ route('admin.show_customer',['slug' => $loopingUsers->slug]) }}" class="btn btn-info btn-flat" data-toggle="tooltip" title="View User"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                       </td>
+
+                     </tr>
+                     @endforeach
+                     @endif
+                                       
+               </table>             
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+                <ul class="pagination pagination-sm no-margin pull-right">
+                    <li>@if($filter){!! $filter->render() !!}@endif</li>
                 </ul>
             </div>
 
@@ -292,7 +387,29 @@ $(".activate_user").on("click", function()
 });
 
 
+//Export Functionality as CSV
+$("#export").click(function(){
+    $("#export_table").tableToCSV();
+})
+
     });    
+</script>
+ <script src="{{ asset('js/user/jquery.tabletoCSV.js') }}"></script>
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+
+<script type="text/javascript">
+    $(function(){$("#start").datepicker({
+            autoclose:!0,
+            format:"yyyy-mm-dd",
+            todayHighlight: true
+        }),
+        $("#end").datepicker({
+            autoclose:!0,
+            format:"yyyy-mm-dd",
+            todayHighlight: true
+        })
+    });   
 </script>
 @endsection
 

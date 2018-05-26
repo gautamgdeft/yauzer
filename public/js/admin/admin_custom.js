@@ -22,8 +22,12 @@
      readURLLogin(this);
     });	  
     $("#picture_coming_soon").change(function () 
+    {
+     readURLSoon(this);
+    });    
+    $("#result_bg_image").change(function () 
 	  {
-	   readURLSoon(this);
+	   readResultImg(this);
 	  });
 
     });
@@ -121,6 +125,21 @@ function readURLSoon(input) {
 
         $('#picture_coming_soon').removeClass('validate_error');
         $("#picture_coming_soon").next('label').remove();
+    }
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+function readResultImg(input) {
+
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $('#image_result').css('display', 'block');
+        $('#image_result').attr('src', e.target.result);
+
+        $('#result_bg_image').removeClass('validate_error');
+        $("#result_bg_image").next('label').remove();
     }
     reader.readAsDataURL(input.files[0]);
   }

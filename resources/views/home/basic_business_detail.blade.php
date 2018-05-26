@@ -12,15 +12,15 @@
          <div class="row">
             <div class="col-sm-6">
                <div id="profile-detail" class="owl-carousel owl-theme">
-                  @if(@sizeof($businessDetail->business_pictures))
+{{--                   @if(@sizeof($businessDetail->business_pictures))
                   @foreach($businessDetail->business_pictures as $loopingPictures)
                   <div class="item"><img src="/uploads/businessAvatars/{{ $loopingPictures->avatar }}"></div>
                   @endforeach
-                  @else
+                  @else --}}
                   <div class="item no-picutre"><img src="{{ asset('uploads/siteCMSAvatars/'.$businessCMSdata->picture_coming_soon) }}"></div>
-                  @endif
+{{--                   @endif --}}
                </div>
-               <div class="addresswrapper @if(!@sizeof($businessDetail->business_pictures)) no-picture-content @endif">                  
+               <div class="addresswrapper no-picture-content ">                  
                   <h4>{{ $businessDetail->name }}</h4>
                   <p>{{ $businessDetail->address }}<br/>{{ $businessDetail->city }}, {{ $businessDetail->state }} {{ $businessDetail->zipcode }}</p>
                   <p><span>Phone:</span> <a href="tele:{{ $businessDetail->phone_number }}">{{ $businessDetail->phone_number }}</a>

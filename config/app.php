@@ -169,7 +169,8 @@ return [
         Geocoder\Laravel\Providers\GeocoderService::class,
         Chencha\Share\ShareServiceProvider::class,
         Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,        
+        Intervention\Image\ImageServiceProvider::class,
+        Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,        
 
 
         /*

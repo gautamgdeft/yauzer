@@ -5,11 +5,13 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
+use Kyslik\ColumnSortable\Sortable;
 
 class BusinessListing extends Model
 {
     use Sluggable;
     use SluggableScopeHelpers;
+    use Sortable;
 
     protected $fillable = ['name', 'address', 'city', 'state', 'zipcode', 'country', 'phone_number', 'avatar', 'website', 'latitude', 'longitude', 'user_id', 'added_by', 'email', 'business_category', 'business_subcategory', 'love', 'status'];
 
@@ -17,10 +19,30 @@ class BusinessListing extends Model
         'latitude', 'longitude',
     ];    
 
+    public $sortable = ['name', 'email', 'created_at'];
+
+    public function yauzerSortable($query, $direction)
+    {
+        return $query->leftjoin('yauzers', 'business_listings.id', '=', 'yauzers.business_id')
+                    ->orderBy('yauzers_count', $direction)->distinct('yauzers.business_id');
+    }  
+
+    public function ownernameSortable($query, $direction)
+    {
+        return $query->leftjoin('users', 'users.id', '=', 'business_listings.user_id')
+                    ->orderBy('users.name', $direction);
+    }    
+
+    public function coownernameSortable($query, $direction)
+    {
+        return $query->leftjoin('users', 'users.id', '=', 'business_listings.added_by')
+                    ->orderBy('users.name', $direction);
+    }    
+
     #Relation with User
     public function user()
     {
-     return $this->belongsTo('App\User');
+     return $this->belongsTo('App\User', 'user_id');
     }     
 
     #Relation with User

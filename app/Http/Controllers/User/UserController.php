@@ -28,18 +28,7 @@ class UserController extends Controller
 
     public function update_profile(Request $request)
     {
-        $user = Auth::user();
-
-    		$validatedData = $request->validate([
-            	'country'      => 'required|string',
-                'address'      => 'required|string',
-                'city'         => 'required|string',
-                'state'        => 'required|string',
-                'zipcode'      => 'required|numeric',
-                'phone_number' => 'required',
-                'avatar'       => 'unique:users'
-            ]);
-
+            $user = Auth::user();
 
             if($request->hasFile('avatar'))
             {   

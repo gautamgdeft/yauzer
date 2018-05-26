@@ -21,13 +21,19 @@
                 </a>
             </li>
 
-            <li class="{{ (\Request::route()->getName() == 'admin.users' || \Request::route()->getName() == 'admin.show_user_form' || \Request::route()->getName() == 'admin.show_edit_form' || \Request::route()->getName() == 'admin.show_customer' || \Request::route()->getName() == 'customer.search') ? 'active' : '' }}">
+            <li class="{{ (\Request::route()->getName() == 'admin.pricing_management') ? 'active' : '' }}">
+                <a href="{{ route('admin.pricing_management') }}">
+                    <i class="fa fa-money"></i> <span>Pricing Management</span>
+                </a>
+            </li>            
+
+            <li class="{{ (\Request::route()->getName() == 'admin.users' || \Request::route()->getName() == 'admin.show_user_form' || \Request::route()->getName() == 'admin.show_edit_form' || \Request::route()->getName() == 'admin.show_customer' || \Request::route()->getName() == 'customer.search' || \Request::route()->getName() == 'customer.search_by_date_customer') ? 'active' : '' }}">
                 <a href="{{ route('admin.users') }}">
                     <i class="fa fa-user"></i> <span>User Management</span>
                 </a>
             </li>
 
-            <li class="{{ (\Request::route()->getName() == 'admin.owners' || \Request::route()->getName() == 'admin.show_owner_form' || \Request::route()->getName() == 'admin.edit_owner_form' || \Request::route()->getName() == 'admin.show_owner' || \Request::route()->getName() == 'owner.search') ? 'active' : '' }}">
+            <li class="{{ (\Request::route()->getName() == 'admin.owners' || \Request::route()->getName() == 'admin.show_owner_form' || \Request::route()->getName() == 'admin.edit_owner_form' || \Request::route()->getName() == 'admin.show_owner' || \Request::route()->getName() == 'owner.search' || \Request::route()->getName() == 'owner.search_by_date_owner') ? 'active' : '' }}">
                 <a href="{{ route('admin.owners') }}">
                     <i class="fa fa-user"></i> <span>Owner Management</span>
                 </a>
@@ -39,13 +45,13 @@
                 </a>
             </li>
 
-            <li class="{{ (\Request::route()->getName() == 'admin.business_listing' || \Request::route()->getName() == 'admin.show_business' || \Request::route()->getName() == 'admin.show_edit_business_form' || \Request::route()->getName() == 'business.search') ? 'active' : '' }}">
+            <li class="{{ (\Request::route()->getName() == 'admin.business_listing' || \Request::route()->getName() == 'admin.show_business' || \Request::route()->getName() == 'admin.show_edit_business_form' || \Request::route()->getName() == 'business.search' || \Request::route()->getName() == 'business.search_by_date_business') ? 'active' : '' }}">
                 <a  href="{{ route('admin.business_listing') }}">
                     <i class="fa fa-suitcase"></i> <span>Business Listings – Basic</span>
                 </a>
             </li>             
 
-            <li class="{{ (\Request::route()->getName() == 'admin.business_listing_premium' || \Request::route()->getName() == 'admin.show_edit_premium_business_form' || \Request::route()->getName() == 'admin.new_picture_form' || \Request::route()->getName() == 'admin.show_business_description_form' || \Request::route()->getName() == 'admin.new_yauzer_form' || \Request::route()->getName() == 'admin.edit_yauzer' || \Request::route()->getName() == 'admin.new_speciality_form' || \Request::route()->getName() == 'admin.edit_speciality' || \Request::route()->getName() == 'admin.show_premium_business' || \Request::route()->getName() == 'premium_business.search' ) ? 'active' : '' }}">
+            <li class="{{ (\Request::route()->getName() == 'admin.business_listing_premium' || \Request::route()->getName() == 'admin.show_edit_premium_business_form' || \Request::route()->getName() == 'admin.new_picture_form' || \Request::route()->getName() == 'admin.show_business_description_form' || \Request::route()->getName() == 'admin.new_yauzer_form' || \Request::route()->getName() == 'admin.edit_yauzer' || \Request::route()->getName() == 'admin.new_speciality_form' || \Request::route()->getName() == 'admin.edit_speciality' || \Request::route()->getName() == 'admin.show_premium_business' || \Request::route()->getName() == 'premium_business.search' || \Request::route()->getName() == 'premium_business.search_by_date' ) ? 'active' : '' }}">
                 <a  href="{{ route('admin.business_listing_premium') }}">
                     <i class="fa fa-money"></i> <span>Business Listings – Premium</span>
                 </a>
@@ -88,7 +94,7 @@
                 <a href="{{ route('admin.report_management') }}">
                     <i class="fa fa-building-o"></i> <span>Report Management</span>
                 </a>
-            </li>
+            </li>            
                         
             <li class="treeview {{ (\Request::route()->getName() == 'admin.listingCategories' || \Request::route()->getName() == 'admin.show_blog_category_form' || \Request::route()->getName() == 'admin.edit_blog_category_form' || \Request::route()->getName() == 'admin.show_blog_category' || \Request::route()->getName() == 'blog.array_search' || \Request::route()->getName() == 'admin.listingBlogs' || \Request::route()->getName() == 'blogMain.search' || \Request::route()->getName() == 'admin.show_blog' || \Request::route()->getName() == 'admin.show_blog_form' || \Request::route()->getName() == 'admin.edit_blog_form' || \Request::route()->getName() == 'admin.listingContributors' || \Request::route()->getName() == 'admin.show_blog_contributor_form' || \Request::route()->getName() == 'admin.edit_blog_contributor_form' || \Request::route()->getName() == 'admin.show_blog_contributor' || \Request::route()->getName() == 'contributor.search') ? 'active' : '' }}">
                 <a href="#">

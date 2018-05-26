@@ -8,9 +8,13 @@
   <div class="container">
     <div class="row">
       <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8 col-xs-offset-1 col-xs-10 padding0">
-        <div class="form-outer-wrapper">
+        <div class="form-outer-wrapper {{ (\Request::route()->getName() == 'owner.login') ? 'owner_login_cstm' : '' }}">
           <div class="form-heading">
-            <h2>{{ (\Request::route()->getName() == 'owner.login') ? 'Log in for Business' : 'Login' }}</h2>
+            @if(\Request::route()->getName() == 'owner.login')
+             <img src="{{ asset('images/Market-Your-Biz.png') }}">
+             <p>Marketing is critical to your business and you cannot have too much exposure. At Yauzer for business unlock your Premium Listing.</p>
+            @endif
+            <h2>{{ (\Request::route()->getName() == 'owner.login') ? 'Sign in or Sign Up today!' : 'Login' }}</h2>
 
               <div id="msgs">
                 @if(session('success'))

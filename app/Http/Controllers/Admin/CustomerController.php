@@ -32,7 +32,7 @@ class CustomerController extends Controller
            if($search_parameter != "")
            {
 
-            $allusers = User::whereHas( 'roles', function($q){ $q->where('name', 'user'); } )->whereHas( 'roles', function($q){ $q->where('name', 'user'); } )->where ( 'name', 'LIKE', '%' . $search_parameter . '%' )->orWhere ( 'email', 'LIKE', '%' . $search_parameter . '%' )->whereHas( 'roles', function($q){ $q->where('name', 'user'); } )->paginate (10)->setPath ( '' );
+            $allusers = User::whereHas( 'roles', function($q){ $q->where('name', 'user'); } )->whereHas( 'roles', function($q){ $q->where('name', 'user'); } )->where ( 'name', 'LIKE', '%' . $search_parameter . '%' )->orWhere ( 'email', 'LIKE', '%' . $search_parameter . '%' )->whereHas( 'roles', function($q){ $q->where('name', 'user'); } )->withCount('yauzers')->sortable()->paginate (50)->setPath ( '' );
             $pagination = $allusers->appends ( array (
                   'search_parameter' => $request->search_parameter 
               ) );
@@ -44,9 +44,26 @@ class CustomerController extends Controller
             return view ( 'admin.customer.user' )->withMessage ( 'No Details found. Try to search again !' );
     }
 
+    public function search_by_date_customer(Request $request)
+    {
+        $allusers = User::whereBetween('users.created_at', [$request->start, $request->end])->whereHas( 'roles', function($q){ $q->where('name', 'user'); } )->withCount('yauzers')->sortable()->paginate (50)->setPath ( '' );
+        $pagination = $allusers->appends ( array (
+              'start' => $request->start,
+              'end'   => $request->end
+          ) );
+        if (count ( $allusers ) > 0) {
+         return view ( 'admin.customer.user' )->withFilter ( $allusers )->withStart ( $request->start )->withEnd( $request->end );
+        }else{
+         return view ( 'admin.customer.user' )->withError ( 'No Details found. Try to search again !' );
+        }
+
+
+    }       
+
     public function users()
     {
-    	$users = User::whereHas( 'roles', function($q){ $q->where('name', 'user'); } )->orderBy('id', 'desc')->paginate(10);
+    	$users = User::whereHas( 'roles', function($q){ $q->where('name', 'user'); } )->withCount('yauzers')->sortable()->orderBy('id', 'desc')->paginate(50);
+
     	return view('admin.customer.user', ['allusers' => $users]);
     }
 

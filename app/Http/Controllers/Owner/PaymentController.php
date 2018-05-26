@@ -12,6 +12,7 @@ use App\BusinessListing;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Session;
+use App\Pricing;
  
 
 class PaymentController extends Controller

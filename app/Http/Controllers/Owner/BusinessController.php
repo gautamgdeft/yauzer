@@ -165,5 +165,10 @@ class BusinessController extends Controller
        
        }
     
+    }
+
+    public function market_get_yauzers()
+    {
+      return view('owner.market_get_yauzers.index');
     }    
 }

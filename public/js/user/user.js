@@ -228,7 +228,6 @@ rules: {
       },           
 
       "phone_number": {
-          required: true,
           phoneUS: true,
           maxlength: 20,
           minlength: 10   
@@ -302,23 +301,23 @@ rules: {
       maxlength: 25, 
   },
   "phone_number": {
-          required: true,
+          //required: true,
           phoneUS: true,
           maxlength: 20,
           minlength: 10   
   },  
   "city": {
-      required: true,
+      //required: true,
   },   
   "state": {
-      required: true,
+      //required: true,
   },   
   "zipcode": {
       alphanumeric: true,
-      required: true,
+      //required: true,
   },   
   "address": {
-      required: true,
+      //required: true,
   },  
 
   valueToBeTested: {

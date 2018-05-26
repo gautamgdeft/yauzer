@@ -27,6 +27,7 @@ use Geocoder\Laravel\Facades\Geocoder;
 use DateTime;
 use Image;
 use File;
+use App\Pricing;
 
 class BusinessController extends Controller
 {
@@ -71,6 +72,7 @@ class BusinessController extends Controller
 
     public function save_yauzer(Request $request)
     { 
+      $plans = Pricing::where('type', 'price')->pluck('yauzer');
       if($request->rating == NULL)
       {
         $request['rating'] = 0;
@@ -96,7 +98,7 @@ class BusinessController extends Controller
   	         $yauzer = new Yauzer($request->all()); 
   	         $yauzer->save();
 
-             if($yauzer->count() == '15'){
+             if($yauzer->count() == $plans[0]){
               #Premium-Business-Notification-Email-Admin
               \Mail::to('teamphp00@gmail.com')->send(new PremiumBusinessAdminEmail($yauzer->business));
              }
@@ -127,7 +129,7 @@ class BusinessController extends Controller
               $yauzer = new Yauzer($request->all()); 
     	        $yauzer->save();
 
-               if($yauzer->count() == '15'){
+               if($yauzer->count() == $plans[0]){
                 #Premium-Business-Notification-Email-Admin
                 \Mail::to('teamphp00@gmail.com')->send(new PremiumBusinessAdminEmail($yauzer->business));
                }
@@ -257,6 +259,8 @@ class BusinessController extends Controller
 
     public function search_by_category($slug)
     {
+       $businessCMSdata = SiteCms::where('slug', 'business')->first();
+       $resultcms = SiteCms::where('slug', 'result-page')->first();
        $businessCategory = BusinessCategory::findBySlugOrFail($slug);
        $location = GeoIP::getLocation();
        $circle_radius = 3959;
@@ -266,13 +270,15 @@ class BusinessController extends Controller
 
        $businesses = DB::select('SELECT * FROM (SELECT *, (' . $circle_radius . ' * acos(cos(radians(' . $lat . ')) * cos(radians(latitude)) * cos(radians(longitude) - radians(' . $lng . ')) + sin(radians(' . $lat . ')) * sin(radians(latitude)))) AS distance FROM business_listings) AS distances WHERE distance < ' . $max_distance . ' AND business_category = '.$businessCategory->id.' ORDER BY distance');
 
-       return view('home.category_search', compact('businesses', 'businessCategory', 'location'));     
+       return view('home.category_search', compact('businesses', 'businessCategory', 'location', 'resultcms', 'businessCMSdata'));     
                 
     }
 
 
     public function search_business(Request $request)
     {
+       $businessCMSdata = SiteCms::where('slug', 'business')->first();
+       $resultcms = SiteCms::where('slug', 'result-page')->first();
        $data = Geocoder::geocode($request->geo_location_terms)->all();
        $simpleAddress = $request->geo_location_terms;
        $formattedAddress = explode(',', $request->geo_location_terms);
@@ -287,7 +293,7 @@ class BusinessController extends Controller
        }else{
        $businesses = DB::select('SELECT * FROM (SELECT *, (' . $circle_radius . ' * acos(cos(radians(' . $lat . ')) * cos(radians(latitude)) * cos(radians(longitude) - radians(' . $lng . ')) + sin(radians(' . $lat . ')) * sin(radians(latitude)))) AS distance FROM business_listings) AS distances WHERE distance < ' . $max_distance . ' ORDER BY distance');        
        }
-       return view('home.main_search', compact('businesses', 'formattedAddress', 'parameter', 'simpleAddress'));                   
+       return view('home.main_search', compact('businesses', 'formattedAddress', 'parameter', 'simpleAddress', 'resultcms', 'businessCMSdata'));                   
     }
 
     public function sendBusinessDirections(Request $request)

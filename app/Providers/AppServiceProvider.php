@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Schema;
 use App\Blog;
 use App\SiteSeo;
 use App\SiteCms;
+use App\Pricing;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,6 +33,8 @@ class AppServiceProvider extends ServiceProvider
         $homeCMSdata = SiteCms::where('slug', 'home')->first();
         $loginSignImage = SiteCms::where('slug', 'signup-login')->first();
 
+        $plans = Pricing::where('type', 'price')->first();
+
         View::share('headerMenus', $headerMenus);
         View::share('footerMenus', $footerMenus);
         View::share('blogs', $blogs);
@@ -42,6 +45,7 @@ class AppServiceProvider extends ServiceProvider
         View::share('homeseoDetail', $homeseoDetail);
         View::share('homeCMSdata', $homeCMSdata);
         View::share('loginSignImage', $loginSignImage);
+        View::share('plans', $plans);
     }
 
     /**

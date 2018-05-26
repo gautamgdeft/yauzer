@@ -43,9 +43,15 @@ a.disabled {
                 </a>
             </li>               
 
-            <li class="{{ (\Request::route()->getName() == 'owner.payment_information') ? 'active' : '' }} @if(Auth::User()->business->yauzers->count() < 15) deactivated @endif">
-                <a href="{{ Auth::User()->business->yauzers->count() < 15? route('owner.unautorize_access') : route('owner.payment_information') }}">
+            <li class="{{ (\Request::route()->getName() == 'owner.payment_information') ? 'active' : '' }} @if(Auth::User()->business->yauzers->count() < $plans->yauzer) deactivated @endif">
+                <a href="{{ Auth::User()->business->yauzers->count() < $plans->yauzer? route('owner.unautorize_access') : route('owner.payment_information') }}">
                     <i class="fa fa-credit-card"></i> <span>Payment Information</span>
+                </a>
+            </li>            
+
+            <li class="{{ (\Request::route()->getName() == 'owner.market_get_yauzers') ? 'active' : '' }} @if(Auth::User()->business->yauzers->count() < $plans->yauzer) deactivated @endif">
+                <a href="{{ Auth::User()->business->yauzers->count() < $plans->yauzer? route('owner.unautorize_access') : route('owner.market_get_yauzers') }}">
+                    <i class="fa fa-envelope-o"></i> <span>Market it! Get more Yauzers</span>
                 </a>
             </li>               
              
@@ -87,7 +93,7 @@ a.disabled {
 
             <li class="{{ (\Request::route()->getName() == 'owner.discounts') ? 'active' : '' }} @if(Auth::User()->business->premium_status == false) deactivated @endif">
                 <a href="{{ (Auth::User()->business->premium_status == false)? route('owner.unautorize_access') :route('owner.discounts') }}" class="@if(Auth::User()->business->premium_status == false) deactivated @endif">
-                    <i class="fa fa-money"></i> <span>Discounts</span>
+                    <i class="fa fa-money"></i> <span>My Biz Discounts</span>
                 </a>
             </li>              
 

@@ -33,7 +33,7 @@ class OwnerController extends Controller
            $search_parameter = $request->search_parameter;
            if($search_parameter != "")
            {
-            $allusers = User::where ( 'name', 'LIKE', '%' . $search_parameter . '%' )->whereHas( 'roles', function($q){ $q->where('name', 'owner'); } )->orWhere ( 'email', 'LIKE', '%' . $search_parameter . '%' )->whereHas( 'roles', function($q){ $q->where('name', 'owner'); } )->paginate (10)->setPath ( '' );
+            $allusers = User::select('users.*','users.name as ownername')->where ( 'users.name', 'LIKE', '%' . $search_parameter . '%' )->whereHas( 'roles', function($q){ $q->where('name', 'owner'); } )->orWhere ( 'users.email', 'LIKE', '%' . $search_parameter . '%' )->whereHas( 'roles', function($q){ $q->where('users.name', 'owner'); } )->sortable()->paginate (50)->setPath ( '' );
             $pagination = $allusers->appends ( array (
                   'search_parameter' => $request->search_parameter 
               ) );
@@ -43,11 +43,27 @@ class OwnerController extends Controller
            }
 
             return view ( 'admin.owner.owner_listing' )->withMessage ( 'No Details found. Try to search again !' );
-    }    
+    }   
+
+
+    public function search_by_date_owner(Request $request)
+    {
+        $allusers = User::select('users.*','users.name as ownername')->whereBetween('users.created_at', [$request->start, $request->end])->whereHas( 'roles', function($q){ $q->where('name', 'owner'); } )->sortable()->paginate (50)->setPath ( '' );
+        $pagination = $allusers->appends ( array (
+              'start' => $request->start,
+              'end'   => $request->end
+          ) );
+        if (count ( $allusers ) > 0) {
+         return view ( 'admin.owner.owner_listing' )->withFilter ( $allusers )->withStart ( $request->start )->withEnd( $request->end );
+        }else{
+         return view ( 'admin.owner.owner_listing' )->withError ( 'No Details found. Try to search again !' );
+        }
+    } 
 
     public function owners()
     {
-      $users = User::whereHas( 'roles', function($q){ $q->where('name', 'owner'); } )->orderBy('id', 'desc')->paginate(10);
+      $users = User::select('users.*','users.name as ownername')->whereHas( 'roles', function($q){ $q->where('name', 'owner'); } )->sortable()->orderBy('users.id', 'desc')->paginate(50);
+
       return view('admin.owner.owner_listing', ['allusers' => $users]);
     }
 

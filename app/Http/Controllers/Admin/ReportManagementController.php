@@ -13,6 +13,7 @@ use Session;
 use Hash;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
+use Carbon\Carbon;
 
 
 class ReportManagementController extends Controller
@@ -42,14 +43,14 @@ class ReportManagementController extends Controller
 
         $reviews = User::whereHas( 'roles', function($q){ $q->where('name', 'user'); } )->orderBy('id', 'desc')->get();
         
-        $columns = array('UserID', 'Name', 'Email', 'City', 'State', 'Zipcode', 'Country', 'Address', 'Phone Number');
+        $columns = array('UserID', 'Name', 'Email', 'City', 'State', 'Zipcode', 'Country', 'Address', 'Phone Number', 'Created At');
 
         $file = fopen('php://output', 'w');
         fputcsv($file, $columns);
 
         foreach($reviews as $review){
 
-             fputcsv($file, array($review->id,$review->name,$review->email,$review->city,$review->state,$review->zipcode, $review->country, $review->address, $review->phone_number));
+             fputcsv($file, array($review->id,$review->name,$review->email,$review->city,$review->state,$review->zipcode, $review->country, $review->address, $review->phone_number, Carbon::parse($review->created_at)->format('m-d-Y')));
 
         }
         exit();
@@ -65,14 +66,14 @@ class ReportManagementController extends Controller
 
         $reviews = User::whereHas( 'roles', function($q){ $q->where('name', 'owner'); } )->orderBy('id', 'desc')->get();
         
-        $columns = array('UserID', 'Name', 'Email', 'City', 'State', 'Zipcode', 'Country', 'Address', 'Phone Number');
+        $columns = array('UserID', 'Name', 'Email', 'City', 'State', 'Zipcode', 'Country', 'Address', 'Phone Number' ,'Created At');
 
         $file = fopen('php://output', 'w');
         fputcsv($file, $columns);
 
         foreach($reviews as $review){
 
-             fputcsv($file, array($review->id,$review->name,$review->email,$review->city,$review->state,$review->zipcode, $review->country, $review->address, $review->phone_number));
+             fputcsv($file, array($review->id,$review->name,$review->email,$review->city,$review->state,$review->zipcode, $review->country, $review->address, $review->phone_number, Carbon::parse($review->created_at)->format('m-d-Y')));
 
         }
         exit();
@@ -87,14 +88,14 @@ class ReportManagementController extends Controller
 
         $reviews = BusinessListing::orderBy('id', 'desc')->where('premium_status', false)->get();
         
-        $columns = array('BusinessID', 'Name', 'BusinessOwner', 'Address', 'City', 'State', 'Zipcode', 'Country', 'Phone Number', 'Website', 'Description', 'Latitude', 'Longitude');
+        $columns = array('BusinessID', 'Name', 'BusinessOwner', 'Address', 'City', 'State', 'Zipcode', 'Country', 'Phone Number', 'Website', 'Description', 'Latitude', 'Longitude', 'Created At');
 
         $file = fopen('php://output', 'w');
         fputcsv($file, $columns);
 
         foreach($reviews as $review){
 
-             fputcsv($file, array($review->id,$review->name,$review->business_added_by->name,$review->address,$review->city,$review->state,$review->zipcode,$review->country,$review->phone_number,$review->website,$review->description,$review->latitude,$review->longitude));
+             fputcsv($file, array($review->id,$review->name,$review->business_added_by->name,$review->address,$review->city,$review->state,$review->zipcode,$review->country,$review->phone_number,$review->website,$review->description,$review->latitude,$review->longitude, Carbon::parse($review->created_at)->format('m-d-Y')));
 
         }
         exit();
@@ -109,14 +110,14 @@ class ReportManagementController extends Controller
 
         $reviews = BusinessListing::orderBy('id', 'desc')->where('premium_status', true)->get();
         
-        $columns = array('BusinessID', 'Name', 'BusinessOwner', 'Address', 'City', 'State', 'Zipcode', 'Country', 'Phone Number', 'Website', 'Description', 'Latitude', 'Longitude');
+        $columns = array('BusinessID', 'Name', 'BusinessOwner', 'Address', 'City', 'State', 'Zipcode', 'Country', 'Phone Number', 'Website', 'Description', 'Latitude', 'Longitude', 'Created At');
 
         $file = fopen('php://output', 'w');
         fputcsv($file, $columns);
 
         foreach($reviews as $review){
 
-             fputcsv($file, array($review->id,$review->name,$review->business_added_by->name,$review->address,$review->city,$review->state,$review->zipcode,$review->country,$review->phone_number,$review->website,$review->description,$review->latitude,$review->longitude));
+             fputcsv($file, array($review->id,$review->name,$review->business_added_by->name,$review->address,$review->city,$review->state,$review->zipcode,$review->country,$review->phone_number,$review->website,$review->description,$review->latitude,$review->longitude, Carbon::parse($review->created_at)->format('m-d-Y')));
 
         }
         exit();
@@ -132,14 +133,14 @@ class ReportManagementController extends Controller
 
         $reviews = Yauzer::orderBy('id', 'desc')->get();
        
-         $columns = array('YauzerID', 'Yauzer', 'BusinessName', 'BusinessOwner', 'User', 'Rating');
+         $columns = array('YauzerID', 'Yauzer', 'BusinessName', 'BusinessOwner', 'User', 'Rating', 'Created At');
 
          $file = fopen('php://output', 'w');
          fputcsv($file, $columns);
 
          foreach($reviews as $review){
 
-              fputcsv($file, array($review->id,$review->yauzer,$review->business->name,$review->business->business_added_by->name,$review->user->name,$review->rating));
+              fputcsv($file, array($review->id,$review->yauzer,$review->business->name,$review->business->business_added_by->name,$review->user->name,$review->rating,Carbon::parse($review->created_at)->format('m-d-Y')));
 
          }
         exit();

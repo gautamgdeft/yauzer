@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\User;
 use App\Yauzer;
 use App\BusinessListing;
+use App\Pricing;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Validator;
 use Session;
@@ -31,6 +32,7 @@ class BusinessYauzerController extends Controller
 
    public function store_yauzer(Request $request, $slug)
    {
+       $plans = Pricing::where('type', 'price')->pluck('yauzer');
        #Validating-Fields
        $validatedData = $request->validate([
             'business_id'       => 'required|numeric',
@@ -43,7 +45,7 @@ class BusinessYauzerController extends Controller
        $user = new Yauzer($request->all());
        $user->save();
 
-       if($user->count() == '15'){
+       if($user->count() == $plans[0]){
         #Premium-Business-Notification-Email-Admin
         \Mail::to('teamphp00@gmail.com')->send(new PremiumBusinessAdminEmail($yauzer->business));
        }       

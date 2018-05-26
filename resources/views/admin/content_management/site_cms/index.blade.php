@@ -59,6 +59,39 @@
                   </div>
                </form>
             </div>
+
+            <div class="box box-info">
+               <div class="box-header">
+                  <h3 class="box-title">Result Page Content</h3>
+               </div>
+               <form id="result_cms" role="form" action="{{ route('admin.update_result_section') }}" enctype="multipart/form-data" method="POST">
+                  {{ csrf_field() }}                                  
+                  <div class="box-body">
+                     <div class="form-group">
+                        <label>Default Background Image:</label>
+                        <input type="file" name="default_bg_image" class="form-control" id="result_bg_image" onchange="ValidateSingleInput(this);">
+                        <img id="image_result" src="/uploads/siteCMSAvatars/{{ $result_cms->default_bg_image }}" style="height: 45px; width: 80px;">                                            
+                     </div>
+                     <div class="form-group">
+                        <label>Image Box Content:</label>
+                        <div class="input-group">
+                           <textarea class="description-ckeditor" name="description_ckeditor" id="description-ckeditor1">{{ $result_cms->description_ckeditor }}</textarea>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label>Button Text:</label>
+                        <input type="text" name="first_section" class="form-control" value="{{ $result_cms->first_section }}">
+                     </div>
+                     <div class="form-group">
+                        <label>Button Link:</label>
+                        <input type="text" name="second_section" class="form-control" value="{{ $result_cms->second_section }}">
+                     </div>                                          
+                  </div>
+                  <div class="box-footer">
+                     <button id="result-submit-btn" type="submit" class="btn btn-primary">Update</button>
+                  </div>
+               </form>
+            </div>            
          </div>
          <!-- /.col (left) -->
          <div class="col-md-6">
@@ -122,6 +155,7 @@
 @section('custom_scripts')
 <script type="text/javascript">
       CKEDITOR.replace( 'description-ckeditor' );
+      CKEDITOR.replace( 'description-ckeditor1' );
    //Adding-Validations-On-Home-Page-CMS
    $('#home_cms').validate({
    

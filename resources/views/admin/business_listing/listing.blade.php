@@ -27,10 +27,9 @@
       <div class="col-xs-12">
          <div class="box">
             <div class="box-header">
-{{--                <a href="{{ route('admin.show_category_form') }}" class="btn bg-olive btn-flat">Add New Category</a> --}}
+                <a id="export" data-export="export" class="btn bg-olive btn-flat"><i class="fa fa-cloud-download"></i> Export Businesses</a>
 
-
-            <div class="box-tools">
+            <div class="box-tools src-filter">
                 <form action="{{ route('business.search') }}" method="POST" role="search">
                   {{ csrf_field() }}
                   <div class="input-group">
@@ -43,7 +42,26 @@
 
                @if(isset($details))
                 <a href="{{ route('admin.business_listing') }}" class="btn btn-danger btn-flat search-filter">Clear Filter</a>
-               @endif     
+               @endif    
+
+                 <form action="{{ route('business.search_by_date_business') }}" id="filter_by_date" method="POST" role="search">
+                    {{ csrf_field() }}
+                  <div class="input-group date-group">
+                        <div class="start">
+                        <label>Start-Date</label>
+                        <input type="text" id="start" name="start" class="form-control input-sm pull-right" style="width: 150px;" value="@if(isset($filter)) {{ $start }} @endif" placeholder="Start Date" required />
+                        </div>
+
+                        <div class="end">
+                        <label>End-Date</label>
+                        <input type="text" id="end" name="end" class="form-control input-sm pull-right" style="width: 150px;" value="@if(isset($filter)) {{ $end }} @endif" placeholder="End Date" required />
+                        </div>
+
+                        <div class="input-group-btn">
+                            <button type="submit" id="filter_by_date_btn" class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                        </div>              
+                  </div> 
+                  </form>                
 
             </div> 
             </div>
@@ -52,14 +70,15 @@
           {{-- All Business Result Display --}}
           @if(isset($business_listing))
           <div class="box-body table-responsive no-padding">
-            <table class="table table-hover table-bordered">
+            <table class="table table-hover table-bordered" id="export_table">
                   
                      <tr>
-                        <th>Name</th>
-                        <th>Business Owner</th>
-                        <th>Business Added By</th>
-                        <th>Email</th>
-                        <th>Yauzers</th>
+                        <th>@sortablelink('name')</th>
+                        <th>@sortablelink('ownername', 'Business Owner')</th>
+                        <th>@sortablelink('coownername', 'Business Added By')</th>
+                        <th>@sortablelink('email')</th>
+                        <th>@sortablelink('yauzer')</th>
+                        <th>@sortablelink('created_at', 'Created At')</th>
                         <th>Status</th>
                         <th>Action</th>
                      </tr>
@@ -73,10 +92,11 @@
                         <td>@if(@sizeof($loopinglistings->business_added_by)) <a data-toggle="tooltip" title="View User" href="{{ route('admin.show_owner',['slug' => $loopinglistings->business_added_by->slug]) }}">{{ $loopinglistings->business_added_by->name }}</a> @else No User @endif</td>
                         <td>{{ $loopinglistings->email }}</td>
                         <td>{{ $loopinglistings->yauzers->count() }}</td>
+                        <td>{{ Carbon\Carbon::parse($loopinglistings->created_at)->format('m/d/Y') }}</td>
                         <td>
-                          <button id="approve_business_{{ $loopinglistings->id }}" class="btn btn-danger btn-flat approve_business @if($loopinglistings->status == '1') hide @endif" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Click to Active">Inactive</button>
+                          <button id="approve_business_{{ $loopinglistings->id }}" class="btn btn-danger btn-flat approve_business @if($loopinglistings->status == '1') hide @else ok @endif" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Click to Active">Inactive</button>
 
-                          <button id="reject_business_{{ $loopinglistings->id }}" class="btn btn-success btn-flat approve_business @if($loopinglistings->status == '0') hide @endif" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Click to Inactive">Active</button>                               
+                          <button id="reject_business_{{ $loopinglistings->id }}" class="btn btn-success btn-flat approve_business @if($loopinglistings->status == '0') hide @else ok @endif" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Click to Inactive">Active</button>                               
                         </td>
                         <td>
                           <button class="btn btn-danger btn-flat delete_business" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Delete Business"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
@@ -103,16 +123,18 @@
 
 
           {{-- Searching Result Business Display --}}
-          @if(isset($details))
+          @if(isset($details) && !isset($filter))
           <div class="box-body table-responsive no-padding">
             <p> The Search results for your query <b class="cstm-bold"> {{ $query }} </b> are :</p>
-            <table class="table table-hover table-bordered">
+            <table class="table table-hover table-bordered" id="export_table">
                   
                      <tr>
-                        <th>Name</th>
-                        <th>Business Owner</th>
-                        <th>Email</th>
-                        <th>Yauzers</th>
+                        <th>@sortablelink('name')</th>
+                        <th>@sortablelink('ownername', 'Business Owner')</th>
+                        <th>@sortablelink('coownername', 'Business Added By')</th>
+                        <th>@sortablelink('email')</th>
+                        <th>@sortablelink('yauzer')</th>
+                        <th>@sortablelink('created_at', 'Created At')</th>
                         <th>Status</th>
                         <th>Action</th>
                      </tr>
@@ -122,13 +144,15 @@
                   	 @foreach($details as $loopinglistings)
                      <tr class="tr_{{ $loopinglistings->id }}">
                         <td>{{ $loopinglistings->name }}</td>
-                        <td>@if(@sizeof($loopinglistings->user)) {{ $loopinglistings->user->name }} @else Deleted User @endif</td>
+                        <td>@if(@sizeof($loopinglistings->user)) <a data-toggle="tooltip" title="View Owner" href="{{ route('admin.show_owner',['slug' => $loopinglistings->user->slug]) }}">{{ $loopinglistings->user->name }}</a> @else No Owner Yet @endif</td>
+                        <td>@if(@sizeof($loopinglistings->business_added_by)) <a data-toggle="tooltip" title="View User" href="{{ route('admin.show_owner',['slug' => $loopinglistings->business_added_by->slug]) }}">{{ $loopinglistings->business_added_by->name }}</a> @else No User @endif</td>
                         <td>{{ $loopinglistings->email }}</td>
                         <td>{{ $loopinglistings->yauzers->count() }}</td>
+                        <td>{{ Carbon\Carbon::parse($loopinglistings->created_at)->format('m/d/Y') }}</td>
                         <td>
-                          <button id="approve_business_{{ $loopinglistings->id }}" class="btn btn-success btn-flat approve_business @if($loopinglistings->status == '1') hide @endif" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Click to Active">Inactive</button>
+                          <button id="approve_business_{{ $loopinglistings->id }}" class="btn btn-success btn-flat approve_business @if($loopinglistings->status == '1') hide @else ok @endif" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Click to Active">Inactive</button>
 
-                          <button id="reject_business_{{ $loopinglistings->id }}" class="btn btn-danger btn-flat approve_business @if($loopinglistings->status == '0') hide @endif" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Click to Inactive">Active</button>                               
+                          <button id="reject_business_{{ $loopinglistings->id }}" class="btn btn-danger btn-flat approve_business @if($loopinglistings->status == '0') hide @else ok @endif" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Click to Inactive">Active</button>                               
                         </td>
                         <td>
                           <button class="btn btn-danger btn-flat delete_business" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Delete Business"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
@@ -156,6 +180,65 @@
             <p>{{ $message }}</p>
             @endif             
             <!-- /.box-body -->
+
+            {{-- Searching Result Customer Display --}}
+           @if(isset($filter) && !isset($details))
+          <div class="box-body table-responsive no-padding">
+            <p> The Search results for your query from <b class="cstm-bold"> {{ $start }} </b> to <b class="cstm-bold"> {{ $end }} </b> are :</p>
+            <table class="table table-hover table-bordered" id="export_table">
+                  
+                     <tr>
+                        <th>@sortablelink('name')</th>
+                        <th>@sortablelink('ownername', 'Business Owner')</th>
+                        <th>@sortablelink('coownername', 'Business Added By')</th>
+                        <th>@sortablelink('email')</th>
+                        <th>@sortablelink('yauzer')</th>
+                        <th>@sortablelink('created_at', 'Created At')</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                     </tr>
+                  
+                  
+                     @if(!is_null($filter))
+                     @foreach($filter as $loopinglistings)
+                     <tr class="tr_{{ $loopinglistings->id }}">
+                        <td>{{ $loopinglistings->name }}</td>
+                        <td>@if(@sizeof($loopinglistings->user)) <a data-toggle="tooltip" title="View Owner" href="{{ route('admin.show_owner',['slug' => $loopinglistings->user->slug]) }}">{{ $loopinglistings->user->name }}</a> @else No Owner Yet @endif</td>
+                        <td>@if(@sizeof($loopinglistings->business_added_by)) <a data-toggle="tooltip" title="View User" href="{{ route('admin.show_owner',['slug' => $loopinglistings->business_added_by->slug]) }}">{{ $loopinglistings->business_added_by->name }}</a> @else No User @endif</td>
+                        <td>{{ $loopinglistings->email }}</td>
+                        <td>{{ $loopinglistings->yauzers->count() }}</td>
+                        <td>{{ Carbon\Carbon::parse($loopinglistings->created_at)->format('m/d/Y') }}</td>
+                        <td>
+                          <button id="approve_business_{{ $loopinglistings->id }}" class="btn btn-success btn-flat approve_business @if($loopinglistings->status == '1') hide @else ok @endif" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Click to Active">Inactive</button>
+
+                          <button id="reject_business_{{ $loopinglistings->id }}" class="btn btn-danger btn-flat approve_business @if($loopinglistings->status == '0') hide @else ok @endif" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Click to Inactive">Active</button>                               
+                        </td>
+                        <td>
+                          <button class="btn btn-danger btn-flat delete_business" data-id="{{ $loopinglistings->id }}" data-toggle="tooltip" title="Delete Business"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                          <a href="{{ route('admin.show_edit_business_form',['slug' => $loopinglistings->slug]) }}" class="btn btn-warning btn-flat" data-toggle="tooltip" title="Edit Business"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                          {{-- <a href="{{ route('admin.show_business_hours_form',['slug' => $loopinglistings->slug]) }}" class="btn btn-warning btn-flat">Edit Hours</a> --}}
+                          <a href="{{ route('admin.show_business',['slug' => $loopinglistings->slug]) }}" class="btn btn-info btn-flat" data-toggle="tooltip" title="View Business"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                          <a href="{{ route('admin.change_biz_status',['slug' => $loopinglistings->slug]) }}" class="btn btn-info btn-flat" data-toggle="tooltip" title="Change Status"><i class="fa fa-refresh" aria-hidden="true"></i></a>                          
+                       </td>
+
+                     </tr>
+                     @endforeach
+                     @endif
+
+                  
+               </table>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+                <ul class="pagination pagination-sm no-margin pull-right">
+                    <li>@if($filter){!! $filter->render() !!}@endif</li>
+                </ul>
+            </div>
+
+            @elseif(isset($message))
+            <p>{{ $message }}</p>
+            @endif   
+
          </div>
          <!-- /.box -->
       </div>
@@ -260,7 +343,29 @@ $('.approve_business').click(function()
 
 
 
+//Export Functionality as CSV
+$("#export").click(function(){
+    $("#export_table").tableToCSV();
+})
+
     });    
+</script>
+<script src="{{ asset('js/user/jquery.tabletoCSV.js') }}"></script>
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+
+<script type="text/javascript">
+    $(function(){$("#start").datepicker({
+            autoclose:!0,
+            format:"yyyy-mm-dd",
+            todayHighlight: true
+        }),
+        $("#end").datepicker({
+            autoclose:!0,
+            format:"yyyy-mm-dd",
+            todayHighlight: true
+        })
+    });   
 </script>
 @endsection
 

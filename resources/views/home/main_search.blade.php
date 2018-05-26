@@ -110,7 +110,8 @@
                @endif
                @endforeach
                @else
-                 <p>No Premium Business Found</p>
+                 <img src="/images/Yauza-Pardon-Us.png">
+                 <p>We’re waiting for someone’s favorite for {{ $parameter }} in this {{ $formattedAddress[0] }} city. Why not Yauz yours!</p>
                @endif
 
                <div class="col-sm-12" style="float: left;">
@@ -120,6 +121,7 @@
                       @if($loopingBusiness->premium_status == false)
                      <div class="col-sm-4">
                         <figure>
+                          <img style="width:236px; height:213px;" src="{{ asset('uploads/siteCMSAvatars/'.$businessCMSdata->picture_coming_soon) }}">
                            <figcaption>
                               <div class="content">
                                  <a href="{{ route('user.business_detail',['slug' => $loopingBusiness->slug]) }}"><h3> {{ $loopingBusiness->name }}</h3></a>
@@ -149,11 +151,10 @@
          </div>
          <div class="col-md-3 col-sm-12">
             <div class="aside_sec hidden-xs">
-               <img src="{{ asset('images/side-business-listing.jpg') }}" alt=""/>
+               <img src="{{ asset('uploads/siteCMSAvatars/'.$resultcms->default_bg_image) }}" alt=""/>
                <div class="img_content">
-                  <h5>Did you ever had a business that you couldn't wait to tell it your friends?</h5>
-                  <p>Here you can share it with the world!</p>
-                  <a href="javascript:void(0)" class="learn-more">Learn More  <img src="{{ asset('images/search-btn-icon.png') }}"></a>  
+                  {!! $resultcms->description_ckeditor !!}
+                  <a href="{{ $resultcms->second_section }}" class="learn-more">{{ $resultcms->first_section }}  <img src="{{ asset('images/search-btn-icon.png') }}"></a>  
                </div>
             </div>
             <div class="aside_sec">                    
