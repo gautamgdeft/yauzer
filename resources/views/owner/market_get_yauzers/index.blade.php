@@ -36,8 +36,7 @@
                 <h3 class="box-title">Business Share Email Template</h3>
             </div><!-- /.box-header -->
             <div class="box-body">
-			   <textarea class="description-ckeditor" id="business_share_email_editor">{!! str_replace('{business_name}'  , Auth::user()->business->name, $ownerMarketITcms->first_section) !!}</textarea>
-
+         <textarea rows="10" cols="70" style="border:dashed 2px #85c226;">{{ html_entity_decode(strip_tags(str_replace('{business_name}'  , Auth::user()->business->name, $ownerMarketITcms->first_section))) }}</textarea>
             </div><!-- /.box-body -->
         </div><!-- /.box -->
     </div>    
@@ -55,7 +54,8 @@
 
             </div><!-- /.box-header -->
             <div class="box-body">
-<textarea class="description-ckeditor" id="business_social_email_editor">{!! str_replace(['{business_name}','{business_slug}']  , [Auth::user()->business->name, Auth::user()->business->slug], $ownerMarketITcms->second_section) !!}</textarea>
+          <textarea rows="10" cols="70" style="border:dashed 2px #85c226;">{!! html_entity_decode(strip_tags(str_replace(['{business_name}','{business_slug}']  , [Auth::user()->business->name, Auth::user()->business->slug], $ownerMarketITcms->second_section))) !!}</textarea>
+
             </div><!-- /.box-body -->
         </div><!-- /.box -->
     </div>
@@ -63,17 +63,4 @@
 </aside>   
 
 
-@endsection
-
-@section('custom_scripts')
- <script type="text/javascript">
-      CKEDITOR.replace( 'business_share_email_editor', {
-        extraPlugins: 'justify',
-        allowedContent: true
-      });
-      CKEDITOR.replace( 'business_social_email_editor', {
-        extraPlugins: 'justify',
-        allowedContent: true
-      });         
- </script>
 @endsection

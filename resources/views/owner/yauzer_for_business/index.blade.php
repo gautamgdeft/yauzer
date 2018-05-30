@@ -32,12 +32,12 @@
               <label for="headline">Choose or Add Business<span> *</span></label>
               <select name="business_id" class="form-control form-input" id="business_select" tabindex="2" required>
                  <option value="" disabled selected>Claim or Add Your Business</option>
+                 <option value="other">NEW BUSINESS</option>
                 @if(sizeof($businesses))
                 @foreach($businesses as $loopingBusiness)
                  <option value="{{ $loopingBusiness->id }}">{{ $loopingBusiness->name }}</option>
                 @endforeach
                 @endif
-                 <option value="other">NEW BUSINESS</option>
               </select>  
               </div>
             </div>            
@@ -117,8 +117,8 @@
 
             <div class="col-md-6 col-sm-6">
               <div class="form-group">
-              <label for="headline">Email Address<span> *</span></label>
-              <input name="email" id="email" type="text" class="form-control form-input" placeholder="Enter Email Address" disabled required>
+              <label for="headline">Email Address</label>
+              <input name="email" id="email" type="text" class="form-control form-input" placeholder="Enter Email Address" disabled>
               </div>
             </div>
 

@@ -95,7 +95,7 @@ class RegisterController extends Controller
         //Sending-Admin-New-User-Email-Registered
          \Mail::to('teamphp00@gmail.com')->send(new NewRegisterationMail($user));
 
-        return redirect('login')->with("success","We sent you an activation code. Check your email and click on the link to verify");   
+        return redirect('login')->with("link_success","We sent you an activation code. Check your email and click on the link to verify");   
 
         #$this->guard()->login($user);
         #return $this->registered($request, $user)

@@ -22,6 +22,12 @@
                 <div class="alert alert-success">
                 {{ session('success') }}
                 </div>
+                @endif                 
+
+                @if(session('link_success'))
+                <div class="alert custom-alert-success">
+                {{ session('link_success') }}
+                </div>
                 @endif               
 
                 @if(session('danger'))

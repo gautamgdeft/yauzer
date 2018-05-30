@@ -1,4 +1,4 @@
-@extends('layouts.owner')
+  @extends('layouts.owner')
 
 @section('content')
 
@@ -14,15 +14,13 @@
       </div>
       <div class="modal-body">
         <p>
-          <a target="_blank" title="Facebook" href="{{ Share::load(route('user.business_detail',['slug' => Auth::user()->business->slug]),Auth::user()->business->name)->facebook() }}"><img src="{{ asset('images/icon-fb.png') }}" alt="Facebook"/></a>
+          <a target="_blank" title="Facebook" href="{{ Share::load(route('user.business_detail',['slug' => Auth::user()->business->slug]),''.Auth::user()->business->name.' is in yauzer.com http://yauzer.com/business-detail/'.Auth::user()->business->slug.', would you give us a yauzer?')->facebook() }}"><img src="{{ asset('images/icon-fb.png') }}" alt="Facebook"/></a>
 
-          <a target="_blank" title="Twitter" href="{{ Share::load(route('user.business_detail',['slug' => Auth::user()->business->slug]), Auth::user()->business->name)->twitter() }}"><img src="{{ asset('images/icon-twitter.png') }}" alt="Twitter"/></a> 
+          <a target="_blank" title="Twitter" href="{{ Share::load('', ''.Auth::user()->business->name.' is in yauzer.com http://yauzer.com/business-detail/'.Auth::user()->business->slug.', would you give us a yauzer?')->twitter() }}"><img src="{{ asset('images/icon-twitter.png') }}" alt="Twitter"/></a> 
 
-          <a target="_blank" title="Google+" href="{{ Share::load(route('user.business_detail',['slug' => Auth::user()->business->slug]), Auth::user()->business->name)->gplus() }}"><img src="{{ asset('images/icon-gplus.png') }}" alt="Google Plus"/></a> 
+          <a target="_blank" title="Google+" href="{{ Share::load(route('user.business_detail',['slug' => Auth::user()->business->slug]), ''.Auth::user()->business->name.' is in yauzer.com http://yauzer.com/business-detail/'.Auth::user()->business->slug.', would you give us a yauzer?')->gplus() }}"><img src="{{ asset('images/icon-gplus.png') }}" alt="Google Plus"/></a> 
 
-          <a target="_blank" title="Linkedin" href="{{ Share::load(route('user.business_detail',['slug' => Auth::user()->business->slug]), Auth::user()->business->name)->linkedin() }}"><img style="height: 55px; width:55px;" src="{{ asset('images/linkedin-icon.png') }}" alt="Linkedin"/></a>
-
-          <a target="_blank" title="Pinterest" href="{{ Share::load(route('user.business_detail',['slug' => Auth::user()->business->slug]), Auth::user()->business->name)->pinterest() }}"><img style="height: 55px; width:55px;" src="{{ asset('images/icon-Pinterest.png') }}" alt="Pinterest"/></a> 
+          <a target="_blank" title="Linkedin" href="{{ Share::load('', ''.Auth::user()->business->name.' is in yauzer.com http://yauzer.com/business-detail/'.Auth::user()->business->slug.', would you give us a yauzer?')->linkedin() }}"><img style="height: 55px; width:55px;" src="{{ asset('images/linkedin-icon.png') }}" alt="Linkedin"/></a>
         </p>
                 
       </div>
