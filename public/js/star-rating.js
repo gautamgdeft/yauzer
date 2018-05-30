@@ -533,7 +533,7 @@
         language: 'en',
         stars: 5,
         filledStar: '<i class="glyphicon glyphicon-star"></i>',
-        emptyStar: '<i class="glyphicon glyphicon-star-empty"></i>',
+        emptyStar: '<i class="glyphicon glyphicon-star"></i>',
         containerClass: '',
         size: 'md',
         animate: true,

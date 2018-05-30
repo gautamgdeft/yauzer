@@ -177,8 +177,10 @@
 
  <script type="text/javascript">
   
-  CKEDITOR.replace( 'description-ckeditor' );
-
+  CKEDITOR.replace( 'description-ckeditor', {
+    extraPlugins: 'justify'
+  });
+  
   $(document).ready(function(){
   //Adding-Validations-On-Business-Form
   $('#blog-form').validate({

@@ -23,8 +23,8 @@
             <div class="box-header">
             </div><!-- /.box-header -->
             <div class="box-body">
-			   <img src="{{ asset('images/Market-it.png') }}">
-			   <p class="text-aqua">At Yauzer we made it easy for you to share your business and germ or yauzers (reviews). Use the templates below often to increase your visibility and reputation.  Yauzer on!</p>
+			   <img src="/uploads/siteCMSAvatars/{{ $ownerMarketITcms->default_bg_image }}">
+			        {!! $ownerMarketITcms->description_ckeditor !!}
             </div><!-- /.box-body -->
         </div><!-- /.box -->
     </div>	
@@ -36,15 +36,8 @@
                 <h3 class="box-title">Business Share Email Template</h3>
             </div><!-- /.box-header -->
             <div class="box-body">
-			   <textarea rows="15" cols="70" style="border:double 4px #85c226;">Subject: {{ Auth::user()->business->name }} Just Joined Yauzer!
+			   <textarea class="description-ckeditor" id="business_share_email_editor">{!! str_replace('{business_name}'  , Auth::user()->business->name, $ownerMarketITcms->first_section) !!}</textarea>
 
-Content:
-As a loyal customer of {{ Auth::user()->business->name }}, your feedback and support is very important to us. 
-We would appreciate if you can share your feedback and show your love by Yauzering us at yauzer.com.
-
-Thank you for being an Ambassador for {{ Auth::user()->business->name }}
-
-Yauzer On!</textarea>
             </div><!-- /.box-body -->
         </div><!-- /.box -->
     </div>    
@@ -55,19 +48,14 @@ Yauzer On!</textarea>
             <div class="box-header">
                 <i class="fa fa-text-width"></i>
                 <h3 class="box-title">Business Social Share Template</h3>
-				  <a target="_blank" href="{{ Share::load('https://yauzer.com/business-detail/'.Auth::user()->business->slug.'', 'Just joined Yauzer!  Review & Yauz us at Yauzer.com '.Auth::user()->business->name.'
-          https://yauzer.com/business-detail/'.Auth::user()->business->slug.'')->facebook() }}"><i data-toggle="tooltip" title="Share on Facebook" data-placement="bottom" class="fa fa-facebook" aria-hidden="true"></i></a>          
+				  <a target="_blank" href="{{ Share::load('https://yauzer.com/business-detail/'.Auth::user()->business->slug.'', html_entity_decode(strip_tags(str_replace(['{business_name}','{business_slug}']  , [Auth::user()->business->name, Auth::user()->business->slug], $ownerMarketITcms->second_section))))->facebook() }}"><i data-toggle="tooltip" title="Share on Facebook" data-placement="bottom" class="fa fa-facebook" aria-hidden="true"></i></a>          
+                  <a target="_blank" href="{{ Share::load('', html_entity_decode(strip_tags(str_replace(['{business_name}','{business_slug}']  , [Auth::user()->business->name, Auth::user()->business->slug], $ownerMarketITcms->second_section))))->twitter() }}"><i data-toggle="tooltip" title="Share on Twitter" data-placement="bottom" class="fa fa-twitter" aria-hidden="true"></i></a>                       
 
-                  <a target="_blank" href="{{ Share::load('', 'Just joined Yauzer!  Review & Yauz us at Yauzer.com '.Auth::user()->business->name.'
-          https://yauzer.com/business-detail/'.Auth::user()->business->slug.'')->twitter() }}"><i data-toggle="tooltip" title="Share on Twitter" data-placement="bottom" class="fa fa-twitter" aria-hidden="true"></i></a>                       
-
-                  <a target="_blank" href="{{ Share::load('', 'Just joined Yauzer!  Review & Yauz us at Yauzer.com '.Auth::user()->business->name.'
-          https://yauzer.com/business-detail/'.Auth::user()->business->slug.'')->linkedin() }}"><i data-toggle="tooltip" title="Share on Linkedin" data-placement="bottom" class="fa fa-linkedin" aria-hidden="true"></i></a>       
+                  <a target="_blank" href="{{ Share::load('', html_entity_decode(strip_tags(str_replace(['{business_name}','{business_slug}']  , [Auth::user()->business->name, Auth::user()->business->slug], $ownerMarketITcms->second_section))))->linkedin() }}"><i data-toggle="tooltip" title="Share on Linkedin" data-placement="bottom" class="fa fa-linkedin" aria-hidden="true"></i></a>       
 
             </div><!-- /.box-header -->
             <div class="box-body">
-<textarea rows="15" cols="70" style="border:double 4px #85c226;">Just joined Yauzer!  Review & Yauz us at Yauzer.com {{ Auth::user()->business->name }}
-          https://yauzer.com/business-detail/{{ Auth::user()->business->slug }}</textarea>
+<textarea class="description-ckeditor" id="business_social_email_editor">{!! str_replace(['{business_name}','{business_slug}']  , [Auth::user()->business->name, Auth::user()->business->slug], $ownerMarketITcms->second_section) !!}</textarea>
             </div><!-- /.box-body -->
         </div><!-- /.box -->
     </div>
@@ -75,4 +63,17 @@ Yauzer On!</textarea>
 </aside>   
 
 
+@endsection
+
+@section('custom_scripts')
+ <script type="text/javascript">
+      CKEDITOR.replace( 'business_share_email_editor', {
+        extraPlugins: 'justify',
+        allowedContent: true
+      });
+      CKEDITOR.replace( 'business_social_email_editor', {
+        extraPlugins: 'justify',
+        allowedContent: true
+      });         
+ </script>
 @endsection

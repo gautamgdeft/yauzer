@@ -10,7 +10,7 @@
 	<br/>
 	Let’s verify your account by clicking the link below and let the fun begin.
 	<br/>
-	<a href="{{url('user/verify', $user->token)}}">Verify Email</a>
+    <a href="{{route('user.verify.link',['usertype' => $user->roles->first()->name, 'token' => $user->token])}}">Verify Email</a>
 	<br/>
 	<br/>
 	The Yauzer team.

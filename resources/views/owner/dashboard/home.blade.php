@@ -63,49 +63,115 @@
      
     </div>
 
-
-             
-   <!-- Main content -->
-   <section class="content">
-      <!-- Small boxes (Stat box) -->
-      <div class="row">
-         <!-- ./col -->
-         <div class="col-lg-3 col-xs-6">
-
-          <img src="{{ asset('images/Yauza-Yauza-Welcome-to-Yauzer.png') }}">
-          <p>Marketing is critical to your business and you cannot have too much exposure.</p>
-          <p>Unlock your PREMIUN LISTING and let the Word of Mouth advertising work for you.</p>
-            <!-- small box -->
-            <div class="small-box bg-yellow">
-               <div class="inner">
-                  <h3>
-                     {{-- @if(sizeof($yauzers['yauzers'])) {{ $yauzers['yauzers']->count() }} @else 0 @endif --}}
-                     {{ Auth::user()->business->yauzers->count() }}
-                  </h3>
-                  <p>
-                     Yauzers
-                  </p>
-               </div>
-               <div class="icon">
-                  <i class="fa fa-user"></i>
-               </div>
-               <a href="{{ route('owner.yauzers') }}" class="small-box-footer">
-               More info <i class="fa fa-arrow-circle-right"></i>
-               </a>
+   <section class="owner-dashboard">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-7">
+        <div class="premium-listing-text">
+          <img src="/uploads/siteCMSAvatars/{{ $ownerHeadercms->default_bg_image }}">
+          {!! $ownerHeadercms->description_ckeditor !!}
+        </div>
+        <div class="col-sm-6 padding-left-none">
+          <div class="listing-container">
+            <div class="listing-heading">
+              <h2>{{ $ownerBasicListingcms->first_section }}</h2><a href="{{ Auth::User()->business->yauzers->count() < $plans->yauzer? route('owner.unautorize_access') : route('owner.payment_information') }}"><i class="fa fa-arrow-circle-right"></i></a>
             </div>
-         </div>
-         <!-- ./col -->
+            <div class="listing-content">
+              {!! $ownerBasicListingcms->description_ckeditor !!}
+            </div>
+          </div>
+          <div class="premium-charges">
+            <div class="premium-charges-left">
+            <img src="/uploads/siteCMSAvatars/{{ $ownerPricingStructurecms->default_bg_image }}">
+            <div class="premium-charges-text">
+              {!! $ownerPricingStructurecms->description_ckeditor !!} 
+            </div>
+          </div>
+          <div class="premium-charges-right">
+            <a href="{{ Auth::User()->business->yauzers->count() < $plans->yauzer? route('owner.unautorize_access') : route('owner.payment_information') }}"><i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+          </div>
+        </div>
+        <div class="col-sm-6 padding-right-none">
+        <div class="listing-container premium-listing">
+            <div class="listing-heading">
+              <h2>{{ $ownerPremiumListingcms->first_section }}</h2><a href="{{ Auth::User()->business->yauzers->count() < $plans->yauzer? route('owner.unautorize_access') : route('owner.payment_information') }}"><i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+            <div class="listing-content">
+              {!! $ownerPremiumListingcms->description_ckeditor !!}
+            </div>
+          </div>
       </div>
-      <!-- /.row -->
-      <!-- top row -->
-      <div class="row">
-         <div class="col-xs-12 connectedSortable">
-         </div>
-         <!-- /.col -->
       </div>
-      <!-- /.row -->
-
+      <div class="col-sm-3">
+        <div class="basic-listing">
+         @if(Auth::user()->business->premium_status == true) 
+          <h2>Premium Listing</h2>
+          <p>You have a Premium Listing, you’re all set. Yauz on!</p>          
+         @else
+          <h2>Basic listing</h2>
+          <p>You have a Basic Listing. Unlock the power of Premium for only pennies a day.</p>
+         @endif
+        </div>
+        
+        <h4>Yauzer Stats</h4>
+        <div class="small-box bg-yellow">
+           <div class="inner">
+              <h3>
+                
+                 {{ Auth::user()->business->yauzers->count() }}
+              </h3>
+              <p>
+                 Yauzers
+              </p>
+           </div>
+           <div class="icon">
+              <i class="fa fa-user"></i>
+           </div>
+           <a href="{{ route('owner.yauzers') }}" class="small-box-footer">
+           More info <i class="fa fa-arrow-circle-right"></i>
+           </a>
+        </div>  
+        <div class="list-rating">
+          <div class="rating-customer">
+           @if(@sizeof(Auth::user()->business->yauzers)) 
+            <div class="rating-customer-image"> 
+             <img src="/uploads/avatars/{{ Auth::user()->business->yauzers->last()->user->avatar }}" class="img-circle" alt="User Image">
+            </div>
+            <div class="rating-customer-name">
+              <h2>{{ @sizeof(Auth::user()->business->yauzers)? Auth::user()->business->yauzers->last()->user->name : '' }}</h2>
+            </div>            
+            <div class="star-rating">
+              <input id="input-21e" value="{{ Auth::user()->business->yauzers->last()->rating }}" type="text" class="rating" data-min=0 data-max=5 data-step=0.5 data-size="xs" title="" disabled="disabled">
+            </div>
+           @endif            
+            <p class="rating-description">{{ @sizeof(Auth::user()->business->yauzers)? Auth::user()->business->yauzers->last()->yauzer : '' }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
    <!-- /.content -->
 </aside>
 <!-- /.right-side -->

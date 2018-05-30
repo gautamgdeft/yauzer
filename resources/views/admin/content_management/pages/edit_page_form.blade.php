@@ -107,7 +107,9 @@
 @section('custom_scripts')
 <script type="text/javascript">
 
-CKEDITOR.replace( 'description-ckeditor' );
+CKEDITOR.replace( 'description-ckeditor', {
+  extraPlugins: 'justify'
+});
 
 
 $(document).ready(function()

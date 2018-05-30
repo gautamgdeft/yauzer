@@ -159,7 +159,8 @@
     <div class="row">
       <div class="col-md-12">
         <div class="blog-form-heading">
-          <h2 id="yauzer_heading_text">Now you can Yauzer your favorite business!</h2>
+          {{-- <h2 id="yauzer_heading_text">Now you can Yauzer your favorite business!</h2> --}}
+          <h2 id="yauzer_heading_text"><img src="{{ asset('images/Yauzer-your-Fave.png') }}"></h2>
         </div>
         <div class="blog-form-container padding-less" id="padding-less">
 
@@ -189,6 +190,7 @@
             {{-- User for checking business on another location --}}
             <input type="hidden" name="businesslatitude" id="businesslatitude">
             <input type="hidden" name="businesslongitude" id="businesslongitude">
+            <input type="hidden" name="first_image_src" id="first_image_src">
 
 
 
@@ -201,6 +203,7 @@
               <button type="button" class="search-button-1" id="shuffleBusiness"><i class="fa fa-search"></i></button>
               </div>
             </div> 
+
 
 {{--             <div class="col-md-6 col-sm-6">
               <div class="form-group">
@@ -345,6 +348,7 @@
             <div class="col-md-12 col-sm-12">
 							<div id="yauzer_div" class="form-group">
               <label>Rating</label>
+              
               <input id="input-21e" value="5" type="text" class="form-control rating" data-min=0 data-max=5 data-step=1 data-size="xs" name="rating" title="">
 							</div>
             </div>

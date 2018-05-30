@@ -26,9 +26,27 @@
      readURLSoon(this);
     });    
     $("#result_bg_image").change(function () 
+    {
+     readResultImg(this);
+    });
+    $("#login_header_image").change(function () 
+    {
+     readHeaderImg(this);
+    });    
+    $("#market_bg_image").change(function () 
 	  {
-	   readResultImg(this);
+     readMarketImg(this);
 	  });
+
+
+//Rating removing Stars text
+  $('.rating-stars').mouseover(function(){
+     if($('.caption').find('span').text() == ''){ $('.caption').addClass('hide'); }else{$('.caption').removeClass('hide');}
+  });
+  $('.rating-stars').mouseout(function(){
+    $('.caption').addClass('hide');
+  });
+    $('.caption').addClass('hide');
 
     });
 
@@ -140,6 +158,34 @@ function readResultImg(input) {
 
         $('#result_bg_image').removeClass('validate_error');
         $("#result_bg_image").next('label').remove();
+    }
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+function readHeaderImg(input) {
+
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $('#image_src4').css('display', 'block');
+        $('#image_src4').attr('src', e.target.result);
+
+        $('#login_header_image').removeClass('validate_error');
+        $("#login_header_image").next('label').remove();
+    }
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+function readMarketImg(input) {
+
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $('#market_result').css('display', 'block');
+        $('#market_result').attr('src', e.target.result);
+
+        $('#market_bg_image').removeClass('validate_error');
+        $("#market_bg_image").next('label').remove();
     }
     reader.readAsDataURL(input.files[0]);
   }

@@ -104,6 +104,16 @@ function readURL(input) {
 $(document).ready(function()
 {
 
+  //Rating removing Stars text
+  $('.rating-stars').mouseover(function(){
+     if($('.caption').find('span').text() == ''){ $('.caption').addClass('hide'); }else{$('.caption').removeClass('hide');}
+  });
+  $('.rating-stars').mouseout(function(){
+    $('.caption').addClass('hide');
+  });
+    $('.caption').addClass('hide');
+
+  
   //$.validator.setDefaults({ ignore: ":hidden:not(select)" });
 
   // validation of chosen on change

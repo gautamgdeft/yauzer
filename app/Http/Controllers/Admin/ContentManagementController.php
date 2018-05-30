@@ -704,8 +704,8 @@ public function update_log_images(Request $request)
               // get previous image from folder
               if (File::exists($signup_bg_image)) { // unlink or remove previous image from folder
                   unlink($signup_bg_image);
-              }               
-
+              }
+              $sitecmsupdation = $sitecms->update($request->all());               
               $avatar1 = $request->file('signup_bg_image');
 
               //Using Helper/helpers.php
@@ -720,9 +720,22 @@ public function update_log_images(Request $request)
               if (File::exists($login_bg_image)) { // unlink or remove previous image from folder
                   unlink($login_bg_image);
               }   
-
+              $sitecmsupdation = $sitecms->update($request->all());
               $avatar2 = $request->file('login_bg_image');
               uploadLoginBackgroundImg($avatar2, $sitecms);
+            }         
+
+          //Saving Login Header Image Avatar
+           if($request->hasFile('default_bg_image'))
+            {
+              $default_bg_image = public_path("uploads/siteCMSAvatars/{$sitecms->default_bg_image}");
+
+              if (File::exists($default_bg_image)) { // unlink or remove previous image from folder
+                  unlink($default_bg_image);
+              }   
+              $sitecmsupdation = $sitecms->update($request->all());
+              $avatar3 = $request->file('default_bg_image');
+              uploadResultBackgroundImg($avatar3, $sitecms, 'signup-login');
             }
 
             Session::flash('success', 'Log In & Sign Up CMS has been updated successsfully');
@@ -745,7 +758,7 @@ public function update_result_section(Request $request)
         $resultcms->update($request->all());
         $avatar = $request->file('default_bg_image');
         //Using Helper/helpers.php
-        uploadResultBackgroundImg($avatar, $resultcms);
+        uploadResultBackgroundImg($avatar, $resultcms, 'result-page');
       }else{
         $resultcms->update($request->all());
       }    
@@ -753,6 +766,109 @@ public function update_result_section(Request $request)
           
       Session::flash('success', 'Result Page Cms has been updated successfully');
       return redirect()->route('admin.sitecms');         
+}
+
+public function ownercms()
+{
+  $ownerHeadercms = SiteCms::where('slug', 'owner-dashboard-header')->first();
+  $ownerBasicListingcms  = SiteCms::where('slug', 'owner-dashboard-basic-listing')->first();
+  $ownerPricingStructurecms  = SiteCms::where('slug', 'owner-pricing-structure')->first();
+  $ownerPremiumListingcms = SiteCms::where('slug', 'owner-dashboard-premium-listing')->first();
+  $ownerMarketITcms = SiteCms::where('slug', 'market-header-section')->first();
+  return view('admin.content_management.owner_cms.index', compact('ownerHeadercms', 'ownerBasicListingcms','ownerPricingStructurecms', 'ownerPremiumListingcms', 'ownerMarketITcms'));
+}
+
+public function update_owner_heading_section(Request $request)
+{
+   $ownerHeadercms = SiteCms::where('slug', 'owner-dashboard-header')->first();
+
+    //Saving Business Picture Avatar
+     if($request->hasFile('default_bg_image'))
+      {   
+
+        $default_bg_image = public_path("uploads/siteCMSAvatars/{$ownerHeadercms->default_bg_image}"); // get previous image from folder
+        if (File::exists($default_bg_image)) { // unlink or remove previous image from folder
+            unlink($default_bg_image);
+        }   
+        
+        $ownerHeadercms->update($request->all());
+        $avatar = $request->file('default_bg_image');
+        //Using Helper/helpers.php
+        uploadResultBackgroundImg($avatar, $ownerHeadercms, 'owner-dashboard-header');
+      }else{
+        $ownerHeadercms->update($request->all());
+      }    
+        
+          
+      Session::flash('success', 'Owner Header Section has been updated successfully');
+      return redirect()->route('admin.ownercms');    
+}
+
+public function update_owner_basic_listing(Request $request)
+{
+    $ownerBasicListingcms = SiteCms::where('slug', 'owner-dashboard-basic-listing')->first();
+    $ownerBasicListingcms->update($request->all());
+    Session::flash('success', 'Owner Basic Listing Section has been updated successfully');
+    return redirect()->route('admin.ownercms');
+}
+
+public function update_pricing_structure(Request $request)
+{
+    $ownerPricingStructurecms = SiteCms::where('slug', 'owner-pricing-structure')->first();
+
+    //Saving Business Picture Avatar
+     if($request->hasFile('default_bg_image'))
+      {   
+
+        $default_bg_image = public_path("uploads/siteCMSAvatars/{$ownerPricingStructurecms->default_bg_image}"); // get previous image from folder
+        if (File::exists($default_bg_image)) { // unlink or remove previous image from folder
+            unlink($default_bg_image);
+        }   
+        
+        $ownerPricingStructurecms->update($request->all());
+        $avatar = $request->file('default_bg_image');
+        //Using Helper/helpers.php
+        uploadResultBackgroundImg($avatar, $ownerPricingStructurecms, 'owner-pricing-structure');
+      }else{
+        $ownerPricingStructurecms->update($request->all());
+      }    
+        
+          
+      Session::flash('success', 'Pricing Structure Section has been updated successfully');
+      return redirect()->route('admin.ownercms');    
+}
+
+public function update_owner_premium_features(Request $request)
+{
+    $ownerPremiumListingcms = SiteCms::where('slug', 'owner-dashboard-premium-listing')->first();
+    $ownerPremiumListingcms->update($request->all());
+    Session::flash('success', 'Owner Premium Listing Section has been updated successfully');
+    return redirect()->route('admin.ownercms');
+}
+
+public function update_market_section(Request $request)
+{
+  $ownerMarketITcms = SiteCms::where('slug', 'market-header-section')->first();
+  //Saving Business Picture Avatar
+   if($request->hasFile('default_bg_image'))
+    {   
+
+      $default_bg_image = public_path("uploads/siteCMSAvatars/{$ownerMarketITcms->default_bg_image}"); // get previous image from folder
+      if (File::exists($default_bg_image)) { // unlink or remove previous image from folder
+          unlink($default_bg_image);
+      }   
+      
+      $ownerMarketITcms->update($request->all());
+      $avatar = $request->file('default_bg_image');
+      //Using Helper/helpers.php
+      uploadResultBackgroundImg($avatar, $ownerMarketITcms, 'market-header-section');
+    }else{
+      $ownerMarketITcms->update($request->all());
+    }    
+      
+        
+    Session::flash('success', 'Market It Section has been updated successfully');
+    return redirect()->route('admin.ownercms');      
 }
 
 

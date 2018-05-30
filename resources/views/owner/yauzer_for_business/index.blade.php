@@ -29,7 +29,7 @@
             
             <div class="col-md-6 col-sm-6">
               <div class="form-group">
-              <label for="headline">Business Name<span> *</span></label>
+              <label for="headline">Choose or Add Business<span> *</span></label>
               <select name="business_id" class="form-control form-input" id="business_select" tabindex="2" required>
                  <option value="" disabled selected>Claim or Add Your Business</option>
                 @if(sizeof($businesses))

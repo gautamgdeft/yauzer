@@ -489,6 +489,7 @@ a.footer-logo{ padding-top: 5px; display: inline-block;}
     padding: 90px 0;
     float: left;
     width: 100%;
+    background-size: cover;
 }
 .form-background-2 {
     background:url(/images/signup-background.jpg);
@@ -946,14 +947,14 @@ overflow: hidden;}
     float: left;
     width: 100%;
     padding: 51px 0 0px;
-    background: #f3f3f3;
+    background: #40939b;
 }
 .blog-form-heading {
     float: left;
     width: 100%;
-    background: #f0eeee;
-    padding: 10px 20px;
-	margin-top:30px;
+    margin-top: 60px;
+    background-color: yellow;
+    padding:15px 0 15px 80px;
 }
 .blog-form-wrapper.create-listing .blog-form-heading {
     margin-top: 60px;
@@ -1592,7 +1593,7 @@ select > option {
     width: 100%;
     min-height: 200px;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6);
+    background: transparent;
 /*    opacity: 0;*/
     -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
@@ -1612,7 +1613,7 @@ select > option {
     font-size: 16px;
     color: #fffefe;
     text-align:left;
-    margin-bottom: 32px;
+    margin-bottom: 10px;
 }
 .lawyer-listing.business-listing h4.basic-heading{
     font-size: 24px;
@@ -2193,8 +2194,12 @@ ul.yauzeredtime-status li {
     color: #a94442 !important; 
 }
 
-.rating-stars .empty-stars span{ color: #aaa !important; }
-.rating-stars .filled-stars span{ color: #fde16d !important; }
+.rating-stars .empty-stars span {
+    color: #dbedb4 !important;
+    -webkit-text-stroke: 1px #777;
+    font-size: 24px;
+}
+.rating-stars .filled-stars span{ color: #fffb00 !important; font-size: 24px;}
 .rating-container .caption .label{color: #fff;}
 /****180402******/
 .error {
@@ -3149,11 +3154,51 @@ a.cstm-blog-title{vertical-align: middle;}
     height:40px!important;
 }
 
+/** 180528 **/
+.form-outer-wrapper.owner_login_cstm {
+    padding:20px 30px;
+}
+.form-outer-wrapper.owner_login_cstm p {
+    text-align: center;
+    margin: 10px 0;
+    color: #000;
+    font-size: 16px;
+}
+.form-outer-wrapper.owner_login_cstm h2 {
+    font-size: 22px;
+}
+a.fb_share, a.twitter_share, a.linkedin_share {
+    width: 10%;
+    display: inline-block!important;
+    padding: 0!important;
+    text-align: center;
+}
+a.fb_share {
+    margin-left: 35px;
+}
+.profile-usermenu p {
+    margin: 10px 25px 0 35px;
+    font-style: italic;
+    font-size: 15px;
+}
+.no-result-found,
+.main-no-result-found {
+    margin-top:  20px;
+}
 
-
-
-
-
+.no-result-found p,
+.main-no-result-found p {
+    font-size: 15px;
+    color:  #000;
+    margin-top: 10px;
+}
+.main-no-result-found {
+    padding-left:15px;
+}
+/** 180529 **/
+.commentbox ul.commentboxlist li {
+    text-indent: 0;
+}
 
 
 

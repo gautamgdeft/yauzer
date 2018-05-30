@@ -12,6 +12,7 @@ use App\Http\Requests;
 use App\BusinessListing;
 use App\BusinessCategory;
 use App\Country;
+use App\SiteCms;
 use App\Mail\BusinessNotificationAdminMail;
 
 class BusinessController extends Controller
@@ -169,6 +170,7 @@ class BusinessController extends Controller
 
     public function market_get_yauzers()
     {
-      return view('owner.market_get_yauzers.index');
+      $ownerMarketITcms = SiteCms::where('slug', 'market-header-section')->first();
+      return view('owner.market_get_yauzers.index', compact('ownerMarketITcms'));
     }    
 }

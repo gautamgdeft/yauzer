@@ -66,8 +66,8 @@ google.maps.event.addDomListener(window, 'load', newinitialize);
 
 $(document).ready(function()
 {
-	//$.validator.setDefaults({ ignore: ":hidden:not(select)" });
-
+$('#first_image_src').val($('#yauzer_heading_text img').attr('src'));
+  //$.validator.setDefaults({ ignore: ":hidden:not(select)" });
 setTimeout(function() {
 $('.alert-success').fadeOut('fast');
 }, 8000); 
@@ -480,7 +480,8 @@ rules: {
 
   }else{ 
   
-  $('#yauzer_heading_text').text('Now you can Yauzer your favorite business!');
+  $('#yauzer_heading_text').text('');
+  $('#yauzer_heading_text').prepend('<img src="'+$('#first_image_src').val()+'" />');
   
   //If Business Exist In Our Db
   if(!$('#business_name').hasClass('hide')){
@@ -694,7 +695,10 @@ $("#zipcode").keypress(function(event) {
 $('.rating-stars').mouseover(function(){
    if($('.caption').find('span').text() == ''){ $('.caption').addClass('hide'); }else{$('.caption').removeClass('hide');}
 });
-
+$('.rating-stars').mouseout(function(){
+  $('.caption').addClass('hide');
+});
+  $('.caption').addClass('hide');
 }); //End-Ready-Function
 
 

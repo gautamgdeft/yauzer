@@ -34,7 +34,7 @@
                 <div class="box-body">
                 <div class="form-group">
                       <label for="name">Select Business-Membership Plan</label>
-                      <select class="form-control" name="payment_plan">
+{{--                       <select class="form-control" name="payment_plan">
 
                         @if(@sizeof($plans))
                         <option value="Annually_{{ $plans->annually_price }}_{{ Auth::User()->business->id }}">Annually ${{ $plans->annually_price }}</option>
@@ -42,7 +42,19 @@
                         <option value="Quarterly_{{ $plans->quarterly_price }}_{{ Auth::User()->business->id }}">Quarterly ${{ $plans->quarterly_price }}</option>
                         <option value="Monthly_{{ $plans->monthly_price }}_{{ Auth::User()->business->id }}">Monthly ${{ $plans->monthly_price }}</option>
                         @endif
-                      </select>
+                      </select> --}}
+                <div class="radio">
+                 <label><input value="Annually_{{ $plans->annually_price }}_{{ Auth::User()->business->id }}" type="radio" name="payment_plan" checked="checked">Annually ${{ $plans->annually_price }}</label>
+                </div>                
+                <div class="radio">
+                 <label><input value="Semi-Annually_{{ $plans->annually_price }}_{{ Auth::User()->business->id }}" type="radio" name="payment_plan">Semi-Annually ${{ $plans->semi_annually_price }}</label>
+                </div>                
+                <div class="radio">
+                 <label><input value="Quarterly_{{ $plans->quarterly_price }}_{{ Auth::User()->business->id }}" type="radio" name="payment_plan">Quarterly ${{ $plans->quarterly_price }}</label>
+                </div>                
+                <div class="radio">
+                 <label><input value="Monthly_{{ $plans->monthly_price }}_{{ Auth::User()->business->id }}" type="radio" name="payment_plan">Monthly ${{ $plans->monthly_price }}</label>
+                </div>
                 </div>               
                                                                                                                         
                 </div>

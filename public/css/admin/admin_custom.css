@@ -687,3 +687,9 @@ section.content.premium-listing-page tbody tr th:nth-child(4) {
     background: transparent  !important;
     color: #84c225 !important;
 }
+.rating-stars .empty-stars span {
+    color: #dbedb4 !important;
+    -webkit-text-stroke: 1px #777;
+    font-size: 24px;
+}
+.rating-stars .filled-stars span{ color: #fffb00 !important; font-size: 24px;}

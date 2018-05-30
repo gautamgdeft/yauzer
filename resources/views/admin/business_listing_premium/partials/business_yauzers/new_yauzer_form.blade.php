@@ -57,7 +57,7 @@
 
     <div class="form-group{{ $errors->has('rating') ? ' has-error' : '' }}">
       <label for="rating">Rating</label>
-      <input id="input-21e" value="0" type="text" class="form-control rating" data-min=0 data-max=5 data-step=1 data-size="xs" name="rating" title="" required="required">
+      <input id="input-21e" value="5" type="text" class="form-control rating" data-min=0 data-max=5 data-step=1 data-size="xs" name="rating" title="" required="required">
 
       @if ($errors->has('rating'))
       <span class="help-block">
@@ -124,7 +124,6 @@
       return false;
     }
   });  
-
 
    });
 

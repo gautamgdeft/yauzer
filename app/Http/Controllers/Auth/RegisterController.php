@@ -103,9 +103,10 @@ class RegisterController extends Controller
     }
 
 
-    public function verifyUser($token)
+    public function verifyUser($role, $token)
     {
         $user = User::where('token', $token)->first();
+        
         if(isset($user) ){
          
             if($user->registeration_status != 1) {
@@ -121,8 +122,12 @@ class RegisterController extends Controller
         }else{
         return redirect('login')->with('danger', "Sorry your email cannot be identified.");
         }
-
+        
+        if($role == 'user'){
         return redirect('login')->with('success', $status);
+        }else{
+        return redirect()->route('owner.login')->with('success', $status);    
+        }
     }
 
 }

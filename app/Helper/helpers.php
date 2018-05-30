@@ -110,11 +110,26 @@ function uploadBusinessBackgroundImg($avatar, $sitecms)
 }
 
 #Upload-Business-Default-CMS-Avatar-Function
-function uploadResultBackgroundImg($avatar, $resultcms) 
+function uploadResultBackgroundImg($avatar, $resultcms, $slug) 
 {
   $filename = time() . '.' . $avatar->getClientOriginalExtension();
   $path = '/uploads/siteCMSAvatars/' . $filename;
-  Image::make($avatar)->resize(272, 258)->save( public_path($path));
+  
+  if($slug == 'owner-dashboard-header'){ 
+  Image::make($avatar)->resize(511, 35)->save( public_path($path));
+  }
+  elseif ($slug == 'owner-pricing-structure') {
+  Image::make($avatar)->resize(225, 34)->save( public_path($path));
+  }  
+  elseif ($slug == 'signup-login') {
+  Image::make($avatar)->resize(519, 35)->save( public_path($path));
+  }  
+  elseif ($slug == 'market-header-section') {
+  Image::make($avatar)->resize(431, 35)->save( public_path($path));
+  }
+  else{
+  Image::make($avatar)->resize(272, 258)->save( public_path($path));  
+  }
   $resultcms->update(
     array(
       'default_bg_image' => $filename,

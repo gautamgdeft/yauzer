@@ -21,7 +21,11 @@
                   <figure>
                      <a href="javascript:void(0)"  class="red-eyes">
                      <span class="sam"><img src="{{ asset('images/red-eyes.png') }}"></span>
-                     <img class="thumnil-img" style="width:236px; height:213px;" src="/uploads/businessAvatars/{{ $loopingBusiness->avatar }}" alt=""/>
+                     @if($loopingBusiness->avatar != "default.png")
+                      <img class="thumnil-img" style="width:236px; height:213px;" src="/uploads/businessAvatars/{{ $loopingBusiness->avatar }}" alt=""/>
+                     @else
+                      <img style="width:236px; height:213px;" src="{{ asset('uploads/siteCMSAvatars/'.$businessCMSdata->picture_coming_soon) }}">
+                     @endif
                      </a>
                      <figcaption>
                         <div class="content">
@@ -76,8 +80,10 @@
                @endif
                @endforeach
                @else
+                 <div class="no-result-found">
                  <img src="/images/Yauza-Pardon-Us.png">
                  <p>We’re waiting for someone’s favorite in this {{ $businessCategory->name }} category. Why not Yauz yours!</p>
+                 </div>
                @endif
 
                <div class="col-sm-12" style="float: left;">
@@ -86,8 +92,7 @@
                       @foreach($businesses as $loopingBusiness)                     
                       @if($loopingBusiness->premium_status == false)
                      <div class="col-sm-4">
-                        <figure>
-                          <img style="width:236px; height:213px;" src="{{ asset('uploads/siteCMSAvatars/'.$businessCMSdata->picture_coming_soon) }}">                          
+                        <figure>                          
                            <figcaption>
                               <div class="content">
                                  <a href="{{ route('user.business_detail',['slug' => $loopingBusiness->slug]) }}"><h3> {{ $loopingBusiness->name }}</h3></a>

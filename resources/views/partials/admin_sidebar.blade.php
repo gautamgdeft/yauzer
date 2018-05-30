@@ -120,14 +120,15 @@
                 </ul>
             </li>
 
-            <li class="treeview {{ (\Request::route()->getName() == 'admin.listingseo' || \Request::route()->getName() == 'admin.edit_seo_form' || \Request::route()->getName() == 'admin.show_seo' || \Request::route()->getName() == 'admin.sitecms') ? 'active' : '' }}">
+            <li class="treeview {{ (\Request::route()->getName() == 'admin.listingseo' || \Request::route()->getName() == 'admin.edit_seo_form' || \Request::route()->getName() == 'admin.show_seo' || \Request::route()->getName() == 'admin.sitecms' || \Request::route()->getName() == 'admin.ownercms') ? 'active' : '' }}">
                 <a href="">
                     <i class="fa fa-cog"></i> <span>Site Admin</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
                     <li class="{{ (\Request::route()->getName() == 'admin.listingseo' || \Request::route()->getName() == 'admin.edit_seo_form' || \Request::route()->getName() == 'admin.show_seo') ? 'active' : '' }}"><a href="{{ route('admin.listingseo') }}"><i class="fa fa-angle-double-right"></i> Site Seo</a></li>
-                    <li class="{{ (\Request::route()->getName() == 'admin.sitecms') ? 'active' : '' }}"><a href="{{ route('admin.sitecms') }}"><i class="fa fa-angle-double-right"></i> Site CMS</a></li>
+                    <li class="{{ (\Request::route()->getName() == 'admin.sitecms') ? 'active' : '' }}"><a href="{{ route('admin.sitecms') }}"><i class="fa fa-angle-double-right"></i> Site CMS</a></li>                    
+                    <li class="{{ (\Request::route()->getName() == 'admin.ownercms') ? 'active' : '' }}"><a href="{{ route('admin.ownercms') }}"><i class="fa fa-angle-double-right"></i> Owner CMS</a></li>
                 </ul>                
             </li>            
         </ul>

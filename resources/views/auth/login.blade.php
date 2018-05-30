@@ -11,10 +11,11 @@
         <div class="form-outer-wrapper {{ (\Request::route()->getName() == 'owner.login') ? 'owner_login_cstm' : '' }}">
           <div class="form-heading">
             @if(\Request::route()->getName() == 'owner.login')
-             <img src="{{ asset('images/Market-Your-Biz.png') }}">
-             <p>Marketing is critical to your business and you cannot have too much exposure. At Yauzer for business unlock your Premium Listing.</p>
+             <img src="{{ asset('uploads/siteCMSAvatars/'.$loginSignImage->default_bg_image) }}">
+             {!! $loginSignImage->first_section !!}
+            @else
+            <h2>Login</h2>
             @endif
-            <h2>{{ (\Request::route()->getName() == 'owner.login') ? 'Sign in or Sign Up today!' : 'Login' }}</h2>
 
               <div id="msgs">
                 @if(session('success'))

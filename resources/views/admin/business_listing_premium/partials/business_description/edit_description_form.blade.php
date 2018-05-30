@@ -54,8 +54,9 @@
 @section('custom_scripts')
 <script type="text/javascript">
 
-
-CKEDITOR.replace( 'description' );
+CKEDITOR.replace( 'description', {
+  extraPlugins: 'justify'
+});
 CKEDITOR.config.allowedContent = true;
 
 $(document).ready(function()

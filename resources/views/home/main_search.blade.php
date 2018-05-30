@@ -55,7 +55,11 @@
                   <figure>
                      <a href="javascript:void(0)"  class="red-eyes">
                      <span><img src="{{ asset('images/red-eyes.png') }}"></span>
-                     <img style="width:236px; height:213px;" src="/uploads/businessAvatars/{{ $loopingBusiness->avatar }}" alt=""/>
+                     @if($loopingBusiness->avatar != "default.png")
+                      <img style="width:236px; height:213px;" src="/uploads/businessAvatars/{{ $loopingBusiness->avatar }}" alt=""/>
+                     @else 
+                      <img style="width:236px; height:213px;" src="{{ asset('uploads/siteCMSAvatars/'.$businessCMSdata->picture_coming_soon) }}">
+                     @endif
                      </a>
                      <figcaption>
                         <div class="content">
@@ -110,8 +114,10 @@
                @endif
                @endforeach
                @else
+               <div class="main-no-result-found">
                  <img src="/images/Yauza-Pardon-Us.png">
                  <p>We’re waiting for someone’s favorite for {{ $parameter }} in this {{ $formattedAddress[0] }} city. Why not Yauz yours!</p>
+               </div>   
                @endif
 
                <div class="col-sm-12" style="float: left;">
@@ -121,7 +127,6 @@
                       @if($loopingBusiness->premium_status == false)
                      <div class="col-sm-4">
                         <figure>
-                          <img style="width:236px; height:213px;" src="{{ asset('uploads/siteCMSAvatars/'.$businessCMSdata->picture_coming_soon) }}">
                            <figcaption>
                               <div class="content">
                                  <a href="{{ route('user.business_detail',['slug' => $loopingBusiness->slug]) }}"><h3> {{ $loopingBusiness->name }}</h3></a>

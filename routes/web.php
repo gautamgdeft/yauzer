@@ -283,7 +283,15 @@ Route::prefix('admin')->group(function()
     Route::post('/update-home-cms', 'Admin\ContentManagementController@update_home_cms')->name('admin.update_home_cms');  
     Route::post('/update-business-default', 'Admin\ContentManagementController@update_business_image')->name('admin.update_business_image');
     Route::post('/update-logs-images', 'Admin\ContentManagementController@update_log_images')->name('admin.update_log_images'); 
-    Route::post('/update-result-section', 'Admin\ContentManagementController@update_result_section')->name('admin.update_result_section');        
+    Route::post('/update-result-section', 'Admin\ContentManagementController@update_result_section')->name('admin.update_result_section'); 
+
+    //Admin-Owner-CMS-Routes
+    Route::get('/owner-cms', 'Admin\ContentManagementController@ownercms')->name('admin.ownercms');  
+    Route::post('/update-heading-cms', 'Admin\ContentManagementController@update_owner_heading_section')->name('admin.update_owner_heading_section');         
+    Route::post('/update-basic-listing', 'Admin\ContentManagementController@update_owner_basic_listing')->name('admin.update_owner_basic_listing');         
+    Route::post('/update-pricing-structure', 'Admin\ContentManagementController@update_pricing_structure')->name('admin.update_pricing_structure');         
+    Route::post('/update-premium-listing', 'Admin\ContentManagementController@update_owner_premium_features')->name('admin.update_owner_premium_features');
+    Route::post('/update-market-section', 'Admin\ContentManagementController@update_market_section')->name('admin.update_market_section');         
 });
 
 
@@ -292,7 +300,7 @@ Route::post('/vendor/unisharp/uploads', 'User\BusinessController@uploads');
 
 
 //Frontend-User-Routes
-Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
+Route::get('/{usertype}/verify/{token}', 'Auth\RegisterController@verifyUser')->name('user.verify.link');
 Route::get('/', 'User\WelcomeController@index')->name('home.welcome');
 Route::get('/business-login', 'Auth\LoginController@showLoginForm')->name('owner.login');
 Route::get('business-detail/{slug}', 'User\BusinessController@business_detail')->name('user.business_detail');

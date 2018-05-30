@@ -137,6 +137,15 @@
                         <input type="file" id="login_bg_image" name="login_bg_image" class="form-control" onchange="ValidateSingleInput(this);">
                         <img id="image_src2" src="/uploads/siteCMSAvatars/{{ $login_signup_img->login_bg_image }}" style="height: 45px; width: 200px;">                                            
                      </div>
+                     <div class="form-group">
+                        <label>Login Header Image</label>
+                        <input type="file" name="default_bg_image" class="form-control" id="login_header_image" onchange="ValidateSingleInput(this);">
+                        <img id="image_src4" src="/uploads/siteCMSAvatars/{{ $login_signup_img->default_bg_image }}" style="height: 35px; width: 519px;">
+                     </div>                       
+                     <div class="form-group">
+                        <label>Business Login Heading:</label>
+                        <textarea class="description-ckeditor" name="first_section" id="first-section-ckeditor">{{ $login_signup_img->first_section }}</textarea>
+                     </div>                     
                   </div>
                   <div class="box-footer">
                      <button id="login-submit-btn" type="submit" class="btn btn-primary">Update</button>
@@ -154,8 +163,16 @@
 @endsection
 @section('custom_scripts')
 <script type="text/javascript">
-      CKEDITOR.replace( 'description-ckeditor' );
-      CKEDITOR.replace( 'description-ckeditor1' );
+      
+      CKEDITOR.replace( 'description-ckeditor', {
+        extraPlugins: 'justify'
+      });
+      CKEDITOR.replace( 'description-ckeditor1', {
+        extraPlugins: 'justify'
+      });
+      CKEDITOR.replace( 'first-section-ckeditor', {
+        extraPlugins: 'justify'
+      });      
    //Adding-Validations-On-Home-Page-CMS
    $('#home_cms').validate({
    

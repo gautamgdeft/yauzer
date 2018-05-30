@@ -295,6 +295,10 @@ button.search-btn{ width: 100%;}
 .banner-search-form h1 {
     font-size: 22px;
 }
+/** 180529 **/
+.blog-form-heading {
+    padding:15px 0 15px 60px;
+}
 /************/
 
 }
@@ -859,6 +863,10 @@ section.business-sec.gallery-sec .tab-content, #blog-carousel{display:none;}
 .lawyer-listing.business-listing .col-md-9.col-sm-12 .col-sm-12 .row .col-sm-4 {
     width:50%;
     float: left;
+}
+/** 180529 **/
+h2#yauzer_heading_text img {
+    max-width: 450px;
 }   
 }
 @media only screen and (max-width:599px){
@@ -1006,6 +1014,11 @@ form#register_form {
 /***********/
 .cstm-blog-title {
     font-size: 18px;
+}
+/** 180529 **/
+h2#yauzer_heading_text img {
+    max-width: 340px;
+}
 }
 
 
@@ -1268,6 +1281,13 @@ p.business-timing span {
 .lawyer-listing.business-listing .col-md-9.col-sm-12 .col-sm-12 .row .col-sm-4 {
     width:100%;
     float: left;
+}
+/** 180529 **/
+.blog-form-heading {
+    padding: 15px 0 15px 30px;
+}
+h2#yauzer_heading_text img {
+    max-width: 230px;
 }
 }
 @media (max-width:479px) {

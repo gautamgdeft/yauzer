@@ -244,8 +244,20 @@ use Carbon\Carbon;
                                        <a href="javascript:void(0)" class="fa fa-star-o {{ $loopingYauzers->rating == 5? 'active' : ''}}"></a>
                                     </div>
                                     <p>{{ $loopingYauzers->yauzer }}</p>
+                                    @if(@sizeof($loopingYauzers->yauzer_comment))
+                                    @endif
                                  </div>
                               </li>
+                              {{--Owner Reply Section--}}
+                              @if(@sizeof($loopingYauzers->yauzer_comment))
+                               <li>
+                                 <figure><img class="img-circle" src="/uploads/avatars/{{ $loopingYauzers->yauzer_comment->user->avatar }}" alt="{{ $loopingYauzers->yauzer_comment->user->name }}"></figure>
+                                 <div class="commentbox-content">
+                                 <h5 class="authorname">{{ $loopingYauzers->yauzer_comment->user->name }}</h5>
+                                 <p>{{ $loopingYauzers->yauzer_comment->comment }}</p>
+                                 </div>
+                               </li>
+                              @endif  
                               @endforeach
                            </ul>
                         </div>
@@ -268,9 +280,11 @@ use Carbon\Carbon;
                   @foreach($interestedBusiness as $loopingInterstedBusiness)
                   <div class="lawyer-listing business-listing listing-adds">
                      <figure>
+                       @if($loopingInterstedBusiness->premium_status == true)
                         <a rel="nofollow" href="{{ route('user.business_detail',['slug' => $loopingInterstedBusiness->slug]) }}"  class="red-eyes">
                         <img src="/uploads/businessAvatars/{{ $loopingInterstedBusiness->avatar }}" alt=""/>
                         </a>
+                       @endif
                         <figcaption>
                            <div class="content">
                               <a rel="nofollow" href="{{ route('user.business_detail',['slug' => $loopingInterstedBusiness->slug]) }}">
@@ -278,7 +292,7 @@ use Carbon\Carbon;
                               </a>
                               <p class="address-text">{{ $loopingInterstedBusiness->address }} {{ $loopingInterstedBusiness->zipcode }}</p>
                               <p class="address-text adds-text"><a href="tel:3051234567" class="hidden-xs"><i class="fa fa-phone"></i>{{ $loopingInterstedBusiness->phone_number }}</a><a href="tel:{{ $loopingInterstedBusiness->phone_number }}" class="visibile-xs">Call Now</a>
-                                 <a href="mailto:david@helfand.com"><i class="fa fa-envelope"></i>{{ $loopingInterstedBusiness->email }}</a>
+                                 @if(@sizeof($loopingInterstedBusiness->email))<a href="mailto:{{ $loopingInterstedBusiness->email }}"><i class="fa fa-envelope"></i>{{ $loopingInterstedBusiness->email }}</a>@endif
                                  <a rel="nofollow" href="{{ $loopingInterstedBusiness->website }}" target="_blank"><i class="fa fa-globe"></i>{{ $loopingInterstedBusiness->website }}</a>
                               </p>
                            </div>
