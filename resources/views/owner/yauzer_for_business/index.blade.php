@@ -29,9 +29,9 @@
             
             <div class="col-md-6 col-sm-6">
               <div class="form-group">
-              <label for="headline">Choose or Add Business<span> *</span></label>
+              <label for="headline">Business Name<span> *</span></label>
               <select name="business_id" class="form-control form-input" id="business_select" tabindex="2" required>
-                 <option value="" disabled selected>Claim or Add Your Business</option>
+                 <option value="" disabled selected>Choose or Add Business</option>
                  <option value="other">NEW BUSINESS</option>
                 @if(sizeof($businesses))
                 @foreach($businesses as $loopingBusiness)
@@ -117,8 +117,8 @@
 
             <div class="col-md-6 col-sm-6">
               <div class="form-group">
-              <label for="headline">Email Address</label>
-              <input name="email" id="email" type="text" class="form-control form-input" placeholder="Enter Email Address" disabled>
+              <label for="headline">Email Address<span> *</span></label>
+              <input name="email" id="email" type="text" class="form-control form-input" placeholder="Enter Email Address" disabled required>
               </div>
             </div>
 
@@ -145,7 +145,7 @@
   <script type="text/javascript">
     $(document).ready(function() {
       $('#business_select').select2({
-        placeholder: 'Choose Business you want to yauzer'
+        placeholder: 'Choose or Add Business'
       });      
       $('#business_category').select2({
         width: "100%",

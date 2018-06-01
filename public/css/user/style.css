@@ -418,7 +418,7 @@ section.yauzer-blog-sec.gallery-sec{ padding-top: 0;}
 .blog-image .blog-img-content{position:absolute; background:rgba(255,255,255,0.8); bottom:0; left:0; text-align:center; height:92px; width:92px; padding:10px;}
 .blog-image .blog-img-content span{display:block; font-size:18px; color:#85c226; font-weight:bold;}
 .yauzer-blog-sec .blog-desc{padding-top:18px;}
-.yauzer-blog-sec .blog-desc h4{font-size:18px; color:#010101; padding-bottom:5px;}
+.yauzer-blog-sec .blog-desc h4{font-size:18px; color:#000; padding-bottom:5px;}
 .yauzer-blog-sec .blog-desc p{color:#4c4c4c; padding-right: 20px;}
 .yauzer-blog-sec .blog-desc p a{color:#85c226; padding-left: 10px;}
 .yauzer-blog-sec .blog-desc p a:hover{color:#313131;}
@@ -968,6 +968,7 @@ overflow: hidden;}
     width: 100%;
     background: #ffffff;
     padding:60px;
+    margin-bottom: 60px;
 }
 .blog-form-container .form-input {
 	height: 50px;
@@ -3200,8 +3201,32 @@ a.fb_share {
     text-indent: 0;
 }
 
-
-
+ul.replies li {
+    padding: 10px 15px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #3bb3c4;
+    font-style: italic;
+}
+.listing-pageview .commentboxlist ul.replies {
+    display: inline-block;
+    border: 0px solid #ddd;
+    width: 86%;
+    background-color: #f1f1f1;
+    border-radius: 2px;
+    padding: 0px 0px;
+    margin-left: 14%;
+}
+.listing-pageview .commentboxlist ul.replies span.reply-nm {
+    font-size: 16px;
+    display: block;
+    font-style: normal;
+    color: #444;
+}
+.select2-container .select2-selection--single .select2-selection__rendered#select2-business_select-container
+{
+    padding-left: 0;
+}
 @media (max-width: 991px) {
     .contact-us-wrapper .contactus-details p {
         font-size:14px;

@@ -10,6 +10,7 @@ use App\User;
 use App\Yauzer;
 use App\BusinessListing;
 use App\YauzerComment;
+use App\SiteCms;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Validator;
 use Session;
@@ -21,10 +22,11 @@ class BusinessYauzerController extends Controller
 {
     public function index()
     {
+        $socialShareCms = SiteCms::where('slug', 'social-share-messages')->first();
     	$business = Auth::user()->business; 
     	$businessYauzersInfo = Yauzer::orderBy('id', 'desc')->where('business_id', Auth::user()->business->id)->get();
     	$yauzerComments = YauzerComment::orderBy('id', 'desc')->where('business_id', Auth::user()->business->id)->get();
-    	return view ( 'owner.business_yauzers.index', compact('businessYauzersInfo','business') );
+    	return view ( 'owner.business_yauzers.index', compact('businessYauzersInfo','business', 'socialShareCms') );
     }
 
     public function respondYauzer(Request $request)

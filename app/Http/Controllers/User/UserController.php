@@ -10,6 +10,7 @@ use App\Yauzer;
 use App\AgeGroup;
 use App\Income;
 use App\Education;
+use App\SiteCMS;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use File;
@@ -18,12 +19,13 @@ class UserController extends Controller
 {
     public function dashboard()
     {    
+         $socialShareCms = SiteCms::where('slug', 'social-share-messages')->first();
          $splitName = explode(' ', Auth::user()->name, 2);
          $countries = Country::selectCountries();
          $agegroups = AgeGroup::all();
          $income = Income::all();
          $education = Education::all();
-    	 return view('user.dashboard.dashboard', compact('countries','splitName','agegroups','income','education'));														
+    	 return view('user.dashboard.dashboard', compact('countries','splitName','agegroups','income','education', 'socialShareCms'));														
     }
 
     public function update_profile(Request $request)
@@ -56,8 +58,9 @@ class UserController extends Controller
 
     public function yauzers()
     {
+        $socialShareCms = SiteCms::where('slug', 'social-share-messages')->first();
         $yauzers = Yauzer::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->whereHas('business',function ($q) { $q->where('status', '1'); })->paginate(5); 
-        return view('user.dashboard.yauzers', compact('yauzers'));
+        return view('user.dashboard.yauzers', compact('yauzers', 'socialShareCms'));
     }
 
     public function update_yauzer(Request $request)

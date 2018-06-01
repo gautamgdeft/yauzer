@@ -510,13 +510,13 @@ ul.commentboxlist li:last-child{
     border-bottom: none;
 }
 ul.commentboxlist li figure {
-    width: 10%;
+    width: 80px;
     float: left;
     text-align: center;
 }
 ul.commentboxlist li  .commentbox-content {
     float: left;
-    width: 90%;
+    width: calc(100% - 80px);
     background-color: #f5f5f5;
     border: 1px solid #e3e3e3;
     border-radius: 4px;
@@ -764,10 +764,10 @@ section.owner-dashboard {
     color: #fff;
 }
 .padding-left-none {
-    padding-left:0!important;
+    padding-left:0;
 }
 .padding-right-none {
-    padding-right:0!important;
+    padding-right:0;
 }
 .premium-listing-text p span {
     color: #85c226;
@@ -812,9 +812,17 @@ p.rating-description {
 #payment-subscription-form input[type="radio"] {
     opacity:  1!important;
     margin:0;
+    position: relative !important;
+    visibility: visible !important;
     margin-top:2px;
 }
 
+.box.box-primary .iradio_minimal {
+    width: 20px;
+    height: 20px;
+    border: 1px solid relatived;
+    text-align: center;
+}
 #payment-subscription-form .radio {
     display:  inline-block;
     min-width:  200px;
@@ -840,11 +848,66 @@ form#payment-subscription-form {
     font-size: 24px;
 }
 .rating-stars .filled-stars span{ color: #fffb00 !important; font-size: 24px;}
+.mobile-cl
+{
+display: none;
+}
 /********Media Query***************/
+
+@media screen and (max-width: 767px)
+{.desktop-cl
+{
+    display: none;
+    }
+.speciality_checks .commentbox-content {
+    display: inline-block;
+    margin-right: 7px;
+}
+ul.speciality_checks li {
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+}
+.box .box-header .bg-olive
+{
+    margin-top: 0px;
+}
+.mobile-cl, .desktop-class
+{
+display: block;
+}
+.desktop-class
+{
+    background-color: #009955;
+    margin-top: 30px;
+}
+}
+
 @media screen and (max-width: 599px){
   .hours ul.open-down .input-group .input-small{
   	width:74%;
   }
+}
+@media screen and (max-width: 580px)
+{
+  ul.commentboxlist li figure {
+    width: 60px !important;
+}
+.commentboxlist .img-circle {
+    width: 100% !important;
+    height: auto !important;
+}
+ul.commentboxlist li .commentbox-content
+{
+  padding: 10px !important;
+  width: calc(100% - 60px) !important;
+}
+  ul.commentboxlist li .button-box {
+    position: relative;
+    right: 0px;
+    width: 100%;
+    top: 10px;
+}
 }
 @media screen and (max-width: 479px){
 .hours {

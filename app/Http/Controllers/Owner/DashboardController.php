@@ -28,7 +28,8 @@ class DashboardController extends Controller
         $ownerBasicListingcms  = SiteCms::where('slug', 'owner-dashboard-basic-listing')->first();
         $ownerPricingStructurecms  = SiteCms::where('slug', 'owner-pricing-structure')->first();
         $ownerPremiumListingcms = SiteCms::where('slug', 'owner-dashboard-premium-listing')->first();
-    	return view('owner.dashboard.home', compact('yauzers','ownerHeadercms','ownerBasicListingcms', 'ownerPricingStructurecms', 'ownerPremiumListingcms'));
+        $socialShareCms = SiteCms::where('slug', 'social-share-messages')->first();
+    	return view('owner.dashboard.home', compact('yauzers','ownerHeadercms','ownerBasicListingcms', 'ownerPricingStructurecms', 'ownerPremiumListingcms', 'socialShareCms'));
     }
 
 

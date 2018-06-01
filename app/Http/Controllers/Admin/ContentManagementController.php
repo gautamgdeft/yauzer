@@ -273,7 +273,7 @@ public function update_slider_image(Request $request, $slug)
  ]);
 
 
- $sliderImage->image_alt_text = $request->input('image_alt_text');
+ $sliderImage->image_alt_text    = $request->input('image_alt_text');
  $sliderImage->h2_description    = $request->input('h2_description');
  $sliderImage->h3_description    = $request->input('h3_description');
  $sliderImage->save();
@@ -641,7 +641,8 @@ public function sitecms()
  $default_bg_image = SiteCms::where('slug', 'business')->first(); 
  $login_signup_img = SiteCms::where('slug', 'signup-login')->first(); 
  $result_cms = SiteCms::where('slug', 'result-page')->first(); 
- return view('admin.content_management.site_cms.index', compact('homecms', 'default_bg_image', 'login_signup_img','result_cms'));   
+ $socialShareCms = SiteCms::where('slug', 'social-share-messages')->first();
+ return view('admin.content_management.site_cms.index', compact('homecms', 'default_bg_image', 'login_signup_img','result_cms', 'socialShareCms'));   
 }
 
 public function update_home_cms(Request $request)
@@ -869,6 +870,15 @@ public function update_market_section(Request $request)
         
     Session::flash('success', 'Market It Section has been updated successfully');
     return redirect()->route('admin.ownercms');      
+}
+
+public function update_business_share(Request $request)
+{
+  $socialShareCms = SiteCms::where('slug', 'social-share-messages')->first();
+  $socialShareCms->update($request->all());
+
+  Session::flash('success', 'Social Share Section has been updated successfully');
+    return redirect()->route('admin.sitecms');  
 }
 
 

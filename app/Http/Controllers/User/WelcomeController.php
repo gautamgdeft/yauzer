@@ -49,7 +49,8 @@ class WelcomeController extends Controller
         $businessCategory = BusinessCategory::where('status', '1')->get();
         $businesses = BusinessListing::withCount('yauzers')->orderBy('yauzers_count', 'desc')->where('premium_status', true)->take(8)->get();
         $blogs = Blog::orderBy('id', 'desc')->get();
-        return view('home.welcome', compact('sliderImages','businessCategory', 'businesses', 'blogs', 'homeCMSdata'));
+        $businessCMSdata = SiteCms::where('slug', 'business')->first();
+        return view('home.welcome', compact('sliderImages','businessCategory', 'businesses', 'blogs', 'homeCMSdata', 'businessCMSdata'));
     }
 
 

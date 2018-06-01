@@ -33,7 +33,7 @@ class CmsController extends Controller
               break;            
 
             case 'find-a-business' :
-              dd('Find a business');
+              return redirect()->route('home.welcome');
               break;
         }
 

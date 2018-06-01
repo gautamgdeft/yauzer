@@ -477,6 +477,28 @@ body > .header .logo .icon {
   }
 }
 @media screen and (max-width: 560px) {
+  .right-side {
+    margin-top: 20px;
+    width: 100%;
+    padding: 15px;
+}
+.premium-listing-text img {
+    margin: 9px 0;
+    width: 100%;
+}
+.box .box-header a {
+    float: none !important;
+    margin: 0px 10px 0px 10px;
+}
+.owner-social-icons {
+     display: inline-block;
+    text-align: right;
+    width: 100%;
+    padding: 15px 0px;
+}
+.box.box-solid .box-body img, .box.box-solid .box-body textarea {
+    width: 100%;
+}
   body > .header {
     position: relative;
   }
@@ -959,6 +981,17 @@ body > .header .logo .icon {
 }
 /* Fix dropdown menu for small screens to display correctly on small screens */
 @media screen and (max-width: 767px) {
+  .padding-left-none {
+    padding-left: 15px !important;
+}
+.listing-container
+{
+  margin-bottom: 30px;
+}
+.owner-dashboard .padding-right-none {
+    padding-right:  15px !important;
+    margin-top: 30px;
+}
   .navbar-nav > .notifications-menu > .dropdown-menu,
   .navbar-nav > .user-menu > .dropdown-menu,
   .navbar-nav > .tasks-menu > .dropdown-menu,
@@ -973,8 +1006,12 @@ body > .header .logo .icon {
     background: #ffffff;
   }
 }
+
 /* Fix menu positions on xs screens to appear correctly and fully */
 @media screen and (max-width: 480px) {
+  .premium-charges-left img {
+    width: 100%;
+}
   .navbar-nav > .notifications-menu > .dropdown-menu > li.header,
   .navbar-nav > .tasks-menu > .dropdown-menu > li.header,
   .navbar-nav > .messages-menu > .dropdown-menu > li.header {

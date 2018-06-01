@@ -22,7 +22,7 @@
    </div>
 </div>
 	</div>
-<div class="col-sm-4">
+{{-- <div class="col-sm-4">
 	<div class="contactus-left">
 		<div class="contact-list-container">
       <div class="contactus-icons">
@@ -49,8 +49,8 @@
       </div>
   </div>
 	</div>
-</div>
-<div class="col-sm-8">
+</div> --}}
+<div class="col-sm-12">
 <div class="profile-content contact-page">
       <div class="card">
          <div class="content">
@@ -60,7 +60,7 @@
                   
                      <div class="form-group">
                         <label>Name<span> *</span></label>
-                        <input type="text" class="form-control border-input" placeholder="Name" name="name" required="">
+                        <input type="text" class="form-control border-input" placeholder="Name" name="name" required>
                      </div>
                   
                      <div class="form-group">
@@ -87,5 +87,53 @@
 </div>
 </div>
 </div>
+
+@endsection
+
+@section('custom_scripts')
+
+ <script type="text/javascript">
+
+$(document).ready(function()
+{  
+  //Adding-Validations-On-Contact-Us-Form
+  $('#contact_form').validate({
+  onfocusout: function (valueToBeTested) {
+    $(valueToBeTested).valid();
+  },
+
+  highlight: function(element) {
+    $('element').removeClass("error");
+  },
+
+  rules: {
+    
+    "name": {
+        character_with_space: true,
+        maxlength: 50, 
+    },
+    'email': {
+        customemail: true,
+    },
+
+    valueToBeTested: {
+        required: true,
+    }
+
+  },
+  });    
+
+  //Only-Character-Add-Method
+  $.validator.addMethod("character_with_space", function (value, element) {
+  return this.optional(element) || /^[a-zA-Z .]+$/i.test(value);
+  }, "Only letters are allowed.");
+
+  //Email-Add-Method
+  $.validator.addMethod("customemail", function (value, element) {
+    return this.optional(element) || /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
+  }, "Please enter a valid email address.");  
+
+});    
+ </script>
 
 @endsection

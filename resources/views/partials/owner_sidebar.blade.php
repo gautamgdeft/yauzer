@@ -80,8 +80,9 @@ a.disabled {
             </li>             
 
             <li class="{{ (\Request::route()->getName() == 'owner.biz_specialties' || \Request::route()->getName() == 'owner.new_speciality_form' || \Request::route()->getName() == 'owner.edit_speciality') ? 'active' : '' }} @if(Auth::User()->business->premium_status == false) deactivated @endif">
-                <a href="{{ (Auth::User()->business->premium_status == false)? route('owner.unautorize_access') : route('owner.biz_specialties') }}" class="@if(Auth::User()->business->premium_status == false) deactivated @endif">
+                <a href="{{ (Auth::User()->business->premium_status == false)? route('owner.biz_specialties') : route('owner.biz_specialties') }}" class="@if(Auth::User()->business->premium_status == false)  @endif">
                     <i class="fa fa-building-o"></i> <span>Biz Specialties</span>
+
                 </a>
             </li>              
 

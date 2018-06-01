@@ -30,9 +30,9 @@
                        <i class="fa fa-star" aria-hidden="true"></i>
 							Yauzers </a>
 
-						<a class="fb_share" target="_blank" href="{{ Share::load('', 'Yauza, Yauza, Yauza! I’m on https://Yauzer.com and sharing my faves. Join me!')->facebook() }}"><i data-toggle="tooltip" title="Share on Facebook" data-placement="bottom" class="fa fa-facebook" aria-hidden="true"></i></a>                        
-                        <a class="twitter_share" target="_blank" href="{{ Share::load('', 'Yauza, Yauza, Yauza! I’m on https://Yauzer.com and sharing my faves. Join me!')->twitter() }}"><i data-toggle="tooltip" title="Share on Twitter" data-placement="bottom" class="fa fa-twitter" aria-hidden="true"></i></a>                        
-                        <a class="linkedin_share" target="_blank" href="{{ Share::load('', 'Yauza, Yauza, Yauza! I’m on https://Yauzer.com and sharing my faves. Join me!')->linkedin() }}"><i data-toggle="tooltip" title="Share on Linkedin" data-placement="bottom" class="fa fa-linkedin" aria-hidden="true"></i></a>                        							
+						<a class="fb_share" target="_blank" href="{{ Share::load('', html_entity_decode(strip_tags($socialShareCms->first_section)))->facebook() }}"><i data-toggle="tooltip" title="Share on Facebook" data-placement="bottom" class="fa fa-facebook" aria-hidden="true"></i></a>                        
+                        <a class="twitter_share" target="_blank" href="{{ Share::load('', html_entity_decode(strip_tags($socialShareCms->first_section)))->twitter() }}"><i data-toggle="tooltip" title="Share on Twitter" data-placement="bottom" class="fa fa-twitter" aria-hidden="true"></i></a>                        
+                        <a class="linkedin_share" target="_blank" href="{{ Share::load('', html_entity_decode(strip_tags($socialShareCms->first_section)))->linkedin() }}"><i data-toggle="tooltip" title="Share on Linkedin" data-placement="bottom" class="fa fa-linkedin" aria-hidden="true"></i></a>                        							
 							<p>The more you share, the more chances to win in our quarterly drawing, keep coming back. Yauz on!</p>
 
 						</li>

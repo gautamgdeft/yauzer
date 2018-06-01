@@ -192,6 +192,7 @@ class BusinessController extends Controller
     {
         $businessDetail = BusinessListing::findBySlugOrFail($slug);
         $businessCMSdata = SiteCms::where('slug', 'business')->first();
+        $socialShareCms = SiteCms::where('slug', 'social-share-messages')->first();
 
         //Interested-Business-Working
         if(@sizeof($businessDetail->interested_business->interested_businesses)){
@@ -206,7 +207,7 @@ class BusinessController extends Controller
 
         if($businessDetail->premium_status == false){
          
-         return view('home.basic_business_detail', compact('businessDetail','interestedBusiness', 'businessCMSdata'));
+         return view('home.basic_business_detail', compact('businessDetail','interestedBusiness', 'businessCMSdata', 'socialShareCms'));
  
         }else{  
         //Hours-Section-Business-Hours
@@ -253,7 +254,7 @@ class BusinessController extends Controller
           $newbusinessHour = NULL;
         }
          
-        return view('home.business_detail', compact('businessDetail','interestedBusiness', 'currentdayname', 'newbusinessHour', 'businessCMSdata'));
+        return view('home.business_detail', compact('businessDetail','interestedBusiness', 'currentdayname', 'newbusinessHour', 'businessCMSdata', 'socialShareCms'));
         }
     }
 

@@ -291,7 +291,10 @@ Route::prefix('admin')->group(function()
     Route::post('/update-basic-listing', 'Admin\ContentManagementController@update_owner_basic_listing')->name('admin.update_owner_basic_listing');         
     Route::post('/update-pricing-structure', 'Admin\ContentManagementController@update_pricing_structure')->name('admin.update_pricing_structure');         
     Route::post('/update-premium-listing', 'Admin\ContentManagementController@update_owner_premium_features')->name('admin.update_owner_premium_features');
-    Route::post('/update-market-section', 'Admin\ContentManagementController@update_market_section')->name('admin.update_market_section');         
+    Route::post('/update-market-section', 'Admin\ContentManagementController@update_market_section')->name('admin.update_market_section');
+
+    //Social-Share-Message-CMS-Routes
+    Route::post('/update-business-share', 'Admin\ContentManagementController@update_business_share')->name('admin.update_business_share');             
 });
 
 

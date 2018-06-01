@@ -2,7 +2,6 @@
 
 @section('content')
 
-
 <!--Share Business Info Popup-->
 <!-- Modal -->
 <div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -14,13 +13,13 @@
       </div>
       <div class="modal-body">
         <p>
-          <a target="_blank" title="Facebook" href="{{ Share::load(route('user.business_detail',['slug' => Auth::user()->business->slug]),''.Auth::user()->business->name.' is in yauzer.com http://yauzer.com/business-detail/'.Auth::user()->business->slug.', would you give us a yauzer?')->facebook() }}"><img src="{{ asset('images/icon-fb.png') }}" alt="Facebook"/></a>
+          <a target="_blank" title="Facebook" href="{{ Share::load(route('user.business_detail',['slug' => Auth::user()->business->slug]),html_entity_decode(strip_tags(str_replace(['{business_name}','{business_slug}']  , [Auth::user()->business->name, Auth::user()->business->slug], $socialShareCms->second_section))))->facebook() }}"><img src="{{ asset('images/icon-fb.png') }}" alt="Facebook"/></a>
 
-          <a target="_blank" title="Twitter" href="{{ Share::load('', ''.Auth::user()->business->name.' is in yauzer.com http://yauzer.com/business-detail/'.Auth::user()->business->slug.', would you give us a yauzer?')->twitter() }}"><img src="{{ asset('images/icon-twitter.png') }}" alt="Twitter"/></a> 
+          <a target="_blank" title="Twitter" href="{{ Share::load('', html_entity_decode(strip_tags(str_replace(['{business_name}','{business_slug}']  , [Auth::user()->business->name, Auth::user()->business->slug], $socialShareCms->second_section))))->twitter() }}"><img src="{{ asset('images/icon-twitter.png') }}" alt="Twitter"/></a> 
 
-          <a target="_blank" title="Google+" href="{{ Share::load(route('user.business_detail',['slug' => Auth::user()->business->slug]), ''.Auth::user()->business->name.' is in yauzer.com http://yauzer.com/business-detail/'.Auth::user()->business->slug.', would you give us a yauzer?')->gplus() }}"><img src="{{ asset('images/icon-gplus.png') }}" alt="Google Plus"/></a> 
+          <a target="_blank" title="Google+" href="{{ Share::load(route('user.business_detail',['slug' => Auth::user()->business->slug]), html_entity_decode(strip_tags(str_replace(['{business_name}','{business_slug}']  , [Auth::user()->business->name, Auth::user()->business->slug], $socialShareCms->second_section))))->gplus() }}"><img src="{{ asset('images/icon-gplus.png') }}" alt="Google Plus"/></a> 
 
-          <a target="_blank" title="Linkedin" href="{{ Share::load('', ''.Auth::user()->business->name.' is in yauzer.com http://yauzer.com/business-detail/'.Auth::user()->business->slug.', would you give us a yauzer?')->linkedin() }}"><img style="height: 55px; width:55px;" src="{{ asset('images/linkedin-icon.png') }}" alt="Linkedin"/></a>
+          <a target="_blank" title="Linkedin" href="{{ Share::load('', html_entity_decode(strip_tags(str_replace(['{business_name}','{business_slug}']  , [Auth::user()->business->name, Auth::user()->business->slug], $socialShareCms->second_section))))->linkedin() }}"><img style="height: 55px; width:55px;" src="{{ asset('images/linkedin-icon.png') }}" alt="Linkedin"/></a>
         </p>
                 
       </div>
@@ -71,12 +70,22 @@
         </div>
         <div class="col-sm-6 padding-left-none">
           <div class="listing-container">
+            <div class="basic-listing mobile-cl">
+         @if(Auth::user()->business->premium_status == true) 
+          <h2>Premium Listing</h2>
+          <p>You have a Premium Listing, you’re all set. Yauz on!</p>          
+         @else
+          <h2>Basic listing</h2>
+          <p>You have a Basic Listing. Unlock the power of Premium for only pennies a day.</p>
+         @endif
+        </div>
+        <span class="desktop-cl">
             <div class="listing-heading">
               <h2>{{ $ownerBasicListingcms->first_section }}</h2><a href="{{ Auth::User()->business->yauzers->count() < $plans->yauzer? route('owner.unautorize_access') : route('owner.payment_information') }}"><i class="fa fa-arrow-circle-right"></i></a>
             </div>
             <div class="listing-content">
               {!! $ownerBasicListingcms->description_ckeditor !!}
-            </div>
+            </div></span>
           </div>
           <div class="premium-charges">
             <div class="premium-charges-left">
@@ -89,6 +98,13 @@
             <a href="{{ Auth::User()->business->yauzers->count() < $plans->yauzer? route('owner.unautorize_access') : route('owner.payment_information') }}"><i class="fa fa-arrow-circle-right"></i></a>
           </div>
           </div>
+           <span class="desktop-class">
+            <div class="listing-heading">
+              <h2>{{ $ownerBasicListingcms->first_section }}</h2><a href="{{ Auth::User()->business->yauzers->count() < $plans->yauzer? route('owner.unautorize_access') : route('owner.payment_information') }}"><i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+            <div class="listing-content">
+              {!! $ownerBasicListingcms->description_ckeditor !!}
+            </div></span>
         </div>
         <div class="col-sm-6 padding-right-none">
         <div class="listing-container premium-listing">
@@ -99,10 +115,11 @@
               {!! $ownerPremiumListingcms->description_ckeditor !!}
             </div>
           </div>
+
       </div>
       </div>
       <div class="col-sm-3">
-        <div class="basic-listing">
+        <div class="basic-listing desktop-cl">
          @if(Auth::user()->business->premium_status == true) 
           <h2>Premium Listing</h2>
           <p>You have a Premium Listing, you’re all set. Yauz on!</p>          

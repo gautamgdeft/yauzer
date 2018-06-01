@@ -393,9 +393,17 @@ $(".business_select").chosen({
 
   //Adding-Validations-On-Yauzer-A-Business-Form
   $('#yauzer_for_business').validate({
+
+
   onfocusout: function (valueToBeTested) {
     $(valueToBeTested).valid();
   },
+    invalidHandler: function(form, validator) {
+        var errors = validator.numberOfInvalids();
+        if (errors) {                    
+            validator.errorList[0].element.focus();
+        }
+    },     
 
   highlight: function(element) {
     $('element').removeClass("error");

@@ -47,10 +47,12 @@
             <div class="box-header">
                 <i class="fa fa-text-width"></i>
                 <h3 class="box-title">Business Social Share Template</h3>
-				  <a target="_blank" href="{{ Share::load('https://yauzer.com/business-detail/'.Auth::user()->business->slug.'', html_entity_decode(strip_tags(str_replace(['{business_name}','{business_slug}']  , [Auth::user()->business->name, Auth::user()->business->slug], $ownerMarketITcms->second_section))))->facebook() }}"><i data-toggle="tooltip" title="Share on Facebook" data-placement="bottom" class="fa fa-facebook" aria-hidden="true"></i></a>          
+                 <div class="owner-social-icons"> 
+				          <a target="_blank" href="{{ Share::load('https://yauzer.com/business-detail/'.Auth::user()->business->slug.'', html_entity_decode(strip_tags(str_replace(['{business_name}','{business_slug}']  , [Auth::user()->business->name, Auth::user()->business->slug], $ownerMarketITcms->second_section))))->facebook() }}"><i data-toggle="tooltip" title="Share on Facebook" data-placement="bottom" class="fa fa-facebook" aria-hidden="true"></i></a>          
                   <a target="_blank" href="{{ Share::load('', html_entity_decode(strip_tags(str_replace(['{business_name}','{business_slug}']  , [Auth::user()->business->name, Auth::user()->business->slug], $ownerMarketITcms->second_section))))->twitter() }}"><i data-toggle="tooltip" title="Share on Twitter" data-placement="bottom" class="fa fa-twitter" aria-hidden="true"></i></a>                       
 
                   <a target="_blank" href="{{ Share::load('', html_entity_decode(strip_tags(str_replace(['{business_name}','{business_slug}']  , [Auth::user()->business->name, Auth::user()->business->slug], $ownerMarketITcms->second_section))))->linkedin() }}"><i data-toggle="tooltip" title="Share on Linkedin" data-placement="bottom" class="fa fa-linkedin" aria-hidden="true"></i></a>       
+                </div>  
 
             </div><!-- /.box-header -->
             <div class="box-body">

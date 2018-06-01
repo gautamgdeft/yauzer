@@ -1,8 +1,10 @@
 @extends('layouts.user')
 @section('content')
+
 @php
 use Carbon\Carbon;
 @endphp
+
 <div class="cstm_banner business-banner-inner" style="background-image: url({{ asset('uploads/siteCMSAvatars/'.$businessCMSdata->default_bg_image) }});">
    <div class="container">
       <div class="search-wrapper">
@@ -40,10 +42,10 @@ use Carbon\Carbon;
                   <div class="item"><img src="/uploads/businessAvatars/{{ $loopingPictures->avatar }}"></div>
                   @endforeach
                   @else
-                  <div class="item no-picutre"><img src="{{ asset('uploads/siteCMSAvatars/'.$businessCMSdata->picture_coming_soon) }}"></div>
+                  <div class="item"><img src="{{ asset('uploads/siteCMSAvatars/'.$businessCMSdata->picture_coming_soon) }}"></div>
                   @endif
                </div>
-               <div class="addresswrapper @if(!@sizeof($businessDetail->business_pictures)) no-picture-content @endif">
+               <div class="addresswrapper">
                   <h4>{{ $businessDetail->name }}</h4>
                   <p>{{ $businessDetail->address }}<br/>{{ $businessDetail->city }}, {{ $businessDetail->state }} {{ $businessDetail->zipcode }}</p>
                   <p><span>Phone:</span> <a href="tele:{{ $businessDetail->phone_number }}">{{ $businessDetail->phone_number }}</a><br/>
@@ -70,31 +72,31 @@ use Carbon\Carbon;
                      <ul class="social-icons">
                         <li><a href="{{ route('user.yauzer_business') }}"><img src="{{ asset('images/icon-yauzer.png') }}" alt="Yauzer"/></a></li>
                         <li><a data-toggle="tooltip" title="Business love" href="javascript:void(0)" id="loveBusiness" data-id="{{ $businessDetail->id }}"><img src="{{ asset('images/icon-heart.png') }}" alt="Heart"/><span class="love_{{ $businessDetail->id }} {{ $businessDetail->love > 9? 'cstm-position' : '' }}">{{ $businessDetail->love }}</span></a></li>
-                        <li><a target="_blank" href="{{ Share::load(Request::url(), "Check this out Business $businessDetail->name")->facebook() }}"><img src="{{ asset('images/icon-fb.png') }}" alt="Facebook"/></a></li>
-                        <li><a target="_blank" href="{{ Share::load(Request::url(), "Check this out Business $businessDetail->name")->twitter() }}"><img src="{{ asset('images/icon-twitter.png') }}" alt="Twitter"/></a></li>
-                        <li><a target="_blank" href="{{ Share::load(Request::url(), "Check this out Business $businessDetail->name")->gplus() }}"><img src="{{ asset('images/icon-gplus.png') }}" alt="Google Plus"/></a></li>
-                        <li><a target="_blank" href="{{ Share::load(Request::url(), "Check this out Business $businessDetail->name")->linkedin() }}"><img src="{{ asset('images/linkedin-icon.png') }}" alt="Linkedin"/></a></li>
-                        <li><a target="_blank" href="{{ Share::load(Request::url(), "Check this out Business $businessDetail->name")->pinterest() }}"><img src="{{ asset('images/icon-Pinterest.png') }}" alt="Pinterest"/></a></li>
+                        <li><a target="_blank" href="{{ Share::load(Request::url(), html_entity_decode(strip_tags(str_replace(['{business_name}','{business_slug}']  , [$businessDetail->name, $businessDetail->slug], $socialShareCms->description_ckeditor))))->facebook() }}"><img src="{{ asset('images/icon-fb.png') }}" alt="Facebook"/></a></li>
+                        <li><a target="_blank" href="{{ Share::load('', html_entity_decode(strip_tags(str_replace(['{business_name}','{business_slug}']  , [$businessDetail->name, $businessDetail->slug], $socialShareCms->description_ckeditor))))->twitter() }}"><img src="{{ asset('images/icon-twitter.png') }}" alt="Twitter"/></a></li>
+                        <li><a target="_blank" href="{{ Share::load(Request::url(), html_entity_decode(strip_tags(str_replace(['{business_name}','{business_slug}']  , [$businessDetail->name, $businessDetail->slug], $socialShareCms->description_ckeditor))))->gplus() }}"><img src="{{ asset('images/icon-gplus.png') }}" alt="Google Plus"/></a></li>
+                        <li><a target="_blank" href="{{ Share::load('', html_entity_decode(strip_tags(str_replace(['{business_name}','{business_slug}']  , [$businessDetail->name, $businessDetail->slug], $socialShareCms->description_ckeditor))))->linkedin() }}"><img src="{{ asset('images/linkedin-icon.png') }}" alt="Linkedin"/></a></li>
+                        <li><a target="_blank" href="{{ Share::load('', html_entity_decode(strip_tags(str_replace(['{business_name}','{business_slug}']  , [$businessDetail->name, $businessDetail->slug], $socialShareCms->description_ckeditor))))->pinterest() }}"><img src="{{ asset('images/icon-Pinterest.png') }}" alt="Pinterest"/></a></li>
                      </ul>
                      @if(sizeof($businessDetail->yauzers))
                      <div class="business-times">
                         <p>This business has been</p>
                         <ul>
-                           <li><span><img src="{{ asset('images/yauzer-Y.png') }}" alt="" /></span></li>
+                            <li><span><img src="{{ asset('images/yauzer-Y.png') }}" alt="" /></span></li>
                            @if($businessDetail->yauzers->count() >= 2)
-                           <li><span><img src="{{ asset('images/yauzer-A.png') }}" alt="" /></span></li>
+                            <li><span><img src="{{ asset('images/yauzer-A.png') }}" alt="" /></span></li>
                            @endif
                            @if($businessDetail->yauzers->count() >= 3)
-                           <li><span><img src="{{ asset('images/yauzer-U.png') }}" alt="" /></span></li>
+                            <li><span><img src="{{ asset('images/yauzer-U.png') }}" alt="" /></span></li>
                            @endif
                            @if($businessDetail->yauzers->count() >= 4)
-                           <li><span><img src="{{ asset('images/yauzer-Z.png') }}" alt="" /></span></li>
+                            <li><span><img src="{{ asset('images/yauzer-Z.png') }}" alt="" /></span></li>
                            @endif
                            @if($businessDetail->yauzers->count() >= 5)
-                           <li><span><img src="{{ asset('images/yauzer-E.png') }}" alt="" /></span></li>
+                            <li><span><img src="{{ asset('images/yauzer-E.png') }}" alt="" /></span></li>
                            @endif
                            @if($businessDetail->yauzers->count() >= 6)
-                           <li><span><img src="{{ asset('images/yauzer-R.png') }}" alt="" /></span></li>
+                            <li><span><img src="{{ asset('images/yauzer-R.png') }}" alt="" /></span></li>
                            @endif
                         </ul>
                         <span class="times-number">{{ $businessDetail->yauzers->count() }}</span>
@@ -247,17 +249,12 @@ use Carbon\Carbon;
                                     @if(@sizeof($loopingYauzers->yauzer_comment))
                                     @endif
                                  </div>
+                                 @if(@sizeof($loopingYauzers->yauzer_comment))
+                                 <ul class="replies">
+                                  <li><span class="reply-nm">{{ $businessDetail->name }}</span> {{ $loopingYauzers->yauzer_comment->comment }}</li>
+                                 </ul>   
+                                 @endif                              
                               </li>
-                              {{--Owner Reply Section--}}
-                              @if(@sizeof($loopingYauzers->yauzer_comment))
-                               <li>
-                                 <figure><img class="img-circle" src="/uploads/avatars/{{ $loopingYauzers->yauzer_comment->user->avatar }}" alt="{{ $loopingYauzers->yauzer_comment->user->name }}"></figure>
-                                 <div class="commentbox-content">
-                                 <h5 class="authorname">{{ $loopingYauzers->yauzer_comment->user->name }}</h5>
-                                 <p>{{ $loopingYauzers->yauzer_comment->comment }}</p>
-                                 </div>
-                               </li>
-                              @endif  
                               @endforeach
                            </ul>
                         </div>
@@ -347,7 +344,7 @@ use Carbon\Carbon;
    
       marker = new google.maps.Marker({map: map, position: new google.maps.LatLng({{ $businessDetail->latitude }},{{ $businessDetail->longitude}})});
    
-      infowindow = new google.maps.InfoWindow({content:'@if(@sizeof($businessDetail))<div class="main_map"><div class="map-img"><img id="image_src" class="img-circle" src="/uploads/businessAvatars/{{ $businessDetail->avatar }}" style="height: 45px; width: 45px;"></div><div class="map-text"><h4>{{ $businessDetail->name }}</h4><p>{{ $businessDetail->address }}</p><p>{{ $businessDetail->city }}, {{ $businessDetail->state }} {{ $businessDetail->zipcode }}</p></div></div> @endif'});
+      infowindow = new google.maps.InfoWindow({content:'@if(@sizeof($businessDetail))<div class="main_map"><div class="map-img">@if($businessDetail->avatar != 'default.png')<img id="image_src" class="img-circle" src="/uploads/businessAvatars/{{ $businessDetail->avatar }}" style="height: 45px; width: 45px;">@else <img id="image_src" class="img-circle" src="{{ asset('uploads/siteCMSAvatars/'.$businessCMSdata->picture_coming_soon) }}" style="height: 45px; width: 45px;"> @endif</div><div class="map-text"><h4>{{ $businessDetail->name }}</h4><p>{{ $businessDetail->address }}</p><p>{{ $businessDetail->city }}, {{ $businessDetail->state }} {{ $businessDetail->zipcode }}</p></div></div> @endif'});
    
       google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);
    

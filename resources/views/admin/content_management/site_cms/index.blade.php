@@ -152,6 +152,37 @@
                   </div>
                </form>
             </div>
+
+            <div class="box box-info">
+               <div class="box-header">
+                  <h3 class="box-title">Social Share Messages</h3>
+               </div>
+               <form id="social_share_cms" role="form" action="{{ route('admin.update_business_share') }}" enctype="multipart/form-data" method="POST">
+                  {{ csrf_field() }}                                  
+                  <div class="box-body">
+                     <div class="form-group">
+                        <label>Business Detail Share:</label>
+                        <textarea class="description-ckeditor" name="description_ckeditor" id="social-share-first">{{ $socialShareCms->description_ckeditor }}</textarea>
+                     </div> 
+                      <div class="form-group">
+                        <label>User Dashoard Left Sidebar Share:</label>
+                        <textarea class="description-ckeditor" name="first_section" id="social-share-second">{{ $socialShareCms->first_section }}</textarea>
+                     </div> 
+                      <div class="form-group">
+                        <label>Owner Dashboard Popup Share:</label>
+                        <textarea class="description-ckeditor" name="second_section" id="social-share-third">{{ $socialShareCms->second_section }}</textarea>
+                      </div>                      
+                      <div class="form-group">
+                        <label>Owner Yauzer Section Share:</label>
+                        <textarea class="description-ckeditor" name="third_section" id="social-share-fourth">{{ $socialShareCms->third_section }}</textarea>
+                      </div>                     
+                  </div>
+                  <div class="box-footer">
+                     <button id="login-submit-btn" type="submit" class="btn btn-primary">Update</button>
+                  </div>
+               </form>
+            </div>
+
          </div>
          <!-- /.col (right) -->
       </div>
@@ -164,15 +195,34 @@
 @section('custom_scripts')
 <script type="text/javascript">
       
-      CKEDITOR.replace( 'description-ckeditor', {
-        extraPlugins: 'justify'
-      });
-      CKEDITOR.replace( 'description-ckeditor1', {
-        extraPlugins: 'justify'
-      });
-      CKEDITOR.replace( 'first-section-ckeditor', {
-        extraPlugins: 'justify'
+      $( 'textarea.description-ckeditor').each( function() {
+
+          CKEDITOR.replace( $(this).attr('id') , {
+           extraPlugins: 'justify'
+          });
+
       });      
+      // CKEDITOR.replace( 'description-ckeditor', {
+      //   extraPlugins: 'justify'
+      // });
+      // CKEDITOR.replace( 'description-ckeditor1', {
+      //   extraPlugins: 'justify'
+      // });
+      // CKEDITOR.replace( 'first-section-ckeditor', {
+      //   extraPlugins: 'justify'
+      // });
+      // CKEDITOR.replace( 'social-share-first', {
+      //   extraPlugins: 'justify'
+      // });      
+      // CKEDITOR.replace( 'social-share-second', {
+      //   extraPlugins: 'justify'
+      // });       
+      // CKEDITOR.replace( 'social-share-third', {
+      //   extraPlugins: 'justify'
+      // });        
+      // CKEDITOR.replace( 'social-share-fourth', {
+      //   extraPlugins: 'justify'
+      // });      
    //Adding-Validations-On-Home-Page-CMS
    $('#home_cms').validate({
    

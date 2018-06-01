@@ -91,7 +91,8 @@
                   <div class="services-sec service1">
                      <div class="service-left">
                         <a href="{{ route('user.business_by_category',['slug' => $loopingCategory->slug]) }}">
-                        <figure> <img src="/uploads/categoryAvatars/{{ $loopingCategory->avatar }}" alt=""/> </figure></a>
+                        <figure> 
+                        <img src="/uploads/categoryAvatars/{{ $loopingCategory->avatar }}" alt=""/> </figure></a>
                      </div>
                      <div class="service-right-sec">
                         <a href="{{ route('user.business_by_category',['slug' => $loopingCategory->slug]) }}"><p class="heading-sec"> {{ $loopingCategory->name }}</p></a>
@@ -175,7 +176,11 @@
                         <div class="col-md-3 col-sm-4 col-xs-6">
                             <div class="business-detail">
                                     <figure>
+                                       @if($loopingBusiness->avatar != "default.png")
                                        <img src="/uploads/businessAvatars/{{ $loopingBusiness->avatar }}" alt="img">
+                                       @else
+                                       <img src="{{ asset('uploads/siteCMSAvatars/'.$businessCMSdata->picture_coming_soon) }}" alt="img">
+                                       @endif
                                     </figure>
                                  <div class="business-detail-text">
                                        <h2>{{ $loopingBusiness->name }}</h2>
@@ -209,7 +214,11 @@
          <li>
             <div class="business-detail">
                <figure>
-                  <img src="/uploads/businessAvatars/{{ $loopingBusiness->avatar }}" alt="img">
+                     @if($loopingBusiness->avatar != "default.png")
+                     <img src="/uploads/businessAvatars/{{ $loopingBusiness->avatar }}" alt="img">
+                     @else
+                     <img src="{{ asset('uploads/siteCMSAvatars/'.$businessCMSdata->picture_coming_soon) }}" alt="img">
+                     @endif
                </figure>         
                <div class="business-detail-text">
                   <h2>{{ $loopingBusiness->name }}</h2>
